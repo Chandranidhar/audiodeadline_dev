@@ -1,0 +1,106 @@
+
+<app-adminheader></app-adminheader>
+<div class="container-fluid dashboard_body myorderblock">
+  <!--<div class="dashboard_wrappertop">
+    <img src="../../assets/images/logo.png">
+  </div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <div class="n-adminheadercls">
+            <h4>Saved Cards</h4>
+          </div>
+          <div class="dashboardwrapper">
+
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="tablediv">
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="empycell"></th>
+                      <th class="text-center">Card Type</th>
+                      <th class="text-center">Card Added On</th>
+                      <th class="text-center">Card Number</th>
+                      <th class="text-center">Action</th>
+
+                      <!--FOR Affiliate/Ambassador------>
+                      <!-- <th>Name</th>
+                       <th>Email</th>
+                       <th>Phone</th>
+                       <th>Enroller</th>
+                       <th>Commision Tier</th>
+                       <th>Order ID</th>
+                       <th>Product</th>
+                       <th>Quantity</th>
+                       <th>Total*</th>-->
+                      <!--------->
+
+                      <th class="empycell"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of  cardlist">
+                      <td class="empycell"></td>
+                      <td data-label="# Of Sale" class="text-center">{{item.cardtype}}</td>
+                      <td data-label="# Of Sale" class="text-center">{{item.added_time}}</td>
+                      <td data-label="Total Commission" class="text-center">**** **** **** {{item.cardnumber}}</td>
+                      <td data-label="Action" class="whitebtnlists text-center"><a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i><!--<span>Delete</span>--></a></td>
+
+
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="!cardlist .length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="7" style="text-align: center;"><div class="loadertabledata"></div></td>
+                      <td class="empycell"></td>
+                    </tr>
+
+                    <!--FOR Affiliate/Ambassador------>
+                    <!--<tr *ngIf="!(commisionlist | commission1 : searchText | commission2 : searchType).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="9" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="9" style="text-align: center;"><div class="loadertabledata"></div></td>
+                      <td class="empycell"></td>
+                    </tr>-->
+                    <!--------->
+
+
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<app-adminfooter></app-adminfooter>
+<ng-template #template>
+  <div class="modal-body text-center modalcls ">
+    <p>Are you sure to delete this Card?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()">No</button>
+    </div>
+
+  </div>
+</ng-template>

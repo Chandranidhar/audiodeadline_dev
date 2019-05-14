@@ -1,0 +1,408 @@
+<app-header></app-header>
+
+
+<div class="ticket_sale_newbanner">
+    <div class="ticket_sale_newbanner_wrapper">
+        <div class="ticket_sale_newbanner_textcon">
+            <h2>BY PURCHASING TICKETS</h2>
+            <h3>BEFORE <span>July 1st, 2019</span>, YOU WILL GET A CHANCE TO WIN AN ALL-EXPENSE PAID TRIP TO LOS ANGELES, CA,
+                TO BE ON THE AUDIODEADLINE SHOW! </h3>
+        </div>
+    </div>
+
+</div>
+
+<div class="ticket_sale_block2 asticket_sale_block2">
+
+    <div class="ticket_sale_block2_bg1">
+
+        <div class="ticket_sale_block2_bg2">
+
+            <div class="ticket_sale_block2_wrapper">
+
+                <div class="ticket_sale_block2form">
+                    <div class="ticket_sale_block2form_block1">
+                        <h6>Buy your
+                            tickets today!</h6>
+
+                        <h5>All Access Digital Ticket AudioDeadline
+                            September 14th 2019 Live Streaming Show
+                        </h5>
+                    </div>
+
+
+                    <div class="ticket_sale_block2form_pricecon">
+
+                        <a href="javascript:void(0)" class="block2form_pricecon_link1"> Login</a>
+                        <a href="javascript:void(0)" class="block2form_pricecon_link2"> Continue As Guest</a>
+                        <div class="clearfix"></div>
+
+                        <table>
+
+                            <tr>
+                                <td>
+                                    <label>price </label>
+                                    <span>${{productprice}}</span>
+
+                                </td>
+                                <td >
+                                    <!--<div class="form-group" ngfor="let item of qty"  >
+
+              <label class="selectqtycls" >
+                <span class="titleheadercls clsqty">
+                  <span class="clsqtyinfo">Qty <button (click)="decreseqty()" type="button" id="minusbtn2" class="minusbtn2" cmd="update" qty="1" stock="1">-</button>
+                    <input type="text" [formControl]="dataForm.controls['qty']" class="clsqtyinput cart_quantity_input_1" value="1"> <button (click)="increseqty()" type="button" class="plusbtn2" cmd="update" qty="1" stock="1">+</button></span>
+                </span>
+              </label>
+            </div>-->
+
+                                    <label>qty</label>
+                                    <div class="pricedivinput">  <a style="cursor: pointer;" (click)="decreseqty()" type="button" id="minusbtn2" class="minusbtn2" cmd="update" qty="1" stock="1">-</a></div>
+                                    <div class="pricedivoutput">{{qty}}</div>
+                                    <div class="pricedivinput">  <a style="cursor: pointer;" (click)="increseqty()" type="button" class="plusbtn2" cmd="update" qty="1" stock="1" >+</a></div>
+
+                                </td>
+                                <td>
+                                    <label>subtotal</label>
+                                    <!--<span>$29.90</span>-->
+                                    <span>${{subtotal}}</span>
+
+                                </td>
+
+                            </tr>
+
+                        </table>
+
+                        <h2><span>special rate discount</span> <span>-${{disamount}}</span></h2>
+                        <h3><span>total</span> <span>${{subtotal_after_promo}}</span></h3>
+
+
+                    </div>
+                    <div class="ticket_sale_block2form_block2">
+                        <form name="ticsaleform" class="wpcf7-form"  novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value,template,loadtemplate,templateguestcheckout)">
+                            <div class="form-group">
+              <span>
+                <input name="firstname" class="form-control" placeholder="First Name*" type="text" [formControl]="dataForm.controls['firstname']"  (blur)="_commonservices.inputUntouch(dataForm,'firstname')">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['firstname'].touched && !dataForm.controls['firstname'].valid">*First Name Required</span>
+                            </div>
+                            <div class="form-group">
+              <span>
+                <input name="lastname" class="form-control" placeholder="Last Name*" type="text" [formControl]="dataForm.controls['lastname']" (blur)="_commonservices.inputUntouch(dataForm,'lastname')">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['lastname'].touched && !dataForm.controls['lastname'].valid">*Last Name Required</span>
+                            </div>
+                            <div class="form-group">
+              <span>
+                <input name="address" class="form-control" placeholder="Address*" type="text" [formControl]="dataForm.controls['address']" (blur)="_commonservices.inputUntouch(dataForm,'address')">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['address'].touched && !dataForm.controls['address'].valid">*Address Required</span>
+                            </div>
+                            <div class="form-group">
+              <span>
+                <input name="city" class="form-control" placeholder="City*" type="text" [formControl]="dataForm.controls['city']" (blur)="_commonservices.inputUntouch(dataForm,'city')">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['city'].touched && !dataForm.controls['city'].valid">*City field Required</span>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control classic" name="state" [formControl]="dataForm.controls['state']" (blur)="_commonservices.inputUntouch(dataForm,'state')">
+                                    <option value="">Select State*</option>
+                                    <option *ngFor="let item of state" value="{{item.abbreviation}}">{{item.name}}</option>
+                                </select>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['state'].touched && !dataForm.controls['state'].valid">*State/Province Required</span>
+                            </div>
+                            <div class="form-group">
+              <span>
+                <input name="zip" class="form-control" placeholder="Zip*" type="text" [formControl]="dataForm.controls['zip']" (blur)="_commonservices.inputUntouch(dataForm,'zip')">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['zip'].touched && !dataForm.controls['zip'].valid">*Zip code Required</span>
+                            </div>
+                            <div class="form-group">
+              <span>
+                <input (blur)="getaffdetailsbyemail(dataForm.controls['email'].value)" type="text" class="form-control" placeholder="Email*" name="email" [formControl]="dataForm.controls['email']" (blur)="_commonservices.inputUntouch(dataForm,'email')">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['email'].touched && dataForm.controls['email'].hasError('blankemail')">*Email Id Required</span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['email'].touched && dataForm.controls['email'].hasError('invalidemail')">*Email Id Required</span>
+                            </div>
+                            <div class="form-group">
+              <span>
+                <input type="text" class="form-control" placeholder="Phone*" name="phone" [formControl]="dataForm.controls['phone']" (blur)="_commonservices.inputUntouch(dataForm,'phone')">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['phone'].touched && !dataForm.controls['phone'].valid">*Phone Required</span>
+                            </div>
+                            <div class="form-group">
+                                <ul class="cardlist list-inline">
+                                    <li>We Accept</li>
+                                    <li>
+                                        <a href="javascript:void(0);"><img src="../../assets/images/img-card1.png"></a>
+                                        <a href="javascript:void(0);"><img src="../../assets/images/img-card2.png"></a>
+                                        <a href="javascript:void(0);"><img src="../../assets/images/img-card3.png"></a>
+                                        <a href="javascript:void(0);"><img src="../../assets/images/img-card4.png"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div *ngIf="tokens.length>0" class="form-group as-card-contant">
+
+                                <ul class="cardlist list-inline">
+                                    <li>Your saved credit and debit cards</li>
+                                </ul>
+                            </div>
+                            <div *ngFor="let item of tokens;" class="form-group as-card-contant">
+                                <span><input type="radio" name="cardtoken"  (click)="setcardval(item)"> </span>
+                                <span><img *ngIf="item.cardtype=='Mastercard' " src="../../assets/images/img-card1.png"></span>
+                                <span><img *ngIf="item.cardtype=='Visa Electron' || item.cardtype=='Visa' " src="../../assets/images/img-card2.png"></span>
+                                <span><img *ngIf="item.cardtype=='Diners - Carte Blanche' || item.cardtype=='Diners' " src="../../assets/images/dinerscard.png"></span>
+                                <span><img *ngIf=" item.cardtype=='AMEX' " src="../../assets/images/img-card2.png"></span>
+                                <span><img *ngIf=" item.cardtype=='JCB' " src="../../assets/images/img-card2.png"></span>
+                                <span>Card ends with {{item.cardnumber}}</span>
+                            </div>
+                            <div class="form-group as-card-contant">
+                                <span *ngIf="tokens.length>0"><input type="radio" name="cardtoken"  (click)="setcardval({type:'card'})"> </span>
+                                <span class="anotherpaymentspan" *ngIf="tokens.length>0">Another payment option</span>
+                            </div>
+                            <div class="form-group">
+                                <ul *ngIf="tokens.length>0" class="cardlist list-inline cvvcls">
+                                    <li>Another payment method</li>
+                                </ul>
+                                <span class="cvvcls"><input name="cardnumber" class="form-control" placeholder="Card Number*" type="text" [formControl]="dataForm.controls['cardnumber']" (blur)="_commonservices.inputUntouch(dataForm,'cardnumber')"></span>
+                                <span class="wpcf7-not-valid-tip cvvcls" *ngIf ="dataForm.controls['cardnumber'].touched && !dataForm.controls['cardnumber'].valid">*Card Number Required</span>
+                                <span class="wpcf7-not-valid-tip cvvcls" *ngIf ="paymenterror"> {{paymenterror}}</span>
+                            </div>
+                            <div class="form-group">
+                                <ul class="list-inline ddyy">
+                                    <li>
+                                        <select class="form-control classic" name="expmon" [formControl]="dataForm.controls['expmon']" (blur)="_commonservices.inputUntouch(dataForm,'expmon')">
+                                            <option value="">--MM--</option>
+                                            <option *ngFor="let item of montharr" value="{{item.val}}">{{item.label}}</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select class="form-control classic" name="expyear" [formControl]="dataForm.controls['expyear']" (blur)="_commonservices.inputUntouch(dataForm,'expyear')">
+                                            <option value="">--YYYY--</option>
+                                            <option *ngFor="let item of yeararr" value="{{item.val}}">{{item.label}}</option>
+                                        </select>
+                                    </li>
+                                </ul>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="((dataForm.controls['expmon'].touched && !dataForm.controls['expmon'].valid) || (dataForm.controls['expyear'].touched && !dataForm.controls['expyear'].valid))">*Exp Month/Year  Required</span>
+                            </div>
+                            <div class="form-group cvvcls">
+                                <span><input name="cvv" class="form-control" placeholder="CVV*" type="text" [formControl]="dataForm.controls['cvv']" (blur)="_commonservices.inputUntouch(dataForm,'cvv')"></span>
+                                <span class="wpcf7-not-valid-tip" *ngIf ="dataForm.controls['cvv'].touched && !dataForm.controls['cvv'].valid">*CVV Required</span>
+                            </div>
+                            <div class="form-group">
+              <span style="position: relative; display: block;">
+                <input name="promocode" class="form-control" placeholder="Do you have a promo code?" type="text" [formControl]="dataForm.controls['promocode']" (blur)="_commonservices.inputUntouch(dataForm,'promocode')">
+                <input type="button" (click)="chkPromocode()" value="Apply" style="color: #FCB51B; position: absolute; right: 5px; top: 0; font-weight: bold; background: none; border: none; line-height: 34px; outline: none; font-size: 13px;">
+              </span>
+                                <span class="wpcf7-not-valid-tip" *ngIf="promoerror">{{promomsg}}</span>
+                                <span class="wpcf7-not-valid-tip" style="color: #00ff00" *ngIf="promosuccess">{{promomsg}}</span>
+                            </div>
+                            <div class="form-group termsandconditioncls">
+                                <label class="checkcontainer">
+                                    <input name="accept-tc" value="Accept Terms And Conditions" type="checkbox" [formControl]="dataForm.controls['accepttermscond']" (blur)="_commonservices.inputUntouch(dataForm,'accepttermscond')">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label style="padding-left: 28px;">
+                                    <a data-toggle="modal" data-target="#termsofuse" style="color: #ffffff; cursor: pointer;">Accept Terms And Conditions</a>
+                                    <span class="wpcf7-not-valid-tip" *ngIf="chkerror"> You have to accept the Terms and Conditions !</span>
+                                </label>
+                            </div>
+                            <p>
+                                <button type="submit" class="btnbuyticket_ticsale">BUY MY TICKETS NOW !</button>
+                            </p>
+                        </form>
+                    </div>
+
+                </div>
+
+
+                <div class="ticket_sale_block2_textwrapper">
+                    <div class="newhomeblock1_devider"></div>
+
+                    <h2>8 HOURS - 1 AMAZING SHARED EXPERIENCE</h2>
+
+                    <div class="newhomeblock1_devider"></div>
+
+
+                    <h3><span>Recording artists</span> have an 8-hour time crunch to come up with an original song - do you think they have what it takes? Buy tickets now and find out!  </h3>
+
+                    <h4>Get intimate with Flii and his special guests live on Twitter while the show is streaming </h4>
+                        <h4> Chances to win amazing merch throughout the broadcast </h4>
+                            <h4> Get front row seats as musical history is being made by your favorite artists!
+                    </h4>
+
+
+
+                </div>
+
+            </div>
+            <div class="asticket_sale_block2_textwrapper">
+                <h6>Saturday, September 14th, 2019
+                    STARTING AT 1:00PM PACIFIC/4PM EASTERN!</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="ticket_sale_block3">
+
+    <div class="ticket_sale_block3_bg2">
+
+        <div class="ticket_sale_block3_wrapper">
+
+            <div class="newhomeblock1_devider"></div>
+            <h2>JOIN OUR PRESIDENT AND CELEBRITY HOST FLII STYLZ!</h2>
+            <div class="newhomeblock1_devider"></div>
+
+            <h3><span>Flii Stylz</span> is an entertainment powerhouse, performing artist,
+                choreographer, and music industry executive! Join him on the show as he chats with special guests and runs contests for everyone watching! You could have a chance to win merch, and even get a chance to meet Flii in person and be on the AudioDeadline show with an
+                exclusive all-expense paid trip to LA!
+            </h3>
+
+            <h4>HURRY AND BUY YOUR TICKET NOW FOR A DISCOUNTED RATE OF
+                JUST $9.95! ($5 OFF!)</h4>
+
+            <a (click)="scrolltop()" class="ticket_sale_block3_link">Buy Tickets Now</a>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<div class="ticket_sale_block4">
+
+    <div class="ticket_sale_block4_bg1">
+
+        <div class="ticket_sale_block4_wrapper">
+            <div class="newhomeblock1_devider"></div>
+            <h2>Be On The Show, Make Your Artist Profile on<br/>
+                ArtistXP.com Today!
+            </h2>
+            <div class="newhomeblock1_devider"></div>
+
+
+            <div class="ticket_sale_block4_left">
+
+                <div class="newhomeblock5_imgwrapper">
+
+                    <div class="newhomeblock5_imgcon">
+                        <img src="../../assets/images/newhome_block5_img1.jpg" alt="#">
+
+                        <div class="newhomeblock5_imgconsub"><h3>Models</h3></div>
+                    </div>
+
+                    <div class="newhomeblock5_imgcon">
+                        <img src="../../assets/images/newhome_block5_img2.jpg" alt="#">
+
+                        <div class="newhomeblock5_imgconsub"><h3>Singers</h3></div>
+                    </div>
+
+                    <div class="newhomeblock5_imgcon">
+                        <img src="../../assets/images/newhome_block5_img3.jpg" alt="#">
+
+                        <div class="newhomeblock5_imgconsub"><h3>Dancers</h3></div>
+                    </div>
+
+                    <div class="newhomeblock5_imgcon">
+                        <img src="../../assets/images/newhome_block5_img4.jpg" alt="#">
+
+                        <div class="newhomeblock5_imgconsub"><h3>Producers/Sound Engineers </h3></div>
+                    </div>
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+
+                <a (click)="scrolltop()" class="ticket_sale_block4_link">Buy Tickets Now</a>
+            </div>
+
+            <div class="ticket_sale_block4_right">
+
+                <h4>This is an awesome opportunity to get in front of industry producers, promoters, and thousands of fans! Whether you’re a producer, vocalist, DJ, guitarist, pianist, model, dancer, or any other type of recording artist, you can compete to be on the next AudioDeadline show!
+                </h4>
+                <h4>Model and dancer contest winners will get the incredible chance to co-host with Flii on the Flii Couch!
+                    Your fans will be able to cheer you on as the show is live-streamed right to their homes!
+                </h4>
+
+                <h5>GET YOUR TICKETS NOW AND TAKE ADVANTAGE OF<br/>
+                    OUR DISCOUNT RATE OF $9.95 AND A CONTEST ENTRY TO WIN A CHANCE<br/>
+                    TO GET FLOWN OUT TO LA AND BE<br/>
+                    TREATED LIKE A STAR! </h5>
+
+            </div>
+
+
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+<div class="ticket_sale_block5">
+
+    <div class="ticket_sale_block5_wrapper">
+
+        <div class="ticket_sale_block5_left">
+
+
+            Go to ArtistXP.com and make your Artist Profile, then upload your media for users to vote on. Competition winners will have the exciting chance to get flown out to LA, with
+            expenses paid, to collaborate on a brand new song in a real sound studio!
+
+        </div>
+
+        <div class="ticket_sale_block5_right">
+            <!--<img src="../../assets/images/affiliaterlogo-audiodeadline.png" alt="#"   >-->
+            <img src="../../assets/images/asjoinmovementuplogo.png" alt="#"   >
+
+            <a href="https://artistxp.com/" class="ticket_sale_block5_link" target="_blank">Join ArtistXP Now</a>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+
+
+</div>
+
+
+<app-footer></app-footer>
+
+<ng-template #template>
+    <div class="modal-body text-center signupeamilbody">
+
+        <button type="button" class="close" (click)="closep()">&times;</button>
+        <img src="../../assets/images/logo.png" alt="logo">
+        <p><span>By buying a Streaming Ticket, you are creating a basic access profile as a Fan on ArtistXP where you will log in to watch the Deadline Showcase that you have purchased.<a style="cursor: pointer" (click)="closep()">OK</a></span></p>
+
+    </div>
+</ng-template>
+
+
+<ng-template #loadtemplate>
+    <div class="modal-body text-center signupeamilbody" style="border: none; background: none;">
+
+        <div class="loder_body">
+            <div class="loder_wrapper">
+                <div class="loader"></div>
+            </div>
+        </div>
+
+    </div>
+</ng-template>
+
+<!--guest check out modal starts here -->
+<ng-template #templateguestcheckout>
+    <div class="modal-body text-center signupeamilbody">
+
+        <button type="button" class="close" (click)="closep()">&times;</button>
+        <img src="../../assets/images/logo.png" alt="logo">
+        <p><span>You are not logged in.<a style="cursor: pointer" (click)="loginmodal(templatelogin)">Log In & Continue</a>
+      <a style="cursor: pointer" (click)="continueasguest(dataForm.value,template,loadtemplate,templateguestcheckout)">Continue As Guest</a>
+    </span></p>
+
+    </div>
+</ng-template>

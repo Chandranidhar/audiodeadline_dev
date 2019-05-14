@@ -1,0 +1,150 @@
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>Manage Competition Sign-Ups</h4>
+          </div>
+          <div class="dashboardwrapper">
+
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form id="filter">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input style="border-radius: 0;" placeholder="Search By Date Signed Up" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText5"
+                                 [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                          <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchText2" [(ngModel)]="searchText4" class="form-control input-lg">
+                            <option value="">Search By Status</option>
+                            <option value="">All Status</option>
+                            <option value="0">Pending</option>
+                            <option value="1">Approved</option>
+                            <option value="2">Declined</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchText2" [(ngModel)]="searchText3" class="form-control input-lg">
+                            <option value="">Search By Genre</option>
+                            <option value="">All Genre</option>
+                            <option *ngFor="let item of genrelist" value="{{item._id}}">{{item.genrename}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchText2" [(ngModel)]="searchText2" class="form-control input-lg">
+                            <option value="" style="text-transform: uppercase;">SEARCH BY COMPETITION</option>
+                            <option value="" style="text-transform: uppercase;">ALL COMPETITION</option>
+                            <option *ngFor="let item of competitionlist" value="{{item._id}}">{{item.competitionname}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="Search By Name/Email" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="tablediv">
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="empycell"></th>
+                      <th>Date</th>
+                      <th>First</th>
+                      <th>Last</th>
+                      <th>Sign-up Form</th>
+                      <th>Email</th>
+                      <th>Competition</th>
+                      <th>Genre</th>
+                      <th class="text-center">Status</th>
+                      <th class="text-center">Action</th>
+                      <th class="empycell"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition' | compuserfilter : searchText3 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5 | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td class="empycell"></td>
+                      <td data-label="date" style="min-width: 95px;">{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mmaa"}}</td>
+                      <td data-label="First">Ann <!--{{item.firstname}}--></td>
+                      <td data-label="Last">Carey <!--{{item.lastname}}--></td>
+                      <td data-label="Sign-up Form">View</td>
+                      <td data-label="Email">{{item.email}}</td>
+                      <td data-label="Competition">{{item.competitionname}}</td>
+                      <td data-label="Genre">{{item.genrename}}</td>
+                      <td data-label="Status" class="text-center">
+                        <span *ngIf="!item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item)" style="cursor: pointer;">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="item.isStatusClicked" class="statusclsdropdown">
+                          <select name="status" (change)="editInlineField($event,item,item.status)" (blur)="selectblur(item)">
+                            <option value="0" [selected]="item.status == 0" *ngIf="item.status == 0">Pending</option>
+                            <option value="1" [selected]="item.status == 1">Approved</option>
+                            <option value="2" [selected]="item.status == 2">Denied</option>
+                          </select>
+                        </span>
+                      </td>
+                      <td data-label="Action" class="whitebtnlists text-center">
+                        <a href="javascript:void(0)" class="loginbtn2 btnview tooltip btnwhite"><i class="fa fa-thumbs-up"></i><span class="tooltiptext">Approve</span></a>
+                        <a href="javascript:void(0)" class="loginbtn2 btnedit tooltip1 btnwhite"><i class="fa fa-ban"></i><span class="tooltiptext">Deny</span></a>
+                        <a href="javascript:void(0)" class="loginbtn2 btndelete tooltip2 btnwhite"><i class="fa fa-envelope"></i><span class="tooltiptext">Email</span></a>
+                      </td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="!(userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition' | compuserfilter : searchText3 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="8" style="text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="8" style="text-align: center;"><div class="loadertabledata"></div><!--<img src="../../assets/images/loader.gif" style="width: 100px;">--></td>
+                      <td class="empycell"></td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+                  <pagination-controls  *ngIf="(userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition' | compuserfilter : searchText3 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+
+
+

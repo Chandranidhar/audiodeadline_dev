@@ -1,0 +1,171 @@
+<!--
+<div class="container-fluid dashboard_body">
+    <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>
+    <div class="row rowmaindiv">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+            <app-adminleft></app-adminleft>
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+            <div class="dashboard_right_wrapper">
+                <div class="dashboard1_div1">
+                    <h4> Add Blog</h4>
+                    <div class="dashboard1form">
+                        <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)">
+                            <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+                            <div class="form-group">
+                                <label>Blog Title*</label>
+                                <input type="text" class="form-control" name="title" [formControl]="dataForm.controls['title']">
+                                <span *ngIf ="dataForm.controls['title'].touched && !dataForm.controls['title'].valid" class="has-error">Blog Title field can not be blank</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Description*</label>
+                                <ck-editor name="description" [formControl]="dataForm.controls['description']" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
+                                <span *ngIf ="dataForm.controls['description'].touched && !dataForm.controls['description'].valid" class="has-error">Blog Description field can not be blank</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Videos</label>
+                                <input type="text" class="form-control" name="videolink" [formControl]="dataForm.controls['videolink']" placeholder="Type/paste youtube URL" autocomplete="off">
+                                <input type="button" value="Add" (click)="addYTvideo()">
+                                <span *ngIf ="videolinkerror" class="has-error">Please type/paste valid youtube URL</span>
+                                <div>
+                                    <div class="col-md-4 embed-responsive embed-responsive-16by9" *ngFor="let item of videos">
+                                        <iframe class="embed-responsive-item" [src]="getYTURL(item)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Images</label>
+                                <input style="display: none"
+                                       type="file" (change)="onFileChanged($event)"
+                                       #fileInput>
+                                <input type="button" (click)="fileInput.click()" value="Select File">
+                                <span *ngIf ="imageserror" class="has-error">Please type/paste valid youtube URL</span>
+                                <div>
+                                    <div class="col-md-4" style="height: 200px; overflow: hidden;" *ngFor="let item of images">
+                                        <img style="width: 100%" src="{{siteurl}}nodeserver/uploads/{{item}}" >
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+-->
+<!--
+<div class="container-fluid dashboard_body">
+    <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>
+    <div class="row rowmaindiv">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+            <app-adminleft></app-adminleft>
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+            <div class="dashboard_right_wrapper">
+                <div class="dashboard1_div1">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+-->
+
+
+
+
+<div class="formnewpopupheader">
+    <h4>Blog Info</h4>
+</div>
+
+<div class="dashboard1form formnewpopup">
+    <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)" class="form-horizontal">
+        <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left"><label>*Title:</label></div>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="title" [formControl]="dataForm.controls['title']">
+                <span *ngIf ="dataForm.controls['title'].touched && !dataForm.controls['title'].valid" class="has-error">Blog Title field can not be blank</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12 control-label text-left"><label>*Description:</label></div>
+            <div class="col-md-12">
+                <ck-editor name="description" [formControl]="dataForm.controls['description']" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
+                <span *ngIf ="dataForm.controls['description'].touched && !dataForm.controls['description'].valid" class="has-error">Blog Description field can not be blank</span>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left"><label>*Who would you like to share this blog with?</label></div>
+            <div class="col-md-8">
+                <div class="newcheckboxdiv">
+                    <div name="shareblog" [formControl]="dataForm.controls['shareblog']">
+                        <input type="checkbox" name="checkbox" value="1" checked="checked"><label>Users</label>
+                        <div class="newcheckboxsubdiv">
+                            <div><input type="checkbox" name="checkbox" value="1"><label>Fan</label></div>
+                            <div><input type="checkbox" name="checkbox" value="2"><label>Dancers</label></div>
+                            <div><input type="checkbox" name="checkbox" value="3"><label>Vocalist</label></div>
+                            <div><input type="checkbox" name="checkbox" value="4"><label>Model</label></div>
+                            <div><input type="checkbox" name="checkbox" value="5"><label>Producer</label></div>
+                            <div><input type="checkbox" name="checkbox" value="6"><label>DJ</label></div>
+                        </div>
+                    </div>
+                    <div><input type="checkbox" name="checkbox" value="2"><label>Affiliates</label>  </div>
+                    <div><input type="checkbox" name="checkbox" value="3"><label>Ambassadors</label>  </div>
+                </div>
+                <span *ngIf ="dataForm.controls['shareblog'].touched && !dataForm.controls['shareblog'].valid" class="has-error">Choose Share Blog</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left"><label>When would you like this visible to the public?</label></div>
+            <div class="col-md-8 text-left">
+                <div class="row">
+                    <div class="col-md-4 control-label text-left"><label>Start Date: </label></div>
+                    <div class="col-md-8 text-left">10/3/2018</div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-4 control-label text-left"><label>End Date: </label></div>
+                    <div class="col-md-8 text-left">10/12/2018</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left"><label>Videos</label></div>
+            <div class="col-md-8 text-left">
+                <input type="text" class="form-control" name="videolink" [formControl]="dataForm.controls['videolink']" placeholder="Type/paste youtube URL" autocomplete="off">
+                <input type="button" value="Add" (click)="addYTvideo()" class="btnadduploadurl loginbtn2">
+                <span *ngIf ="videolinkerror" class="has-error">Please type/paste valid youtube URL</span>
+                <div>
+                    <div class="col-md-4 embed-responsive embed-responsive-16by9" *ngFor="let item of videos">
+                        <iframe class="embed-responsive-item" [src]="getYTURL(item)" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left"> <label>Images</label></div>
+            <div class="col-md-8 text-left">
+                <input style="display: none"
+                       type="file" (change)="onFileChanged($event)"
+                       #fileInput>
+                <input type="button" class="addbtn2" (click)="fileInput.click()" value="Select File">
+                <span *ngIf ="imageserror" class="has-error">Please type/paste valid youtube URL</span>
+                <div>
+                    <div class="col-md-4" style="height: 200px; overflow: hidden;" *ngFor="let item of images">
+                        <img style="width: 100%" src="{{siteurl}}nodeserver/uploads/{{item}}" >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+    </form>
+</div>

@@ -1,0 +1,136 @@
+<!--
+<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop">
+    <div class="dashboradtoplogo">
+      <img src="../../assets/images/logo.png">
+    </div>
+  </div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <h4>Sponsor List</h4>
+          <div class="dashboardwrapper">
+            <div class="row socialsinglepostlists">
+              <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost" [ngStyle]="{'border-bottom':bannerlist.length ? '1px solid #d6d6d6' : 'none' }">
+                <div class="row socialsinglepostcontent" *ngIf="!bannerlist.length" style="text-align: center; color: #ee680f; font-family: 'OpenSans-Semibold'; font-size: 19px;">No Record Found</div>
+                <div class="row socialsinglepostcontent" *ngIf="bannerlist.length">
+                  <div class="sponsorblock" *ngFor="let sp of sponsorList" [ngClass]="{'hide': (!(bannerlist | bannerbysponsor: sp.name).length)}">
+                    <h2>{{sp.label}}</h2>
+                    <div class="col-md-3 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist | bannerbysponsor: sp.name">
+                      <div class="socialsinglepostimgwrapper">
+                        <img src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                      </div>
+                      <div class="socialsinglepostright">
+                        <div class="btnsocialsharenewlists">
+                          <a class="btn btnsocialsharenew btnfb" (click)="postinfb(item.sponsor,item.name,item.image,affiliatename)"><span>Post In Facebook</span></a>
+                          <a class="btn btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Twitter</span></a>
+                          <a class="btn btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Linkedin</span></a>
+                          <a class="btn btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}&posttype=link" target="_blank"><span>Post In Tumblr</span></a>
+                          <a class="btn btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Google+</span></a>
+                          <a class="btn btnsocialsharenew btngrapurl" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname='+item.sponsor+'&media_id='+item.name+'&image='+item.image+'&affiliate='+affiliatename)"><span>Grab URL</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-body text-center modalcls modalclswrapper">
+    <h1>Add or Edit Mail Body</h1>
+    <h2>Subject</h2>
+    <input type="text" name="mailsubject" [(ngModel)]="mailsubject">
+    <h2>Mail Body</h2>
+    <ck-editor name="mailbody" [(ngModel)]="mailbody" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
+    <div class="text-center activebtnclsnew">
+      <button type="button" class="btnedit" (click)="confirm()" >Save</button>
+      <button type="button" class="btndelete" (click)="decline()" >Cancel</button>
+    </div>
+
+  </div>
+</ng-template>-->
+
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <!--<div class="dashboard_wrappertop">
+    <div class="dashboradtoplogo">
+      <img src="../../assets/images/logo.png">
+    </div>
+  </div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <div class="n-adminheadercls">
+            <h4>Sponsor List</h4>
+          </div>
+          <div class="dashboardwrapper">
+            <div class="tabcontentwrapper">
+              <div class="row socialsinglepostlists">
+                <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost" [ngStyle]="{'border-bottom':bannerlist.length ? '1px solid #d6d6d6' : 'none' }">
+                  <div class="row socialsinglepostcontent" *ngIf="!bannerlist.length" style="text-align: center; color: #ee680f; font-family: 'OpenSans-Semibold'; font-size: 19px;">No Record Found</div>
+                  <div class="row socialsinglepostcontent" *ngIf="bannerlist.length">
+                    <div class="sponsorblock" *ngFor="let sp of sponsorList" [ngClass]="{'hide': (!(bannerlist | bannerbysponsor: sp.name).length)}">
+                      <h2>{{sp.label}}</h2>
+                      <div class="col-md-3 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist | bannerbysponsor: sp.name">
+                        <div class="socialsinglepostimgwrapper">
+                          <img src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                        </div>
+                        <div class="socialsinglepostright">
+                          <div class="btnsocialsharenewlists">
+                            <a class="btn btnsocialsharenew btnfb" (click)="postinfb(item.sponsor,item.name,item.image,affiliatename)"><span>Post In Facebook</span></a>
+                            <a class="btn btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Twitter</span></a>
+                            <a class="btn btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Linkedin</span></a>
+                            <a class="btn btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}&posttype=link" target="_blank"><span>Post In Tumblr</span></a>
+                            <a class="btn btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Google+</span></a>
+                            <a class="btn btnsocialsharenew btngrapurl" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname='+item.sponsor+'&media_id='+item.name+'&image='+item.image+'&affiliate='+affiliatename)"><span>Grab URL</span></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+
+<ng-template #template>
+  <div class="modal-body text-center modalcls modalclswrapper">
+    <h1>Add or Edit Mail Body</h1>
+    <h2>Subject</h2>
+    <input type="text" name="mailsubject" [(ngModel)]="mailsubject">
+    <h2>Mail Body</h2>
+    <ck-editor name="mailbody" [(ngModel)]="mailbody" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
+    <div class="text-center activebtnclsnew">
+      <button type="button" class="btnedit" (click)="confirm()" >Save</button>
+      <button type="button" class="btndelete" (click)="decline()" >Cancel</button>
+    </div>
+
+  </div>
+</ng-template>

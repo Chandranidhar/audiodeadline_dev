@@ -1,0 +1,3 @@
+{{uploadmsg}}
+<input style="display: none" type="file" (change)="onFileChanged($event)" accept=".jpg,.jpeg,.png" multiple #fileInput>
+<input type="button" (click)="fileInput.click()" value="Select File" class="cropselectbtn">

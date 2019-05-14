@@ -1,0 +1,157 @@
+import { Injectable } from '@angular/core';
+import {Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+// import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+//import { ApiService } from './api_service/api.service';
+// import {Http} from "@angular/http";
+import { HttpClient } from '@angular/common/http';
+//import {Commonservices} from "./app.commonservices";
+import { CookieService } from 'ngx-cookie-service';
+import { switchMap, map, takeWhile } from 'rxjs/operators';
+
+export interface EndpointComponent {
+    endpoint: string;
+}
+
+@Injectable()
+export class TestresolveService implements Resolve<EndpointComponent> {
+
+    public limit:any = 10;
+    public skip:any = 0;
+    public user_id:any = '';
+    public username:any = '';
+    public url:any;
+    public url1:any;
+
+    constructor( private _http: HttpClient,private router: Router,public userdata: CookieService) {
+        this.userdata=userdata;
+        /*this.url = "https://developmentapi.audiodeadline.com:6003/";
+        this.url1 = "https://developmentapi.audiodeadline.com:6004/";*/
+        this.url1 = "https://api.audiodeadline.com:6004/";
+        this.url = "https://api.audiodeadline.com:6003/";
+    }
+    resolve(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+        //let id = route.params['id'];
+        // console.log('resolve route data');
+        // console.log(route.data);
+
+        let endpoint:any;
+        if(route.data.object == 'mediamarketdata'){
+
+            endpoint=route.data.object;
+
+            console.log(endpoint);
+            console.log(state);
+
+            return new Promise((resolve) => { this.getmarketdata().subscribe(api_object => {
+                if (api_object) {
+                    return resolve(api_object);
+                } else { // id not found
+                    // this.router.navigateByUrl('/login');
+                    return true;
+                }
+            });
+            });
+        }
+        if(route.data.object == 'orderlistaff'){
+
+            endpoint=route.data.object;
+
+            console.log(endpoint);
+            console.log(state);
+            this.user_id = this.userdata.get('user_id');
+
+            return new Promise((resolve) => { this.getOrderListForAffiliate().subscribe(api_object => {
+                if (api_object) {
+                    return resolve(api_object);
+                } else { // id not found
+                    // this.router.navigateByUrl('/login');
+                    return true;
+                }
+            });
+            });
+        }
+
+        if(route.data.object == 'commisionlist'){
+            endpoint=route.data.object;
+
+    if(route.data.condition.typeval == 'true'){
+    let userdata2 =JSON.parse(this.userdata.get('userdetails'));
+    let signupaffiliate = userdata2.signupaffiliate;
+    let admin = userdata2.admin;
+
+    if(signupaffiliate==1){
+        let username = userdata2.username;
+        return new Promise((resolve) => { this.getCommisionlist(username).subscribe(api_object => {
+            if (api_object) {
+                return resolve(api_object);
+            } else { // id not found
+                // this.router.navigateByUrl('/login');
+                return true;
+            }
+        });
+        });
+
+    }
+    if(admin==1){
+        let username = '';
+        return new Promise((resolve) => { this.getCommisionlist(username).subscribe(api_object => {
+            if (api_object) {
+                return resolve(api_object);
+            } else { // id not found
+                // this.router.navigateByUrl('/login');
+                return true;
+            }
+        });
+        });
+
+    }
+}
+
+
+
+        }
+
+    }
+    getmarketdata(){
+
+        let link2= this.url+'datalist';
+        //alert(this.user_id);
+        //alert(this.userdata.get('user_id'));
+        //if(this.user_id=='' || this.user_id==null || this.user_id.length<5) return true;
+        // console.log(data);
+
+        let result =this._http.post(link2,({source:'mediaview',condition:{"type":7,"status":1}})).pipe(map(res => res));
+        return result;
+
+    }
+
+    getOrderListForAffiliate(){
+
+        let link2= this.url+'datalist';
+        //alert(this.user_id);
+        //alert(this.userdata.get('user_id'));
+        //if(this.user_id=='' || this.user_id==null || this.user_id.length<5) return true;
+        // console.log(data);
+
+        let result =this._http.post(link2,({"source": "order_view","condition":{"userid_object":this.user_id}})).pipe(map(res => res));
+        return result;
+
+    }
+
+    getCommisionlist(val){
+        let link2= this.url+'datalist';
+        if(val == ''){
+
+            let result =this._http.post(link2,({"source": "newcommision"})).pipe(map(res => res));
+            return result;
+        }
+        if(val!=''){
+            let result =this._http.post(link2,({"source": "newcommision","condition":{"username":val}})).pipe(map(res => res));
+            return result;
+        }
+    }
+
+// {"condition":{"parent": "banetest"},"source": "newcommision"}
+
+}

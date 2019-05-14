@@ -1,0 +1,587 @@
+<!--
+<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop">
+    <div class="dashboradtoplogo">
+      <img src="../../assets/images/logo.png">
+    </div>
+  </div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <h4>Dashboard</h4>
+          <div class="dashboardwrapper">
+            <form method="post" action="">
+              <div class="row socialmediadiv">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 socialmedia socialmedia_left">
+                  <div class="dashboard1form">
+                    <h2 class="headersocialbroadcast">My Profile</h2>
+                    <div class="form-group" *ngIf="userdetails">
+                      <span><label>Name:</label> {{userdetails.firstname}} {{userdetails.lastname}}</span>
+                    </div>
+                    <div class="form-group" *ngIf="userdetails">
+                      <span><label>Email:</label> {{userdetails.email}}</span>
+                    </div>
+                    <div class="form-group" *ngIf="userdetails">
+                      <span><label>Joining Date:</label> {{(userdetails.added_time*1000) | date:'MM-dd-yyyy'}}</span>
+                    </div>
+                    <div class="form-group" *ngIf="userdetails" style="word-break: break-all;">
+                      <span>
+                        <label>Audiodeadline Ticket Sale link:</label>
+                        <span class="linksharedivnew">
+                          <code style="padding-left: 0;">https://audiodeadline.com/ticket-sale/media-{{defaultadmedia}}/affiliate-{{userdetails.username}}</code>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="form-group" *ngIf="userdetails">
+                      <button type="button" class="copybtn" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname=&media_id='+defaultadmedia+'&image='+defaultadimage+'&affiliate='+userdetails.username)"><span>Grab Url</span></button>
+                    </div>
+                    <div class="form-group" *ngIf="userdetails" style="word-break: break-all;">
+                      <span>
+                        <label>Artist XP Signup link:</label>
+                        <span class="linksharedivnew">
+                          <code style="padding-left: 0;">https://artistxp.com/signup/{{userdetails.username}}/{{defaultxpmedia}}</code>
+                        </span>
+                      </span>
+                    </div>
+                    <div class="form-group" *ngIf="userdetails">
+                      <button type="button" class="copybtn" (click)="copyText('http://artistxp.com/sharetool2.php?media_id=artistxp_banner_1&username='+userdetails.username+'&image='+defaultxpimage)"><span>Grab Url</span></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 socialmedia socialmedia_right"  *ngIf="!enrollerdetails" style="border: none;"></div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 socialmedia socialmedia_right"  *ngIf="enrollerdetails">
+                  <div class="dashboard1form" *ngIf="enrollerdetails">
+                    <h2 class="headersocialbroadcast">Enroller Information</h2>
+                    <div class="form-group">
+                      <span><label>Name:</label> {{enrollerdetails.firstname}} {{enrollerdetails.lastname}}</span>
+                    </div>
+                    <div class="form-group">
+                      <span><label>Email:</label> {{enrollerdetails.email}}</span>
+                    </div>
+                    <div class="form-group">
+                      <span><label>User Name:</label> {{enrollerdetails.username}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row socialsinglepostlists">
+              <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost" [ngStyle]="{'border-bottom':bannerlist.length ? '1px solid #d6d6d6' : 'none' }">
+                <div class="row socialsinglepostcontent">
+                  <div class="sponsorblock" *ngFor="let sp of sponsorList" [ngClass]="{'hide': (!(bannerlist | bannerbysponsor: sp.name).length)}">
+                    <h2>{{sp.label}}</h2>
+                    <div class="col-md-3 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist | bannerbysponsor: sp.name">
+                      <div class="socialsinglepostimgwrapper">
+                        <img src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                      </div>
+                      <div class="socialsinglepostright">
+                        <div class="btnsocialsharenewlists">
+                          <a class="btn btnsocialsharenew btnfb" (click)="postinfb(item.sponsor,item.name,item.image,affiliatename)"><span>Post In Facebook</span></a>
+                          <a class="btn btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Twitter</span></a>
+                          <a class="btn btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Linkedin</span></a>
+                          <a class="btn btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}&posttype=link" target="_blank"><span>Post In Tumblr</span></a>
+                          <a class="btn btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Google+</span></a>
+                          <a class="btn btnsocialsharenew btngrapurl" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname='+item.sponsor+'&media_id='+item.name+'&image='+item.image+'&affiliate='+affiliatename)"><span>Grab URL</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row socialsinglepostlists">
+              <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                <div class="row socialsinglepostcontent">
+                  <h2><span><img src="../../assets/images/logo.png"></span> Banner For Audiodeadline</h2>
+                  <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist1">
+                    <p>https://audiodeadline.com/ticket-sale/media-{{item.name}}/affiliate-{{username}}</p>
+                    <div class="socialsinglepostimgwrapper">
+                      <img  src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                    </div>
+                    <div class="socialsinglepostright">
+                      <div class="btnsocialsharenewlists">
+                        <a class="btnsocialsharenew btnfb" href="javascript:void(0)" (click)="postinfb(username,item.name,item.image)">Post In Facebook</a>
+                        <a class="btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}" target="_blank">Post In Twitter</a>
+                        <a class="btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}" target="_blank">Post In Linkedin</a>
+                        <a class="btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}&posttype=link" target="_blank">Post In Tumblr</a>
+                        <a class="btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}" target="_blank">Post In Google+</a>
+                        <a class="btn btnsocialsharenew btngrapurl" href="javascript:void(0)" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname=&media_id='+item.name+'&image='+item.image+'&affiliate='+username)"><span>Grab URL</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row socialsinglepostlists">
+              <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                <div class="row socialsinglepostcontent">
+                  <h2><span><img src="../../assets/images/landing-logo-artistxp.png"></span> Banner For ArtistXP</h2>
+                  <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist2">
+                    <p>https://artistxp.com/signup/{{username}}/{{item.name}}</p>
+                    <div class="socialsinglepostimgwrapper">
+                      <img src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                    </div>
+                    <div class="socialsinglepostright">
+                      <div class="btnsocialsharenewlists">
+                        <a class="btnsocialsharenew btnfb" href="javascript:void(0)" (click)="postinfb2(username,item.name,item.image)">Post In Facebook</a>
+                        <a class="btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank">Post In Twitter</a>
+                        <a class="btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank">Post In Linkedin</a>
+                        <a class="btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}&posttype=link" target="_blank">Post In Tumblr</a>
+                        <a class="btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank">Post In Google+</a>
+                        <a class="btn btnsocialsharenew btngrapurl" href="javascript:void(0)" (click)="copyText('http://artistxp.com/sharetool2.php?media_id='+item.name+'&username='+username+'&image='+item.image)"><span>Grab URL</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row socialsinglepostlists">
+              <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                <div class="row socialsinglepostcontent">
+                  <h2><span><img src="../../assets/images/logo.png"></span> Instagram Banner For Audiodeadline</h2>
+                  <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of instabannerlist1">
+                    <div class="socialsinglepostimgwrapper" style="height: auto !important;">
+                      <img src="{{fileurl}}{{uploadfolder}}{{item.image}}" style="position: unset; top: auto; left: auto; -webkit-transform: none;">
+                    </div>
+                    <div class="socialsinglepostright">
+                      <div class="btnsocialsharenewlists">
+                        <a class="btn btnsocialsharenew btngrapurl" href="{{fileurl}}{{uploadfolder}}{{item.image}}" download><span>Download</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row socialsinglepostlists">
+              <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                <div class="row socialsinglepostcontent">
+                  <h2><span><img src="../../assets/images/landing-logo-artistxp.png"></span> Instagram Banner For ArtistXP</h2>
+                  <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of instabannerlist2">
+                    <div class="socialsinglepostimgwrapper" style="height: auto !important;">
+                      <img src="{{fileurl}}{{uploadfolder}}{{item.image}}" style="position: unset; top: auto; left: auto; -webkit-transform: none;">
+                    </div>
+                    <div class="socialsinglepostright">
+                      <div class="btnsocialsharenewlists">
+                        <a class="btn btnsocialsharenew btngrapurl" href="{{fileurl}}{{uploadfolder}}{{item.image}}" download target="_blank"><span>Download</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>-->
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <!--<div class="dashboard_wrappertop">
+    <div class="dashboradtoplogo">
+      <img src="../../assets/images/logo.png">
+    </div>
+  </div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right afiliatedashboard">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <div class="n-adminheadercls text-center">
+            <h3>Welcome</h3>
+            <p>ArtistXP has gone live! Thank you for being a part of the movement that unites musicians, music lovers, and anyone who appreciates artistry together.</p>
+            <a href="https://artistxp.com" target="_blank" class="btn adminbtnred">Visit ArtistXP Now</a>
+          </div>
+
+          <div class="dashboardwrapper">
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <!--<div class="dashboard1form formnewpopup">
+                  <form method="post" action="" class="form-horizontal">
+                    <div class="row socialmediadiv">
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 socialmedia socialmedia_left">
+                        <div class="dashboard1form">
+                          <h2 class="headersocialbroadcast">My Profile</h2>
+                          <div class="form-group" *ngIf="userdetails">
+                            <span><label>Name:</label> {{userdetails.firstname}} {{userdetails.lastname}}</span>
+                          </div>
+                          <div class="form-group" *ngIf="userdetails">
+                            <span><label>Email:</label> {{userdetails.email}}</span>
+                          </div>
+                          <div class="form-group" *ngIf="userdetails">
+                            <span><label>Joining Date:</label> {{(userdetails.added_time*1000) | date:'MM-dd-yyyy'}}</span>
+                          </div>
+                          <div class="form-group" *ngIf="userdetails" style="word-break: break-all;">
+                            <span>
+                              <label>Audiodeadline Ticket Sale link:</label>
+                              <span class="linksharedivnew">
+                                <code style="padding-left: 0;">https://audiodeadline.com/ticket-sale/media-{{defaultadmedia}}/affiliate-{{userdetails.username}}</code>
+                              </span>
+                            </span>
+                          </div>
+                          <div class="form-group" *ngIf="userdetails">
+                            <button type="button" class="copybtn" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname=&media_id='+defaultadmedia+'&image='+defaultadimage+'&affiliate='+userdetails.username)"><span>Grab Url</span></button>
+                          </div>
+                          <div class="form-group" *ngIf="userdetails" style="word-break: break-all;">
+                            <span>
+                              <label>Artist XP Signup link:</label>
+                              <span class="linksharedivnew">
+                                <code style="padding-left: 0;">https://artistxp.com/signup/{{userdetails.username}}/{{defaultxpmedia}}</code>
+                              </span>
+                            </span>
+                          </div>
+                          <div class="form-group" *ngIf="userdetails">
+                            <button type="button" class="copybtn" (click)="copyText('http://artistxp.com/sharetool2.php?media_id=artistxp_banner_1&username='+userdetails.username+'&image='+defaultxpimage)"><span>Grab Url</span></button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 socialmedia socialmedia_right"  *ngIf="!enrollerdetails" style="border: none;"></div>
+                      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 socialmedia socialmedia_right"  *ngIf="enrollerdetails">
+                        <div class="dashboard1form" *ngIf="enrollerdetails">
+                          <h2 class="headersocialbroadcast">Enroller Information</h2>
+                          <div class="form-group">
+                            <span><label>Name:</label> {{enrollerdetails.firstname}} {{enrollerdetails.lastname}}</span>
+                          </div>
+                          <div class="form-group">
+                            <span><label>Email:</label> {{enrollerdetails.email}}</span>
+                          </div>
+                          <div class="form-group">
+                            <span><label>User Name:</label> {{enrollerdetails.username}}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>-->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="tablediv affidashboardwhatsnew">
+                      <div class="n-affidashboardwhatsnewheadercls text-center">
+                        <h2>What’s New?</h2>
+                      </div>
+                      <ul>
+                        <li>
+                          <div class="row">
+                            <div class="col-md-3">
+                              <h1>Competitions Are Coming!</h1>
+                              <p class="affidashboardwhatsnewpara"><span>Lorem Ipsum</span><span>03/1/19</span></p>
+                            </div>
+                            <div class="col-md-9">
+                              <p>Are you ready to be apart of our first competition show live?! Artist will need to bring their A-game to start preparing for this unique artist experience. We go Live June 1st, 2019! Don’t forget to indulge yourself in to the artist community on ArtistXP.com and show your fans all that you have to offer! Sign-up now....<span class="txtred"><a href="javascript">Read More</a></span></p></div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="row">
+                            <div class="col-md-3">
+                              <h1>New Feature Coming!</h1>
+                              <p class="affidashboardwhatsnewpara"><span>Lorem Ipsum</span><span>02/28/19</span></p>
+                            </div>
+                            <div class="col-md-9">
+                              <p>You gave feedback and we heard it! We are excited to be bringing a whole new spin on how to manage your Trade Requests with your fellow artists...<span class="txtred"><a href="javascript">Read More</a></span></p></div>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="row">
+                            <div class="col-md-3">
+                              <h1>Competitions Are Coming!</h1>
+                              <p class="affidashboardwhatsnewpara"><span>Lorem Ipsum</span><span>02/28/19</span></p>
+                            </div>
+                            <div class="col-md-9">
+                              <p>Are you ready to be apart of our first competition show live?! Artist will need to bring their A-game to start preparing for this unique artist experience. We go Live June 1st, 2019! Don’t forget to indulge yourself in to the artist community on ArtistXP.com and show your fans all that you have to offer! Sign-up now....<span class="txtred"><a href="javascript">Read More</a></span></p></div>
+                          </div>
+                        </li>
+                      </ul>
+                      <div class="text-center">
+                        <a [routerLink]="['/upcomingevents']" target="_blank" class="btn adminbtnred">View All Blogs</a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <4>My Orde4>
+                    <div class="tablediv affidashboardbg1">
+                      <table>
+                        <thead>
+                        <tr>
+                          <th class="empycell"></th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Order ID</th>
+                          <th>Date/Time</th>
+                          <th>Product</th>
+                          <th>Quantity</th>
+                          <th class="text-center">Total</th>
+                          <th class="empycell"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <!----list single start--->
+                        <tr *ngFor="let item of afforderlist">
+                          <td class="empycell"></td>
+                          <td data-label="Name">{{item.firstname}} {{item.lastname}}</td>
+                          <td data-label="Email">{{item.email}}</td>
+                          <td data-label="Order ID" *ngIf="item.orderdetails!=null && item.orderdetails[0]!=null">{{item.orderdetails[0].orderid}}</td>
+                          <td data-label="Order ID" *ngIf="item.orderdetails==null || item.orderdetails[0]==null">N/A</td>
+                          <td data-label="Date/Time" *ngIf="item.orderdetails!=null && item.orderdetails[0]!=null">{{commonservices.unixtodatetimeConverter(0,item.orderdetails[0].added_time)}} {{commonservices.unixtodatetimeConverter(1,item.orderdetails[0].added_time)}}</td>
+                          <td data-label="Date/Time" *ngIf="item.orderdetails==null || item.orderdetails[0]==null">N/A</td>
+                          <td data-label="Product" *ngIf="item.orderdetails!=null && item.orderdetails[0]!=null">{{item.orderdetails[0].source_name}}</td>
+                          <td data-label="Product" *ngIf="item.orderdetails==null || item.orderdetails[0]==null">N/A</td>
+                          <!--<td *ngIf="item.orderdetails[0].source_name==null && item.orderdetails[0].source_name=='' " data-label="Product">Test</td>-->
+                          <td data-label="Quantity" *ngIf="item.orderdetails!=null && item.orderdetails[0]!=null">{{item.orderdetails[0].quantity}}</td>
+                          <td data-label="Quantity" *ngIf="item.orderdetails==null || item.orderdetails[0]==null">N/A</td>
+                          <td data-label="Total" class="text-center">${{item.total}}</td>
+                          <td class="empycell"></td>
+                        </tr>
+                        <tr>
+                          <td class="empycell"></td>
+                          <td colspan="7" class="norecordfound">No Record Found</td>
+                          <td class="empycell"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="9" style="text-align: right;  background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
+                            <a [routerLink]="['/myorder']" class="btn adminbtnred">View All Orders</a>
+                          </td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <h4>My Affiliates</h4>
+                    <div class="tablediv affidashboardbg2">
+                      <table>
+                        <thead>
+                        <tr>
+                          <th class="empycell"></th>
+                          <th>Date Added</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th class="empycell"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <!----list single start--->
+                        <tr *ngFor="let item of affunderme">
+                          <td class="empycell"></td>
+                          <td data-label="Date Added">{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
+                          <td data-label="Name">{{item.firstname}} {{item.lastname}}</td>
+                          <td data-label="Email">{{item.email}}</td>
+                          <td class="empycell"></td>
+                        </tr>
+                        <!----list single end--->
+                        <tr *ngIf="affunderme==null || affunderme.length==0">
+                          <td class="empycell"></td>
+                          <td colspan="3" class="norecordfound">No Record Found</td>
+                          <td class="empycell"></td>
+                        </tr>
+                        <tr>
+                          <td colspan="5" style="text-align: right;  background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
+                            <a [routerLink]="['/affiliatetree']" class="btn adminbtnred">View Affiliates</a>
+                          </td>
+                        </tr>
+
+                        </tbody>
+                      </table>
+                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h4>Commissions</h4>
+                    <div class="tablediv affidashboardbg2">
+                      <table>
+                        <thead>
+                        <tr>
+                          <th class="empycell"></th>
+                          <th>Date</th>
+                          <th>Enroller</th>
+                          <!--<th>Tier</th>-->
+                          <th>Account Type</th>
+                          <th># Of Sale</th>
+                          <!--<th>Product</th>-->
+                          <th>Total Amount</th>
+                          <!--<th>Quantity</th>-->
+                          <!--<th>Quantity</th>-->
+                          <th class="empycell"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <!----list single start--->
+                        <tr *ngFor="let item of commisionlist">
+                          <td class="empycell"></td>
+                          <td data-label="Date">{{item.added_time}}</td>
+                          <td data-label="Enroller">{{item.parent}}</td>
+                          <!--<td data-label="Tier">1</td>-->
+                          <td data-label="Tier">{{(item.ambassador == 1)?'Ambassador':'Affiliate'}}</td>
+                          <td data-label="Tier">{{item.noofsale}}</td>
+                          <!--<td data-label="Product">Ticket</td>-->
+                          <td data-label="Product">${{item.totalamount}}</td>
+                          <!--<td data-label="Quantity">1</td>-->
+                          <td class="empycell"></td>
+                        </tr>
+
+                        <!----list single end--->
+
+                        <tr *ngIf="commisionlist==null || commisionlist.length==0">
+                          <td class="empycell"></td>
+                          <td colspan="5" class="norecordfound">No Record Found</td>
+                          <td class="empycell"></td>
+                        </tr>
+                        <tr>
+                          <!--<td colspan="12" style="text-align: center;">
+                              <div class="loadertabledata"></div>
+                          </td>-->
+                          <td colspan="7" style="text-align: right; background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
+                            <a [routerLink]="['/commission-list']" class="btn adminbtnred">View All Commissions</a>
+                          </td>
+
+                        </tr>
+
+                        </tbody>
+                      </table>
+                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+              <!--<div class="row socialsinglepostlists">
+                <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost" [ngStyle]="{'border-bottom':bannerlist.length ? '1px solid #d6d6d6' : 'none' }">
+                  <div class="row socialsinglepostcontent">
+                    <div class="sponsorblock" *ngFor="let sp of sponsorList" [ngClass]="{'hide': (!(bannerlist | bannerbysponsor: sp.name).length)}">
+                      <h2>{{sp.label}}</h2>
+                      <div class="col-md-3 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist | bannerbysponsor: sp.name">
+                        <div class="socialsinglepostimgwrapper">
+                          <img src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                        </div>
+                        <div class="socialsinglepostright">
+                          <div class="btnsocialsharenewlists">
+                            <a class="btn btnsocialsharenew btnfb" (click)="postinfb(item.sponsor,item.name,item.image,affiliatename)"><span>Post In Facebook</span></a>
+                            <a class="btn btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Twitter</span></a>
+                            <a class="btn btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Linkedin</span></a>
+                            <a class="btn btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}&posttype=link" target="_blank"><span>Post In Tumblr</span></a>
+                            <a class="btn btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Google+</span></a>
+                            <a class="btn btnsocialsharenew btngrapurl" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname='+item.sponsor+'&media_id='+item.name+'&image='+item.image+'&affiliate='+affiliatename)"><span>Grab URL</span></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="row socialsinglepostlists">
+                <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                  <div class="row socialsinglepostcontent">
+                    <h2><span><img src="../../assets/images/logo.png"></span> Banner For Audiodeadline</h2>
+                    <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist1">
+                      <p>https://audiodeadline.com/ticket-sale/media-{{item.name}}/affiliate-{{username}}</p>
+                      <div class="socialsinglepostimgwrapper">
+                        <img  src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                      </div>
+                      <div class="socialsinglepostright">
+                        <div class="btnsocialsharenewlists">
+                          <a class="btnsocialsharenew btnfb" href="javascript:void(0)" (click)="postinfb(username,item.name,item.image)">Post In Facebook</a>
+                          <a class="btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}" target="_blank">Post In Twitter</a>
+                          <a class="btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}" target="_blank">Post In Linkedin</a>
+                          <a class="btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}&posttype=link" target="_blank">Post In Tumblr</a>
+                          <a class="btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{username}}" target="_blank">Post In Google+</a>
+                          <a class="btn btnsocialsharenew btngrapurl" href="javascript:void(0)" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname=&media_id='+item.name+'&image='+item.image+'&affiliate='+username)"><span>Grab URL</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="row socialsinglepostlists">
+                <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                  <div class="row socialsinglepostcontent">
+                    <h2><span><img src="../../assets/images/landing-logo-artistxp.png"></span> Banner For ArtistXP</h2>
+                    <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist2">
+                      <p>https://artistxp.com/signup/{{username}}/{{item.name}}</p>
+                      <div class="socialsinglepostimgwrapper">
+                        <img src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                      </div>
+                      <div class="socialsinglepostright">
+                        <div class="btnsocialsharenewlists">
+                          <a class="btnsocialsharenew btnfb" href="javascript:void(0)" (click)="postinfb2(username,item.name,item.image)">Post In Facebook</a>
+                          <a class="btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank">Post In Twitter</a>
+                          <a class="btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank">Post In Linkedin</a>
+                          <a class="btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}&posttype=link" target="_blank">Post In Tumblr</a>
+                          <a class="btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Fartistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank">Post In Google+</a>
+                          <a class="btn btnsocialsharenew btngrapurl" href="javascript:void(0)" (click)="copyText('http://artistxp.com/sharetool2.php?media_id='+item.name+'&username='+username+'&image='+item.image)"><span>Grab URL</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="row socialsinglepostlists">
+                <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                  <div class="row socialsinglepostcontent">
+                    <h2><span><img src="../../assets/images/logo.png"></span> Instagram Banner For Audiodeadline</h2>
+                    <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of instabannerlist1">
+                      <div class="socialsinglepostimgwrapper" style="height: auto !important;">
+                        <img src="{{fileurl}}{{uploadfolder}}{{item.image}}" style="position: unset; top: auto; left: auto; -webkit-transform: none;">
+                      </div>
+                      <div class="socialsinglepostright">
+                        <div class="btnsocialsharenewlists">
+                          <a class="btn btnsocialsharenew btngrapurl" href="{{fileurl}}{{uploadfolder}}{{item.image}}" download><span>Download</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+              <div class="row socialsinglepostlists">
+                <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost">
+                  <div class="row socialsinglepostcontent">
+                    <h2><span><img src="../../assets/images/landing-logo-artistxp.png"></span> Instagram Banner For ArtistXP</h2>
+                    <div class="col-md-4 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of instabannerlist2">
+                      <div class="socialsinglepostimgwrapper" style="height: auto !important;">
+                        <img src="{{fileurl}}{{uploadfolder}}{{item.image}}" style="position: unset; top: auto; left: auto; -webkit-transform: none;">
+                      </div>
+                      <div class="socialsinglepostright">
+                        <div class="btnsocialsharenewlists">
+                          <a class="btn btnsocialsharenew btngrapurl" href="{{fileurl}}{{uploadfolder}}{{item.image}}" download target="_blank"><span>Download</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>

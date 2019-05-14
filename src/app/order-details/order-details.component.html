@@ -1,0 +1,399 @@
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body order-deatils-pg">
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>Order Details</h4>
+          </div>
+          <div class="dashboardwrapper">
+            <form class="ng-pristine ng-untouched ng-valid" name="dataForm" novalidate="">
+              <div class="tabcontentwrapper">
+                <div class="adminlisttable adminlisttabledashboard">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="tablediv affidashboardwhatsnew">
+                        <div class="n-affidashboardwhatsnewheadercls text-center">
+                          <h2>View Order</h2>
+                        </div>
+                        <div class="formdivwrapper">
+                          <div class="formtopdetials">
+                            <div class="form-row">
+                              <div class="form-group col-lg-4 col-md-5 col-sm-12 col-xs-6 formpaddingright">
+                                <label>User</label>
+                                <!--<span>95 | andrewaffiliate | Andrew Affiliate</span>-->
+                                <span>{{orderdetails.firstname}} {{orderdetails.lastname}}</span>
+                              </div>
+                              <div class="form-group col-lg-4 col-md-7 col-sm-12 col-xs-6 formpaddingright">
+                                <label>Order ID</label>
+                                <!--<span>163 Jump to<input class="form-control" id="" name="" placeholder="" type="text"><a href="javascript:void(0)" target="_blank" class="btn adminbtnred">GO</a></span>-->
+                                <span>{{orderdetails._id}}</span>
+                              </div>
+                              <!--<div class="form-group col-lg-4 col-md-5 col-sm-12 col-xs-6">
+                                <label>Order Status</label>
+                                <span>Default</span>
+                              </div>-->
+
+
+                              <!--<div class="form-group col-lg-6 col-md-7 col-sm-12 col-xs-12 formpaddingright">
+                                &lt;!&ndash;<label>Payment Status</label>&ndash;&gt;
+                                &lt;!&ndash;<span>Error. The payment status for this order is not recognized.</span>&ndash;&gt;
+                                <div class="formtopdetialsbtns">
+                                  <div class="form-horizontal">
+                                    <div class="form-row">
+                                      <div class="form-group col-sm-5 col-xs-12 formpaddingright">
+                                        <label>Authorize Only</label>
+                                        <span><a href="javascript:void(0)" target="_blank" class="btn adminbtnred">Authorize Order</a></span>
+                                      </div>
+                                      <div class="form-group col-sm-7 col-xs-12">
+                                        <label>Authorize & Capture</label>
+                                        <span><a href="javascript:void(0)" target="_blank" class="btn adminbtnred">Authorize & Capture Order</a></span>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+
+                              </div>-->
+                              <div class="form-group col-lg-3 col-md-5 col-sm-12 col-xs-12 formpaddingright">
+                                <label>Date Added</label>
+                                <!--<span>Mar 27th, 2019 6:35 CDT </span>-->
+                                <!--<span>{{commonservices.unixtodatetimeConverter(0,orderdetails.added_time    )}} {{commonservices.unixtodatetimeConverter(1,orderdetails.added_time)}}</span>-->
+                                <span>{{orderdetails.added_time}}</span>
+                              </div>
+                              <div class="form-group col-lg-3 col-md-7 col-sm-12 col-xs-12">
+                                <label>Order Source</label>
+                                <span>{{orderdetails.source_name}}</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h4>Order Details</h4>
+                      <div class="tablediv affidashboardbg1">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th class="empycell"></th>
+                            <th></th>
+                            <th>Product</th>
+                            <th>Product Category</th>
+                            <th>QTY</th>
+                            <th>Unit Price</th>
+                            <th class="text-center">Total</th>
+                            <th class="empycell"></th>
+                          </tr>
+                          </thead>
+                          <tbody *ngIf="orderdetails.orderdetails!='' && orderdetails.orderdetails!=null">
+
+                          <!----list single start--->
+                          <tr *ngFor="let item of orderdetails.orderdetails">
+                            <td class="empycell"></td>
+                            <td><input type="checkbox" name="checkbox" checked></td>
+                            <td data-label="Product">{{item.title}}</td>
+                            <td data-label="Product Category">{{item.categoryname}}</td>
+                            <td data-label="QTY">{{item.quantity}}</td>
+                            <td data-label="Unit Price">${{item.price}}</td>
+                            <td data-label="Total" class="text-center">${{item.subtotal.toFixed(2)}}</td>
+                            <td class="empycell"></td>
+                          </tr>
+                          <!----list single end--->
+
+                          <tr>
+                            <td class="empycell"></td>
+                            <td colspan="4"></td>
+                            <td><strong>Subtotal</strong></td>
+                            <td data-label="Total" class="text-center">${{orderdetails.subtotal.toFixed(2)}}</td>
+                            <td class="empycell"></td>
+                          </tr>
+
+                          <tr>
+                            <td class="empycell"></td>
+                            <td colspan="4"></td>
+                            <td><strong>Shipping & Handling</strong></td>
+                            <td data-label="Total" class="text-center">${{orderdetails.shipping}}</td>
+                            <td class="empycell"></td>
+                          </tr>
+                          <tr>
+                            <td class="empycell"></td>
+                            <td colspan="4"></td>
+                            <td><strong>Tax</strong></td>
+                            <td data-label="Total" class="text-center">${{orderdetails.tax}}</td>
+                            <td class="empycell"></td>
+                          </tr>
+                          <tr>
+                            <td class="empycell"></td>
+                            <td colspan="4"></td>
+                            <td><strong>Total</strong></td>
+                            <td data-label="Total" class="text-center">${{orderdetails.total}}</td>
+                            <td class="empycell"></td>
+                          </tr>
+                          <tr *ngIf="orderdetails.orderdetails=='' || orderdetails.orderdetails==null">
+                            <td class="empycell"></td>
+                            <td colspan="6" class="norecordfound">No Record Found</td>
+                            <td class="empycell"></td>
+                          </tr>
+                         <!-- <tr>
+                            <td colspan="8" style="text-align: right;  background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
+                              <a href="javascript:void(0)" class="btn adminbtnred">Refund Selected</a>
+                            </td>
+                          </tr>-->
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="row n-socialsinglepostlists">
+                        <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost userdashboardinvitefriend">
+                          <div class="row n-socialsinglepostcontent">
+                            <div class="n-sponsorblock">
+                              <div class="n-sponsorblocklists">
+                                <div class="col-md-12 col-sm-12 col-xs-12 inviteyourfriend text-center">
+                                  <!--<h2>Billing Profile - <span>1031</span></h2>-->
+                                  <h2>Billing Profile</h2>
+
+
+
+                                  <div class="form-row inviteyourfriendnewblock">
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                      <label class="labelheader">Billing Address</label>
+                                      <div class="inviteyourfriendnewblockinfo text-left">
+                                        <div class="form-horizontal">
+                                          <div class="form-row">
+                                            <div class="form-group">
+                                              <label>First Name</label><span>{{orderdetails.firstname}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Last Name</label><span>{{orderdetails.lastname}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Address Line 1</label><span>{{orderdetails.address}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>City</label><span>{{orderdetails.city}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Region</label><span>{{orderdetails.state}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Country</label><span>{{orderdetails.country}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Postal Code</label><span>{{orderdetails.zip}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Email</label><span>{{orderdetails.email}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Phone</label><span>{{orderdetails.phone}}</span>
+                                            </div>
+                                          </div>
+
+                                          <!--<br>
+                                          &lt;!&ndash;<label>Company</label><span>&nbsp;</span><br>&ndash;&gt;
+                                          <br>
+                                          &lt;!&ndash;<label>Address Line 2</label><span>sds</span><br>&ndash;&gt;
+
+                                          <br>
+                                          <br>
+                                          <br>
+                                          <br>
+                                          <br>-->
+                                          <!--<label>District</label><span>&nbsp;</span><br>-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                      <label class="labelheader">Shipping Address</label>
+                                      <div class="inviteyourfriendnewblockinfo text-left">
+                                        <div class="form-horizontal">
+                                          <div class="form-row">
+                                            <div class="form-group">
+                                              <label>First Name</label><span>{{orderdetails.ship_firstname}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Last Name</label><span>{{orderdetails.ship_lastname}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Address Line 1</label><span>{{orderdetails.ship_address}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>City</label><span>{{orderdetails.ship_city}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Region</label><span>{{orderdetails.ship_state}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Country</label><span>{{orderdetails.ship_country}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Postal Code</label><span>{{orderdetails.ship_zip}}</span>
+                                            </div>
+                                          </div>
+
+                                          <!--<br>
+                                          <br>
+                                          &lt;!&ndash;<label>Company</label><span>&nbsp;</span><br>&ndash;&gt;
+                                          <br>
+                                          &lt;!&ndash;<label>Address Line 2</label><span>sds</span><br>&ndash;&gt;
+                                          <br>
+                                          <br>
+                                          <br>-->
+                                         <!-- <br>-->
+                                          <!--<label>Address Key</label><span>&nbsp;</span><br>-->
+                                          <!--<label>Shipping Notes</label><span>&nbsp;</span><br>-->
+                                          <!--<label>Phone</label><span>{{orderdetails.phone}}</span><br>-->
+                                          <!--<label>District</label><span>&nbsp;</span><br>-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                                      <label class="labelheader">Card Information</label>
+                                      <div class="inviteyourfriendnewblockinfo text-left">
+                                        <div class="form-horizontal">
+                                          <div class="form-row">
+                                            <div class="form-group">
+                                              <label>Card Number</label><span>************{{orderdetails.card_number}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Card Exp Mo</label><span>{{orderdetails.card_exp_date}}</span>
+                                            </div>
+                                            <div class="form-group">
+                                              <label>Card Type</label><span>{{orderdetails.card_type}}</span>
+                                            </div>
+                                          </div>
+                                          <!--<br>
+                                          <br>
+                                          <br>-->
+                                          <!--<label>Currency Code</label><span>&nbsp;</span><br>-->
+                                          <!--<label>Anxpro Username</label><span>&nbsp;</span><br>-->
+                                          <!--<label>Anxpro Password</label><span>&nbsp;</span><br>-->
+                                          <!--<label>Card Name</label><span>Debasis Kar</span><br>-->
+                                          <!--<label>Card Phone</label><span>&nbsp;</span><br>-->
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+
+
+
+                                  <!--<div class="inviteyourfriendform mt0">
+
+                                    <div class="form-row">
+                                      <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label>Shipping Instructions</label>
+                                        <p>&nbsp;</p>
+                                      </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                      <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label>Fulfillment Notes</label>
+                                        <p>&nbsp;</p>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label>User Comments</label>
+                                        <textarea class="form-control" name="user_comments" rows="1" placeholder=""></textarea>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label>Admin Comments</label>
+                                        <textarea class="form-control" name="admin_comments" rows="1" placeholder=""></textarea>
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
+                                      <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <label>System Log</label>
+                                        <textarea class="form-control" name="system_log" rows="1" placeholder=""></textarea>
+                                      </div>
+                                    </div>
+
+                                  </div>-->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <!--  <div class="row transactionsdetails">
+                    <div class="col-md-12">
+                      <h4>Transactions Details</h4>
+                      <div class="tablediv affidashboardbg1">
+                        <table>
+                          <thead>
+                          <tr>
+                            <th class="empycell"></th>
+                            <th>Txn ID</th>
+                            <th>Merchant ID</th>
+                            <th>Type</th>
+                            <th>Date/Time</th>
+                            <th>Approval</th>
+                            <th>Authorization Code</th>
+                            <th class="empycell"></th>
+                          </tr>
+                          </thead>
+                          <tbody>
+
+                          &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
+                          <tr>
+                            <td class="empycell"></td>
+                            <td data-label="Txn ID">156</td>
+                            <td data-label="Merchant ID">&nbsp;</td>
+                            <td data-label="Type">AUTH_CAPTURE</td>
+                            <td data-label="Date/Time">	2019-04-01 01:04:02 </td>
+                            <td data-label="Approval"><span class="redtxtnew">Error</span></td>
+                            <td data-label="Authorization Code">Reserved</td>
+                            <td class="empycell"></td>
+                          </tr>
+                          &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
+
+
+                          <tr>
+                            <td class="empycell"></td>
+                            <td colspan="6" class="norecordfound">No Record Found</td>
+                            <td class="empycell"></td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>-->
+
+
+                </div>
+                <div class="tabcontentwrapperoverlay"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+

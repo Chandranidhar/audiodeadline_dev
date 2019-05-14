@@ -1,0 +1,256 @@
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right afiliatedashboard">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <div class="n-adminheadercls n-adminheaderclsnp text-center">
+            <h4>Social Media Banners</h4>
+            <div class="n-adminheaderclssub">
+              <h5>Share these banners with your friends to help spread the word about<br> <span>AudioDeadline</span> and <span>ArtistXP’s</span> exciting experience. </h5>
+
+            </div>
+          </div>
+
+          <div class="dashboardwrapper">
+            <div class="tabcontentwrapper tabcontentwrappertransparent">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="row n-socialsinglepostlists n-socialsinglepostlistsbg1 n-socialsinglepostlistsbgsame">
+                  <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost">
+                    <div class="row n-socialsinglepostcontent">
+                      <div class="n-sponsorblock">
+                        <div class="n-sponsorblockheader">
+                          <h2>Ticket Sale Banners</h2>
+                        </div>
+                        <div class="n-sponsorblocklists">
+                          <div class="col-md-4 col-sm-6 col-xs-12 n-socialsinglepostcontentinner" *ngFor="let item of ticketsalebanner">
+                            <div class="n-socialsinglepostimgwrapper">
+                              <!--<img src="https://api.audiodeadline.com/nodeserver/uploads/banner/beautiful-images-26824-27540-hd-wallpapers-1554903788-resized.jpg">-->
+                              <img src="{{fileurl}}/{{uploadfile}}/{{item.origimage}}">
+                            </div>
+                            <div class="n-socialsinglepostbottom">
+                              <!-----------live share urls start------------------>
+
+                              <div class="n-btnsocialsharenewlists" *ngIf="_commonservices.envflag=='live'">
+                                <!--<a class="btn n-btnsocialsharenew btnsharealt btnnew"><span><i class="fa fa fa-share-alt"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}"  target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" (click)="postinfb(item.sponsor,item.name,item.image,affiliatename)"><span><i class="fa fa-facebook"></i></span></a>
+                                <!--<a class="btn n-btnsocialsharenew btngplus btnnew" href="https://plus.google.com/share?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span><i class="fa fa-google-plus"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntumblr btnnew" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}&posttype=link" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>
+                               <!-- <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('https://development.audiodeadline.com/'+affiliatename)"><span>Grab URL</span></a>-->
+                                <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('https://audiodeadline.com/'+affiliatename)"><span>Grab URL</span></a>
+                              <!--  <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('http://api.audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname='+item.sponsor+'&media_id='+item.name+'&image='+item.image+'&affiliate='+affiliatename)"><span>Grab URL</span></a>-->
+                              </div>
+                              <!-----------live share urls end------------------>
+                              <!------------------development share urls start-------------->
+                              <div class="n-btnsocialsharenewlists" *ngIf="_commonservices.envflag=='dev'">
+                                <!--<a class="btn n-btnsocialsharenew btnsharealt btnnew"><span><i class="fa fa fa-share-alt"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdevelopmentapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}"  target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" (click)="postinfb(item.sponsor,item.name,item.image,affiliatename)"><span><i class="fa fa-facebook"></i></span></a>
+                                <!--<a class="btn n-btnsocialsharenew btngplus btnnew" href="https://plus.google.com/share?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span><i class="fa fa-google-plus"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fdevelopmentapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntumblr btnnew" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fdevelopmentapi.audiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}&posttype=link" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('https://development.audiodeadline.com/'+affiliatename)"><span>Grab URL</span></a>
+                                <!--<a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('https://audiodeadline.com/'+affiliatename)"><span>Grab URL</span></a>-->
+                                <!--  <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('http://api.audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname='+item.sponsor+'&media_id='+item.name+'&image='+item.image+'&affiliate='+affiliatename)"><span>Grab URL</span></a>-->
+                              </div>
+                              <!------------------development share urls end-------------->
+                            </div>
+                          </div>
+                          <!--<div class="col-md-4 col-sm-6 col-xs-12 n-socialsinglepostcontentinner">
+                            <div class="n-socialsinglepostimgwrapper">
+                              <img src="../../assets/images/n-socialsinglepostimg2.jpg">
+                            </div>
+                            <div class="n-socialsinglepostbottom">
+                              <div class="n-btnsocialsharenewlists">
+                                <a class="btn n-btnsocialsharenew btnsharealt btnnew"><span><i class="fa fa fa-share-alt"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" href="" target="_blank"><span><i class="fa fa-facebook"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btngplus btnnew" href="" target="_blank"><span><i class="fa fa-google-plus"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                &lt;!&ndash;<a class="btn n-btnsocialsharenew btntumblr btnnew" href="" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>&ndash;&gt;
+                                <a class="btn n-btnsocialsharenew btngrapurl"><span>Grab URL</span></a>
+                              </div>
+                            </div>
+                          </div>-->
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tabcontentwrapperoverlay"></div>
+                </div>
+
+                <!--<div class="row n-socialsinglepostlists n-socialsinglepostlistsbg1">
+                  <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost">
+                    <div class="row n-socialsinglepostcontent">
+                      <div class="n-sponsorblock">
+                        <div class="n-sponsorblockheader">
+                          <h2>Merchandise Banners</h2>
+                        </div>
+                        <div class="n-sponsorblocklists">
+                          <div class="col-md-4 col-sm-6 col-xs-12 n-socialsinglepostcontentinner" *ngFor="let item of merchbanner">
+                            <div class="n-socialsinglepostimgwrapper">
+                              &lt;!&ndash;<img src="https://api.audiodeadline.com/nodeserver/uploads/banner/beautiful-images-26824-27540-hd-wallpapers-1554903788-resized.jpg">&ndash;&gt;
+                              <img src="{{fileurl}}/{{uploadfile}}/{{item.origimage}}">
+                            </div>
+                            <div class="n-socialsinglepostbottom">
+                              <div class="n-btnsocialsharenewlists">
+                                &lt;!&ndash;<a class="btn n-btnsocialsharenew btnsharealt btnnew"><span><i class="fa fa fa-share-alt"></i></span></a>&ndash;&gt;
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool23.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" (click)="postinfb3(username,item.name,item.image)"><span><i class="fa fa-facebook"></i></span></a>
+                                &lt;!&ndash;<a class="btn n-btnsocialsharenew btngplus btnnew" href="" target="_blank"><span><i class="fa fa-google-plus"></i></span></a>&ndash;&gt;
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool23.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntumblr btnnew" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool23.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}&posttype=link" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('http://api.audiodeadline.com/sharetool23.php?media_id='+item.name+'&username='+username+'&image='+item.image)"><span>Grab URL</span></a>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>-->
+
+                <div class="row n-socialsinglepostlists n-socialsinglepostlistsbg2">
+                  <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost">
+                    <div class="row n-socialsinglepostcontent">
+                      <div class="n-sponsorblock">
+                        <div class="n-sponsorblockheader">
+                          <h2>Artistxp Sign Up Banners</h2>
+                        </div>
+                        <div class="n-sponsorblocklists">
+                          <div class="col-md-4 col-sm-6 col-xs-12 n-socialsinglepostcontentinner" *ngFor="let item of artistxpsignbanner">
+                            <div class="n-socialsinglepostimgwrapper">
+                              <!--<img src="https://api.audiodeadline.com/nodeserver/uploads/banner/beautiful-images-26824-27540-hd-wallpapers-1554903788-resized.jpg">-->
+                              <img src="{{fileurl}}/{{uploadfile}}/{{item.origimage}}">
+                            </div>
+                            <!-----------live share urls start------------------>
+                            <div class="n-socialsinglepostbottom" *ngIf="_commonservices.envflag=='live'">
+                              <div class="n-btnsocialsharenewlists">
+                                <!--<a class="btn n-btnsocialsharenew btnsharealt btnnew"><span><i class="fa fa fa-share-alt"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" (click)="postinfb2(username,item.name,item.image)"><span><i class="fa fa-facebook"></i></span></a>
+                                <!--<a class="btn n-btnsocialsharenew btngplus btnnew" href="" target="_blank"><span><i class="fa fa-google-plus"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntumblr btnnew"  href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fapi.audiodeadline.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}&posttype=link" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>
+                                <!--<a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('http://api.audiodeadline.com/sharetool2.php?media_id='+item.name+'&username='+username+'&image='+item.image)"><span>Grab URL</span></a>-->
+                                <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('https://artistxp.com/'+username)"><span>Grab URL</span></a>
+                              </div>
+                            </div>
+                            <!-----------live share urls end------------------>
+                            <!------------------development share urls start-------------->
+                            <div class="n-socialsinglepostbottom" *ngIf="_commonservices.envflag=='dev'">
+                              <div class="n-btnsocialsharenewlists">
+                                <!--<a class="btn n-btnsocialsharenew btnsharealt btnnew"><span><i class="fa fa fa-share-alt"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdevelopmentapi.audiodeadline.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" (click)="postinfb2(username,item.name,item.image)"><span><i class="fa fa-facebook"></i></span></a>
+                                <!--<a class="btn n-btnsocialsharenew btngplus btnnew" href="" target="_blank"><span><i class="fa fa-google-plus"></i></span></a>-->
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fdevelopmentapi.audiodeadline.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntumblr btnnew"  href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fdevelopmentapi.audiodeadline.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}&posttype=link" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>
+                                <!--<a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('http://api.audiodeadline.com/sharetool2.php?media_id='+item.name+'&username='+username+'&image='+item.image)"><span>Grab URL</span></a>-->
+                                <a class="btn n-btnsocialsharenew btngrapurl" (click)="copyText('https://development.artistxp.com/'+username)"><span>Grab URL</span></a>
+
+                              </div>
+                            </div>
+                            <!------------------development share urls end-------------->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row n-socialsinglepostlists n-socialsinglepostlistsbg1 n-socialsinglepostlistsbgsame">
+                  <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost">
+                    <div class="row n-socialsinglepostcontent">
+                      <div class="n-sponsorblock">
+                        <div class="n-sponsorblocklists">
+                          <div class="col-md-12 col-sm-12 col-xs-12 inviteyourfriend">
+                            <h2>Invite your friends</h2>
+                            <h5>to join in on this incredible experience!</h5>
+                            <div class="inviteyourfriendform">
+                              <form name="dataForm" novalidate="" class="ng-pristine ng-invalid ng-touched">
+
+                                <div class="form-row">
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>INVITE FRIENDS VIA YOUR ONLINE ADDRESS BOOK</label>
+                                    <select class="form-control" name="type">
+                                      <option value="select service" selected>select service</option>
+                                      <option value="2">select service 1</option>
+                                      <option value="3">select service 2</option>
+                                      <option value="4">select service 3</option>
+                                      <option value="5">select service 4</option>
+                                      <option value="6">select service 5</option>
+                                    </select>
+                                    <span class="has-error"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts">get contacts</button>
+                                  </div>
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>INVITE FRIENDS VIA SOCIAL MEDIA</label>
+                                    <select class="form-control" name="type">
+                                      <option value="select service" selected>select service</option>
+                                      <option value="2">select service 1</option>
+                                      <option value="3">select service 2</option>
+                                      <option value="4">select service 3</option>
+                                      <option value="5">select service 4</option>
+                                      <option value="6">select service 5</option>
+                                    </select>
+                                    <span class="has-error"> *select field can not be blank</span>
+
+                                    <button class="btnred" name="getcontacts">send social invite</button>
+                                  </div>
+                                </div>
+                                <div class="form-row">
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>Enter Your Friends' Email Addresses</label>
+                                    <input type="text" class="form-control" name="emailaddress" placeholder="email address">
+                                    <span class="has-error"> *select field can not be blank</span>
+                                  </div>
+                                </div>
+
+                                <div class="form-row">
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>Audiodeadline Email message</label>
+                                    <textarea class="form-control" id="audiodeadlineemailmsg" rows="3" placeholder="" value="ArtistXP Email messageqw"></textarea>
+                                    <span class="has-error"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts">send email invite</button>
+                                  </div>
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>ArtistXP Email message</label>
+                                    <textarea class="form-control" id="artistxpemailmessage" rows="3" placeholder="" value="ArtistXP Email message"></textarea>
+                                    <span class="has-error"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts">send email invite</button>
+                                  </div>
+                                </div>
+
+
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tabcontentwrapperoverlay"></div>
+                </div>
+
+              </div>
+              <!--<div class="tabcontentwrapperoverlay"></div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>

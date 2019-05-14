@@ -1,0 +1,113 @@
+<app-header></app-header>
+<div class="container-fluid signup">
+  <div class="container-fluid multi_bg_example_signup">
+    <div class="row">
+      <div class="container landingwrapper_signup">
+        <div class="img1wrapper_signup">
+          <img src="../../assets/images/girlimg-signup.png">
+        </div>
+        <div class="txt1wrapper_signup">
+          <h2><!--ticket availability!-->"RSVP for AudioDeadline Tickets NOW!"</h2>
+          <h3> Tickets are going to sell fast – </h3>
+          <h4 style="margin-bottom: 10px;">You can be the first to know!</h4>
+          <h1>WE GO LIVE FOR OUR FIRST SHOW ON</h1>
+          <h1>April 13th, 2019, AT 12:00PM PACIFIC!</h1>
+          <h1>TICKETS GO ON SALE Friday, November 30th, 2018.</h1>
+          <h1>BY SIGNING UP FOR RSVP YOU WILL GET AN</h1>
+          <h1>IMMEDIATE DISCOUNT CODE TO USE ON THIS UPCOMING LIVE EVENT!</h1>
+          <p><!--Enter your information to receive an RSVP notification when tickets are available for purchase! -->By entering your information, you are also enrolled to win a chance to be flown to Los Angeles, CA for the first AudioDeadline.com Experience to be Flii’s special guest!</p>
+          <p><!--You will also be entered in to win a trip to the prime, first deadline and be able to hang out with Flii Stylz and the artists – in person!--><!--You will also be entered in to win a trip to the prime, first deadline and be able to hang out with Flii Stylz and the artists – in person!-->You can also check box to join as an affiliate and rsvp ticket buyers. You will earn 10% of their purchase and you can sign up other affiliates under you as well!</p>
+          <h5><!--Only 2 can win and the only way to qualify is to sign up now!-->For information on our award-winning celebrity host Flii Stylz <a href="https://www.fliistylz.com" target="_blank">click here!</a> </h5>
+          <p></p>
+        </div>
+        <div class="landingformwrapper_signup">
+          <div class="landingformheader_signup">
+            <h1>RSVP to hear first when Tickets go live</h1>
+            <p></p></div>
+          <div class="landingforminnerwrapper_signup">
+            <div role="form" class="wpcf7" id="wpcf7-f306-p301-o1" lang="en-US" dir="ltr">
+              <div class="screen-reader-response"></div>
+              <!--<form action="/sign-up/#wpcf7-f306-p301-o1" method="post" class="wpcf7-form" novalidate="novalidate">-->
+              <form action="/sign-up/#wpcf7-f306-p301-o1" method="post" class="wpcf7-form" role="form" name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)">
+                <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+                <!--<div *ngIf="emailexist" >{{showerror}}</div>-->
+                <div style="display: none;">
+                  <input type="hidden" name="_wpcf7" value="306">
+                  <input type="hidden" name="_wpcf7_version" value="4.7">
+                  <input type="hidden" name="_wpcf7_locale" value="en_US">
+                  <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f306-p301-o1">
+                  <input type="hidden" name="_wpnonce" value="8fec57066f">
+                </div>
+
+
+                  <p><label> <span class="wpcf7-form-control-wrap your-first-name"><input type="text" name="your-first-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="First Name*" [formControl]="dataForm.controls['firstname']"></span> </label></p> <span *ngIf ="dataForm.controls['firstname'].touched && !dataForm.controls['firstname'].valid" class="wpcf7-not-valid-tip">First Name field can not be blank</span>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap your-last-name"><input type="text" name="your-last-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Last Name*" [formControl]="dataForm.controls['lastname']"></span> </label></p><span *ngIf ="dataForm.controls['lastname'].touched && !dataForm.controls['lastname'].valid" class="wpcf7-not-valid-tip">Last Name field can not be blank</span>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap your-active-phone"><input type="tel" name="your-active-phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel form-control" aria-required="true" aria-invalid="false" placeholder="Telephone*" [formControl]="dataForm.controls['phone']"></span> </label></p><span *ngIf ="dataForm.controls['phone'].touched && !dataForm.controls['phone'].valid" class="wpcf7-not-valid-tip">Phone field can not be blank</span>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap your-active-email"><input type="text" name="your-active-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" placeholder="Email*" [formControl]="dataForm.controls['email']"></span> </label></p><span *ngIf ="dataForm.controls['email'].touched && !dataForm.controls['email'].valid" class="wpcf7-not-valid-tip">Email field can not be blank ! </span>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap your-active-email"><input type="text" name="your-username" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" placeholder="Username*" [formControl]="dataForm.controls['username']"></span> </label></p><span *ngIf ="dataForm.controls['username'].touched && !dataForm.controls['username'].valid" class="wpcf7-not-valid-tip">Please enter valid username</span>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap password"><input type="password" name="password" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Password*" [formControl]="dataForm.controls['password']"></span> </label></p><span *ngIf ="dataForm.controls['password'].touched && !dataForm.controls['password'].valid" class="wpcf7-not-valid-tip">Please fill in the required field.</span>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap password"><input type="password" name="password" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Confirm Password*" [formControl]="dataForm.controls['confirmpassword']"></span> </label></p><span *ngIf ="dataForm.controls['confirmpassword'].touched && !dataForm.controls['confirmpassword'].valid" class="wpcf7-not-valid-tip">Please fill in the required field.</span><div *ngIf ="dataForm.hasError('mismatchedPasswords') && dataForm.controls['confirmpassword'].valid " class="wpcf7-not-valid-tip">
+        <strong>Passwords must match</strong>
+      </div>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap your-address"><input type="text" name="your-address" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Address*" [formControl]="dataForm.controls['address']"></span> </label></p><span *ngIf ="dataForm.controls['address'].touched && !dataForm.controls['address'].valid" class="wpcf7-not-valid-tip">Address field can not be blank</span>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap your-second-address"><input type="text" name="your-second-address" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Address2" [formControl]="dataForm.controls['address2']"></span> </label></p>
+
+
+                <p><label> <span class="wpcf7-form-control-wrap your-city"><input type="text" name="your-city" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="City*" [formControl]="dataForm.controls['city']"></span> </label></p><span *ngIf ="dataForm.controls['city'].touched && !dataForm.controls['city'].valid" class="wpcf7-not-valid-tip">City field can not be blank</span>
+                <p><label> <span class="wpcf7-form-control-wrap your-state"><select name="your-state" class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required" aria-required="true" aria-invalid="false" [formControl]="dataForm.controls['state']"><option value="">Select State</option><option *ngFor="let item of state2" value="{{item.abbreviation}}">{{item.name}}</option></select></span></label></p>
+                <p><label> <span class="wpcf7-form-control-wrap your-zip-code"><input type="text" name="your-zip-code" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Zip Code*" [formControl]="dataForm.controls['zip']"></span> </label></p><span *ngIf ="dataForm.controls['zip'].touched && !dataForm.controls['zip'].valid" class="wpcf7-not-valid-tip">Zip Code field can not be blank</span>
+
+
+                <p><span class="wpcf7-form-control-wrap your-accept-rsvp"><span class="wpcf7-form-control wpcf7-checkbox wpcf7-validates-as-required"><span class="wpcf7-list-item first last"><input type="checkbox" name="your-accept-rsvp[]" value="Check box to RSVP to receive ticket purchase information." [formControl]="dataForm.controls['rsvp']"><span class="wpcf7-list-item-label">Check box to RSVP to receive ticket purchase information.</span></span></span></span></p>
+
+
+                <p><span class="wpcf7-form-control-wrap your-accept-signupaffiliate"><span class="wpcf7-form-control wpcf7-checkbox wpcf7-validates-as-required"><span class="wpcf7-list-item first last"><input type="checkbox" name="your-accept-signupaffiliate[]" value="Check box to sign up as an affiliate and earn 10% on all referral ticket sales." [formControl]="dataForm.controls['signupaffiliate']"><span class="wpcf7-list-item-label">Check box to sign up as an affiliate and earn 10% on all referral ticket sales.</span></span></span></span></p>
+                <span class="wpcf7-not-valid-tip" *ngIf="chkerror">You have to check at least one.</span>
+
+
+                <p><button type="submit" class="btnbuyticket_ss"  >Submit</button></p>
+                <div class="wpcf7-response-output wpcf7-display-none"></div></form></div>
+          </div>
+          <p></p></div>
+        <p></p></div>
+      <p></p></div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+<div id="popthankyou" class="modal fade" role="dialog">
+
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+
+    <div class="modal-content">
+
+      <div class="modal-body text-center signupeamilbody">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <img src="../../assets/images/logo.png" alt="logo">
+        <p><span>Sign up begin Aug 27th After our company opening webinar. <a href="https://registerforwebinar.audiodeadline.com" target="_blank">Sign up for the webinar</a></span></p>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,119 @@
+<!--
+<app-header></app-header>
+<div class="blogblock">
+  <div class="blogwrappernew">
+    <div class="row">
+      <div class="col-xs-12 ">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane show active" id="pills-bydate" role="tabpanel" aria-labelledby="pills-bydate-tab">
+            <div class="singleblogwrapper" *ngFor="let item of bloglist">
+              <div class="row is-table-row">
+                <div class="col-lg-3 col-md-5">
+                  <div class="blogimgwrapper" *ngIf="item.images">
+                    <img src="{{siteurl}}nodeserver/uploads/{{getimages(item)}}">
+                  </div>
+                  <div class="blogimgwrapperouter"></div>
+                </div>
+                <div class="col-lg-9 col-md-7 blogcontentarea">
+                  <h4>{{item.title}}</h4>
+                  <p [innerHTML]="item.description | safehtml:500"></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="weblinks">
+                    <span class="weblinksspan1"> By {{item.parentname}}</span>
+                    <span class="weblinksspan2">{{(item.added_time*1000) | date :  "MMM d, yyyy" }}</span>
+                  </div>
+                </div>
+              </div>
+              <span class="hrdivider"></span>
+              <div class="row bottomsociallinks">
+                <div class="col-lg-12 col-md-12">
+
+                  <ul class="socialmenu">
+                    <li><img src="assets/images/blog-sharelink.png"></li>
+                    <li><img src="assets/images/blog-fbicon.png"></li>
+                    <li><img src="assets/images/blog-twicon.png"></li>
+                    <li><img src="assets/images/blog-linkdinicon.png"></li>
+                    <li><img src="assets/images/blog-gplusicon.png"></li>
+                  </ul>
+                  <div class="blogblockcatlistitemright_readmore">
+                    <a [routerLink]="['/blog-details',item._id]">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-byauthor" role="tabpanel" aria-labelledby="pills-byauthor-tab">
+            <h2>BY AUTHOR</h2>
+          </div>
+          <div class="tab-pane fade" id="pills-bycategory" role="tabpanel" aria-labelledby="pills-bycategory-tab">
+            <h2>LIST BY CATEGORY</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>-->
+
+
+<app-header></app-header>
+<div class="blogblock">
+  <div class="blogwrappernew">
+    <div class="row">
+      <div class="col-xs-12 ">
+        <div class="tab-content" id="pills-tabContent">
+          <div class="tab-pane show active" id="pills-bydate" role="tabpanel" aria-labelledby="pills-bydate-tab">
+            <div class="singleblogwrapper" *ngFor="let item of bloglist">
+              <div class="row is-table-row">
+                <div class="col-lg-3 col-md-5">
+                  <div class="blogimgwrapper" *ngIf="item.images">
+                    <img src="{{siteurl}}nodeserver/uploads/{{getimages(item)}}">
+                  </div>
+                  <div class="blogimgwrapperouter"></div>
+                </div>
+                <div class="col-lg-9 col-md-7 blogcontentarea">
+                  <h4>{{item.title}}</h4>
+                  <p [innerHTML]="item.description | safehtml:500"></p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-12 col-md-12">
+                  <div class="weblinks">
+                    <span class="weblinksspan1"> By {{item.parentname}}</span>
+                    <span class="weblinksspan2">{{(item.added_time*1000) | date :  "MMM d, yyyy" }}</span>
+                  </div>
+                </div>
+              </div>
+              <span class="hrdivider"></span>
+              <div class="row bottomsociallinks">
+                <div class="col-lg-12 col-md-12">
+
+                  <ul class="socialmenu">
+                    <li><img src="assets/images/blog-sharelink.png"></li>
+                    <li><img src="assets/images/blog-fbicon.png"></li>
+                    <li><img src="assets/images/blog-twicon.png"></li>
+                    <li><img src="assets/images/blog-linkdinicon.png"></li>
+                    <li><img src="assets/images/blog-gplusicon.png"></li>
+                  </ul>
+                  <div class="blogblockcatlistitemright_readmore">
+                    <a [routerLink]="['/blog-details',item._id]">Read More</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="pills-byauthor" role="tabpanel" aria-labelledby="pills-byauthor-tab">
+            <h2>BY AUTHOR</h2>
+          </div>
+          <div class="tab-pane fade" id="pills-bycategory" role="tabpanel" aria-labelledby="pills-bycategory-tab">
+            <h2>LIST BY CATEGORY</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
