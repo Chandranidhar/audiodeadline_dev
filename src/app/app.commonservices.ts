@@ -33,7 +33,7 @@ export class Commonservices{
     envflag:any;
     constructor(private http: HttpClient,userdata: CookieService,private router: Router) {
 
-        this.envflag='live';
+        this.envflag='dev';
 
         this.cookieData= userdata;
         if(this.envflag=='dev'){
@@ -42,10 +42,10 @@ export class Commonservices{
            // this.siteurl = 'http://api.audiodeadline.com/';
             //this.nodeurl = 'http://192.169.196.208:3009/';
             // this.nodeurl = 'http://192.169.196.208:3007/';
-        this.nodeurl = 'https://developmentapi.audiodeadline.com:3008/';
+        this.nodeurl = 'https://developmentapi.audiodeadline.com:6090/';
         this.nodeurl1 = 'http://developmentapi.audiodeadline.com:3007/';
-        this.nodeurl2 = 'http://developmentapi.audiodeadline.com:3008/';
-        this.nodesslurl ='https://developmentapi.audiodeadline.com:6003/';
+        this.nodeurl2 = 'http://developmentapi.audiodeadline.com:3090/';
+        this.nodesslurl ='https://developmentapi.audiodeadline.com:6090/';
         this.nodesslurl1 ='https://developmentapi.audiodeadline.com:6004/';
         this.phpurl = 'https://developmentapi.audiodeadline.com/';
         this.phpurllive = 'https://developmentapi.audiodeadline.com/';

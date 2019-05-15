@@ -23,14 +23,19 @@ export class OrderlistComponent implements OnInit {
   public nodesslurl:any;
   public userdata2: any;
   public afforderlist: any=[];
+  public afforderlist_skip: any=["_id", "userid", "firstname", "lastname", "phone", "email","address", "city", "state", "zip", "affiliate", "media", "sponsor", "productid", "promocode", "subtotal", "shipping", "tax", "discount","orderdetails","userphone"];
+  public orderlist_skip: any=["_id", "userid", "firstname", "lastname", "phone", "email","address", "city", "state", "zip", "affiliate", "media", "sponsor", "productid", "promocode", "subtotal", "shipping", "tax", "discount","orderdetails","userphone"];
+  public modify_header: any={"useremail":"Email"};
+  public orderlist_modify_header: any={"type":"Type",'genrename':"Genre",'status':'Status'};
+  // genrelistarray_modify_header:any={"type":"Type",'genrename':"Genre",'status':'Status'};
+  // genrelistarray_skip:any=["_id"];
+  tablename: any = 'order_view';
+  detailroute1:any = 'order-details';
 
   constructor(private _commonservices: Commonservices, userdata: CookieService, private router: Router,private _http: HttpClient, public activeRoute:ActivatedRoute) {
     this.serverurl=_commonservices.url;
     this.nodesslurl=_commonservices.nodesslurl;
-
     this.username = '';
-
-
     this.userdata2= userdata.get('userdetails');
     if (typeof (this.userdata2) == 'undefined' || this.userdata2 == ''){
       this.router.navigateByUrl('/login');
@@ -52,10 +57,7 @@ export class OrderlistComponent implements OnInit {
           let result=data['results'];
           //console.log(result);
           this.afforderlist = result.res;
-
           // console.log(this.ticketsalebanner);
-
-
 
         });
       }

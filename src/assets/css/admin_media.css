@@ -204,9 +204,9 @@
 }
 
 @media (max-width: 1199px){
-    .formfilterdiv .mat-form-field .mat-form-field-infix {
+    /*.formfilterdiv .mat-form-field .mat-form-field-infix {
         top: -112px;
-    }
+    }*/
     .n-adminfooter .footerrightdivsocial{
         width: 100% !important;
     }
@@ -290,7 +290,9 @@
     .newcheckboxdiv {text-align: left; float: right;}
     .tablediv table th, .tablediv table td {border-bottom: 1px solid #646464 !important;}
     .tablediv table td {padding: 10px;}
-
+    .tablediv.affiliatetree table.mat-table tr:nth-child(even){
+        background-color: #353434;
+    }
 
     .n-audiodeadeline_admin_header .n-audiodeadeline_admin_header_user .n-audiodeadeline_user {
         width: 37px;
@@ -364,13 +366,53 @@
     .tablediv table td button, .tablediv table td button:hover{
         float: right;
     }
+/*
+    .tablediv table td::after {
+        !*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        *!
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -33%;
+    }*/
+    .tablediv table td:first-child::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label) !important;
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -18px;
+        /* z-index: 999; */
+        color: #fff;
+    }
+    .tablediv table td:last-child::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label) !important;
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        /* z-index: 999; */
+        color: #fff;
+    }
 
     .tablediv table td::before {
         /*
         * aria-label has no advantage, it won't be read inside a table
         content: attr(aria-label);
         */
-        content: attr(data-label);
+        content: attr(title);
         float: left;
         font-weight: bold;
         text-transform: uppercase;

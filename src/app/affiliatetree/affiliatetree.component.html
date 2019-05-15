@@ -14,8 +14,8 @@
 
           <div class="dashboardwrapper">
 
-           <!-- <div class="tabletopbar newtabletopbar">
-              <div class="pull-right">
+           <!-- <div class="tabletopbar newtabletopbar newtabletopbarfilter">
+              &lt;!&ndash;<div class="pull-right">
                 <form id="filter">
                   <ul>
                     <li>
@@ -38,9 +38,9 @@
                     </li>
                   </ul>
                 </form>
-              </div>
-            </div>-->
-
+              </div>&ndash;&gt;
+            </div>
+-->
 
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
@@ -321,10 +321,10 @@
                   </table>-->
                   <!----------------using listing library (material) starts here------------------------->
 
-                  <lib-listing *ngIf="listarray!=null && listarray.length>0"  [datasource]="listarray" [skip]="listarray_skip" [modify_header_array]="listarray_modify_header" [sourcedata]="tablename"  [statusarr]="statusarray"></lib-listing>
+                  <lib-listing class="formfilterdiv" *ngIf="listarray!=null && listarray.length>0"  [datasource]="listarray" [skip]="listarray_skip" [modify_header_array]="listarray_modify_header" [sourcedata]="tablename"  [statusarr]="statusarray"></lib-listing>
                   <!----------------using listing library (material) ends here--------------------------->
 
-                  <pagination-controls  maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <!--<pagination-controls  maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
                 </div>
 
               </div>

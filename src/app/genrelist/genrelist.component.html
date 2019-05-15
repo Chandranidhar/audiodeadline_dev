@@ -159,10 +159,13 @@
                 </form>
               </div>
             </div>
+
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
-                <div class="tablediv">
-                  <table>
+                <div class="tablediv affiliatetree showmodaldiv ">
+                  <lib-listing class="formfilterdiv" *ngIf="genrelistarray!=null && genrelistarray.length>0" [datasource]="genrelistarray"  [skip]="genrelistarray_skip" [modify_header_array]=" genrelistarray_modify_header"[sourcedata]="genrelisttablename" [statusarr]="genreliststatusarray" [apiurl]="apiurl"  [deleteendpoint]="deleteval" [updateendpoint]="updateurl"  [editroute]="editroute1"></lib-listing>
+
+                  <!--<table>
                     <thead>
                     <tr>
                       <th class="empycell"></th>
@@ -195,12 +198,12 @@
                     </tr>
                     <tr *ngIf="loadinglist">
                       <td class="empycell"></td>
-                      <td colspan="4" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div><!--<img src="../../assets/images/loader.gif" style="width: 100px;">--></td>
+                      <td colspan="4" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div>&lt;!&ndash;<img src="../../assets/images/loader.gif" style="width: 100px;">&ndash;&gt;</td>
                       <td class="empycell"></td>
                     </tr>
                     </tbody>
-                  </table>
-                  <pagination-controls  *ngIf="(genrelist | genrefilter : searchText : 'name' | genrefilter : searchText1 : 'type' | genrefilter : searchText2 : 'status').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  </table>-->
+                  <!--<pagination-controls  *ngIf="(genrelist | genrefilter : searchText : 'name' | genrefilter : searchText1 : 'type' | genrefilter : searchText2 : 'status').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
                 </div>
               </div>
             </div>

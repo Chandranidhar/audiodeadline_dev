@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {Commonservices} from '../app.commonservices';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 // import {Http} from '@angular/http';

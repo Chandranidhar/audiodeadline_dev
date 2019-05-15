@@ -304,18 +304,24 @@
                           </div>
                         </li>
                       </ul>
-                      <div class="text-center">
+                      <!--<div class="text-center">
                         <a [routerLink]="['/upcomingevents']" target="_blank" class="btn adminbtnred">View All Blogs</a>
-                      </div>
+                      </div>-->
 
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <4>My Orde4>
-                    <div class="tablediv affidashboardbg1">
-                      <table>
+                    <h4>My Order</h4>
+                    <div class="tablediv affiliatetree actionsectionhide affidashboardbg1">
+                      <lib-listing class="formfilterdiv" *ngIf="afforderlist!=null && afforderlist.length>0"
+                                   [datasource]="afforderlist"
+                                   [skip]="afforderlist_skip"
+                                   [modify_header_array]="afforderlist_modify_header"
+                                   [sourcedata]="ordertablename">
+                      </lib-listing>
+                      <!--<table>
                         <thead>
                         <tr>
                           <th class="empycell"></th>
@@ -331,7 +337,7 @@
                         </thead>
                         <tbody>
 
-                        <!----list single start--->
+                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
                         <tr *ngFor="let item of afforderlist">
                           <td class="empycell"></td>
                           <td data-label="Name">{{item.firstname}} {{item.lastname}}</td>
@@ -342,13 +348,13 @@
                           <td data-label="Date/Time" *ngIf="item.orderdetails==null || item.orderdetails[0]==null">N/A</td>
                           <td data-label="Product" *ngIf="item.orderdetails!=null && item.orderdetails[0]!=null">{{item.orderdetails[0].source_name}}</td>
                           <td data-label="Product" *ngIf="item.orderdetails==null || item.orderdetails[0]==null">N/A</td>
-                          <!--<td *ngIf="item.orderdetails[0].source_name==null && item.orderdetails[0].source_name=='' " data-label="Product">Test</td>-->
+                          &lt;!&ndash;<td *ngIf="item.orderdetails[0].source_name==null && item.orderdetails[0].source_name=='' " data-label="Product">Test</td>&ndash;&gt;
                           <td data-label="Quantity" *ngIf="item.orderdetails!=null && item.orderdetails[0]!=null">{{item.orderdetails[0].quantity}}</td>
                           <td data-label="Quantity" *ngIf="item.orderdetails==null || item.orderdetails[0]==null">N/A</td>
                           <td data-label="Total" class="text-center">${{item.total}}</td>
                           <td class="empycell"></td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="afforderlist==null || afforderlist.length==0">
                           <td class="empycell"></td>
                           <td colspan="7" class="norecordfound">No Record Found</td>
                           <td class="empycell"></td>
@@ -361,15 +367,16 @@
 
                         </tbody>
                       </table>
-                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                      <pagination-controls maxSize="5" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                    </div>
                     </div>
                   </div>
-                </div>
+
                 <div class="row">
                   <div class="col-md-6">
                     <h4>My Affiliates</h4>
-                    <div class="tablediv affidashboardbg2">
-                      <table>
+                    <div class="tablediv affiliatetree actionsectionhide affidashboardbg2">
+                      <!--<table>
                         <thead>
                         <tr>
                           <th class="empycell"></th>
@@ -381,7 +388,7 @@
                         </thead>
                         <tbody>
 
-                        <!----list single start--->
+                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
                         <tr *ngFor="let item of affunderme">
                           <td class="empycell"></td>
                           <td data-label="Date Added">{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
@@ -389,7 +396,7 @@
                           <td data-label="Email">{{item.email}}</td>
                           <td class="empycell"></td>
                         </tr>
-                        <!----list single end--->
+                        &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
                         <tr *ngIf="affunderme==null || affunderme.length==0">
                           <td class="empycell"></td>
                           <td colspan="3" class="norecordfound">No Record Found</td>
@@ -403,45 +410,51 @@
 
                         </tbody>
                       </table>
-                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                      <lib-listing class="formfilterdiv" *ngIf="affunderme!=null && affunderme.length>0"
+                                   [datasource]="affunderme"
+                                   [skip]="affunderme_skip"
+                                   [modify_header_array]="affunderme_modify_header"
+                                   [sourcedata]="tablename">
+                      </lib-listing>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <h4>Commissions</h4>
-                    <div class="tablediv affidashboardbg2">
-                      <table>
+                    <div class="tablediv affiliatetree actionsectionhide affidashboardbg2">
+                      <!--<table>
                         <thead>
                         <tr>
                           <th class="empycell"></th>
                           <th>Date</th>
                           <th>Enroller</th>
-                          <!--<th>Tier</th>-->
+                          &lt;!&ndash;<th>Tier</th>&ndash;&gt;
                           <th>Account Type</th>
                           <th># Of Sale</th>
-                          <!--<th>Product</th>-->
+                          &lt;!&ndash;<th>Product</th>&ndash;&gt;
                           <th>Total Amount</th>
-                          <!--<th>Quantity</th>-->
-                          <!--<th>Quantity</th>-->
+                          &lt;!&ndash;<th>Quantity</th>&ndash;&gt;
+                          &lt;!&ndash;<th>Quantity</th>&ndash;&gt;
                           <th class="empycell"></th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        <!----list single start--->
+                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
                         <tr *ngFor="let item of commisionlist">
                           <td class="empycell"></td>
                           <td data-label="Date">{{item.added_time}}</td>
                           <td data-label="Enroller">{{item.parent}}</td>
-                          <!--<td data-label="Tier">1</td>-->
+                          &lt;!&ndash;<td data-label="Tier">1</td>&ndash;&gt;
                           <td data-label="Tier">{{(item.ambassador == 1)?'Ambassador':'Affiliate'}}</td>
                           <td data-label="Tier">{{item.noofsale}}</td>
-                          <!--<td data-label="Product">Ticket</td>-->
+                          &lt;!&ndash;<td data-label="Product">Ticket</td>&ndash;&gt;
                           <td data-label="Product">${{item.totalamount}}</td>
-                          <!--<td data-label="Quantity">1</td>-->
+                          &lt;!&ndash;<td data-label="Quantity">1</td>&ndash;&gt;
                           <td class="empycell"></td>
                         </tr>
 
-                        <!----list single end--->
+                        &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
 
                         <tr *ngIf="commisionlist==null || commisionlist.length==0">
                           <td class="empycell"></td>
@@ -449,9 +462,9 @@
                           <td class="empycell"></td>
                         </tr>
                         <tr>
-                          <!--<td colspan="12" style="text-align: center;">
+                          &lt;!&ndash;<td colspan="12" style="text-align: center;">
                               <div class="loadertabledata"></div>
-                          </td>-->
+                          </td>&ndash;&gt;
                           <td colspan="7" style="text-align: right; background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
                             <a [routerLink]="['/commission-list']" class="btn adminbtnred">View All Commissions</a>
                           </td>
@@ -460,7 +473,13 @@
 
                         </tbody>
                       </table>
-                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                      <lib-listing class="formfilterdiv" *ngIf="commisionlist!=null && commisionlist.length>0"
+                                   [datasource]="commisionlist"
+                                   [skip]="commisionlist_skip"
+                                   [modify_header_array]="commision_modify_header"
+                                   [sourcedata]=" commisiontablename">
+                      </lib-listing>
                     </div>
                   </div>
                 </div>

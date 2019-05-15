@@ -80,7 +80,11 @@
   </li>
 
 
-  <li [ngClass]="router.url === '/affiliate-dashboard' ? 'dashboardcls' : ''">
+  <li *ngIf="userdetails.signupaffiliate==1" [ngClass]="router.url === '/affiliate-dashboard' ? 'dashboardcls' : ''">
+    <a [routerLink]="['/affiliate-dashboard']">Dashboard</a>
+  </li>
+
+  <li *ngIf="userdetails.admin==1" [ngClass]="router.url === '/dashboard' ? 'dashboardcls' : ''">
     <a [routerLink]="['/dashboard']">Dashboard</a>
   </li>
 
@@ -112,7 +116,7 @@
   <!--<li [ngClass]="router.url === '/my-order' ? 'dashboardcls' : ''" *ngIf="userdetails.signupaffiliate==1">
     <a  [routerLink]="['/my-order']" >My order</a>
   </li>-->
-  <li  *ngIf="userdetails.signupaffiliate==1 " [ngClass]="router.url === '/user-list' ? 'dashboardcls' : ''"><a  [routerLink]="['/user-list']">User list</a></li>
+  <li  *ngIf="userdetails.signupaffiliate!=1 " [ngClass]="router.url === '/user-list' ? 'dashboardcls' : ''"><a  [routerLink]="['/user-list']">User list</a></li>
 
   <li class="dropdown" *ngIf="userdetails.admin == 1">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Competition Manager<span class="caret"></span></a>

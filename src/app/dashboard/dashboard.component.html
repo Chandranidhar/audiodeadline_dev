@@ -184,8 +184,8 @@
                                         <div class="tabcontentwrapper">
                                             <div class="adminlisttable adminlisttabledashboard">
                                                 <h4>Ambassador List</h4>
-                                                <div class="tablediv affiliatetree">
-                                                    <lib-listing *ngIf="ambassadorlistarray!=null && ambassadorlistarray.length>0" [datasource]="ambassadorlistarray" [skip]="ambassadorlistarray_skip" [modify_header_array]=" ambassadorlistarray_modify_header" [sourcedata]="ambassadortablename" [statusarr]="ambassadorstatusarray" ></lib-listing>
+                                                <div class="tablediv affiliatetree actionsectionhide"> <!---actionsectionhide--->
+                                                    <lib-listing class="formfilterdiv" *ngIf="ambassadorlistarray!=null && ambassadorlistarray.length>0" [datasource]="ambassadorlistarray" [skip]="ambassadorlistarray_skip" [modify_header_array]=" ambassadorlistarray_modify_header" [sourcedata]="ambassadortablename" [statusarr]="ambassadorstatusarray" ></lib-listing>
 
                                                 </div>
                                             </div>
@@ -197,7 +197,7 @@
                                         <div class="tabcontentwrapper">
                                             <div class="adminlisttable adminlisttabledashboard">
                                                 <h4>Affiliate List</h4>
-                                                <div class="tablediv affiliatetree">
+                                                <div class="tablediv affiliatetree actionsectionhide">
                                                     <!--<table>
                                                         <thead>
                                                         <tr>
@@ -283,7 +283,7 @@
                                                         </tr>
                                                         </tbody>
                                                     </table>-->
-                                                    <lib-listing *ngIf="affiliatelistarray!=null && affiliatelistarray.length>0" [datasource]="affiliatelistarray" [skip]="affiliatelistarray_skip" [modify_header_array]="affiliatelistarray_modify_header" [sourcedata]="affiliatetablename" [statusarr]="affiliateliststatusarray"></lib-listing>
+                                                    <lib-listing class="formfilterdiv" *ngIf="affiliatelistarray!=null && affiliatelistarray.length>0" [datasource]="affiliatelistarray" [skip]="affiliatelistarray_skip" [modify_header_array]="affiliatelistarray_modify_header" [sourcedata]="affiliatetablename" [statusarr]="affiliateliststatusarray"></lib-listing>
 
                                                 </div>
                                             </div>

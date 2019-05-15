@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
     private idx: number;
 
     datasource:any;
-    ambassadorlistarray:any[];
+    ambassadorlistarray:any=[];
     ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
     ambassadorlistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'email':'Email','lastname':'Last Name','parent':'Enroller'};
     // tablename:'user';
@@ -114,6 +114,7 @@ export class DashboardComponent implements OnInit {
                 let result: any;
                 result = res;
                 this.ambassadorlistarray = result.res;
+                console.log('this.ambassadorlistarray');
                 console.log(this.ambassadorlistarray);
             });
 

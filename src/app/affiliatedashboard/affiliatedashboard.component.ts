@@ -49,6 +49,19 @@ export class AffiliatedashboardComponent implements OnInit {
     public afforderlist:any = [];
     public affunderme:any = [];
     public commisionlist:any = [];
+    public commisiontablename:any='commission_details';
+
+        public commisionlist_skip:any=['_id','added_time','amount','commission','firstname','lastname',''];
+    public commision_modify_header:any={'orderid':' Order ID','username':'Name','tier':'Commision Tier','total':'Total($)'};
+
+    public afforderlist_skip:any=["address","affiliate","city","discount","firstname","lastname","media","orderdetails","phone","productid","productname","shipping","sponsor","state","subtotal","tax","useremail","userid","userphone","zip","_id"];
+    public afforderlist_modify_header:any={'added_time':"Date/Time ",'fullname':"Name",'email':'Email','mode':'Mode','productname':'Product','promocode':'Promo','quantity':'Quantity','total':'Total'};
+    public ordertablename:any="order_view";
+    public tablename:any="user";
+    public affunderme_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate", "parent", "admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
+    public affunderme_modify_header:any={'added time':"Date Added",'firstname':"First Name",'email':'Email','lastname':'Last Name'};
+
+
 
     constructor(private _http: HttpClient, private router: Router, userdata: CookieService, private _commonservices: Commonservices, public activeRoute:ActivatedRoute){
         this.userlink = '';
@@ -101,9 +114,13 @@ export class AffiliatedashboardComponent implements OnInit {
             console.log(data);
             let result=data['results'];
             console.log(result);
+            /*for(let i in result.res){
+                if(result.res[i].orderdetails!=null && result.res[i].orderdetails.length>0)
+                this.afforderlist.push(result.res[i]);
+            }*/
            this.afforderlist = result.res;
 
-            // console.log(this.ticketsalebanner);
+            console.log(this.afforderlist);
 
 
 
@@ -117,12 +134,12 @@ export class AffiliatedashboardComponent implements OnInit {
                 result = res;
                 this.affunderme = result.res;
 
-            })
+            });
     }
 
     getCommisionList(){
         let link = this._commonservices.nodesslurl+'datalist';
-        this._http.post(link,{source:'newcommision',condition:{"username":this.affiliatename}})
+        this._http.post(link,{source:'commission_details',condition:{"username":this.affiliatename}})
             .subscribe(res => {
                 // this.loadinglist = false;
                 let result:any ;

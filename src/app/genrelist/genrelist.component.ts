@@ -1,4 +1,6 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+
 import {Commonservices} from '../app.commonservices';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 // import {Http} from '@angular/http';
@@ -16,16 +18,47 @@ export class GenrelistComponent implements OnInit {
     public serverurl;
     public genrelist;
     public idx;
+    public genreid:any;
     public searchText='';
     public searchText1='';
     public searchText2='';
+    public genrelistarray:any=[];
+    genrelistarray_modify_header:any={"type":"Type",'genrename':"Genre",'status':'Status'};
+    genrelistarray_skip:any=["_id"];
+    genrelisttablename: any = 'user';
+    genreliststatusarray:any=[{val:1,name:'Active'},{val:0,name:'Inactive'}];
+    updateurl:any = 'addorupdatedata';
+    editroute1:any = 'edit-genre';
+    deleteval:any = 'deletesingledata';
+    apiurl:any;
 
-    constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService) {
+    constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService,public activeRoute:ActivatedRoute) {
         this.serverurl=_commonservices.url;
-        this.getGenreList();
+        this.apiurl = _commonservices.nodesslurl;
+        console.log(this.apiurl);
+        // this.getgenrelist();
     }
 
     ngOnInit() {
+        this.activeRoute.data.forEach((data) => {
+            console.log('json',data['results']);
+            console.log(data);
+            console.log(data['results']);
+            let result=data['results'];
+            console.log(result);
+            for(let i in result.res){
+                if(result.res[i].genrename!=null){
+
+                    this.genrelistarray.push( result.res[i]);
+                }
+            }
+            /*this.genrelistarray = result.res;*/
+            console.log(this.genrelistarray);
+            // console.log(this.ticketsalebanner);
+
+
+
+        });
     }
 
     getGenreList(){
@@ -38,7 +71,7 @@ export class GenrelistComponent implements OnInit {
                 this.loadinglist = false;
                 let result:any;
                 result = res;
-                this.genrelist = result.res;
+                this.genrelistarray = result.res;
             },error => {
                 this.loadinglist = false;
                 console.log("Oooops!");
@@ -46,6 +79,20 @@ export class GenrelistComponent implements OnInit {
 
     }
 
+    getgenrelist(){
+        this.genrelistarray=[];
+     let link=this._commonservices.nodesslurl+'datalist';
+     this._http.post(link,{"source":"allgenre"})
+     .subscribe(res=> {
+     let result:any;
+     result=res;
+     this.genrelistarray=result.res;
+     console.log(this.genrelistarray);
+     });
+
+
+
+     }
 
     cngstatus(item){
         var status = 1;
@@ -98,6 +145,8 @@ export class GenrelistComponent implements OnInit {
 
     openEditModal(template: TemplateRef<any>,id:any){
         //noinspection TypeScriptValidateTypes
+        this.genreid= id;
+        console.log(this.genreid);
         this.modalRef = this.modalService.show(template, {class: 'modal-md editgenre'});
     }
 

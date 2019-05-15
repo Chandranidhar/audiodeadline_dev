@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
                         this.userdata.set('user_id',result.msg._id);
                         this.userdata.set('user_email',result.msg.email);
                         this.userdata.set('username',result.msg.username);
+                        this.userdata.set('jwttoken',result.msg.email);
                         let userdata2: any;
                         userdata2= result.msg;
                         console.log('userdata2');

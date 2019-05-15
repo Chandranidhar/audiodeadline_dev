@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {SignupComponent} from '../signup/signup.component';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Commonservices} from '../app.commonservices';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {AdminlistComponent} from "../adminlist/adminlist.component";
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+
 
 @Component({
     selector: 'app-adminadd',
@@ -19,10 +22,12 @@ export class AdminaddComponent implements OnInit {
     public serverurl;
     public is_error;
     public state2;
+    modalRef:BsModalRef;
 
-    constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router) {
+    constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,public adminlistpage:AdminlistComponent) {
         this.fb = fb;
         this.serverurl=_commonservices.url;
+        this.adminlistpage=adminlistpage;
 
         let link=this.serverurl+'getusastates';
         this._http.get(link)
@@ -106,7 +111,10 @@ export class AdminaddComponent implements OnInit {
                     let result:any;
                     result = res;
                     if(result.status=='success'){
-                        this.router.navigate(['/admin-list']);
+                        this.adminlistpage.modalRef.hide();
+                        this.adminlistpage.getUserList();
+
+                        //this.router.navigate(['/admin-list']);
                     }else{
                         this.is_error= result.msg;
                     }

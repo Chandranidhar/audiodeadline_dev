@@ -97,24 +97,24 @@
 
           <div class="dashboardwrapper">
 
-            <div class="tabletopbar newtabletopbar newtabletopbarfilter">
+            <div class="tabletopbar newtabletopbar">
 
-              <!--<div class="pull-right">
+              <div class="pull-right">
                 <form action="" method="get">
                   <ul>
-                    <li>
+                    <!--<li>
                       <div>
                         <div class="input-group col-md-12">
                           <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="Search" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
                         </div>
                       </div>
-                    </li>
+                    </li>-->
                     <li>
                       <a href="javascript:void(0)" class="loginbtn2" (click)="openAddModal(addadmin)"><i class="fa fa-plus"></i> Add Admin</a>
                     </li>
                   </ul>
                 </form>
-              </div>-->
+              </div>
             </div>
 
             <div class="tabcontentwrapper">
@@ -196,7 +196,7 @@
                     </tbody>
                   </table>
                   <pagination-controls  *ngIf="(userlist | namefilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
-                  <lib-listing class="formfilterdiv" *ngIf="adminlistarray!=null && adminlistarray.length>0" [datasource]="adminlistarray" [skip]="adminlistarray_skip" [modify_header_array]=" adminlistarray_modify_header" [sourcedata]="admintablename" [statusarr]="adminstatusarray" ></lib-listing>
+                  <lib-listing class="formfilterdiv" *ngIf="adminlistarray!=null && adminlistarray.length>0" [datasource]="adminlistarray" [skip]="adminlistarray_skip" [modify_header_array]=" adminlistarray_modify_header" [sourcedata]="admintablename" [statusarr]="adminstatusarray" [jwttoken]="jwttoken" [apiurl]="apiurl"     [editroute]="editroute1"></lib-listing>
                 </div>
               </div>
               <div class="tabcontentwrapperoverlay"></div>

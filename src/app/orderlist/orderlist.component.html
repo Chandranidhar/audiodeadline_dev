@@ -99,7 +99,7 @@
             <!--<h4>Order List</h4>-->
           </div>
           <div class="dashboardwrapper" *ngIf="orderlist!=null && orderlist.length>0">
-            <div class="tabletopbar newtabletopbar">
+            <!--<div class="tabletopbar newtabletopbar">
               <div class="pull-right">
                 <form action="" method="get">
                   <ul>
@@ -124,12 +124,12 @@
                   </ul>
                 </form>
               </div>
-            </div>
+            </div>-->
 
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
-                <div class="tablediv">
-                  <table>
+                <div class="tablediv affiliatetree orderlistpage">
+                  <!--<table>
                     <thead>
                     <tr>
                       <th class="empycell"></th>
@@ -138,7 +138,7 @@
                       <th>Phone</th>
                       <th>Enroller</th>
                       <th>Sponsor</th>
-                      <!--<th>Product</th>-->
+                      &lt;!&ndash;<th>Product</th>&ndash;&gt;
                       <th>Mode</th>
                       <th>Transaction Id</th>
                       <th>Total</th>
@@ -156,13 +156,13 @@
                       <td>{{item.phone}}</td>
                       <td>{{item.affiliate}}</td>
                       <td style="text-transform: uppercase;">{{item.sponsor}}</td>
-                      <!--<td style="text-transform: uppercase;">{{item.productname}}</td>-->
+                      &lt;!&ndash;<td style="text-transform: uppercase;">{{item.productname}}</td>&ndash;&gt;
                       <td>{{item.mode}}</td>
                       <td>{{item.transactionId}}</td>
                       <td style="word-break: keep-all;">${{showtwoDecnum(item.total)}}</td>
                       <td>{{item.promocode}}</td>
                       <td style="word-break: keep-all;">{{(item.discount)?'$'+showtwoDecnum(item.discount):''}}</td>
-                      <!--<td>{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>-->
+                      &lt;!&ndash;<td>{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>&ndash;&gt;
                       <td>{{item.added_time }}</td>
                       <td class="empycell"></td>
                     </tr>
@@ -170,13 +170,14 @@
                     <tr *ngIf="loadinglist"> <td class="empycell"></td><td colspan="12" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div></td> <td class="empycell"></td></tr>
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(orderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <pagination-controls  *ngIf="(orderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                  <lib-listing class="formfilterdiv" *ngIf="orderlist!=null && orderlist.length>0" [datasource]="orderlist" [skip]="orderlist_skip" [modify_header_array]="modify_header" [sourcedata]="tablename" [editroute]="detailroute1"></lib-listing>
                 </div>
               </div>
             </div>
           </div>
           <div class="dashboardwrapper" *ngIf="afforderlist!=null && afforderlist.length>0">
-            <div class="tabletopbar newtabletopbar">
+           <!-- <div class="tabletopbar newtabletopbar">
               <div class="pull-right">
                 <form action="" method="get">
                   <ul>
@@ -201,12 +202,12 @@
                   </ul>
                 </form>
               </div>
-            </div>
+            </div>-->
 
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
-                <div class="tablediv">
-                  <table>
+                <div class="tablediv affiliatetree orderlistpage">
+                  <!--<table>
                     <thead>
                     <tr>
                       <th class="empycell"></th>
@@ -215,7 +216,7 @@
                       <th>Phone</th>
                       <th>Enroller</th>
                       <th>Sponsor</th>
-                      <!--<th>Product</th>-->
+                      &lt;!&ndash;<th>Product</th>&ndash;&gt;
                       <th>Mode</th>
                       <th>Transaction Id</th>
                       <th>Total</th>
@@ -233,13 +234,13 @@
                       <td>{{item.phone}}</td>
                       <td>{{item.affiliate}}</td>
                       <td style="text-transform: uppercase;">{{item.sponsor}}</td>
-                      <!--<td style="text-transform: uppercase;">{{item.productname}}</td>-->
+                      &lt;!&ndash;<td style="text-transform: uppercase;">{{item.productname}}</td>&ndash;&gt;
                       <td>{{item.mode}}</td>
                       <td>{{item.transactionId}}</td>
                       <td style="word-break: keep-all;">${{showtwoDecnum(item.total)}}</td>
                       <td>{{item.promocode}}</td>
                       <td style="word-break: keep-all;">{{(item.discount)?'$'+showtwoDecnum(item.discount):''}}</td>
-                      <!--<td>{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>-->
+                      &lt;!&ndash;<td>{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>&ndash;&gt;
                       <td>{{item.added_time}}</td>
                       <td class="empycell"></td>
                     </tr>
@@ -247,7 +248,8 @@
                     <tr *ngIf="loadinglist"> <td class="empycell"></td><td colspan="12" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div></td> <td class="empycell"></td></tr>
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(afforderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <pagination-controls  *ngIf="(afforderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                  <lib-listing class="formfilterdiv" *ngIf="afforderlist!=null && afforderlist.length>0" [datasource]="afforderlist" [skip]="afforderlist_skip" [modify_header_array]="modify_header" [sourcedata]="tablename" [editroute]="detailroute1"></lib-listing>
                 </div>
               </div>
             </div>
