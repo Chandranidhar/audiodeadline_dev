@@ -23,9 +23,9 @@ export class OrderlistComponent implements OnInit {
   public nodesslurl:any;
   public userdata2: any;
   public afforderlist: any=[];
-  public afforderlist_skip: any=["_id", "userid", "firstname", "lastname", "phone", "email","address", "city", "state", "zip", "affiliate", "media", "sponsor", "productid", "promocode", "subtotal", "shipping", "tax", "discount","orderdetails","userphone"];
-  public orderlist_skip: any=["_id", "userid", "firstname", "lastname", "phone", "email","address", "city", "state", "zip", "affiliate", "media", "sponsor", "productid", "promocode", "subtotal", "shipping", "tax", "discount","orderdetails","userphone"];
-  public modify_header: any={"useremail":"Email"};
+  public afforderlist_skip: any=["_id", "userid", "firstname", "lastname", "phone", "email","address", "city", "state", "zip", "affiliate", "media", "sponsor", "productid", "subtotal", "shipping", "tax", "discount","orderdetails","userphone","time"];
+  public orderlist_skip: any=["_id", "userid", "firstname", "lastname", "phone", "email","address", "city", "state", "zip", "affiliate", "media", "sponsor", "productid", "subtotal", "shipping", "tax", "discount","orderdetails","userphone","time"];
+  public modify_header: any={"useremail":"Email","promocode":"Promocode","added time":"Date/Time","productname":"Product"};
   public orderlist_modify_header: any={"type":"Type",'genrename':"Genre",'status':'Status'};
   // genrelistarray_modify_header:any={"type":"Type",'genrename':"Genre",'status':'Status'};
   // genrelistarray_skip:any=["_id"];

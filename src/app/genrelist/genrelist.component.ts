@@ -5,6 +5,7 @@ import {Commonservices} from '../app.commonservices';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
     selector: 'app-genrelist',
     templateUrl: './genrelist.component.html',
@@ -25,16 +26,20 @@ export class GenrelistComponent implements OnInit {
     public genrelistarray:any=[];
     genrelistarray_modify_header:any={"type":"Type",'genrename':"Genre",'status':'Status'};
     genrelistarray_skip:any=["_id"];
-    genrelisttablename: any = 'user';
+    genrelisttablename: any = 'genre';
     genreliststatusarray:any=[{val:1,name:'Active'},{val:0,name:'Inactive'}];
     updateurl:any = 'addorupdatedata';
     editroute1:any = 'edit-genre';
     deleteval:any = 'deletesingledata';
     apiurl:any;
+    jwttoken:any;
+    private userdata: CookieService;
 
-    constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService,public activeRoute:ActivatedRoute) {
+    constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService,public activeRoute:ActivatedRoute,userdata: CookieService) {
         this.serverurl=_commonservices.url;
+        this.userdata = userdata;
         this.apiurl = _commonservices.nodesslurl;
+        this.jwttoken = this.userdata.get('jwttoken');
         console.log(this.apiurl);
         // this.getgenrelist();
     }

@@ -321,8 +321,8 @@
                                    [modify_header_array]="afforderlist_modify_header"
                                    [sourcedata]="ordertablename">
                       </lib-listing>
-                      <!--<table>
-                        <thead>
+                      <table >
+                       <!-- <thead>
                         <tr>
                           <th class="empycell"></th>
                           <th>Name</th>
@@ -334,11 +334,10 @@
                           <th class="text-center">Total</th>
                           <th class="empycell"></th>
                         </tr>
-                        </thead>
+                        </thead>-->
                         <tbody>
-
-                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
-                        <tr *ngFor="let item of afforderlist">
+                        <!----list single start--->
+                        <!--<tr *ngFor="let item of afforderlist">
                           <td class="empycell"></td>
                           <td data-label="Name">{{item.firstname}} {{item.lastname}}</td>
                           <td data-label="Email">{{item.email}}</td>
@@ -354,12 +353,13 @@
                           <td data-label="Total" class="text-center">${{item.total}}</td>
                           <td class="empycell"></td>
                         </tr>
+                        -->
                         <tr *ngIf="afforderlist==null || afforderlist.length==0">
-                          <td class="empycell"></td>
-                          <td colspan="7" class="norecordfound">No Record Found</td>
-                          <td class="empycell"></td>
+                            <td class="empycell"></td>
+                            <td colspan="7" class="norecordfound">No Record Found</td>
+                            <td class="empycell"></td>
                         </tr>
-                        <tr>
+                        <tr *ngIf="afforderlist!=null && afforderlist.length>0">
                           <td colspan="9" style="text-align: right;  background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
                             <a [routerLink]="['/myorder']" class="btn adminbtnred">View All Orders</a>
                           </td>
@@ -367,7 +367,7 @@
 
                         </tbody>
                       </table>
-                      <pagination-controls maxSize="5" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                     <!-- <pagination-controls maxSize="5" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
                     </div>
                     </div>
                   </div>
@@ -376,8 +376,15 @@
                   <div class="col-md-6">
                     <h4>My Affiliates</h4>
                     <div class="tablediv affiliatetree actionsectionhide affidashboardbg2">
-                      <!--<table>
-                        <thead>
+
+                      <lib-listing class="formfilterdiv" *ngIf="affunderme!=null && affunderme.length>0"
+                                   [datasource]="affunderme"
+                                   [skip]="affunderme_skip"
+                                   [modify_header_array]="affunderme_modify_header"
+                                   [sourcedata]="tablename">
+                      </lib-listing>
+                        <table>
+                        <!--<thead>
                         <tr>
                           <th class="empycell"></th>
                           <th>Date Added</th>
@@ -385,45 +392,45 @@
                           <th>Email</th>
                           <th class="empycell"></th>
                         </tr>
-                        </thead>
+                        </thead>-->
                         <tbody>
 
-                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
-                        <tr *ngFor="let item of affunderme">
+                        <!--&#45;&#45;list single start- -->
+                       <!-- <tr *ngFor="let item of affunderme">
                           <td class="empycell"></td>
                           <td data-label="Date Added">{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
                           <td data-label="Name">{{item.firstname}} {{item.lastname}}</td>
                           <td data-label="Email">{{item.email}}</td>
                           <td class="empycell"></td>
-                        </tr>
-                        &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
+                        </tr>-->
+                        <!----list single end--->
                         <tr *ngIf="affunderme==null || affunderme.length==0">
                           <td class="empycell"></td>
                           <td colspan="3" class="norecordfound">No Record Found</td>
                           <td class="empycell"></td>
                         </tr>
-                        <tr>
+                        <tr  *ngIf="affunderme!=null && affunderme.length>0">
                           <td colspan="5" style="text-align: right;  background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
                             <a [routerLink]="['/affiliatetree']" class="btn adminbtnred">View Affiliates</a>
                           </td>
                         </tr>
-
                         </tbody>
                       </table>
-                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
-                      <lib-listing class="formfilterdiv" *ngIf="affunderme!=null && affunderme.length>0"
-                                   [datasource]="affunderme"
-                                   [skip]="affunderme_skip"
-                                   [modify_header_array]="affunderme_modify_header"
-                                   [sourcedata]="tablename">
-                      </lib-listing>
+                      <!--<pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
                     </div>
                   </div>
                   <div class="col-md-6">
                     <h4>Commissions</h4>
                     <div class="tablediv affiliatetree actionsectionhide affidashboardbg2">
-                      <!--<table>
-                        <thead>
+
+                      <lib-listing class="formfilterdiv" *ngIf="commisionlist!=null && commisionlist.length>0"
+                                   [datasource]="commisionlist"
+                                   [skip]="commisionlist_skip"
+                                   [modify_header_array]="commision_modify_header"
+                                   [sourcedata]=" commisiontablename">
+                      </lib-listing>
+                        <table>
+                       <!-- <thead>
                         <tr>
                           <th class="empycell"></th>
                           <th>Date</th>
@@ -437,11 +444,11 @@
                           &lt;!&ndash;<th>Quantity</th>&ndash;&gt;
                           <th class="empycell"></th>
                         </tr>
-                        </thead>
+                        </thead>-->
                         <tbody>
 
-                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
-                        <tr *ngFor="let item of commisionlist">
+                        <!----list single start--->
+                        <!--<tr *ngFor="let item of commisionlist">
                           <td class="empycell"></td>
                           <td data-label="Date">{{item.added_time}}</td>
                           <td data-label="Enroller">{{item.parent}}</td>
@@ -452,19 +459,19 @@
                           <td data-label="Product">${{item.totalamount}}</td>
                           &lt;!&ndash;<td data-label="Quantity">1</td>&ndash;&gt;
                           <td class="empycell"></td>
-                        </tr>
+                        </tr>-->
 
-                        &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
+                        <!----list single end--->
 
                         <tr *ngIf="commisionlist==null || commisionlist.length==0">
                           <td class="empycell"></td>
                           <td colspan="5" class="norecordfound">No Record Found</td>
                           <td class="empycell"></td>
                         </tr>
-                        <tr>
-                          &lt;!&ndash;<td colspan="12" style="text-align: center;">
+                        <tr *ngIf="commisionlist!=null && commisionlist.length>0">
+                          <!--<td colspan="12" style="text-align: center;">
                               <div class="loadertabledata"></div>
-                          </td>&ndash;&gt;
+                          </td>-->
                           <td colspan="7" style="text-align: right; background: url(../../assets/images/n-bgwhite.jpg) repeat; background-size: initial; padding: 0;">
                             <a [routerLink]="['/commission-list']" class="btn adminbtnred">View All Commissions</a>
                           </td>
@@ -473,13 +480,7 @@
 
                         </tbody>
                       </table>
-                      <pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
-                      <lib-listing class="formfilterdiv" *ngIf="commisionlist!=null && commisionlist.length>0"
-                                   [datasource]="commisionlist"
-                                   [skip]="commisionlist_skip"
-                                   [modify_header_array]="commision_modify_header"
-                                   [sourcedata]=" commisiontablename">
-                      </lib-listing>
+                      <!--<pagination-controls maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
                     </div>
                   </div>
                 </div>

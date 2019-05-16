@@ -168,7 +168,7 @@ export class TestresolveService implements Resolve<EndpointComponent> {
         //if(this.user_id=='' || this.user_id==null || this.user_id.length<5) return true;
         // console.log(data);
 
-        let result =this._http.post(link2,({"source": "order_view","condition":{"userid_object":this.user_id}})).pipe(map(res => res));
+        let result =this._http.post(link2,({"source": "order_view","condition":{"userid_object":this.user_id},"sort":"-time"})).pipe(map(res => res));
         return result;
 
     }

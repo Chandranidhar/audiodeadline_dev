@@ -61,7 +61,8 @@ export class LoginComponent implements OnInit {
             this.loginform.controls[x].markAsTouched();
         }
         console.log(this.loginform.valid);
-        var link = this.serverurl+'userlogin';
+        // var link = this.serverurl+'userlogin';
+        var link = this._commonservices.nodesslurl+'loginasuser';
 
         // var link = 'http://localhost:3007/userlogin';
         if (this.loginform.valid) {
@@ -93,7 +94,7 @@ export class LoginComponent implements OnInit {
                                 this.router.navigateByUrl('/login');
                             } else {                                    //replace in login page
                                 //userdata2 =JSON.parse(userdata2);
-                                if(userdata2.admin == 0){
+                                if(userdata2.admin == 0 || userdata2.admin==null){
                                     if(userdata2.signupaffiliate == 1){
                                         if(userdata2.agreement == 0){
                                             this.router.navigateByUrl('/agreement/'+userdata2._id);

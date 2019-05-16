@@ -561,14 +561,15 @@ if(this.route.snapshot.url[0].path!='ticket-sale' && this.route.snapshot.url[0].
     }
 
     dosubmit(formval,template: TemplateRef<any>,loadtemplate: TemplateRef<any>,guestcheckout: TemplateRef<any>){
-        /*if(this.testmode){
+        if(this.testmode){
 
             console.log(111);
             this.dosubmit1(formval,template,loadtemplate,guestcheckout);
+
         }else {
             this.dosubmit2(formval,template,loadtemplate,guestcheckout);
-        }*/
-      this.dosubmit1(formval,template,loadtemplate,guestcheckout);
+        }
+      // this.dosubmit1(formval,template,loadtemplate,guestcheckout);
     }
     dosubmit1(formval,template: TemplateRef<any>,loadtemplate: TemplateRef<any>,guestcheckout: TemplateRef<any>) {
         console.log(333);

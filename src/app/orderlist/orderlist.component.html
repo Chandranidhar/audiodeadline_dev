@@ -98,7 +98,7 @@
             <h4 *ngIf="isadmin==1">Order List</h4>
             <!--<h4>Order List</h4>-->
           </div>
-          <div class="dashboardwrapper" *ngIf="orderlist!=null && orderlist.length>0">
+          <div class="dashboardwrapper" *ngIf="orderlist!=null && orderlist.length>0" >
             <!--<div class="tabletopbar newtabletopbar">
               <div class="pull-right">
                 <form action="" method="get">
@@ -176,7 +176,7 @@
               </div>
             </div>
           </div>
-          <div class="dashboardwrapper" *ngIf="afforderlist!=null && afforderlist.length>0">
+          <div class="dashboardwrapper" *ngIf="isadmin!=1 && userdata2.signupaffiliate==1">
            <!-- <div class="tabletopbar newtabletopbar">
               <div class="pull-right">
                 <form action="" method="get">
@@ -207,8 +207,8 @@
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
                 <div class="tablediv affiliatetree orderlistpage">
-                  <!--<table>
-                    <thead>
+                  <table *ngIf="afforderlist==null || afforderlist.length==0">
+                    <!--<thead>
                     <tr>
                       <th class="empycell"></th>
                       <th>Name</th>
@@ -225,9 +225,9 @@
                       <th>Order Time</th>
                       <th class="empycell"></th>
                     </tr>
-                    </thead>
+                    </thead>-->
                     <tbody>
-                    <tr *ngFor="let item of afforderlist | oreder1 : searchText | oreder2 : searchDate | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/order-details',item._id]">
+                    <!--<tr *ngFor="let item of afforderlist | oreder1 : searchText | oreder2 : searchDate | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/order-details',item._id]">
                       <td class="empycell"></td>
                       <td>{{item.firstname}} {{item.lastname}}</td>
                       <td>{{item.email}}</td>
@@ -243,12 +243,12 @@
                       &lt;!&ndash;<td>{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>&ndash;&gt;
                       <td>{{item.added_time}}</td>
                       <td class="empycell"></td>
-                    </tr>
-                    <tr *ngIf="!(afforderlist | oreder1 : searchText | oreder2 : searchDate).length && !loadinglist"> <td class="empycell"></td><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td> <td class="empycell"></td></tr>
-                    <tr *ngIf="loadinglist"> <td class="empycell"></td><td colspan="12" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div></td> <td class="empycell"></td></tr>
+                    </tr>-->
+                    <tr > <td class="empycell"></td><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td> <td class="empycell"></td></tr>
+                   <!-- <tr *ngIf="loadinglist"> <td class="empycell"></td><td colspan="12" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div></td> <td class="empycell"></td></tr>-->
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(afforderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                  <!--<pagination-controls  *ngIf="(afforderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
                   <lib-listing class="formfilterdiv" *ngIf="afforderlist!=null && afforderlist.length>0" [datasource]="afforderlist" [skip]="afforderlist_skip" [modify_header_array]="modify_header" [sourcedata]="tablename" [editroute]="detailroute1"></lib-listing>
                 </div>
               </div>

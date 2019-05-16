@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import {SignupComponent} from '../signup/signup.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Commonservices} from '../app.commonservices';
 // import {Http} from '@angular/http';
+import {GenrelistComponent} from "../genrelist/genrelist.component";
 import { HttpClient } from '@angular/common/http';
 import {Router} from '@angular/router';
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-genreadd',
@@ -17,10 +19,16 @@ export class GenreaddComponent implements OnInit {
     public fb;
     public is_error;
     public serverurl;
+    modalRef:BsModalRef;
+    public idx;
+    public genrelist;
+    public generelistpage;
+    public genrelistarray:any=[];
 
-  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router) {
+  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private modalService:BsModalService,public genrelistpage:GenrelistComponent) {
       this.fb = fb;
       this.serverurl=_commonservices.url;
+      this.generelistpage=genrelistpage;
   }
 
   ngOnInit() {
@@ -29,6 +37,7 @@ export class GenreaddComponent implements OnInit {
           type: ["", Validators.required],
       });
   }
+
 
     dosubmit(formval){
         let x: any;
@@ -48,7 +57,10 @@ export class GenreaddComponent implements OnInit {
                     let result:any;
                     result = res;
                     if(result.status=='success'){
-                        this.router.navigate(['/genre-list']);                    }
+                        this.generelistpage.modalRef.hide();
+                        this.generelistpage.getgenrelist();
+                        // this.router.navigate(['/genre-list']);
+                    }
                     else {
                         this.is_error= result.msg;
                     }

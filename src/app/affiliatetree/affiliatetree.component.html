@@ -321,6 +321,47 @@
                   </table>-->
                   <!----------------using listing library (material) starts here------------------------->
 
+                  <table *ngIf="listarray==null || listarray.length==0">
+                    <!--<thead>
+                    <tr>
+                      <th class="empycell"></th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Enroller</th>
+                      <th>Sponsor</th>
+                      &lt;!&ndash;<th>Product</th>&ndash;&gt;
+                      <th>Mode</th>
+                      <th>Transaction Id</th>
+                      <th>Total</th>
+                      <th>Promocode</th>
+                      <th>Discount</th>
+                      <th>Order Time</th>
+                      <th class="empycell"></th>
+                    </tr>
+                    </thead>-->
+                    <tbody>
+                    <!--<tr *ngFor="let item of afforderlist | oreder1 : searchText | oreder2 : searchDate | paginate: { itemsPerPage: 10, currentPage: p }" [routerLink]="['/order-details',item._id]">
+                      <td class="empycell"></td>
+                      <td>{{item.firstname}} {{item.lastname}}</td>
+                      <td>{{item.email}}</td>
+                      <td>{{item.phone}}</td>
+                      <td>{{item.affiliate}}</td>
+                      <td style="text-transform: uppercase;">{{item.sponsor}}</td>
+                      &lt;!&ndash;<td style="text-transform: uppercase;">{{item.productname}}</td>&ndash;&gt;
+                      <td>{{item.mode}}</td>
+                      <td>{{item.transactionId}}</td>
+                      <td style="word-break: keep-all;">${{showtwoDecnum(item.total)}}</td>
+                      <td>{{item.promocode}}</td>
+                      <td style="word-break: keep-all;">{{(item.discount)?'$'+showtwoDecnum(item.discount):''}}</td>
+                      &lt;!&ndash;<td>{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>&ndash;&gt;
+                      <td>{{item.added_time}}</td>
+                      <td class="empycell"></td>
+                    </tr>-->
+                    <tr > <td class="empycell"></td><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td> <td class="empycell"></td></tr>
+                    <!-- <tr *ngIf="loadinglist"> <td class="empycell"></td><td colspan="12" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div></td> <td class="empycell"></td></tr>-->
+                    </tbody>
+                  </table>
                   <lib-listing class="formfilterdiv" *ngIf="listarray!=null && listarray.length>0"  [datasource]="listarray" [skip]="listarray_skip" [modify_header_array]="listarray_modify_header" [sourcedata]="tablename"  [statusarr]="statusarray"></lib-listing>
                   <!----------------using listing library (material) ends here--------------------------->
 
