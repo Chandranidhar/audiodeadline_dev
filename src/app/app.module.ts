@@ -148,6 +148,8 @@ import { SavedcardsComponent } from './savedcards/savedcards.component';
 
 import {ListingModule} from "listing-angular7";
 import {DemoMaterialModule} from '../material-module';
+import { BannerfiltertextPipe } from './bannerfiltertext.pipe';
+import { DatefilterPipe } from './datefilter.pipe';
 
 
 @NgModule({
@@ -279,7 +281,9 @@ import {DemoMaterialModule} from '../material-module';
     AmbassadoropportunityComponent,
     ReturnsrefundsComponent,
     TermsandconditionsComponent,
-    SavedcardsComponent
+    SavedcardsComponent,
+    BannerfiltertextPipe,
+    DatefilterPipe
   ],
   imports: [
     ImageCropperModule,

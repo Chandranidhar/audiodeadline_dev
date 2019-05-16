@@ -25,8 +25,8 @@ export class ManageCompetitionSignupComponent implements OnInit {
   public serverurl;
   public userlist;
   public searchText;
+  public searchText3;
   public searchText2 = '';
-  public searchText3 = '';
   public searchText4 = '';
   public searchText5;
   public selecteduser;
@@ -46,6 +46,7 @@ export class ManageCompetitionSignupComponent implements OnInit {
     this.imageuploadfolder= 'artistxpimage/';
     this.musicuploadfolder= 'artistxpmusic/';
     this.iframevideourl = '';
+    this.searchText3 = '';
     this.getUserList();
     this.getCompetitionList();
     this.getGenreList();
@@ -54,9 +55,9 @@ export class ManageCompetitionSignupComponent implements OnInit {
   ngOnInit() {
     this.dataForm = this.fb.group({
       fullname :[""],
-      firstname :[""],
+      /*firstname :[""],
       lastname :[""],
-      artistname:[""],
+      artistname:[""],*/
       birthdate:[""],
       state:[""],
       email:[""],
@@ -71,12 +72,44 @@ export class ManageCompetitionSignupComponent implements OnInit {
 
   }
 
-
+  viewassets(template: TemplateRef<any>,item) {
+    this.selecteduser = item;
+    /*this.musicform.patchValue({
+     music : this.tempUploadFilename
+     });*/
+    this.dataForm.patchValue({
+      fullname: this.selecteduser.name,
+      email: this.selecteduser.email,/*
+      genre: this.selecteduser.genrename,
+      competition: this.selecteduser.competitionname,*/
+      description: this.selecteduser.bio
+    });
+    this.dataForm.controls['genre'].setValue(this.selecteduser.genre);
+    this.dataForm.controls['competition'].setValue(this.selecteduser.competitionname);
+    console.log(this.dataForm.value);
+    this.selecteduser.isImages = Array.isArray(item.images);
+    this.selecteduser.isVideos = Array.isArray(item.videos);
+    this.selecteduser.isMusics = Array.isArray(item.musics);
+    if(this.selecteduser.backstorytype !='' && this.selecteduser.backstoryval !=''){
+      if(this.selecteduser.backstorytype == 'Youtube'){
+        this.iframevideourl = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+this.selecteduser.backstoryval+'?rel=0&amp;showinfo=0');
+      }else if(this.selecteduser.backstorytype == 'Vimeo'){
+        this.iframevideourl = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/video/'+this.selecteduser.backstoryval+'?title=0&byline=0&portrait=0');
+      }else{
+        this.iframevideourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.fileurl+this.videouploadfolder+this.selecteduser.backstoryval);
+      }
+    }
+    console.log(this.selecteduser);
+    // console.log(this.dataForm.value);
+    //noinspection TypeScriptValidateTypes
+    this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+  }
 
 
   getUserList(){
     this.loadinglist = true;
-    var link =this.serverurl+'getcompetitionsignuplist';
+    // var link =this.serverurl+'getcompetitionsignuplist';
+    var link =this._commonservices.nodesslurl1+'getcompetitionsignuplist';
     var data = {};
 
     this._http.post(link, data)
@@ -92,7 +125,8 @@ export class ManageCompetitionSignupComponent implements OnInit {
   }
 
   getCompetitionList(){
-    var link =this.serverurl+'competitionlist';
+    // var link =this.serverurl+'competitionlist';
+    var link =this._commonservices.nodesslurl1+'competitionlist';
     var data = {type: 'active'};
 
     this._http.post(link, data)
@@ -100,6 +134,7 @@ export class ManageCompetitionSignupComponent implements OnInit {
           let result:any;
           result = res;
           this.competitionlist = result.res;
+          console.log(this.competitionlist);
         },error => {
           console.log("Oooops!");
         });
@@ -107,7 +142,8 @@ export class ManageCompetitionSignupComponent implements OnInit {
   }
 
   getGenreList(){
-    var link =this.serverurl+'genrelist';
+    // var link =this.serverurl+'genrelist';
+    var link =this._commonservices.nodesslurl1+'genrelist';
     var data = {type: 'active'};
 
     this._http.post(link, data)
@@ -138,10 +174,11 @@ export class ManageCompetitionSignupComponent implements OnInit {
   }
 
   editInlineField(ev,item,itemval){
-    var fld_val = ev.target.value;
+    var fld_val = ev;
     if(fld_val != itemval){
 
-      var link =this.serverurl+'cngstatuscompuser';
+      // var link =this.serverurl+'cngstatuscompuser';
+      var link =this._commonservices.nodesslurl1+'cngstatuscompuser';
       var data = {_id: item._id,filedvalue:fld_val};
 
       this._http.post(link, data)

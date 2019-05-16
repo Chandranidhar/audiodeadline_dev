@@ -30,8 +30,14 @@
                           <!--<input type="date" class="form-control input-lg newtabletopbarsearchfield" placeholder="search by date" autocomplete="off" [(ngModel)]="searchDate" name="searchDate" />-->
                           <input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
                                  [(ngModel)]="searchText3"
-                                 [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                          <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
+                        <!--  <input style="border-radius: 0;" placeholder="Search By DateRange" name="searchDate" autocomplete="off" class="form-control input-lg"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>-->
                         </div>
                       </div>
                     </li>
@@ -82,7 +88,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <tr *ngFor="let item of bannerlist | bannerfiltertext : searchText | bannerfilter : searchType | bannerfilter2: searchStatus | datefilter : searchText3 | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
                       <td class="empycell"></td>
                       <td data-label="Type" style="min-width: 166px;">{{getTypeName(item.type)}}</td>
                       <td data-label="Title" style="min-width: 150px;">
@@ -91,12 +97,13 @@
                       <td data-label="Banner Image" class="text-center">
                         <img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}">
                       </td>
-                      <td data-label="Date">03/9/2019</td>
+                      <td data-label="Date">{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
                       <td data-label="# Of Click" style="text-align: center;">
-                        <span *ngIf="!item.isSortindexClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'sortindex')">{{item.sortindex}}</span>
-                        <span *ngIf="item.isSortindexClicked"><input type="number" name="sortindex" value="{{item.sortindex}}" (blur)="editInlineField($event,'sortindex',item,item.sortindex)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 70px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>
+                        {{item.noofclick}}
+                       <!-- <span *ngIf="!item.isSortindexClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'sortindex')">{{item.sortindex}}</span>
+                        <span *ngIf="item.isSortindexClicked"><input type="number" name="sortindex" value="{{item.sortindex}}" (blur)="editInlineField($event,'sortindex',item,item.sortindex)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 70px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>-->
                       </td>
-                      <td data-label="# Of Signups" style="text-align: center;">11</td>
+                      <td data-label="# Of Signups" style="text-align: center;">{{item.noofsignup}}</td>
                       <td data-label="Status" class="statuscls">
                         <span *ngIf="!isadmin" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))">{{getStatusName(item.status)}}</span>
                         <span *ngIf="isadmin && !item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item,'status')" style="cursor: pointer">{{getStatusName(item.status)}}</span>
@@ -131,7 +138,7 @@
                         <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
                       </td>-->
                     </tr>
-                    <tr *ngIf="!(bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus).length && !loadinglist">
+                    <tr *ngIf="!(bannerlist | datefilter : searchText3 | bannerfiltertext : searchText | bannerfilter : searchType | bannerfilter2: searchStatus).length && !loadinglist">
                       <td class="empycell"></td>
                       <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
                       <td class="empycell"></td>
@@ -143,7 +150,7 @@
                     </tr>
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <pagination-controls  *ngIf="(bannerlist | datefilter : searchText3 | bannerfiltertext : searchText | bannerfilter : searchType | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
                 </div>
               </div>
               <div class="tabcontentwrapperoverlay"></div>

@@ -88,7 +88,8 @@
       <div class="dashboard_right_wrapper">
         <div class="dashboard1_div1 adminlisttable">
           <div class="n-adminheadercls">
-            <h4>BLog List</h4>
+            <h4>Event List</h4>
+          <!--  <h4>BLog List</h4>-->
           </div>
           <div class="dashboardwrapper">
             <div class="tabletopbar newtabletopbar">
@@ -98,10 +99,15 @@
                     <li>
                       <div>
                         <div class="input-group col-md-12">
-                          <input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                          <!--<input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
                                  [(ngModel)]="searchText3"
                                  [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                          <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                          <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>-->
+                          <input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
                         </div>
                       </div>
                     </li>
@@ -126,7 +132,7 @@
                       </div>
                     </li>
                     <li>
-                      <a (click)="openAddModal(addblog)" class="loginbtn2"><i class="fa fa-plus"></i> Add Blog</a>
+                      <a (click)="openAddModal(addblog)" class="loginbtn2"><i class="fa fa-plus"></i> Add Event</a>
                     </li>
                   </ul>
                 </form>
@@ -149,7 +155,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let item of bloglist | blogfilter : searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+                  <tr *ngFor="let item of bloglist | blogfilter : searchText | bannerfilter2: searchText2 | datefilter : searchText3 | paginate: { itemsPerPage: 10, currentPage: p }">
                     <td class="empycell"></td>
                     <td data-label="Start Date">{{(item.added_time*1000) | date :  "MM/dd/yyyy" }}</td>
                     <td data-label="Title">{{item.title}}</td>
@@ -185,7 +191,7 @@
                     </td>
                     <td class="empycell"></td>
                   </tr>
-                  <tr *ngIf="!(bloglist | blogfilter : searchText).length && !loadinglist">
+                  <tr *ngIf="!(bloglist | datefilter : searchText3  | blogfilter : searchText).length && !loadinglist">
                     <td class="empycell"></td>
                     <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
                     <td class="empycell"></td>
@@ -197,7 +203,7 @@
                   </tr>
                   </tbody>
                 </table>
-                <pagination-controls  *ngIf="(bloglist | blogfilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                <pagination-controls  *ngIf="(bloglist | datefilter : searchText3 | blogfilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
               </div>
             </div>
           </div>

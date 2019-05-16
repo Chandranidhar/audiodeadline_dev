@@ -5,6 +5,7 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import { HttpClient } from '@angular/common/http';
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
+import {DomSanitizer} from "@angular/platform-browser";
 
 
 @Component({
@@ -21,8 +22,10 @@ export class MediaInterestReportComponent implements OnInit {
   public serverurl;
   public fileurl;
   public bannerlist;
+  public searchText;
   public idx;
   public searchType;
+  public searchText3;
   public searchStatus;
   public sponsorList;
   public uploadfolder;
@@ -30,17 +33,17 @@ export class MediaInterestReportComponent implements OnInit {
   public inlineerror;
   public isadmin;
   public userid;
-  public searchText;
-  public searchText3;
 
 
 
-  constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router) {
+  constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,private sanitizer:DomSanitizer) {
     this.serverurl=_commonservices.url;
     this.uploadfolder = 'banner/';
     this.fileurl=_commonservices.fileurl;
     this.searchType = '';
     this.searchStatus = '';
+    this.searchText = '';
+    this.searchText3 = '';
     this.sponsorList=_commonservices.getSponsorList();
     this.bannerTypeList=_commonservices.getBannerTypeList();
     let userdata2: any;

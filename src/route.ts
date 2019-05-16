@@ -165,6 +165,7 @@ const appRoutes: Routes = [
     { path: 'trainingartists', component: TrainingartistsComponent},
     { path: 'competition', component: CompetitionComponent},
     { path: 'blog-list', component: BloglistComponent},
+    { path: 'event-list', component: BloglistComponent},
     { path: 'add-blog', component: BlogaddComponent},
     { path: 'edit-blog/:id', component: BlogeditComponent},
     { path: 'forgot-password', component: ForgotpasswordComponent},

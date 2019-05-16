@@ -2,9 +2,32 @@ import { Pipe, PipeTransform } from '@angular/core';
 import {moment} from "ngx-bootstrap/chronos/test/chain";
 
 @Pipe({
-  name: 'oreder2'
+  name: 'datefilter'
 })
-export class Oreder2Pipe implements PipeTransform {
+export class DatefilterPipe implements PipeTransform {
+
+ /* transform(items: any[], searchText: string): any[] {
+    if(!items) return [];
+
+
+    if(!searchText || typeof (searchText) == 'undefined'){
+      return items;
+    }else{
+      var ftime = moment().unix();
+     var searchText2 = searchText.toString();
+     // searchText2 = searchText2.substring(4,15);
+    //  searchText2 = searchText2+' 23:59:59';
+      var etime = moment(searchText2,"MMM DD YYYY HH:mm:ss").unix();
+
+      if(ftime > 0 && etime >0){
+        return items.filter( it => {
+          return (it.added_time >=ftime && it.added_time <= etime);
+        });
+      }else{
+        return items;
+      }
+    }
+  }*/
 
   transform(items: any[], searchText: string): any[] {
     if(!items) return [];
@@ -37,6 +60,6 @@ export class Oreder2Pipe implements PipeTransform {
       }
     }
 
-   }
+  }
 
 }

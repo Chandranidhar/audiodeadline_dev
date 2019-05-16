@@ -24,6 +24,7 @@ export class BlogaddComponent implements OnInit {
     public userid;
     public is_error;
     public videolink;
+    public searchText3;
     public videolinkerror:boolean;
     public imageserror:boolean;
     public videos:any;
@@ -34,6 +35,7 @@ export class BlogaddComponent implements OnInit {
         this.fb = fb;
         this.videos = [];
         this.images = [];
+        this.searchText3='';
         this.videolinkerror = false;
         this.imageserror = false;
         this.serverurl=_commonservices.url;

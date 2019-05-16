@@ -24,7 +24,9 @@ export class BlogfilterPipe implements PipeTransform {
             let parentname = it.parentname;
             if(!parentname)
                 parentname = '';
-            return (title.toLowerCase().includes(searchText) || description.toLowerCase().includes(searchText) || parentname.toLowerCase().includes(searchText));
+
+           // return (it.status == parseInt(searchText));
+            return (parseInt(searchText) || title.toLowerCase().includes(searchText) || description.toLowerCase().includes(searchText) || parentname.toLowerCase().includes(searchText));
         });
     }
 

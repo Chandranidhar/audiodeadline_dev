@@ -157,8 +157,8 @@
     <a [routerLink]="['/commission-list']" *ngIf="userdetails.admin == 1 || userdetails.signupaffiliate==1">Commission List</a>
   </li>
 
-  <li class="dropdown" *ngIf="userdetails.admin == 1" [ngClass]="router.url === '/blog-list' ? 'dashboardcls' : ''">
-    <a [routerLink]="['/blog-list']" >Blog Management</a>
+  <li class="dropdown" *ngIf="userdetails.admin == 1" [ngClass]="router.url === '/event-list' ? 'dashboardcls' : ''">
+    <a [routerLink]="['/event-list']" >Event Management</a>
   </li>
 
   <!--<li [ngClass]="router.url === '/my-order' ? 'dashboardcls' : ''"><a [routerLink]="['/my-order']">My Order</a></li>-->
