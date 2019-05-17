@@ -150,6 +150,7 @@ import {ListingModule} from "listing-angular7";
 import {DemoMaterialModule} from '../material-module';
 import { BannerfiltertextPipe } from './bannerfiltertext.pipe';
 import { DatefilterPipe } from './datefilter.pipe';
+import { DateblogpipePipe } from './dateblogpipe.pipe';
 
 
 @NgModule({
@@ -283,7 +284,8 @@ import { DatefilterPipe } from './datefilter.pipe';
     TermsandconditionsComponent,
     SavedcardsComponent,
     BannerfiltertextPipe,
-    DatefilterPipe
+    DatefilterPipe,
+    DateblogpipePipe
   ],
   imports: [
     ImageCropperModule,

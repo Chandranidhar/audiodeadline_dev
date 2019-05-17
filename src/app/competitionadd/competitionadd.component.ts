@@ -55,6 +55,7 @@ export class CompetitionaddComponent implements OnInit {
     this.dataForm = this.fb.group({
       competitionname: ["", Validators.required],
       description: ["", Validators.required],
+      putcontentright: ["0"],
       startdate: ["", CompetitionaddComponent.validateDate],
       enddate: ["", CompetitionaddComponent.validateDate],
     });
@@ -113,13 +114,20 @@ export class CompetitionaddComponent implements OnInit {
       var data = {
         competitionname: formval.competitionname,
         description: formval.description,
+        putcontentright: formval.putcontentright,
         startdate: moment(formval.startdate).unix(),
         enddate: moment(formval.enddate).unix(),
         image: this.image,
         image1: this.image1,
         image2: this.image2,
       };
-
+      if(formval.putcontentright=='true'){
+          data.putcontentright= 1;
+      }
+      if(formval.putcontentright=='false'){
+          data.putcontentright= 0;
+      }
+      console.log(data);
       this._http.post(link, data)
           .subscribe(res => {
             let result:any;
@@ -217,6 +225,11 @@ export class CompetitionaddComponent implements OnInit {
 
   previewcomp(template: TemplateRef<any>,formval){
     this.formval = formval;
+    if(this.formval.putcontentright=='1' || this.formval.putcontentright=='true'){
+        this.formval.putcontentright=1;
+    }else{
+        this.formval.putcontentright = 0;
+    }
     this.formvalstartdate = moment(formval.startdate).format('Do MMM YYYY');
     this.formvalenddate = moment(formval.enddate).format('Do MMM YYYY');
     this.formvalendbgimage = this.sanitizer.bypassSecurityTrustStyle('url('+this.fileurl+this.image1+')  no-repeat left 7% bottom');

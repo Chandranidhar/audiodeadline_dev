@@ -88,7 +88,12 @@
                     <li>
                       <div>
                         <div class="input-group col-md-12">
-                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="search by date" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                          <!--<input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="search by date" autocomplete="off" [(ngModel)]="searchText" name="searchText" />-->
+                          <input style="border-radius: 0;" placeholder="Search By Date Range" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
                         </div>
                       </div>
                     </li>
@@ -119,7 +124,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of promocodelist | namefilter : '' | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <tr *ngFor="let item of promocodelist| datefilter : searchText3 | namefilter : '' | paginate: { itemsPerPage: 10, currentPage: p }">
                       <td class="empycell"></td>
                       <td data-label="Date Active">02/18/19</td>
                       <td data-label="Promocode">{{item.promocode}}</td>
@@ -131,12 +136,12 @@
                       </td>
                       <td data-label="End Date">02/25/19</td>
                       <td data-label="Action" class="whitebtnlists text-center">
-                        <a class="loginbtn2 btnedit btnwhite" (click)="openEditModal(editpromocode,item._id)"><i class="fa fa-pencil-square-o"></i></a>
+                        <a class="loginbtn2 btnedit btnwhite" (click)="openEditModal(editpromocode,item)"><i class="fa fa-pencil-square-o"></i></a>
                         <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i></a>
                       </td>
                       <td class="empycell"></td>
                     </tr>
-                    <tr *ngIf="!(promocodelist | namefilter : '').length && !loadinglist">
+                    <tr *ngIf="!(promocodelist | datefilter : searchText3 | namefilter : '').length && !loadinglist">
                       <td class="empycell"></td>
                       <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
                       <td class="empycell"></td>
@@ -148,7 +153,7 @@
                     </tr>
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(promocodelist | namefilter : '').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <pagination-controls  *ngIf="(promocodelist | datefilter : searchText3 | namefilter : '').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
                 </div>
               </div>
             </div>
@@ -181,6 +186,6 @@
 
 <ng-template #editpromocode>
   <div class="modal-body text-center modalcls n-modalcls">
-    <app-promocodeedit></app-promocodeedit>
+    <app-promocodeedit [obj]="editobj"></app-promocodeedit>
   </div>
 </ng-template>

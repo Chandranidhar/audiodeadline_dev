@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {Commonservices} from "../app.commonservices";
+import {PromocodelistComponent} from '../../app/promocodelist/promocodelist.component';
 import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 // import {Http} from "@angular/http";
 import {Router, ActivatedRoute} from "@angular/router";
@@ -16,15 +17,27 @@ export class PromocodeeditComponent implements OnInit {
   public is_error;
   public serverurl;
   public promocodeid;
+  public promolistpage;
+  @Input()
+  set obj(data: any) {
+    this.promocodeid = (data) || '<no name set>';
+    this.promocodeid = data;
+    console.log(this.promocodeid);
+    this.getPromoDetails();
 
-  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private route:ActivatedRoute) {
+
+
+    /*  console.log(this.postarr);
+     console.log(postarr1);*/
+  }
+  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private route:ActivatedRoute, public promocodelist:PromocodelistComponent) {
     this.fb = fb;
     this.serverurl=_commonservices.url;
-
+/*
     this.route.params.subscribe(params=>{
       this.promocodeid = params['id'];
       this.getPromoDetails();
-    });
+    });*/
 
   }
 
@@ -34,6 +47,9 @@ export class PromocodeeditComponent implements OnInit {
       description: ["", Validators.required],
       type: ["", Validators.required],
       amount: ["", PromocodeeditComponent.validateAmount],
+      startdate: ["", Validators.required],
+      enddate: ["", Validators.required]
+
     });
   }
 
@@ -50,6 +66,8 @@ export class PromocodeeditComponent implements OnInit {
             this.dataForm.controls['promocode'].setValue(userdet.promocode);
             this.dataForm.controls['description'].setValue(userdet.description);
             this.dataForm.controls['type'].setValue(userdet.type);
+            this.dataForm.controls['startdate'].setValue(userdet.startdate);
+            this.dataForm.controls['enddate'].setValue(userdet.enddate);
             this.dataForm.controls['amount'].setValue(userdet.amount.toString());
           }
         },error => {
@@ -97,6 +115,8 @@ export class PromocodeeditComponent implements OnInit {
         description: formval.description,
         type: formval.type,
         amount: formval.amount,
+        startdate: formval.startdate,
+        enddate: formval.enddate,
       };
 
       this._http.post(link, data)
@@ -104,7 +124,10 @@ export class PromocodeeditComponent implements OnInit {
             let result:any;
             result = res;
             if(result.status=='success'){
-              this.router.navigate(['/promocode-list']);                    }
+              this.promolistpage.modalRef.hide();
+              this.promolistpage.getPromocodeList();
+              // this.router.navigate(['/promocode-list']);
+            }
             else {
               this.is_error= result.msg;
             }

@@ -17,6 +17,12 @@
 }
 
 @media screen and (max-width:1666px) {
+
+    .n-adminfooter .footerrightdivsocial{
+        width: auto !important;
+    }
+
+
     .dashboard_left ul li {
         font-size: 13px;
     }
@@ -48,6 +54,14 @@
         font-size: 16px;
     }
 }
+
+
+@media screen and (max-width:1540px) {
+    .n-adminfooter .footerrightdivsocial {
+        width: auto !important;
+    }
+}
+
 
 @media screen and (max-width:1366px) {
 
@@ -98,7 +112,18 @@
 
 
 @media screen and (max-width:1280px) {
+    .n-adminfooter .footerrightdiv {
+        display: inline-block;
+    }
 
+    .n-adminfooter .footerrightdiv .row {
+        display: inline-flex;
+    }
+
+    .n-adminfooter .footernav ul {
+        float: none!important;
+        margin: 0 auto;
+    }
     .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
         padding: 13px 2px ;
         font-size: 11px;
@@ -125,6 +150,10 @@
 }
 
 @media screen and (max-width:1199px) {
+    .n-adminfooter .footerrightdiv .row {
+        display: block;
+    }
+
     .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
         padding: 13px 10px !important;
         font-size: 14px;
@@ -192,7 +221,7 @@
 
 @media screen and (min-width:1199px) {
     .tabcontentwrapper {
-        min-height: 700px;
+        min-height: 80vh;
     }
 
 }
@@ -393,6 +422,11 @@
         /* z-index: 999; */
         color: #fff;
     }
+    .adminlisttable.adminlisttabledashboard .tablediv table tr {
+        display: table-row !important;
+    }
+
+
     .tablediv table td:last-child::before {
         /*
         * aria-label has no advantage, it won't be read inside a table
@@ -405,6 +439,19 @@
         text-align: left;
         /* z-index: 999; */
         color: #fff;
+    }
+
+    .tablediv table td::after {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -33%;
     }
 
     .tablediv table td::before {

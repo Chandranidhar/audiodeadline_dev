@@ -120,7 +120,7 @@
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
 
-                <div class="tablediv affiliatetree">
+                <div class="tablediv affiliatetree affidashboardbg2">
                   <!--<table>
                     <thead>
                     <tr>
@@ -196,7 +196,19 @@
                     </tbody>
                   </table>
                   <pagination-controls  *ngIf="(userlist | namefilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
-                  <lib-listing class="formfilterdiv" *ngIf="adminlistarray!=null && adminlistarray.length>0" [datasource]="adminlistarray" [skip]="adminlistarray_skip" [modify_header_array]=" adminlistarray_modify_header" [sourcedata]="admintablename" [statusarr]="adminstatusarray" [jwttoken]="jwttoken" [apiurl]="apiurl"     [editroute]="editroute1"></lib-listing>
+                  <lib-listing class="formfilterdiv" *ngIf="adminlistarray!=null && adminlistarray.length>0"
+                               [datasource]="adminlistarray"
+                               [skip]="adminlistarray_skip"
+                               [modify_header_array]=" adminlistarray_modify_header"
+                               [sourcedata]="admintablename"
+                               [statusarr]="adminstatusarray"
+                               [jwttoken]="jwttoken"
+                               [apiurl]="apiurl"
+                               [date_search_source]="date_search_source"
+                               [date_search_endpoint]="date_search_endpoint"
+                               [search_settings]="search_settings"
+                               [editroute]="editroute1"
+                               [deleteendpoint]="deleteval"></lib-listing>
                 </div>
               </div>
               <div class="tabcontentwrapperoverlay"></div>

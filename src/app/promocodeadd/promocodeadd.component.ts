@@ -4,6 +4,7 @@ import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
 // import {Http} from "@angular/http";
 import {Router} from "@angular/router";
 import { HttpClient } from '@angular/common/http';
+import {PromocodelistComponent} from '../../app/promocodelist/promocodelist.component';
 @Component({
   selector: 'app-promocodeadd',
   templateUrl: './promocodeadd.component.html',
@@ -15,10 +16,12 @@ export class PromocodeaddComponent implements OnInit {
   public fb;
   public is_error;
   public serverurl;
+  public promolistpage;
 
-  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router) {
+  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router, public promocodelist:PromocodelistComponent) {
     this.fb = fb;
     this.serverurl=_commonservices.url;
+    this.promolistpage=promocodelist;
   }
 
   ngOnInit() {
@@ -26,6 +29,8 @@ export class PromocodeaddComponent implements OnInit {
       promocode: ["", PromocodeaddComponent.validateUsername],
       description: ["", Validators.required],
       type: ["", Validators.required],
+      startdate: ["", Validators.required],
+      enddate: ["", Validators.required],
       amount: ["", PromocodeaddComponent.validateAmount],
     });
   }
@@ -66,14 +71,19 @@ export class PromocodeaddComponent implements OnInit {
         description: formval.description,
         type: formval.type,
         amount: formval.amount,
+        startdate: formval.startdate,
+        enddate: formval.enddate,
       };
-
+      console.log(data);
       this._http.post(link, data)
           .subscribe(res => {
             let result:any;
             result = res;
             if(result.status=='success'){
-              this.router.navigate(['/promocode-list']);                    }
+              // this.router.navigate(['/promocode-list']);
+              this.promolistpage.modalRef.hide();
+              this.promolistpage.getPromocodeList();
+            }
             else {
               this.is_error= result.msg;
             }

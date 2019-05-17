@@ -164,8 +164,8 @@ const appRoutes: Routes = [
     { path: 'artist-xp', component: ArtistsexchangeComponent},
     { path: 'trainingartists', component: TrainingartistsComponent},
     { path: 'competition', component: CompetitionComponent},
+    { path: 'blog-list', component: BloglistComponent},
     { path: 'event-list', component: BloglistComponent},
-    /*{ path: 'blog-list', component: BloglistComponent},*/
     { path: 'add-blog', component: BlogaddComponent},
     { path: 'edit-blog/:id', component: BlogeditComponent},
     { path: 'forgot-password', component: ForgotpasswordComponent},
@@ -208,7 +208,7 @@ const appRoutes: Routes = [
     { path: 'edit-promocode/:id', component: PromocodeeditComponent},
     { path: 'add-product', component: ProductaddComponent},
     { path: 'product-list', component: ProductlistComponent},
-
+    
     { path: 'edit-product/:id', component: ProducteditComponent},
     { path: 'order-list', component: OrderlistComponent,resolve: {results: TestresolveService},data: { object: 'orderlistaff' }},
     { path: 'myorder', component: OrderlistComponent,resolve: {results: TestresolveService},data: { object: 'orderlistaff' }},
@@ -224,14 +224,15 @@ const appRoutes: Routes = [
     { path: 'partnerships', component: PartnersComponent},
 
     { path: 'add-competition', component: CompetitionaddComponent},
-    { path: 'competition-list', component: CompetitionlistComponent},
+    // { path: 'competition-list', component: CompetitionlistComponent},
+    { path: 'competition-list', component: CompetitionlistComponent,resolve: {results: TestresolveService},data: { object: 'complist'}},
     { path: 'edit-competition/:id', component: CompetitioneditComponent},
 
     { path: 'add-media', component: BanneraddComponent},
     { path: 'media-list', component: BannerlistComponent},
     { path: 'edit-media/:id', component: BannereditComponent},
 
-    { path: 'my-order', component: MyorderComponent},
+     { path: 'my-order', component: MyorderComponent},
     {path: 'commission-list', component: CommssionlistComponent,resolve: {results: TestresolveService}, data: {object: 'commisionlist', condition: {typeval:'true'}}},
     // {path: 'my-order', component: MyorderComponent,resolve: {results: TestresolveService}, data: {object: 'myorder', condition: {}}},
 
@@ -255,7 +256,8 @@ const appRoutes: Routes = [
     { path: 'adminheader', component: AdminheaderComponent},
     { path: 'adminfooter', component: AdminfooterComponent},
 
-    { path: 'manage-competition-signup', component: ManageCompetitionSignupComponent},
+    // { path: 'manage-competition-signup', component: ManageCompetitionSignupComponent},
+    { path: 'manage-competition-signup', component: ManageCompetitionSignupComponent,resolve: {results: TestresolveService},data: { object: 'managecompsign'}},
     { path: 'competition-stats', component: CompetitionStatsComponent},
     { path: 'media-interest-report', component: MediaInterestReportComponent},
     { path: 'affiliatemediamarketing', component: AffiliatemediamarketingComponent,resolve: {results: TestresolveService},data: { object: 'mediamarketdata' }},

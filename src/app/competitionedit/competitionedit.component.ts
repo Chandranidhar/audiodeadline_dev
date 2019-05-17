@@ -69,6 +69,7 @@ export class CompetitioneditComponent implements OnInit {
     this.dataForm = this.fb.group({
       competitionname: ["", Validators.required],
       description: ["", Validators.required],
+        putcontentright: ["0"],
       startdate: ["", CompetitioneditComponent.validateDate],
       enddate: ["", CompetitioneditComponent.validateDate],
     });
@@ -86,6 +87,8 @@ export class CompetitioneditComponent implements OnInit {
             let userdet = result.item;
             this.dataForm.controls['competitionname'].setValue(userdet.competitionname);
             this.dataForm.controls['description'].setValue(userdet.description);
+            this.dataForm.controls['putcontentright'].setValue(userdet.putcontentright);
+            console.log(this.dataForm.controls['putcontentright'].value);
             this.dataForm.controls['startdate'].setValue(moment.unix(userdet.startdate).toDate());
             this.dataForm.controls['enddate'].setValue(moment.unix(userdet.enddate).toDate());
             this.image = userdet.image;
@@ -152,12 +155,19 @@ export class CompetitioneditComponent implements OnInit {
         _id: this.compid,
         competitionname: formval.competitionname,
         description: formval.description,
+          putcontentright: formval.putcontentright,
         startdate: moment(formval.startdate).unix(),
         enddate: moment(formval.enddate).unix(),
         image: this.image,
         image1: this.image1,
         image2: this.image2,
       };
+        if(formval.putcontentright=='true'){
+            data.putcontentright= 1;
+        }
+        if(formval.putcontentright=='false'){
+            data.putcontentright= 0;
+        }
 
       this._http.post(link, data)
           .subscribe(res => {
@@ -268,6 +278,11 @@ export class CompetitioneditComponent implements OnInit {
 
   previewcomp(template: TemplateRef<any>,formval){
     this.formval = formval;
+      if(this.formval.putcontentright=='1' || this.formval.putcontentright=='true'){
+          this.formval.putcontentright=1;
+      }else{
+          this.formval.putcontentright = 0;
+      }
     this.formvalstartdate = moment(formval.startdate).format('Do MMM YYYY');
     this.formvalenddate = moment(formval.enddate).format('Do MMM YYYY');
     this.formvalendbgimage = this.sanitizer.bypassSecurityTrustStyle('url('+this.fileurl+this.image1+')  no-repeat left 7% bottom');

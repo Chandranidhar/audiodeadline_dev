@@ -162,12 +162,7 @@
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
                 <div class="tablediv affiliatetree showmodaldiv hidebtnnew">
-                  <lib-listing *ngIf="genrelistarray!=null && genrelistarray.length>0" [datasource]="genrelistarray"  [skip]="genrelistarray_skip" [modify_header_array]=" genrelistarray_modify_header"[sourcedata]="genrelisttablename" [statusarr]="genreliststatusarray" [apiurl]="apiurl"  [deleteendpoint]="deleteval" [updateendpoint]="updateurl"  [editroute]="editroute1" [jwttoken]="jwttoken"
-
-
-
-
-                  ></lib-listing>
+                  <lib-listing class="formfilterdiv" *ngIf="genrelistarray!=null && genrelistarray.length>0" [datasource]="genrelistarray"  [skip]="genrelistarray_skip" [modify_header_array]=" genrelistarray_modify_header"[sourcedata]="genrelisttablename" [statusarr]="genreliststatusarray" [apiurl]="apiurl"  [deleteendpoint]="deleteval" [updateendpoint]="updateurl"  [editroute]="editroute1" [jwttoken]="jwttoken"></lib-listing>
 
                   <!--<table>
                     <thead>

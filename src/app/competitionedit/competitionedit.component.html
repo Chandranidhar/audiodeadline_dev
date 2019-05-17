@@ -216,6 +216,11 @@
         </div>
       </div>
     </div>
+    <div class="form-group">
+      <div class="col-md-12 control-label text-left">
+        <input type="checkbox" name="checkbox" [formControl]="dataForm.controls['putcontentright']"  value="1" checked="checked"><label>Put Content On Right*:</label></div>
+
+    </div>
     <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
     <input type="button" value="PREVIEW" class="loginbtn2" style="margin-left: 10px;" (click)="previewcomp(template,dataForm.value)">
   </form>
@@ -228,7 +233,7 @@
       <div [style.background]="formvalendbgimage" class="bgmainbanner">
         <img style="display: none;" src="{{fileurl}}{{image2}}">
       </div>
-      <div class="bgmainbannercontainer">
+      <div [ngClass]="formval.putcontentright == '1' ? 'bgmainbannercontainer classforcomppreview' : 'bgmainbannercontainer'">
         <div>
           <h2>{{formval.competitionname}}</h2>
           <h3>{{formval.description | charlimit:400}}</h3>

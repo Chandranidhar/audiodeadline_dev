@@ -159,6 +159,7 @@
         <span *ngIf ="dataForm.controls['competitionname'].touched && !dataForm.controls['competitionname'].valid" class="has-error"> Name field can not be blank</span>
       </div>
     </div>
+
     <div class="form-group">
       <div class="col-md-4 control-label text-left"><label>Description*:</label></div>
       <div class="col-md-8">
@@ -214,6 +215,11 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-12 control-label text-left">
+        <input type="checkbox" name="checkbox" [formControl]="dataForm.controls['putcontentright']"  value="1" checked="checked"><label>Put Content On Right*:</label></div>
+
     </div>
     <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
     <input type="button" value="PREVIEW" class="loginbtn2" style="margin-left: 10px;" (click)="previewcomp(template,dataForm.value)">

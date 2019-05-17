@@ -14,12 +14,15 @@ export class PromocodelistComponent implements OnInit {
     public p: number = 1;
     modalRef: BsModalRef;
     public serverurl;
+    public searchText3;
     public promocodelist;
     public searchText;
     public idx;
+    public editobj;
 
     constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService) {
         this.serverurl=_commonservices.url;
+        this.searchText3 = '';
         this.getPromocodeList();
     }
 
@@ -90,10 +93,12 @@ export class PromocodelistComponent implements OnInit {
 
     openAddModal(template: TemplateRef<any>){
         //noinspection TypeScriptValidateTypes
+
         this.modalRef = this.modalService.show(template, {class: 'modal-md addpromocode'});
     }
 
-    openEditModal(template: TemplateRef<any>){
+    openEditModal(template: TemplateRef<any>,item:any){
+        this.editobj = item._id;
         //noinspection TypeScriptValidateTypes
         this.modalRef = this.modalService.show(template, {class: 'modal-md editpromocode'});
     }

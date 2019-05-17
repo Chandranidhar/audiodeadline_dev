@@ -78,7 +78,7 @@
         <label>*PromoCode</label>
       </div>
       <div class="col-md-8">
-        <input type="text" class="form-control" name="promocode" placeholder="Promocode*" [formControl]="dataForm.controls['promocode']">
+        <input type="text" class="form-control" name="promocode" placeholder="Promocode*" [formControl]="dataForm.controls['promocode']" (blur)="_commonservices.inputUntouch(dataForm,'promocode')">
         <span *ngIf ="dataForm.controls['promocode'].touched && dataForm.controls['promocode'].hasError('blankprocode')" class="has-error"> Promocode field can not be blank</span>
         <span *ngIf ="dataForm.controls['promocode'].touched && dataForm.controls['promocode'].hasError('invalidprocode')" class="has-error"> Promocode contain only alphabetic or numeric value</span>
       </div>
@@ -88,7 +88,7 @@
         <label>*Description</label>
       </div>
       <div class="col-md-8">
-        <textarea class="form-control" name="description" placeholder="Description*" [formControl]="dataForm.controls['description']"></textarea>
+        <textarea class="form-control" name="description" placeholder="Description*" [formControl]="dataForm.controls['description']" (blur)="_commonservices.inputUntouch(dataForm,'description')"></textarea>
         <span *ngIf ="dataForm.controls['description'].touched && !dataForm.controls['description'].valid" class="has-error"> Description field can not be blank</span>
       </div>
     </div>
@@ -97,7 +97,7 @@
         <label>*Type</label>
       </div>
       <div class="col-md-8">
-        <select class="form-control"  name="type"  [formControl]="dataForm.controls['type']">
+        <select class="form-control"  name="type"  [formControl]="dataForm.controls['type']" (blur)="_commonservices.inputUntouch(dataForm,'type')">
           <option value="">Select One</option>
           <option value="flat">Flat</option>
           <option value="percentage">Percentage</option>
@@ -110,7 +110,7 @@
         <label>*Discount Amount</label>
       </div>
       <div class="col-md-8">
-        <input type="text" class="form-control" name="amount" placeholder="Discount Amount*" [formControl]="dataForm.controls['amount']">
+        <input type="text" class="form-control" name="amount" placeholder="Discount Amount*" [formControl]="dataForm.controls['amount']" (blur)="_commonservices.inputUntouch(dataForm,'amount')">
         <span *ngIf ="dataForm.controls['amount'].touched && dataForm.controls['amount'].hasError('blankamount')" class="has-error"> Discount Amount field can not be blank</span>
         <span *ngIf ="dataForm.controls['amount'].touched && dataForm.controls['amount'].hasError('maxamount')" class="has-error"> Discount Amount must be less than 100</span>
         <span *ngIf ="dataForm.controls['amount'].touched && dataForm.controls['amount'].hasError('invalidamount')" class="has-error"> Discount Amount contain only numeric value</span>
@@ -122,7 +122,7 @@
         <label>*Start Date</label>
       </div>
       <div class="col-md-8">
-        <input type="date" class="form-control" name="startdate" placeholder="Startdate" [formControl]="dataForm.controls['startdate']">
+        <input type="date" class="form-control" name="startdate" placeholder="Startdate" [formControl]="dataForm.controls['startdate']" (blur)="_commonservices.inputUntouch(dataForm,'startdate')">
         <span *ngIf ="dataForm.controls['startdate'].touched && !dataForm.controls['startdate'].valid" class="has-error">startdate amount field can not be blank</span>
       </div>
     </div>
@@ -132,7 +132,7 @@
         <label>*End Date</label>
       </div>
       <div class="col-md-8">
-        <input type="date" class="form-control" name="enddate" placeholder="End Date" [formControl]="dataForm.controls['enddate']">
+        <input type="date" class="form-control" name="enddate" placeholder="End Date" [formControl]="dataForm.controls['enddate']" (blur)="_commonservices.inputUntouch(dataForm,'enddate')">
         <span *ngIf ="dataForm.controls['enddate'].touched && !dataForm.controls['enddate'].valid" class="has-error">end date amount field can not be blank</span>
       </div>
     </div>

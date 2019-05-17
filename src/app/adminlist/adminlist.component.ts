@@ -16,6 +16,14 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 
 export class AdminlistComponent implements OnInit {
+
+    date_search_source: any='all_admin';
+    date_search_endpoint: any='datalist';
+    search_settings:any={datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",field:"unixtime"}],textsearch:[{label:"Search By Name",field:'fullname'}]};
+
+
+
+
     public loadinglist:boolean;
     public p: number = 1;
     modalRef: BsModalRef;
@@ -28,13 +36,14 @@ export class AdminlistComponent implements OnInit {
     public editroute1:any='edit-admin';
     datasource:any;
     adminlistarray:any=[];
-    adminlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","parent","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
-    adminlistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email"};
+    adminlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","parent","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","fb_access_token","fb_access_token_expire_in","fullname","unixtime"];
+    adminlistarray_modify_header:any={'added_time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email"};
     // admintablename:'all_users';
     admintablename:any='user';
     updateurl:any = 'addorupdatedata';
     apiurl:any;
     jwttoken:any;
+    deleteval:any= 'deletesingledata';
     adminstatusarray:any=[{val:1,name:'Active'},{val:0,name:'Inactive'}];
 
 

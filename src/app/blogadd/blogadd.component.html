@@ -103,21 +103,24 @@
       <div class="col-md-4 control-label text-left"><label>*Who would you like to share this blog with?</label></div>
       <div class="col-md-8">
         <div class="newcheckboxdiv">
-          <div name="shareblog" [formControl]="dataForm.controls['shareblog']">
-            <input type="checkbox" name="checkbox" value="1" checked="checked"><label>Users</label>
+          <div name="shareblog" >
+            <input type="checkbox" [formControl]="dataForm.controls['user']" name="checkbox1" value="user" (change)="allcheck()" ><label>Users</label>
             <div class="newcheckboxsubdiv">
-              <div><input type="checkbox" name="checkbox" value="1"><label>Fan</label></div>
-              <div><input type="checkbox" name="checkbox" value="2"><label>Dancers</label></div>
-              <div><input type="checkbox" name="checkbox" value="3"><label>Vocalist</label></div>
-              <div><input type="checkbox" name="checkbox" value="4"><label>Model</label></div>
-              <div><input type="checkbox" name="checkbox" value="5"><label>Producer</label></div>
-              <div><input type="checkbox" name="checkbox" value="6"><label>DJ</label></div>
+              <div><input type="checkbox" name="checkbox11" [formControl]="dataForm.controls['musicians']"  value="false"><label>Musician</label></div>
+              <div><input type="checkbox" name="checkbox12" [formControl]="dataForm.controls['dancer']" value="false"><label>Dancers</label></div>
+              <div><input type="checkbox" name="checkbox13" [formControl]="dataForm.controls['model']" value="false"><label>Model</label></div>
+              <div><input type="checkbox" name="checkbox14" [formControl]="dataForm.controls['producer']" value="false"><label>Producer</label></div>
+              <div><input type="checkbox" [formControl]="dataForm.controls['fan']"  name="checkbox15" value="false"><label>Fan</label></div>
+
+
+
+
             </div>
           </div>
-          <div><input type="checkbox" name="checkbox" value="2"><label>Affiliates</label>  </div>
-          <div><input type="checkbox" name="checkbox" value="3"><label>Ambassadors</label>  </div>
+          <div><input type="checkbox" name="checkbox2" [formControl]="dataForm.controls['signupaffiliate']"><label>Affiliates</label>  </div>
+          <div><input type="checkbox" name="checkbox3" [formControl]="dataForm.controls['ambassadors']"><label>Ambassadors</label>  </div>
         </div>
-        <span *ngIf ="dataForm.controls['shareblog'].touched && !dataForm.controls['shareblog'].valid" class="has-error">Choose Share Blog</span>
+        <!--<span *ngIf ="dataForm.controls['shareblog'].touched && !dataForm.controls['shareblog'].valid" class="has-error">Choose Share Blog</span>-->
       </div>
     </div>
 
@@ -126,10 +129,17 @@
       <div class="col-md-8 text-left">
         <div class="row">
           <div class="col-md-4 control-label text-left"><label>Start Date: </label></div>
-          <div class="col-md-8 text-left">10/3/2018</div>
+          <div class="col-md-8 text-left">
+            <input type="date" class="form-control" name="startdate" placeholder="Startdate" [formControl]="dataForm.controls['startdate']">
+            <span *ngIf ="dataForm.controls['startdate'].touched && !dataForm.controls['startdate'].valid" class="has-error">startdate field can not be blank</span>
+          </div>
           <div class="clearfix"></div>
           <div class="col-md-4 control-label text-left"><label>End Date: </label></div>
-          <div class="col-md-8 text-left">10/12/2018</div>
+          <div class="col-md-8 text-left">
+
+            <input type="date" class="form-control" name="enddate" placeholder="End Date" [formControl]="dataForm.controls['enddate']">
+            <span *ngIf ="dataForm.controls['enddate'].touched && !dataForm.controls['enddate'].valid" class="has-error">end date field can not be blank</span>
+          </div>
         </div>
       </div>
     </div>
@@ -155,7 +165,8 @@
         <span *ngIf ="imageserror" class="has-error">Please upload image</span>
         <div>
           <div class="col-md-4" style="height: 200px; overflow: hidden;" *ngFor="let item of images">
-            <img style="width: 100%" src="{{siteurl}}nodeserver/uploads/{{item}}" >
+           <!-- <img style="width: 100%" src="{{siteurl}}nodeserver/uploads/{{item}}" >-->
+            <img style="width: 100%" src="{{_commonservices.fileurl}}{{item}}" >
           </div>
         </div>
       </div>

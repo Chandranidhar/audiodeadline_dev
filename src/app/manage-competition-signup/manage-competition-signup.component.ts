@@ -1,5 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import {Commonservices} from "../app.commonservices";
+import {Router,ActivatedRoute} from "@angular/router";
 // import {Http} from "@angular/http";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {DomSanitizer} from "@angular/platform-browser";
@@ -26,6 +27,7 @@ export class ManageCompetitionSignupComponent implements OnInit {
   public userlist;
   public searchText;
   public searchText3;
+  public searchText6;
   public searchText2 = '';
   public searchText4 = '';
   public searchText5;
@@ -38,7 +40,7 @@ export class ManageCompetitionSignupComponent implements OnInit {
   public competitionlist;
   public genrelist;
 
-  constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService,private sanitizer:DomSanitizer) {
+  constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService,private sanitizer:DomSanitizer,public activeRoute:ActivatedRoute) {
     this.fb = fb;
     this.serverurl=_commonservices.url;
     this.fileurl=_commonservices.fileurl;
@@ -47,12 +49,27 @@ export class ManageCompetitionSignupComponent implements OnInit {
     this.musicuploadfolder= 'artistxpmusic/';
     this.iframevideourl = '';
     this.searchText3 = '';
-    this.getUserList();
+    this.searchText6 = '';
+    //this.getUserList();
     this.getCompetitionList();
     this.getGenreList();
   }
 
   ngOnInit() {
+    this.activeRoute.data.forEach((data) => {
+      //PRE LOAD DATA PRIOR
+      /*console.log('route data for profile');
+       console.log('json',data['results']);
+       console.log(data['results'].item);*/
+      // console.log('json',data['results']);
+      console.log('json',data['results']);
+      let result=data['results'];
+      console.log(result);
+      this.userlist = result.item;
+      // this.ticketsalebanner = result.res;
+      // console.log(this.ticketsalebanner);
+    });
+
     this.dataForm = this.fb.group({
       fullname :[""],
       /*firstname :[""],

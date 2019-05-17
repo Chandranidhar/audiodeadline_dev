@@ -31,6 +31,7 @@ export class Commonservices{
     artistxpurl:any;
     nodesslurl1:any;
     envflag:any;
+    fileurl_new:any;
     constructor(private http: HttpClient,userdata: CookieService,private router: Router) {
 
         this.envflag='dev';
@@ -60,6 +61,7 @@ export class Commonservices{
             this.uploadncropurlnew = 'https://developmentapi.audiodeadline.com/fileuploadandcropnew.php';
             // this.uploadncropurlnew = 'https://audiodeadline.com/fileuploadandcropnew.php';
             this.fileurl = 'https://developmentapi.audiodeadline.com/nodeserver/uploads/';
+            this.fileurl_new = 'https://developmentapi.audiodeadline.com/nodeserver/uploads/';
             // this.fileurl = 'https://audiodeadline.com/nodeserver/uploads/';
             this.FB_APP_ID = '906815096194208';
             this.FB_APP_SECRET = 'f569451eb41a239d2045ebf115a3bcc7';

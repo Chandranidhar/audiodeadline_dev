@@ -144,9 +144,10 @@
                   <thead>
                   <tr>
                     <th class="empycell"></th>
-                    <th>Start Date</th>
-                    <th>Title</th>
+
+                    <th class="clstitle">Title</th>
                     <th class="clsdescription">Description</th>
+                    <th>Start Date</th>
                     <th>End Date</th>
                     <th>Display For</th>
                     <th>Status</th>
@@ -155,27 +156,27 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let item of bloglist | blogfilter : searchText | bannerfilter2: searchText2 | datefilter : searchText3 | paginate: { itemsPerPage: 10, currentPage: p }">
+                  <tr *ngFor="let item of bloglist | blogfilter : searchText | bannerfilter2: searchText2 | dateblogpipe : searchText3 | paginate: { itemsPerPage: 10, currentPage: p }">
                     <td class="empycell"></td>
-                    <td data-label="Start Date">{{(item.added_time*1000) | date :  "MM/dd/yyyy" }}</td>
+
                     <td data-label="Title">{{item.title}}</td>
                     <td data-label="Description"><div  [innerHTML]="item.description | safehtml:300"></div></td>
-                    <td data-label="End Date">10/12/2018</td>
+                    <td data-label="Start Date">{{(item.startdate) | date :  "MM/dd/yyyy" }}</td>
+                    <td data-label="End Date">{{(item.enddate) | date :  "MM/dd/yyyy" }}</td>
                     <td data-label="Display For">
                       <div class="newcheckboxdiv">
                         <div>
                           <input id="checkbox1" type="checkbox" name="checkbox" value="1" checked="checked"><label>Users</label>
                           <div class="newcheckboxsubdiv">
-                            <div><input id="subcheckbox1" type="checkbox" name="checkbox" value="1"><label>Fan</label></div>
-                            <div><input id="subcheckbox2" type="checkbox" name="checkbox" value="2"><label>Dancers</label></div>
-                            <div><input id="subcheckbox3" type="checkbox" name="checkbox" value="3"><label>Vocalist</label></div>
-                            <div><input id="subcheckbox4" type="checkbox" name="checkbox" value="4"><label>Model</label></div>
-                            <div><input id="subcheckbox5" type="checkbox" name="checkbox" value="5"><label>Producer</label></div>
-                            <div><input id="subcheckbox6" type="checkbox" name="checkbox" value="6"><label>DJ</label></div>
+                            <div><input id="subcheckbox1" type="checkbox" name="subcheckbox1" ngModel="item.musicians"><label>Musician</label></div>
+                            <div><input id="subcheckbox2" type="checkbox" name="subcheckbox2" ngModel="item.dancer" ><label>Dancers</label></div>
+                            <div><input id="subcheckbox3" type="checkbox" name="subcheckbox3" ngModel="item.model"><label>Model</label></div>
+                            <div><input id="subcheckbox4" type="checkbox" name="subcheckbox4" ngModel="item.producer"><label>Producer</label></div>
+                            <div><input id="subcheckbox5" type="checkbox" name="subcheckbox5" ngModel="item.fan" ><label>Fan</label></div>
                           </div>
                         </div>
-                        <div><input id="checkbox2" type="checkbox" name="checkbox" value="2"><label>Affiliates</label>  </div>
-                        <div><input id="checkbox3" type="checkbox" name="checkbox" value="3"><label>Ambassadors</label>  </div>
+                        <div><input id="checkbox6" type="checkbox" name="checkbox6" ngModel="item.signupaffiliate"><label>Affiliates</label>  </div>
+                        <div><input id="checkbox7" type="checkbox" name="checkbox7" ngModel="item.ambassadors"><label>Ambassadors</label>  </div>
                       </div>
 
                       <!--{{item.parentname}}-->
@@ -240,3 +241,4 @@
     <app-blogadd></app-blogadd>
   </div>
 </ng-template>
+<app-adminfooter></app-adminfooter>

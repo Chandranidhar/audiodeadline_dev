@@ -3,6 +3,7 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {Commonservices} from "../app.commonservices";
 // import {Http} from "@angular/http";
 import { HttpClient } from '@angular/common/http';
+import {Router,ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-competitionlist',
@@ -28,21 +29,34 @@ export class CompetitionlistComponent implements OnInit {
   public searchText2='';
   public paramid:any = '';
 
-  constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService) {
+  constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, public activeRoute:ActivatedRoute) {
     this.maxlength= 100;
     this.isMore= false;
     this.moreTxt= 'Show More';
     this.serverurl=_commonservices.url;
     this.fileurl=_commonservices.fileurl;
-    this.getCompetitionList();
+    // this.getCompetitionList();
   }
 
   ngOnInit() {
+    this.activeRoute.data.forEach((data) => {
+      //PRE LOAD DATA PRIOR
+      /*console.log('route data for profile');
+       console.log('json',data['results']);
+       console.log(data['results'].item);*/
+      // console.log('json',data['results']);
+      console.log('json',data['results']);
+      let result=data['results'];
+      console.log(result);
+      this.competitionlist = result.res;
+      // this.ticketsalebanner = result.res;
+      // console.log(this.ticketsalebanner);
+    });
   }
 
   getCompetitionList(){
     this.loadinglist = true;
-    var link =this.serverurl+'competitionlist';
+    var link =this._commonservices.nodesslurl1+'competitionlist';
     var data = {};
 
     this._http.post(link, data)
@@ -53,6 +67,7 @@ export class CompetitionlistComponent implements OnInit {
           this.competitionlist = result.res;
         },error => {
           this.loadinglist = false;
+          // this.getCompetitionList();
           console.log("Oooops!");
         });
 

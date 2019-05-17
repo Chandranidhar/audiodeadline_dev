@@ -29,6 +29,11 @@
                                  [selectMode]="'range'"
                                  [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
                           <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>-->
+                          <input style="border-radius: 0;" placeholder="Search By Date Range" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
                         </div>
                       </div>
                     </li>
@@ -48,7 +53,7 @@
                     <li>
                       <div>
                         <div class="input-group col-md-12">
-                          <select name="searchText2" [(ngModel)]="searchText3" class="form-control input-lg">
+                          <select name="searchText2" [(ngModel)]="searchText6" class="form-control input-lg">
                             <option value="">Search By Genre</option>
                             <option value="">All Genre</option>
                             <option *ngFor="let item of genrelist" value="{{item._id}}">{{item.genrename}}</option>
@@ -98,12 +103,12 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of userlist | compuserfilter : searchText : 'name'| datefilter : searchText3 | compuserfilter : searchText2 : 'competition' | compuserfilter : searchText3 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5 | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <tr *ngFor="let item of userlist | compuserfilter : searchText : 'name' | datefilter : searchText3 | compuserfilter : searchText2 : 'competition' | compuserfilter : searchText6 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5 | paginate: { itemsPerPage: 10, currentPage: p }">
                       <td class="empycell"></td>
                       <td data-label="date" style="min-width: 95px;">{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mmaa"}}</td>
                       <!--<td data-label="First">Ann &lt;!&ndash;{{item.firstname}}&ndash;&gt;</td>-->
                       <td data-label="name">{{item.name}}</td>
-                      <td data-label="Sign-up Form" (click)="viewassets(template,item)">View</td>
+                      <td data-label="Sign-up Form" class="viewcls" (click)="viewassets(template,item)">View</td>
                       <td data-label="Email">{{item.email}}</td>
                       <td data-label="Competition">{{item.competitionname}}</td>
                       <td data-label="Genre">{{item.genrename}}</td>
@@ -124,7 +129,7 @@
                       </td>
                       <td class="empycell"></td>
                     </tr>
-                    <tr *ngIf="!(userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition'| datefilter : searchText3 | compuserfilter : searchText3 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5).length && !loadinglist">
+                    <tr *ngIf="!(userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition'| datefilter : searchText3 | compuserfilter : searchText6 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5).length && !loadinglist">
                       <td class="empycell"></td>
                       <td colspan="8" style="text-align: center;">No Record Found</td>
                       <td class="empycell"></td>
@@ -137,7 +142,7 @@
 
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition'| datefilter : searchText3 | compuserfilter : searchText3 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <pagination-controls  *ngIf="(userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition'| datefilter : searchText3 | compuserfilter : searchText6 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
                 </div>
               </div>
             </div>

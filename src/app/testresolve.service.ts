@@ -85,6 +85,40 @@ export class TestresolveService implements Resolve<EndpointComponent> {
             });
             });
         }
+        if(route.data.object == 'managecompsign'){
+
+            endpoint=route.data.object;
+
+            console.log(endpoint);
+            console.log(state);
+
+            return new Promise((resolve) => { this.getmanageCompList().subscribe(api_object => {
+                if (api_object) {
+                    return resolve(api_object);
+                } else { // id not found
+                    // this.router.navigateByUrl('/login');
+                    return true;
+                }
+            });
+            });
+        }
+        if(route.data.object == 'complist'){
+
+            endpoint=route.data.object;
+
+            console.log(endpoint);
+            console.log(state);
+
+            return new Promise((resolve) => { this.getCompList().subscribe(api_object => {
+                if (api_object) {
+                    return resolve(api_object);
+                } else { // id not found
+                    // this.router.navigateByUrl('/login');
+                    return true;
+                }
+            });
+            });
+        }
         if(route.data.object == 'orderlistaff'){
 
             endpoint=route.data.object;
@@ -194,6 +228,16 @@ export class TestresolveService implements Resolve<EndpointComponent> {
     getGenreList(){
         let link =this.url+'datalist';
         let result=this._http.post(link,({'source':'allgenre'})).pipe(map(res=>res));
+        return result;
+    }
+    getmanageCompList(){
+        let link =this.url1+'getcompetitionsignuplist';
+        let result=this._http.post(link,({})).pipe(map(res=>res));
+        return result;
+    }
+    getCompList(){
+        let link =this.url1+'competitionlist';
+        let result=this._http.post(link,({})).pipe(map(res=>res));
         return result;
     }
 

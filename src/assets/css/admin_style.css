@@ -206,6 +206,7 @@ body {
     background:#ffffff;
     overflow-x:hidden;
     font-family:Arial, Helvetica, sans-serif;
+    height: auto !important;
 }
 * {
     padding:0;
@@ -257,7 +258,7 @@ img:focus, *img:focus{
 .row{ margin-left:0px; margin-right:0px; padding-left:0px; padding-right:0px;}
 
 
-.dashboard_body{ background:#e6eaec;min-height:100vh; overflow: hidden;}
+.dashboard_body{ background:#e6eaec;/*min-height:100vh;*/ min-height: 1px; overflow: hidden;}
 .dashboard_wrappertop{ width:100%; background: rgba(230,234,244,1);
     background: -moz-linear-gradient(top, rgba(230,234,244,1) 0%, rgba(183,194,200,1) 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(230,234,244,1)), color-stop(100%, rgba(183,194,200,1)));
@@ -689,17 +690,49 @@ img:focus, *img:focus{
 
 .formfilterdiv{}
 .formfilterdiv .mat-form-field .mat-form-field-infix{
-    position: absolute;
-    top: -8px;
-    background: url(../../assets/images/n-iconsearchfield.png)no-repeat right 10px center #909090 !important;
-    background-position: center right 5px;
-    padding-right: 35px !important;
+    /*position: absolute;*/
+    /*top: -8px;*/
+    /*background: url(../../assets/images/n-iconsearchfield.png)no-repeat right 10px center #909090 !important;*/
+    /*background-position: center right 5px;*/
+
+    /*background-color:#909090 !important;*/
+    padding-right: 0px !important;
     padding-left: 5px;
-    background-size: 22px !important;
-    border: 1px solid #efefef;
+  /*  border: 1px solid #efefef;*/
     height: 36px;
-    width: 275px;
+    /*width: 235px;*/
     line-height: 22px;
+    border-top: 0 !important;
+}
+
+.tablediv.affiliatetree .mat-card .mat-paginator-page-size-select .mat-form-field-flex{
+    margin-top: 0px;
+    background-color: transparent !important;
+    border: 0px solid #efefef !important;
+}
+
+.tablediv.affiliatetree .formfilterdiv .mat-card .mat-form-field-appearance-legacy .mat-form-field-label{
+    /*background: url(../../assets/images/n-iconsearchfield.png)no-repeat right 10px center !important;
+    background-position: center right 5px;
+    background-size: 22px !important;*/
+}
+
+.tablediv.affiliatetree .mat-card .mat-form-field-prefix .mat-icon-button, .tablediv.affiliatetree .mat-card  .mat-form-field-suffix .mat-icon-button {
+    height: 2.5em;
+    width: 2.5em;
+}
+
+.tablediv.affiliatetree .mat-card .mat-form-field-appearance-legacy .mat-form-field-prefix .mat-datepicker-toggle-default-icon,
+
+.tablediv.affiliatetree .mat-card .mat-form-field-appearance-legacy .mat-form-field-suffix .mat-datepicker-toggle-default-icon {
+    width: 2em;
+}
+
+.tablediv table td span input[type="text"]{
+    background-color: #333 !important;
+    border: 1px solid #6a6a6a !important;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 .tablediv.affiliatetree .formfilterdiv .mat-card .mat-input-element {
@@ -2704,6 +2737,10 @@ a.copybtn, a:hover.copybtn{
     width: 28%;
 }
 
+.clstitle{
+    width: 16%;
+}
+
 /*.adminlisttabledashboard .adminbtnred{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -3363,6 +3400,8 @@ a.copybtn, a:hover.copybtn{
 
 .tablediv.affiliatetree .mat-card .mat-form-field-flex {
     margin-top: 0px;
+    background-color: #909090 !important;
+    border: 1px solid #efefef;
 }
 /*.tablediv.affiliatetree .mat-card .mat-form-field-appearance-legacy .mat-form-field-label {color: #fff !important;}*/
 
@@ -3383,6 +3422,26 @@ a.copybtn, a:hover.copybtn{
 .tablediv.affiliatetree .mat-card .mat-form-field-label-wrapper{
     top: -1em;
     padding-top: 1em;
+}
+
+.tablediv.affiliatetree button.mat-raised-button{
+    display: inline-block!important;
+    height: auto!important;
+    background: #cc3333!important;
+    font-size: 12px!important;
+    color: #fff!important;
+    text-transform: uppercase!important;
+    font-family: 'Ralewaybold';
+    text-decoration: none!important;
+    line-height: normal!important;
+    text-align: center!important;
+    margin: 0 auto!important;
+    white-space: normal!important;
+    margin-top: 10px!important;
+    padding: 12px 10px!important;
+    border-radius: 0px !important;
+    margin-right: 5px !important;
+    margin-bottom: 10px !important;
 }
 
 .mat-select-panel-wrap .mat-select-panel {
@@ -3908,7 +3967,7 @@ a.copybtn, a:hover.copybtn{
 .cdk-global-overlay-wrapper {
     align-items: center !important;
 }
-.cdk-global-overlay-wrapper .mat-bottom-sheet-container bottom-sheet .mat-nav-list{display:flex;}
+.cdk-global-overlay-wrapper .mat-bottom-sheet-container bottom-sheet .mat-nav-list{display:flex; padding-top:0 !important;}
 .mat-bottom-sheet-container bottom-sheet .mat-nav-list .mat-list-item {
     display: inline-block;
     height: auto;
@@ -3930,7 +3989,8 @@ a.copybtn, a:hover.copybtn{
 
 .tablediv.orderlistpage table td span span{display: none !important;}
 
-.tablediv.orderlistpage table td span span{cursor: pointer;}
+.tablediv table td span span, .viewcls{cursor: pointer;}
+
 
 .tablediv.orderlistpage table td span span:first-child{display: block !important;}
 .tablediv.orderlistpage table td span span:first-child .material-icons{display: none !important;}
@@ -3969,3 +4029,17 @@ a.copybtn, a:hover.copybtn{
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;display: block !important;
 }*/
+
+
+.mat-bottom-sheet-container {
+    min-width: max-content !important;
+}
+
+.n-adminfooter .footerrightdiv {
+    padding-right: 5px;
+    padding-left: 5px;
+    display: inline-flex;
+    justify-content: flex-end;
+}
+
+.searchicon{position: absolute; right: 0;}
