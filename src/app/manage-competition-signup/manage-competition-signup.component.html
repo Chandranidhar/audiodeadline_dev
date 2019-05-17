@@ -120,7 +120,7 @@
                       <td data-label="Action" class="whitebtnlists text-center">
                         <a href="javascript:void(0)" (click)="editInlineField(1,item,item.status)" class="loginbtn2 btnview tooltip btnwhite"><i class="fa fa-thumbs-up"></i><span class="tooltiptext">Approve</span></a>
                         <a href="javascript:void(0)" (click)="editInlineField(2,item,item.status)" class="loginbtn2 btnedit tooltip1 btnwhite"><i class="fa fa-ban"></i><span class="tooltiptext">Deny</span></a>
-                        <!--<a href="javascript:void(0)" class="loginbtn2 btndelete tooltip2 btnwhite"><i class="fa fa-envelope"></i><span class="tooltiptext">Email</span></a>-->
+                        <a href="mailto:{{item.email}}" class="loginbtn2 btndelete tooltip2 btnwhite"><i class="fa fa-envelope"></i><span class="tooltiptext">Email</span></a>
                       </td>
                       <td class="empycell"></td>
                     </tr>
