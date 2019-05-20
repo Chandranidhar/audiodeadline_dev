@@ -18,7 +18,7 @@ export class PromocodeaddComponent implements OnInit {
   public serverurl;
   public promolistpage;
 
-  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router, public promocodelist:PromocodelistComponent) {
+  constructor(fb: FormBuilder,public _commonservices : Commonservices,private _http: HttpClient,private router: Router, public promocodelist:PromocodelistComponent) {
     this.fb = fb;
     this.serverurl=_commonservices.url;
     this.promolistpage=promocodelist;
@@ -65,7 +65,8 @@ export class PromocodeaddComponent implements OnInit {
     }
 
     if (this.dataForm.valid) {
-      var link = this.serverurl+'addpromocode';
+      // var link = this.serverurl+'addpromocode';
+      var link = this._commonservices.nodesslurl1+'addpromocode';
       var data = {
         promocode: formval.promocode,
         description: formval.description,

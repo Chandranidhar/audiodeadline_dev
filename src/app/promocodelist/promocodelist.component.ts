@@ -31,7 +31,8 @@ export class PromocodelistComponent implements OnInit {
 
     getPromocodeList(){
         this.loadinglist = true;
-        var link =this.serverurl+'promocodelist';
+        // var link =this.serverurl+'promocodelist';
+        var link =this._commonservices.nodesslurl1+'promocodelist';
         var data = {};
 
         this._http.post(link, data)

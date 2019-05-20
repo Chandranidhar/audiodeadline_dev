@@ -137,6 +137,34 @@ export class TestresolveService implements Resolve<EndpointComponent> {
             });
             });
         }
+        if(route.data.object=='ambassadorresolve'){
+            endpoint=route.data.object;
+            console.log(endpoint);
+            console.log(state);
+            return new Promise((resolve)=>{this.ambassadorlist().subscribe(api_object=>{
+                if(api_object){
+                    return resolve(api_object);
+
+                }
+                else{
+                    return true;
+                }
+            })})
+        }
+        if(route.data.object=='affiliateresolve'){
+            endpoint=route.data.object;
+            console.log(endpoint);
+            console.log(state);
+            return new Promise((resolve)=>{this.affiliatelist().subscribe(api_object=>{
+                if(api_object){
+                    return resolve(api_object);
+
+                }
+                else{
+                    return true;
+                }
+            })})
+        }
 
         if(route.data.object == 'commisionlist'){
             endpoint=route.data.object;
@@ -240,7 +268,16 @@ export class TestresolveService implements Resolve<EndpointComponent> {
         let result=this._http.post(link,({})).pipe(map(res=>res));
         return result;
     }
-
+    ambassadorlist(){
+        let link=this.url+'datalist';
+        let result=this._http.post(link,({'source':'user_ambassador'})).pipe(map(res=>res));
+        return result;
+    }
+    affiliatelist(){
+        let link=this.url+'datalist';
+        let result=this._http.post(link,({'source':'user_affiliate'})).pipe(map(res=>res));
+        return result;
+    }
 // {"condition":{"parent": "banetest"},"source": "newcommision"}
 
 }

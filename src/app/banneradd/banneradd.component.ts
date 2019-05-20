@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , TemplateRef} from '@angular/core';
 import {Commonservices} from "../app.commonservices";
 import {FormControl, Validators, FormBuilder, FormGroup} from "@angular/forms";
-import {Http} from "@angular/http";
+// import {Http} from "@angular/http";
 
 import { HttpClient } from '@angular/common/http';
 import {Router} from "@angular/router";
-import {BsModalService} from "ngx-bootstrap";
+import {BsModalService, BsModalRef} from "ngx-bootstrap";
 import {CookieService} from "ngx-cookie-service";
 import {BannerlistComponent} from "../bannerlist/bannerlist.component";
+import {ImageCroppedEvent} from "ngx-image-cropper";
 @Component({
   selector: 'app-banneradd',
   templateUrl: './banneradd.component.html',
@@ -30,7 +31,7 @@ export class BanneraddComponent implements OnInit {
   public imageheight2;
   public imagewidth3;
   public imageheight3;
-  public image;
+  public image1;
   public origimage;
   public imageloading;
   public imageserror;
@@ -54,6 +55,9 @@ export class BanneraddComponent implements OnInit {
   public userid;
   public isadmin;
   public bannerlistpage;
+  modalRef: BsModalRef;
+  public base64image;
+  public rawimage;
 
   constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private modalService: BsModalService, userdata: CookieService, public bannerlist:BannerlistComponent) {
     this.fb = fb;
@@ -61,7 +65,7 @@ export class BanneraddComponent implements OnInit {
     this.images = [];
     this.origimage = '';
     this.userid = '';
-    this.image = '';
+    this.image1 = '';
     this.origimage2 = '';
     this.image2 = '';
     this.origimage3 = '';
@@ -96,6 +100,9 @@ export class BanneraddComponent implements OnInit {
     this.dataForm = this.fb.group({
       label: ["", BanneraddComponent.validateLabel],
       type: ["", Validators.required],
+      displayfor: ["", Validators.required],
+      startdate: ["", Validators.required],
+      enddate: ["", Validators.required],
       sponsor: [""],
     });
   }
@@ -124,11 +131,32 @@ export class BanneraddComponent implements OnInit {
       this.imageheight = 1080;
     }
   }
+  imageCropped(event: ImageCroppedEvent) {
+    this.base64image = event.base64;
+  }
+
+  crop1(){
+    this.rawimage = '';
+    let link = this.siteurl+'saveCropImage1.php';
+    let data = {filename: this.image1,base64image:this.base64image,cropwidth:1920,cropheight:401};
+
+    this._http.post(link, data)
+        .subscribe(res => {
+          // var result = res.text();
+          let result:any;
+          result = res;
+          this.image1 = '';
+          this.image1 = result.data;
+          this.modalRef.hide();
+        }, error => {
+          console.log("Oooops!");
+        });
+  }
 
   onFileChanged(event) {
     this.uploaderror = '';
     this.imageloading = true;
-    this.image = '';
+    this.image1 = '';
     this.imageserror = false;
     this.selectedFile = event.target.files[0];
 
@@ -145,7 +173,7 @@ export class BanneraddComponent implements OnInit {
           res = event;
           if(res.error_code == 0){
             this.origimage = res.filename;
-            this.image = res.filename2;
+            this.image1 = res.filename2;
           }else{
             this.uploaderror = res.msg;
           }
@@ -214,6 +242,7 @@ export class BanneraddComponent implements OnInit {
   }
 
   dosubmit(formval){
+
     if(this.dataForm.controls['type'].value == '2'){
       this.dataForm.controls['sponsor'].setValidators(Validators.required);
     }
@@ -224,7 +253,7 @@ export class BanneraddComponent implements OnInit {
       this.dataForm.controls[x].markAsTouched();
     }
 
-    if(this.image == '' && this.dataForm.controls['type'].value != ''){
+    if(this.image1 == '' && this.dataForm.controls['type'].value != ''){
       this.imageserror = true;
       return true;
     }
@@ -238,21 +267,57 @@ export class BanneraddComponent implements OnInit {
       this.imageserror3 = true;
       return true;
     }
-
+    if(this.dataForm.controls['displayfor'].value !='' || this.dataForm.controls['displayfor'].value !=null){
+      console.log(this.dataForm.controls['displayfor'].value);
+      if(this.dataForm.controls['displayfor'].value.indexOf("Dancer")>-1){
+        formval.dancer = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Model")>-1){
+        formval.model = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Producer")>-1){
+        formval.producer = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Musician")>-1){
+        formval.musician = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Fan")>-1){
+        formval.fan = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Ambassador")>-1){
+        formval.ambassador = 1;
+        console.log(formval.ambassador);
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Affiliate")>-1){
+        formval.affiliate = 1;
+      }
+    }
+    console.log(formval);
     if (this.dataForm.valid) {
-      var link = this.serverurl+'addmedia';
+      // var link = this.serverurl+'addmedia';
+      var link = this._commonservices.nodesslurl1+'addmedia';
       var data = {
         label: formval.label,
         type: formval.type,
+        dancer: formval.dancer,
+        model: formval.model,
+        producer: formval.producer,
+        musician: formval.musician,
+        fan: formval.fan,
+        ambassador: formval.ambassador,
+        affiliate: formval.affiliate,
         sponsor: formval.sponsor,
-        image: this.image,
+        image: this.image1,
         origimage: this.origimage,
         image2: this.image2,
         origimage2: this.origimage2,
         image3: this.image3,
         origimage3: this.origimage3,
         userid: this.userid,
-        isadmin: this.isadmin
+        isadmin: this.isadmin,
+        startdate: formval.startdate,
+        enddate: formval.enddate,
+
       };
 
       this._http.post(link, data)
@@ -271,6 +336,23 @@ export class BanneraddComponent implements OnInit {
             console.log("Oooops!");
           });
     }
+  }
+  cropimg1(template: TemplateRef<any>){
+    //noinspection TypeScriptValidateTypes
+    this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+    this.rawimage = '';
+    let link = this.siteurl+'getbase64image1.php';
+    // let link = 'https://developmentapi.audiodeadline.com/getbase64image1.php';
+    let data = {fileurl: this.image1};
+
+    this._http.post(link, data)
+        .subscribe(res => {
+          let result:any;
+          result = res;
+          console.log(result);
+          console.log(result.data);
+          this.rawimage = result.data;
+        });
   }
 
 }

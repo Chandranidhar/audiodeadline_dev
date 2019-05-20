@@ -1,11 +1,14 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Commonservices} from '../app.commonservices';
+//import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router'
+
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import {CookieService} from 'ngx-cookie-service';
-import {Router} from '@angular/router';
+//import {Router,ActivatedRoute} from '@angular/router';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -17,33 +20,51 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 
 export class AffiliatelistComponent implements OnInit {
+    date_search_source: any='user_affiliate';
+    date_search_endpoint: any='datalist';
+    search_settings:any={datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",field:"unixtime"}],textsearch:[{label:"Search By Name",field:'fullname'}]};
+
+
+
     public loadinglist:boolean;
     public p: number = 1;
     modalRef: BsModalRef;
     public serverurl;
     public userlist;
+    public userdata:CookieService;
+
     public idx;
     public searchText;
     public username;
     public isadmin;
     public defaultadmedia;
     public defaultxpmedia;
+    jwttoken:any;
+    apiurl:any;
 
+
+    public editroute1:any="edit-admin";
     public dataForm: FormGroup;
     public fb;
     public datasource:any;
     affiliatelistarray:any[];
-    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
-    affiliatelistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Nmae",'email':"Email",'parent':"Enroller"};
-    affiliatestatusarray:any=[{val:1,name:"Active"},{val:2,name:"Inactive"}];
-    affiliatelisttablename:"user_affiliate";
+    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    affiliatelistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Nmae",'email':"Email",'parent':"Enroller","status":"Status"};
+    affiliatelisttablename:any="user";
 
-    constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router) {
+    deleteval:any= 'deletesingledata';
+    affiliatestatusarray:any=[{val:1,name:"Active"},{val:2,name:"Inactive"}];
+    updateurl:any = 'addorupdatedata';
+
+    constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute) {
+        this.userdata = userdata;
         this.fb = fb;
         this.serverurl=_commonservices.url;
         this.username = '';
         this.defaultadmedia = '';
         this.defaultxpmedia = '';
+        this.jwttoken = this.userdata.get('jwttoken');
+        this.apiurl = _commonservices.nodesslurl;
 
         let userdata2: any;
         userdata2= userdata.get('userdetails');
@@ -60,7 +81,7 @@ export class AffiliatelistComponent implements OnInit {
             this.getBannerList1();
             this.getBannerList2();
         }
-        this.affiliatelist();
+        //this.affiliatelist();
     }
 
     ngOnInit() {
@@ -83,9 +104,18 @@ export class AffiliatelistComponent implements OnInit {
             password:[""],
             confirmpassword:[""],
         });
+      this.activeRoute.data.forEach((data) => {
+          console.log('json',data['results']);
+          console.log(data);
+          console.log(data['results']);
+          let result=data['results'];
+          console.log(result);
+          this.affiliatelistarray=result.res;
+      });
+
     }
 
-    affiliatelist() {
+   /* affiliatelist() {
       let link=this._commonservices.nodesslurl+'datalist';
       this._http.post(link,{"source":"user_affiliate"})
           .subscribe(res=>{
@@ -95,7 +125,7 @@ export class AffiliatelistComponent implements OnInit {
               console.log(this.affiliatelistarray);
         });
 
-}
+}*/
 
     getUserList(){
         this.loadinglist = true;

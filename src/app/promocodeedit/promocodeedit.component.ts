@@ -33,6 +33,7 @@ export class PromocodeeditComponent implements OnInit {
   constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private route:ActivatedRoute, public promocodelist:PromocodelistComponent) {
     this.fb = fb;
     this.serverurl=_commonservices.url;
+    this.promolistpage = promocodelist;
 /*
     this.route.params.subscribe(params=>{
       this.promocodeid = params['id'];
@@ -54,7 +55,8 @@ export class PromocodeeditComponent implements OnInit {
   }
 
   getPromoDetails(){
-    var link =this.serverurl+'promocodedetails';
+    // var link =this.serverurl+'promocodedetails';
+    var link =this._commonservices.nodesslurl1+'promocodedetails';
     var data = {_id: this.promocodeid};
 
     this._http.post(link, data)
@@ -108,7 +110,8 @@ export class PromocodeeditComponent implements OnInit {
     }
 
     if (this.dataForm.valid) {
-      var link = this.serverurl+'updatepromocode';
+      // var link = this.serverurl+'updatepromocode';
+      var link = this._commonservices.nodesslurl1+'updatepromocode';
       var data = {
         _id: this.promocodeid,
         promocode: formval.promocode,

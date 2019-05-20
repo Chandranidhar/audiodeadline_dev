@@ -171,6 +171,27 @@
         <span *ngIf="dataForm.controls['label'].touched && dataForm.controls['label'].hasError('invalid')" class="has-error"> *Name field contains only alphanumeric or space</span>
       </div>
     </div>
+    <!---->
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left"><label>Display for*:</label></div>
+      <div class="col-md-8">
+        <select [formControl]="dataForm.controls['displayfor']" multiple="multiple" style="height: 100px;">
+          <option value="">Select value</option>
+          <optgroup label="User">
+            <option value="Dancer">Dancer</option>
+            <option value="Model">Model</option>
+            <option value="Producer">Producer</option>
+            <option value="Musician">Musician</option>
+            <option value="Fan">Fan</option>
+          </optgroup>
+          <option value="Ambassador">Ambassador</option>
+          <option value="Affiliate">Affiliate</option>
+        </select>
+
+        <span *ngIf ="dataForm.controls['displayfor'].touched && !dataForm.controls['displayfor'].valid" class="has-error">*Please select the value.</span>
+      </div>
+    </div>
+    <!---->
     <div class="form-group">
       <div class="col-md-4 control-label text-left"><label>Display for*:</label></div>
       <div class="col-md-8">
@@ -181,6 +202,26 @@
         <span *ngIf ="dataForm.controls['type'].touched && !dataForm.controls['type'].valid" class="has-error">*Please select type.</span>
       </div>
     </div>
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left">
+        <label>*Start Date</label>
+      </div>
+      <div class="col-md-8">
+        <input type="date" class="form-control" name="startdate" placeholder="Startdate" [formControl]="dataForm.controls['startdate']" (blur)="_commonservices.inputUntouch(dataForm,'startdate')">
+        <span *ngIf ="dataForm.controls['startdate'].touched && !dataForm.controls['startdate'].valid" class="has-error">startdate amount field can not be blank</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left">
+        <label>*End Date</label>
+      </div>
+      <div class="col-md-8">
+        <input type="date" class="form-control" name="enddate" placeholder="End Date" [formControl]="dataForm.controls['enddate']" (blur)="_commonservices.inputUntouch(dataForm,'enddate')">
+        <span *ngIf ="dataForm.controls['enddate'].touched && !dataForm.controls['enddate'].valid" class="has-error">end date amount field can not be blank</span>
+      </div>
+    </div>
+
     <div class="form-group" *ngIf="dataForm.controls['type'].value == '2'">
       <div class="col-md-4 control-label text-left"><label>Sponsor*:</label></div>
       <div class="col-md-8">
@@ -205,10 +246,13 @@
             <img style="width: 100%" src="{{fileurl}}line-loader.gif" >
           </div>
         </div>
-        <div class="col-md-12" style="padding: 0;" *ngIf="image">
+        <div class="col-md-12" style="padding: 0;" *ngIf="image1">
           <div class="col-md-9" style="margin: 15px 0 0 0; padding: 0;">
-            <img style="width: 100%; height: auto;" src="{{fileurl}}{{uploadfolder}}{{image}}" >
+            <img style="width: 100%; height: auto;" src="{{fileurl}}{{uploadfolder}}{{image1}}" >
           </div>
+          <!--<div class="col-md-9" style="height: auto; max-height: 421px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+            <input type="button" (click)="cropimg1(croptemplate1)" value="CROP" class="cropselectbtn">
+          </div>-->
         </div>
       </div>
     </div>

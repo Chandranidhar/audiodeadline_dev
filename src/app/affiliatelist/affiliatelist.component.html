@@ -106,7 +106,7 @@
           <div class="n-adminheadercls">
             <h4>Affiliates Manager</h4>
           </div>
-          <div class="dashboardwrapper">
+          <div class="dashboardwrapper affidashboardbg2">
             <!--<div class="tabletopbar newtabletopbar newtabletopbarfilter">
               &lt;!&ndash;<div class="pull-right">
                 <form id="filter">
@@ -124,17 +124,31 @@
             </div>-->
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
-                <div class="tablediv affiliatetree">
-                  <lib-listing class="formfilterdiv" *ngIf="affiliatelistarray!=null && affiliatelistarray.length>0" [datasource]="affiliatelistarray" [skip]="affiliatearray_skip" [modify_header_array]="affiliatelistarray_modify_header" [sourcedata]="affiliatelisttablename" [statusarr]="affiliatestatusarray"></lib-listing>
+                <div class="tablediv affiliatetree affidashboardbg2">
+                  <lib-listing class="formfilterdiv" *ngIf="affiliatelistarray!=null && affiliatelistarray.length>0"
+                               [datasource]="affiliatelistarray"
+                               [skip]="affiliatearray_skip"
+                               [modify_header_array]="affiliatelistarray_modify_header"
+                               [sourcedata]="affiliatelisttablename"
+                               [statusarr]="affiliatestatusarray"
+                               [jwttoken]="jwttoken"
+                               [apiurl]="apiurl"
+                               [updateendpoint]="updateurl"
+                               [date_search_source]="date_search_source"
+                               [date_search_endpoint]="date_search_endpoint"
+                               [search_settings]="search_settings"
+                               [editroute]="editroute1"
+                               [deleteendpoint]="deleteval">
+                  </lib-listing>
                   <!--<table>
                     <thead>
                     <tr>
                       &lt;!&ndash;<th>Name</th>
+                      <th>Address</th>
+                      <th>Added on</th>
                       <th>Email</th>
                       <th>Enroller</th>
                       <th>Phone</th>
-                      <th>Address</th>
-                      <th>Added on</th>
                       <th>RSVP</th>
                       <th>No Of Click</th>
                       <th>No of Signups</th>

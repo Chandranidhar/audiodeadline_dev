@@ -122,8 +122,23 @@
             </div>-->
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
-                <div class="tablediv affiliatetree">
-                  <lib-listing class="formfilterdiv" *ngIf="ambassadorlistarray!=null && ambassadorlistarray.length>0" [datasource]="ambassadorlistarray" [skip]="ambassadorlistarray_skip" [modify_header_array]="ambassadorlist_modify_header" [statusarr]="ambassadorstatusarray" [sourcedata]="ambasadortablename"></lib-listing>
+                <div class="tablediv affiliatetree affidashboardbg2">
+                  <lib-listing class="formfilterdiv" *ngIf="ambassadorlistarray!=null && ambassadorlistarray.length>0"
+                               [datasource]="ambassadorlistarray"
+                               [skip]="ambassadorlistarray_skip"
+                               [modify_header_array]="ambassadorlist_modify_header"
+                               [statusarr]="ambassadorstatusarray"
+                               [sourcedata]="ambasadortablename"
+                               [jwttoken]="jwttoken"
+                               [apiurl]="apiurl"
+                               [updateendpoint]="updateurl"
+                               [date_search_source]="date_search_source"
+                               [date_search_endpoint]="date_search_endpoint"
+                               [search_settings]="search_settings"
+                               [editroute]="editroute1"
+                               [deleteendpoint]="deleteval">
+
+                  </lib-listing>
                   <!--<table>
                     <thead>
                     <tr>

@@ -123,7 +123,7 @@ export class Commonservices{
 
     getBannerTypeList(){
         var bannerTypeList = [
-            {'val': 2, 'label': 'SPONSORED MEDIA FOR TICKET SALE PAGE'},
+            // {'val': 2, 'label': 'SPONSORED MEDIA FOR TICKET SALE PAGE'},
             {'val': 3, 'label': 'BANNER FOR AUDIODEADLINE'},
             {'val': 4, 'label': 'BANNER FOR ARTISTXP'},
             {'val': 5, 'label': 'INSTAGRAM BANNER FOR AUDIODEADLINE'},

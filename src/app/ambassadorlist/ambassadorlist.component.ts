@@ -2,10 +2,15 @@ import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Commonservices} from '../app.commonservices';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {CookieService} from 'ngx-cookie-service';
-import {Router} from '@angular/router';
+//import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
+
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+/*import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal';*/
+
 
 declare var $:any;
 
@@ -17,6 +22,10 @@ declare var $:any;
     providers: [Commonservices]
 })
 export class AmbassadorlistComponent implements OnInit {
+    date_search_source: any='user_ambassador';
+    date_search_endpoint: any='datalist';
+    search_settings:any={datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",field:"unixtime"}],textsearch:[{label:"Search By Name",field:'fullname'}]};
+
     public loadinglist:boolean;
     public p: number = 1;
     modalRef: BsModalRef;
@@ -28,23 +37,31 @@ export class AmbassadorlistComponent implements OnInit {
     public isadmin;
     public defaultadmedia;
     public defaultxpmedia;
-
+    public userdata:CookieService;
     public dataForm: FormGroup;
     public fb;
     public datasource:any;
+    public editroute1:any='edit-admin';
+    jwttoken:any;
+    apiurl:any;
     ambassadorlistarray:any[];
-    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
-    ambassadorlist_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email",'parent':"Enroller"};
-    ambassadorstatusarray:any=[{val:1,name:'Active'},{val:2,name:'Inactive'}];
-    ambasadortablename:any='user_ambassador';
+    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    ambassadorlist_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email",'parent':"Enroller","status":"Status"};
+    deleteval:any = 'deletesingledata';
 
-    constructor(fb: FormBuilder , private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router) {
+    ambassadorstatusarray:any=[{val:1,name:'Active'},{val:2,name:'Inactive'}];
+    ambasadortablename:any='user';
+
+
+    constructor(fb: FormBuilder , private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute,) {
+        this.userdata = userdata;
         this.fb = fb;
         this.serverurl=_commonservices.url;
         this.username = '';
         this.defaultadmedia = '';
         this.defaultxpmedia = '';
-
+       this.jwttoken = this.userdata.get('jwttoken');
+        this.apiurl = _commonservices.nodesslurl;
         let userdata2: any;
         userdata2= userdata.get('userdetails');
 
@@ -61,7 +78,7 @@ export class AmbassadorlistComponent implements OnInit {
             this.getBannerList2();
 
         }
-        this.ambassadorlist();
+        //this.ambassadorlist();
     }
 
     ngOnInit() {
@@ -86,10 +103,19 @@ export class AmbassadorlistComponent implements OnInit {
             confirmpassword:[""],
 
         });
+        this.activeRoute.data.forEach((data) => {
+            console.log('json', data['results']);
+            console.log(data);
+            console.log(data['results']);
+            let result = data['results'];
+            console.log(result);
+            this.ambassadorlistarray = result.res;
+        });
+
 
 
     }
-    ambassadorlist(){
+   /* ambassadorlist(){
      let link=this._commonservices.nodesslurl+'datalist';
      this._http.post(link,{"source":"user_ambassador"})
         .subscribe(res=>{
@@ -99,7 +125,7 @@ export class AmbassadorlistComponent implements OnInit {
             console.log(this.ambassadorlistarray);
         });
 
-}
+}*/
 
     getBannerList1(){
         var link =this.serverurl+'medialistbytype';

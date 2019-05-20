@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef} from '@angular/core';
 import {Commonservices} from "../app.commonservices";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
-import {Http} from "@angular/http";
+import {HttpClient} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 
@@ -33,7 +33,7 @@ export class BannerlistComponent implements OnInit {
     public rolediv:any = [];
     public mediaid:any = '';
 
-    constructor(private _commonservices: Commonservices,private _http: Http,private modalService: BsModalService, userdata: CookieService, private router: Router) {
+    constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router) {
         this.serverurl=_commonservices.url;
         this.uploadfolder = 'banner/';
         this.fileurl=_commonservices.fileurl;
@@ -68,14 +68,17 @@ export class BannerlistComponent implements OnInit {
     }
     getBannerList(){
         this.loadinglist = true;
-        var link =this.serverurl+'medialist';
+        // var link =this.serverurl+'medialist';
+        var link =this._commonservices.nodesslurl1+'medialist';
         var data = {userid: this.userid,isadmin: this.isadmin};
 
         this._http.post(link, data)
             .subscribe(res => {
                 this.loadinglist = false;
-                var result = res.json();
+                let result:any;
+                result = res;
                 this.bannerlist = result.res;
+                console.log(this.bannerlist);
             },error => {
                 this.loadinglist = false;
                 console.log("Oooops!");
@@ -108,7 +111,8 @@ export class BannerlistComponent implements OnInit {
 
         this._http.post(link, data)
             .subscribe(res => {
-                var result = res.json();
+                let result:any;
+                result = res;
                 if(result.status == 'success'){
                     this.bannerlist.splice(this.idx, 1);
                 }
@@ -125,7 +129,8 @@ export class BannerlistComponent implements OnInit {
 
         this._http.post(link, data)
             .subscribe(res => {
-                var result = res.json();
+                let result:any;
+                result = res;
                 if(result.status == 'success'){
                     this.bannerlist.splice(idx, 1);
                     this.bannerlist.splice(this.idx, 1);
@@ -229,7 +234,8 @@ export class BannerlistComponent implements OnInit {
 
             this._http.post(link, data)
                 .subscribe(res => {
-                    var result = res.json();
+                    let result:any;
+                    result = res;
                     if(result.status == 'error'){
                         ev.target.focus();
                         this.inlineerror = result.msg;

@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, Input} from '@angular/core';
 import {Commonservices} from "../app.commonservices";
-import {FormGroup, FormBuilder, Validators, FormControl} from "@angular/forms";
+import {FormGroup, FormBuilder, Validators, FormControl, FormArray} from "@angular/forms";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 // import {Http} from "@angular/http";
 import { HttpClient } from '@angular/common/http';
@@ -57,6 +57,7 @@ export class BannereditComponent implements OnInit {
   public _id;
   public isadmin;
   public bannerlistpage;
+  public displayfor:any=[];
   public mediaid:any;
 
   @Input()
@@ -82,6 +83,7 @@ export class BannereditComponent implements OnInit {
     this.sponsorList=_commonservices.getSponsorList();
     this.bannerTypeList=_commonservices.getBannerTypeList();
     this.bannerlistpage = bannerlist;
+
     setTimeout(()=>{
       this.getmediadetails();
 
@@ -94,13 +96,17 @@ export class BannereditComponent implements OnInit {
     this.dataForm = this.fb.group({
       label: ["", BannereditComponent.validateLabel],
       type: ["", Validators.required],
+      displayfor: ["", Validators.required],
+      startdate: ["", Validators.required],
+      enddate: ["", Validators.required],
       sponsor: [""],
+      // displayfor: this.fb.array([]),
     });
   }
 
   getmediadetails(){
 
-    let link = this._commonservices.nodesslurl1+'mediadetails';
+    let link = this._commonservices.nodesslurl1+'newmediadetails';
     let data = {_id:this.mediaid};
     this._http.post(link ,data)
         .subscribe(res=>{
@@ -109,11 +115,13 @@ export class BannereditComponent implements OnInit {
          // console.log(result);
           if (result.status == 'success' && typeof(result.item) != 'undefined'){
             let mediadet = result.item;
-            console.log(mediadet);
+            // console.log(mediadet);
             this.dataForm.controls['label'].setValue(mediadet.label);
             this.dataForm.controls['type'].setValue(mediadet.type);
             this.cngtype(mediadet.type);
             this.dataForm.controls['sponsor'].setValue(mediadet.sponsor);
+            this.dataForm.controls['startdate'].setValue(mediadet.newstartdate);
+            this.dataForm.controls['enddate'].setValue(mediadet.newenddate);
             this.image = mediadet.image;
             this.image1 = mediadet.image1;
             this.image2 = mediadet.image2;
@@ -122,10 +130,46 @@ export class BannereditComponent implements OnInit {
             this.origimage2 = mediadet.origimage2;
             this.origimage3 = mediadet.origimage3;
             this._id = mediadet._id;
+            // console.log(this.dataForm.get('displayfor').value);
+            if(mediadet.model == 1){
+              this.displayfor.push('Model');
+              this.dataForm.get('displayfor').setValue(this.displayfor);
+            }
+            if(mediadet.affiliate == 1){
+              this.displayfor.push('Affiliate');
+              this.dataForm.get('displayfor').setValue(this.displayfor);
 
-            console.log("this.getTypeName(this.dataForm.controls");
-            console.log(this.getTypeName(mediadet.type));
-            console.log(this.dataForm.controls['type'].value);
+            }
+            if(mediadet.producer == 1){
+              this.displayfor.push('Producer');
+              this.dataForm.get('displayfor').setValue(this.displayfor);
+
+            }
+            if(mediadet.ambassador == 1){
+              this.displayfor.push('Ambassador');
+              this.dataForm.get('displayfor').setValue(this.displayfor);
+
+            }
+            if(mediadet.dancer == 1){
+              this.displayfor.push('Dancer');
+              this.dataForm.get('displayfor').setValue(this.displayfor);
+
+            }
+            if(mediadet.musician == 1){
+              this.displayfor.push('Musician');
+              this.dataForm.get('displayfor').setValue(this.displayfor);
+
+
+            }
+            if(mediadet.fan == 1){
+              this.displayfor.push('Fan');
+              this.dataForm.get('displayfor').setValue(this.displayfor);
+
+            }
+            // console.log(this.dataForm.controls['displayfor'].value);
+            // console.log("this.getTypeName(this.dataForm.controls");
+            // console.log(this.getTypeName(mediadet.type));
+            // console.log(this.dataForm.controls['type'].value);
           }
 
         });
@@ -298,9 +342,33 @@ export class BannereditComponent implements OnInit {
       this.imageserror3 = true;
       return true;
     }
-
+    if(this.dataForm.controls['displayfor'].value !='' || this.dataForm.controls['displayfor'].value !=null){
+      console.log(this.dataForm.controls['displayfor'].value);
+      if(this.dataForm.controls['displayfor'].value.indexOf("Dancer")>-1){
+        formval.dancer = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Model")>-1){
+        formval.model = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Producer")>-1){
+        formval.producer = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Musician")>-1){
+        formval.musician = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Fan")>-1){
+        formval.fan = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Ambassador")>-1){
+        formval.ambassador = 1;
+        console.log(formval.ambassador);
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Affiliate")>-1){
+        formval.affiliate = 1;
+      }
+    }
     if (this.dataForm.valid) {
-      var link = this._commonservices.nodeurl1+'mediaupdate';
+      var link = this._commonservices.nodesslurl1+'mediaupdate';
       var data = {
         _id:this._id,
         label: formval.label,
@@ -311,7 +379,16 @@ export class BannereditComponent implements OnInit {
         image2: this.image2,
         origimage2: this.origimage2,
         image3: this.image3,
-        origimage3: this.origimage3
+        origimage3: this.origimage3,
+        dancer: formval.dancer,
+        model: formval.model,
+        producer: formval.producer,
+        musician: formval.musician,
+        fan: formval.fan,
+        ambassador: formval.ambassador,
+        affiliate: formval.affiliate,
+        startdate: formval.startdate,
+        enddate: formval.enddate,
       };
 
       console.log(data);
