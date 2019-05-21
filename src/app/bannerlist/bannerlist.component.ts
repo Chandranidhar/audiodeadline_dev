@@ -31,6 +31,7 @@ export class BannerlistComponent implements OnInit {
     public searchText;
     public searchText3;
     public rolediv:any = [];
+    public arrayforrole:any = [];
     public mediaid:any = '';
 
     constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router) {
@@ -51,9 +52,12 @@ export class BannerlistComponent implements OnInit {
             this.isadmin = userdata2.admin;
         }
         this.getBannerList();
+        this.arrayforrole.push("Fan");
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+
+    }
 
     openrolediv(id){
 
@@ -79,6 +83,12 @@ export class BannerlistComponent implements OnInit {
                 result = res;
                 this.bannerlist = result.res;
                 console.log(this.bannerlist);
+                for(let i in this.bannerlist){
+                    if(this.bannerlist[i].musician ==1 || this.bannerlist[i].dancer ==1 || this.bannerlist[i].fan ==1 || this.bannerlist[i].producer ==1 || this.bannerlist[i].model ==1 ){
+                        this.bannerlist[i].user = 1;
+                        this.openrolediv(this.bannerlist[i]._id);
+                    }
+                }
             },error => {
                 this.loadinglist = false;
                 console.log("Oooops!");

@@ -135,39 +135,40 @@ export class BannereditComponent implements OnInit {
             // console.log(this.dataForm.get('displayfor').value);
             if(mediadet.model == 1){
               this.displayfor.push('Model');
-              this.dataForm.get('displayfor').setValue(this.displayfor);
+
             }
             if(mediadet.affiliate == 1){
               this.displayfor.push('Affiliate');
-              this.dataForm.get('displayfor').setValue(this.displayfor);
+
 
             }
             if(mediadet.producer == 1){
               this.displayfor.push('Producer');
-              this.dataForm.get('displayfor').setValue(this.displayfor);
+
 
             }
             if(mediadet.ambassador == 1){
               this.displayfor.push('Ambassador');
-              this.dataForm.get('displayfor').setValue(this.displayfor);
+
 
             }
             if(mediadet.dancer == 1){
               this.displayfor.push('Dancer');
-              this.dataForm.get('displayfor').setValue(this.displayfor);
+
 
             }
             if(mediadet.musician == 1){
               this.displayfor.push('Musician');
-              this.dataForm.get('displayfor').setValue(this.displayfor);
+
 
 
             }
             if(mediadet.fan == 1){
               this.displayfor.push('Fan');
-              this.dataForm.get('displayfor').setValue(this.displayfor);
+
 
             }
+            this.dataForm.get('displayfor').setValue(this.displayfor);
             // console.log(this.dataForm.controls['displayfor'].value);
             // console.log("this.getTypeName(this.dataForm.controls");
             // console.log(this.getTypeName(mediadet.type));
