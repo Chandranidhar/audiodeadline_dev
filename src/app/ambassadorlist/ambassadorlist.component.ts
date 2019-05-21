@@ -41,12 +41,12 @@ export class AmbassadorlistComponent implements OnInit {
     public dataForm: FormGroup;
     public fb;
     public datasource:any;
-    public editroute1:any='edit-admin';
+    public editroute1:any='edit-ambassador';
     jwttoken:any;
     apiurl:any;
     ambassadorlistarray:any[];
-    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
-    ambassadorlist_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email",'parent':"Enroller","status":"Status"};
+    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    ambassadorlist_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email",'parent':"Enroller"};
     deleteval:any = 'deletesingledata';
 
     ambassadorstatusarray:any=[{val:1,name:'Active'},{val:2,name:'Inactive'}];

@@ -19,7 +19,9 @@
 </div>-->
 
 <div class="formnewpopupheader">
-  <h4>Edit Admin</h4>
+  <h4 *ngIf="routes.url.indexOf('/edit-admin')>-1">Edit Admin</h4>
+  <h4 *ngIf="routes.url.indexOf('/edit-affiliate')>-1">Edit Affiliate</h4>
+  <h4 *ngIf="routes.url.indexOf('/edit-ambassador')>-1">Edit Ambassador</h4>
 </div>
 
 <div class="dashboard1form formnewpopup">
@@ -76,21 +78,35 @@
         <label>*Role</label>
       </div>
       <div class="col-md-8">
-        <select class="form-control" name="role" [formControl]="dataForm.controls['role']">
+        <!--<select class="form-control" name="role" [formControl]="dataForm.controls['role']">
           <option value="">Select Role</option>
           <option value="admin">Admin</option>
           <option value="ambassador">Ambassador</option>
           <option value="affiliate">Affiliate</option>
           <option value="user">User</option>
           <option value="deactivateaccount">Deactivate Account</option>
-        </select>
-        <div class="typeuserrole" *ngIf="dataForm.value['role']=='user'">
-          <div class="newcheckboxdiv text-left">
+        </select>-->
+        <div class="typeuserrole">
+
+          <!--<div class="newcheckboxdiv text-left">
             <div><input type="checkbox" name="checkbox" value="1" checked="checked"><label>Musician</label></div>
             <div><input type="checkbox" name="checkbox" value="2"><label>Dancer</label></div>
             <div><input type="checkbox" name="checkbox" value="3"><label>Model</label></div>
             <div><input type="checkbox" name="checkbox" value="5"><label>Fan</label></div>
-          </div>
+          </div>-->
+          <select multiple="multiple"  [formControl]="dataForm.controls['role']" style="height: 100px;">
+            <option value="admin">Admin</option>
+            <option value="ambassador">Ambassador</option>
+            <option value="affiliate">Affiliate</option>
+            <optgroup label="User">
+              <option value="dancer">Dancer</option>
+              <option value="fan">Fan</option>
+              <option value="model">Model</option>
+              <option value="musicians">Musician</option>
+              <option value="producer">Producer</option>
+            </optgroup>
+
+          </select>
         </div>
         <!--<span *ngIf ="dataForm.controls['role'].touched && !dataForm.controls['role'].valid" class="has-error">Role field can not be blank</span>-->
       </div>
@@ -145,7 +161,7 @@
       </div>
     </div>
 
-    <div class="form-group cardonfilediv">
+    <!--<div class="form-group cardonfilediv">
       <div class="col-md-4 control-label text-left">
         <label>Card on File</label>
       </div>
@@ -177,10 +193,10 @@
         <input type="text" class="form-control" name="zip" placeholder="CSV" [formControl]="dataForm.controls['csv']">
         <span *ngIf ="dataForm.controls['csv'].touched && !dataForm.controls['csv'].valid" class="has-error">Put CSV number here</span>
       </div>
-    </div>
+    </div>-->
 
 
-    <div class="form-group">
+   <!-- <div class="form-group">
       <div class="col-md-4 control-label text-left">
         <label>Current Password</label>
       </div>
@@ -208,7 +224,7 @@
         <input type="password" class="form-control" name="confirmpassword"  placeholder="Confirm Password" [formControl]="dataForm.controls['confirmpassword']">
         <span *ngIf ="dataForm.hasError('mismatchedPasswords') && dataForm.controls['confirmpassword'].valid" class="has-error">Passwords must match</span>
       </div>
-    </div>
+    </div>-->
 
     <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
   </form>

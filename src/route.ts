@@ -149,6 +149,8 @@ const appRoutes: Routes = [
     // { path: 'admin-list', component: AdminlistComponent},
     { path: 'admin-list', component: AdminlistComponent,resolve:{results: TestresolveService},data:{object:'adminlistnew'}},
     { path: 'edit-admin/:id', component: AdmineditComponent},
+    { path: 'edit-affiliate/:id', component: AdmineditComponent},
+    { path: 'edit-ambassador/:id', component: AdmineditComponent},
     // { path: 'affiliate-list', component: AffiliatelistComponent},
     { path: 'affiliate-list', component: AffiliatelistComponent,resolve:{results:TestresolveService},data:{object:'affiliateresolve'}},
     { path: 'user-list', component: UserlistComponent},

@@ -43,13 +43,13 @@ export class AffiliatelistComponent implements OnInit {
     apiurl:any;
 
 
-    public editroute1:any="edit-admin";
+    public editroute1:any="edit-affiliate";
     public dataForm: FormGroup;
     public fb;
     public datasource:any;
     affiliatelistarray:any[];
-    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
-    affiliatelistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Nmae",'email':"Email",'parent':"Enroller","status":"Status"};
+    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    affiliatelistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Nmae",'email':"Email",'parent':"Enroller"};
     affiliatelisttablename:any="user";
 
     deleteval:any= 'deletesingledata';
