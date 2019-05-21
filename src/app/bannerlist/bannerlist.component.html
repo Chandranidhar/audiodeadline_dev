@@ -229,16 +229,16 @@
                           <div>
                             <input id="checkbox1" type="checkbox" name="checkbox" value="user"  [(ngModel)]="item.user" (click)="openrolediv(item._id)"><label>User</label>
                             <div class="newcheckboxsubdiv" *ngIf="rolediv[item._id]==1">
-                              <div><input id="subcheckbox1" type="checkbox" name="checkbox" [(ngModel)]="item.fan" value="Fan"><label>Fan</label></div>
-                              <div><input id="subcheckbox2" type="checkbox" name="checkbox" value="Dancer" [(ngModel)]="item.dancer" ><label>Dancers</label></div>
-                              <div><input id="subcheckbox3" type="checkbox" name="checkbox" value="Musician" [(ngModel)]="item.musician" ><label>Musician</label></div>
-                              <div><input id="subcheckbox4" type="checkbox" name="checkbox" value="Model" [(ngModel)]="item.model" ><label>Model</label></div>
-                              <div><input id="subcheckbox5" type="checkbox" name="checkbox" value="Producer"  [(ngModel)]="item.producer" ><label>Producer</label></div>
+                              <div><input id="subcheckbox1" type="checkbox" name="checkbox" [(ngModel)]="item.fan" value="Fan" (change)="changerole(item)"><label>Fan</label></div>
+                              <div><input id="subcheckbox2" type="checkbox" name="checkbox" value="Dancer" [(ngModel)]="item.dancer" (change)="changerole(item)"><label>Dancers</label></div>
+                              <div><input id="subcheckbox3" type="checkbox" name="checkbox" value="Musician" [(ngModel)]="item.musician" (change)="changerole(item)"><label>Musician</label></div>
+                              <div><input id="subcheckbox4" type="checkbox" name="checkbox" value="Model" [(ngModel)]="item.model" (change)="changerole(item)"><label>Model</label></div>
+                              <div><input id="subcheckbox5" type="checkbox" name="checkbox" value="Producer"  [(ngModel)]="item.producer" (change)="changerole(item)"><label>Producer</label></div>
                               <!--<div><input id="subcheckbox6" type="checkbox" name="checkbox" value="6"><label>DJ</label></div>-->
                             </div>
                           </div>
-                          <div><input id="checkbox2" type="checkbox" name="checkbox" value="Affiliate" [(ngModel)]="item.affiliate" ><label>Affiliates</label>  </div>
-                          <div><input id="checkbox3" type="checkbox" name="checkbox" value="Ambassador" [(ngModel)]="item.ambassador" ><label>Ambassadors</label></div>
+                          <div><input id="checkbox2" type="checkbox" name="checkbox" value="Affiliate" [(ngModel)]="item.affiliate" (change)="changerole(item)"><label>Affiliates</label>  </div>
+                          <div><input id="checkbox3" type="checkbox" name="checkbox" value="Ambassador" [(ngModel)]="item.ambassador" (change)="changerole(item)"><label>Ambassadors</label></div>
                         </div>
                         <!--<span><input type="checkbox" name="checkbox" value="1" checked="checked"></span><label>User</label>
                         <div class="newcheckboxsubdiv">

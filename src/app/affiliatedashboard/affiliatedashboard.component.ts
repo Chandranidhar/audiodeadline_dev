@@ -1,10 +1,12 @@
-import {Compiler, Component, OnInit} from '@angular/core';
+import {Compiler, Component, OnInit, TemplateRef} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {Commonservices} from '../app.commonservices';
-
+import {throwErrorIfNoChangesMode} from "@angular/core/src/render3/errors";
+import {template} from "@angular/core/src/render3";
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
 declare const FB: any;
 
 @Component({
@@ -27,6 +29,7 @@ export class AffiliatedashboardComponent implements OnInit {
     public FB_APP_SECRET;
     public LI_CLIENT_ID;
     public LI_CLIENT_SECRET;
+    modalRef: BsModalRef;
     public randomstr;
     public fb_access_token;
     public fbimg;
@@ -39,12 +42,14 @@ export class AffiliatedashboardComponent implements OnInit {
     public instabannerlist2;
     public uploadfolder;
     public fileurl;
+    public flag:any=0;
     public defaultadmedia;
     public defaultadimage;
     public defaultxpmedia;
     public defaultxpimage;
     public sponsorList;
     public bannerlist;
+    public sponserurl:any="https://yoursponserurl.com";
     public affiliatename;
     public afforderlist:any = [];
     public affunderme:any = [];
@@ -63,7 +68,7 @@ export class AffiliatedashboardComponent implements OnInit {
 
 
 
-    constructor(private _http: HttpClient, private router: Router, userdata: CookieService, private _commonservices: Commonservices, public activeRoute:ActivatedRoute){
+    constructor(private _http: HttpClient, private router: Router, userdata: CookieService, private _commonservices: Commonservices, public activeRoute:ActivatedRoute,private modalService: BsModalService){
         this.userlink = '';
         this.fbimg = '../../assets/images/profileimg.png';
         this.fbname = '';
@@ -92,6 +97,8 @@ export class AffiliatedashboardComponent implements OnInit {
         }else{
             this.userid = userdata2._id;
             this.affiliatename = userdata2.username;
+            this.sponserurl = userdata2.sponserurl;
+            console.log(this.sponserurl);
            /* this.getUserDetails();
             this.getBannerList1();
             this.getBannerList2();
@@ -164,6 +171,7 @@ export class AffiliatedashboardComponent implements OnInit {
                     let userdet = result.item;
                     this.userdetails = userdet;
                     this.username = userdet.username;
+
                     this.userlink = 'https://audiodeadline.com/signup/'+this.username;
                     if(userdet.parent != 0 && userdet.parent != ''){
                         this.getEnrollerDetails(userdet.parent);
@@ -444,6 +452,24 @@ export class AffiliatedashboardComponent implements OnInit {
 
     postintm(ind){
         window.open('https://www.tumblr.com/widgets/share/tool?canonicalUrl='+encodeURIComponent(this.userlink)+'&title=Audio Deadline&caption=');
+    }
+    openmodal(template:TemplateRef<any>){
+        this.modalRef=this.modalService.show(template);
+    }
+    updatesponserurl(){
+
+        this.flag= 1-this.flag;
+        let dataval:any ={sponserurl:this.sponserurl,id:this.userdata.get('user_id')};
+        let data:any = {data: dataval,source:'user'};
+        console.log(data);
+        let link = this._commonservices.nodesslurl+'addorupdatedata';
+         this._http.post(link,data)
+         .subscribe(res=>{
+         let result:any = {};
+         result = res;
+         console.log(result);
+         });
+        return this.sponserurl;
     }
 }
 

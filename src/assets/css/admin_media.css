@@ -271,6 +271,28 @@
 }
 
 @media screen and (max-width:991px){
+
+
+    .sponsorblocknew_block1{ width: 100%; float: none;   border-right: none; margin-top: 30px;}
+
+    .sponsorblocknew_block1_updateblock{ width: 100%; height: auto; margin: 10px auto; position: relative; text-align: center;}
+
+    .sponsorblocknew_block1_updateblock_wrapper{ width: 100%; height:auto; display: block; text-align: center; vertical-align: middle;}
+
+    .sponsorblocknew_block1:nth-of-type(2){ border-top: solid 1px #ccc; padding-top: 30px;}
+
+    .sponsorblocknew_block1 input[type="text"]{ height: auto!important;}
+
+    .modal-body .adminbtnred{ display: block; margin-top: 5px!important;}
+
+    .sponsorblocknew_block1_updateblock_wrapper p{word-break: break-all;}
+
+    .sponsorblocknew_block1 img {
+        width: auto;
+        max-height:inherit;
+        max-width: 100%;
+    }
+
     .formdivwrapper .formtopdetials .form-control {
         width: 80%;
         margin-left: 8px;

@@ -33,6 +33,7 @@ export class BannerlistComponent implements OnInit {
     public rolediv:any = [];
     public arrayforrole:any = [];
     public mediaid:any = '';
+    public item;
 
     constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router) {
         this.serverurl=_commonservices.url;
@@ -52,7 +53,7 @@ export class BannerlistComponent implements OnInit {
             this.isadmin = userdata2.admin;
         }
         this.getBannerList();
-        this.arrayforrole.push("Fan");
+        // this.arrayforrole.push("Fan");
     }
 
     ngOnInit() {
@@ -73,7 +74,7 @@ export class BannerlistComponent implements OnInit {
     getBannerList(){
         this.loadinglist = true;
         // var link =this.serverurl+'medialist';
-        var link =this._commonservices.nodesslurl1+'medialist';
+        var link =this._commonservices.nodesslurl1+'medialistnew';
         var data = {userid: this.userid,isadmin: this.isadmin};
 
         this._http.post(link, data)
@@ -297,6 +298,18 @@ export class BannerlistComponent implements OnInit {
         //noinspection TypeScriptValidateTypes
         this.modalRef = this.modalService.show(template, {class: 'modal-md addmedialist'});
     }
+    changerole(item:any){
 
-
+        console.log(item.fan);
+        let dataval:any ={item:1};
+        let data:any = {data: dataval,source:'media'};
+        console.log(data);
+        /*let link = this._commonservices.nodesslurl+'addorupdatedata';
+        this._http.post(link,data)
+            .subscribe(res=>{
+                let result:any = {};
+                result = res;
+                console.log(result);
+            });*/
+    }
 }

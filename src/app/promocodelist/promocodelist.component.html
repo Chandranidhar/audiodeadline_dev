@@ -113,35 +113,39 @@
                     <thead>
                     <tr>
                       <th class="empycell"></th>
-                      <th>Date Active</th>
+
                       <th>Promocode</th>
                       <th>Discount Amount</th>
                       <th>Product</th>
-                      <th class="text-center">Status</th>
+                      <th>Date Active</th>
                       <th>End Date</th>
+                      <th class="text-center">Status</th>
+
                       <th class="text-center">Action</th>
                       <th class="empycell"></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of promocodelist| datefilter : searchText3 | namefilter : '' | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <tr *ngFor="let item of promocodelist| dateblogpipe : searchText3 | namefilter : '' | paginate: { itemsPerPage: 10, currentPage: p }">
                       <td class="empycell"></td>
-                      <td data-label="Date Active">02/18/19</td>
+
                       <td data-label="Promocode">{{item.promocode}}</td>
                       <td data-label="Discount Amount">{{(item.type == 'flat')?'Flat '+item.amount:item.amount+'%'}}</td>
                       <td data-label="Product">Ticket</td>
+                      <td data-label="Start Date">{{(item.startdate) | date :  "MM/dd/yyyy" }}</td>
+                      <td data-label="End Date">{{(item.enddate) | date :  "MM/dd/yyyy" }}</td>
                       <td data-label="Status" class="text-center">
                         <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
                         <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
                       </td>
-                      <td data-label="End Date">02/25/19</td>
+
                       <td data-label="Action" class="whitebtnlists text-center">
                         <a class="loginbtn2 btnedit btnwhite" (click)="openEditModal(editpromocode,item)"><i class="fa fa-pencil-square-o"></i></a>
                         <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i></a>
                       </td>
                       <td class="empycell"></td>
                     </tr>
-                    <tr *ngIf="!(promocodelist | datefilter : searchText3 | namefilter : '').length && !loadinglist">
+                    <tr *ngIf="!(promocodelist | dateblogpipe : searchText3 | namefilter : '').length && !loadinglist">
                       <td class="empycell"></td>
                       <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
                       <td class="empycell"></td>
@@ -153,7 +157,7 @@
                     </tr>
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(promocodelist | datefilter : searchText3 | namefilter : '').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <pagination-controls  *ngIf="(promocodelist | dateblogpipe : searchText3 | namefilter : '').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
                 </div>
               </div>
             </div>

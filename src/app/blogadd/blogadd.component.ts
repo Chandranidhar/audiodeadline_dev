@@ -63,6 +63,7 @@ console.log(this.showimageurl);
 
     ngOnInit(){
     this.dataForm = this.fb.group({
+        type: ["", Validators.required],
         title: ["", Validators.required],
         description: ["", Validators.required],
         startdate: ["", Validators.required],
@@ -168,6 +169,7 @@ console.log(this.showimageurl);
     if (this.dataForm.valid){
         var link = this.serverurl+'addblog';
         var data = {
+            type: formval.type,
             title: formval.title,
             description: formval.description,
             startdate: formval.startdate,
@@ -201,7 +203,7 @@ console.log(this.showimageurl);
         if(formval.signupaffiliate){
             data.signupaffiliate = 1;
         }
-        if(formval.signupaffiliate){
+        if(formval.ambassadors){
             data.ambassadors = 1;
         }
        // console.log(data);return;

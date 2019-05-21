@@ -88,7 +88,7 @@
       <div class="dashboard_right_wrapper">
         <div class="dashboard1_div1 adminlisttable">
           <div class="n-adminheadercls">
-            <h4>Event List</h4>
+            <h4>Event/Blog List</h4>
           <!--  <h4>BLog List</h4>-->
           </div>
           <div class="dashboardwrapper">
@@ -96,6 +96,17 @@
               <div class="pull-right">
                 <form action="" method="get">
                   <ul>
+                    <!--<li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchText7" [(ngModel)]="searchText7" class="form-control input-lg">
+                            <option value="">Select One</option>
+                            <option value="event">Event</option>
+                            <option value="blog">Blog</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>-->
                     <li>
                       <div>
                         <div class="input-group col-md-12">
@@ -132,7 +143,7 @@
                       </div>
                     </li>
                     <li>
-                      <a (click)="openAddModal(addblog)" class="loginbtn2"><i class="fa fa-plus"></i> Add Event</a>
+                      <a (click)="openAddModal(addblog)" class="loginbtn2"><i class="fa fa-plus"></i> Add Event/Blog</a>
                     </li>
                   </ul>
                 </form>
@@ -147,6 +158,7 @@
 
                     <th class="clstitle">Title</th>
                     <th class="clsdescription">Description</th>
+                    <th>Type</th>
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Display For</th>
@@ -156,27 +168,29 @@
                   </tr>
                   </thead>
                   <tbody>
-                  <tr *ngFor="let item of bloglist | blogfilter : searchText | bannerfilter2: searchText2 | dateblogpipe : searchText3 | paginate: { itemsPerPage: 10, currentPage: p }">
+                  <tr *ngFor="let item of bloglist  | blogfilter : searchText | bannerfilter2: searchText2 | dateblogpipe : searchText3 | paginate: { itemsPerPage: 10, currentPage: p }">
                     <td class="empycell"></td>
 
                     <td data-label="Title">{{item.title}}</td>
                     <td data-label="Description"><div  [innerHTML]="item.description | safehtml:300"></div></td>
+                   <!-- <td data-label="Type">{{item.type.toUpperCase()}}</td>-->
+                    <td data-label="Type">{{item.type}}</td>
                     <td data-label="Start Date">{{(item.startdate) | date :  "MM/dd/yyyy" }}</td>
                     <td data-label="End Date">{{(item.enddate) | date :  "MM/dd/yyyy" }}</td>
                     <td data-label="Display For">
                       <div class="newcheckboxdiv">
                         <div>
-                          <input id="checkbox1" type="checkbox" name="checkbox" value="1" checked="checked"><label>Users</label>
+                          <input id="checkbox1" type="checkbox" name="checkbox" value="1" [checked]="item.musicians==1 || item.dancer==1 || item.model==1 || item.producer==1 ||  item.fan==1"><label>Users</label>
                           <div class="newcheckboxsubdiv">
-                            <div><input id="subcheckbox1" type="checkbox" name="subcheckbox1" ngModel="item.musicians"><label>Musician</label></div>
-                            <div><input id="subcheckbox2" type="checkbox" name="subcheckbox2" ngModel="item.dancer" ><label>Dancers</label></div>
-                            <div><input id="subcheckbox3" type="checkbox" name="subcheckbox3" ngModel="item.model"><label>Model</label></div>
-                            <div><input id="subcheckbox4" type="checkbox" name="subcheckbox4" ngModel="item.producer"><label>Producer</label></div>
-                            <div><input id="subcheckbox5" type="checkbox" name="subcheckbox5" ngModel="item.fan" ><label>Fan</label></div>
+                            <div><input id="subcheckbox1" type="checkbox" name="subcheckbox1" [checked]="item.musicians==1"><label>Musician</label></div>
+                            <div><input id="subcheckbox2" type="checkbox" name="subcheckbox2" [checked]="item.dancer==1" ><label>Dancers</label></div>
+                            <div><input id="subcheckbox3" type="checkbox" name="subcheckbox3" [checked]="item.model==1"><label>Model</label></div>
+                            <div><input id="subcheckbox4" type="checkbox" name="subcheckbox4" [checked]="item.producer==1"><label>Producer</label></div>
+                            <div><input id="subcheckbox5" type="checkbox" name="subcheckbox5" [checked]="item.fan==1" ><label>Fan</label></div>
                           </div>
                         </div>
-                        <div><input id="checkbox6" type="checkbox" name="checkbox6" ngModel="item.signupaffiliate"><label>Affiliates</label>  </div>
-                        <div><input id="checkbox7" type="checkbox" name="checkbox7" ngModel="item.ambassadors"><label>Ambassadors</label>  </div>
+                        <div><input id="checkbox6" type="checkbox" name="checkbox6" [checked]="item.signupaffiliate==1"><label>Affiliates</label>  </div>
+                        <div><input id="checkbox7" type="checkbox" name="checkbox7" [checked]="item.ambassadors==1"><label>Ambassadors</label>  </div>
                       </div>
 
                       <!--{{item.parentname}}-->
@@ -192,7 +206,7 @@
                     </td>
                     <td class="empycell"></td>
                   </tr>
-                  <tr *ngIf="!(bloglist | datefilter : searchText3  | blogfilter : searchText).length && !loadinglist">
+                  <tr *ngIf="!(bloglist | dateblogpipe : searchText3  | blogfilter : searchText).length && !loadinglist">
                     <td class="empycell"></td>
                     <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
                     <td class="empycell"></td>
@@ -204,7 +218,7 @@
                   </tr>
                   </tbody>
                 </table>
-                <pagination-controls  *ngIf="(bloglist | datefilter : searchText3 | blogfilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                <pagination-controls  *ngIf="(bloglist | dateblogpipe : searchText3  | blogfilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
               </div>
             </div>
           </div>
@@ -217,7 +231,7 @@
 </div>
 <ng-template #template>
   <div class="modal-body text-center modalcls">
-    <p>Are you sure to delete this blog?</p>
+    <p>Are you sure to delete this event/blog?</p>
     <div class="text-center">
       <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
       <button type="button" class="btndelete" (click)="decline()" >No</button>
