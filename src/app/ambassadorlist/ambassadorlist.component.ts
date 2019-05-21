@@ -53,7 +53,7 @@ export class AmbassadorlistComponent implements OnInit {
     ambasadortablename:any='user';
 
 
-    constructor(fb: FormBuilder , private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute,) {
+    constructor(fb: FormBuilder , public _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute,) {
         this.userdata = userdata;
         this.fb = fb;
         this.serverurl=_commonservices.url;

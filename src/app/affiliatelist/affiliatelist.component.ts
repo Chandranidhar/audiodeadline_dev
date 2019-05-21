@@ -56,7 +56,7 @@ export class AffiliatelistComponent implements OnInit {
     affiliatestatusarray:any=[{val:1,name:"Active"},{val:2,name:"Inactive"}];
     updateurl:any = 'addorupdatedata';
 
-    constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute) {
+    constructor(fb: FormBuilder, public _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute) {
         this.userdata = userdata;
         this.fb = fb;
         this.serverurl=_commonservices.url;

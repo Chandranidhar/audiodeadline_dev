@@ -94,8 +94,8 @@
                       <td data-label="Title" style="min-width: 150px;">
                         <span *ngIf="!item.isLabelClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'label')">{{item.label}}</span><span *ngIf="item.isLabelClicked"><input type="text" name="label" value="{{item.label}}" (blur)="editInlineField($event,'label',item,item.label)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 135px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>
                       </td>
-                      <td data-label="Banner Image" class="text-center">
-                        <img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}">
+                      <td data-label="Banner Image" class="text-center" >
+                        <img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}" (click)="openpopup(item.image,templateimage)"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}" (click)="openpopup(item.image2,templateimage)"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}" (click)="openpopup(item.image3,templateimage)">
                       </td>
                       <td data-label="Date">{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
                       <td data-label="# Of Click" style="text-align: center;">
@@ -165,3 +165,12 @@
 </div>
 
 <app-adminfooter></app-adminfooter>
+<ng-template #templateimage>
+  <div class="modal-body text-center modalcls">
+    <p>Banner Image</p>
+    <div class="text-center">
+      <img style="max-width: 500px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{tempimage}}">
+    </div>
+
+  </div>
+</ng-template>

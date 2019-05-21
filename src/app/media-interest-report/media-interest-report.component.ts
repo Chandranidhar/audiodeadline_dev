@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
+import {template} from "@angular/core/src/render3";
 
 
 @Component({
@@ -33,6 +34,7 @@ export class MediaInterestReportComponent implements OnInit {
   public inlineerror;
   public isadmin;
   public userid;
+  public tempimage;
 
 
 
@@ -265,6 +267,9 @@ export class MediaInterestReportComponent implements OnInit {
   selectblur(item){
     item.isStatusClicked = false;
   }
-
+  openpopup(image:any,template:TemplateRef<any>){
+    this.tempimage = image;
+    this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+  }
 
 }
