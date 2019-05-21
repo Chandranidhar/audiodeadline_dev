@@ -87,6 +87,9 @@
   <li *ngIf="userdetails.admin==1" [ngClass]="router.url === '/dashboard' ? 'dashboardcls' : ''">
     <a [routerLink]="['/dashboard']">Dashboard</a>
   </li>
+  <li *ngIf="userdetails.ambassador==1" [ngClass]="router.url === '/dashboard' ? 'dashboardcls' : ''">
+    <a [routerLink]="['/ambassador-dashboard']">Dashboard</a>
+  </li>
 
   <li  class="dropdown" *ngIf="userdetails.admin == 1">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">User Manager<span class="caret"></span></a>

@@ -36,7 +36,7 @@ export class BlogaddComponent implements OnInit {
     public selectedFile:File;
     modalRef:BsModalRef;
 
-    constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private sanitizer: DomSanitizer, userdata: CookieService,public bloglistpage:BloglistComponent) {
+    constructor(fb: FormBuilder,public _commonservices : Commonservices,private _http: HttpClient,private router: Router,private sanitizer: DomSanitizer, userdata: CookieService,public bloglistpage:BloglistComponent) {
         this.fb = fb;
         this.videos = [];
         this.images = [];

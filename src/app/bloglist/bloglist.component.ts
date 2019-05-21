@@ -26,7 +26,7 @@ export class BloglistComponent implements OnInit {
     public searchText2='';
     public searchText3;
 
-    constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService) {
+    constructor(fb: FormBuilder, public _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService) {
         this.fb = fb;
         this.serverurl=_commonservices.url;
         this.getBlogList();

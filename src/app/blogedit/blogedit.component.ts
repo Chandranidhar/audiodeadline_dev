@@ -41,7 +41,7 @@ export class BlogeditComponent implements OnInit {
          console.log(postarr1);*/
     }
 
-    constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private route:ActivatedRoute,private sanitizer: DomSanitizer,public bloglistpage:BloglistComponent){
+    constructor(fb: FormBuilder,public _commonservices : Commonservices,private _http: HttpClient,private router: Router,private route:ActivatedRoute,private sanitizer: DomSanitizer,public bloglistpage:BloglistComponent){
         this.blogid = '';
         this.fb = fb;
         this.videos = [];
