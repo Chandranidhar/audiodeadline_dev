@@ -54,6 +54,7 @@ export class BannereditComponent implements OnInit {
   public origimages;
   public images;
   public userid;
+  public status;
   public _id;
   public isadmin;
   public bannerlistpage;
@@ -129,6 +130,7 @@ export class BannereditComponent implements OnInit {
             this.origimage = mediadet.origimage;
             this.origimage2 = mediadet.origimage2;
             this.origimage3 = mediadet.origimage3;
+            this.status = mediadet.status;
             this._id = mediadet._id;
             // console.log(this.dataForm.get('displayfor').value);
             if(mediadet.model == 1){
@@ -175,6 +177,19 @@ export class BannereditComponent implements OnInit {
         });
   }
 
+  cngstatus(item){
+    var status = 2;
+    if(typeof (item.status) != 'undefined')
+      status = 1-parseInt(item.status);
+    var link =this.serverurl+'cngstatusmedia';
+    var data = {_id:item,status : status};
+    this._http.post(link, data)
+        .subscribe(res => {
+          this.status = status;
+        },error => {
+          console.log("Oooops!");
+        });
+  }
 
   static validateLabel(control: FormControl) {
     if (control.value === '') {
@@ -389,6 +404,7 @@ export class BannereditComponent implements OnInit {
         affiliate: formval.affiliate,
         startdate: formval.startdate,
         enddate: formval.enddate,
+        status: this.status,
       };
 
       console.log(data);

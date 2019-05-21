@@ -59,7 +59,7 @@ export class BanneraddComponent implements OnInit {
   public base64image;
   public rawimage;
 
-  constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private modalService: BsModalService, userdata: CookieService, public bannerlist:BannerlistComponent) {
+  constructor(fb: FormBuilder,public _commonservices : Commonservices,private _http: HttpClient,private router: Router,private modalService: BsModalService, userdata: CookieService, public bannerlist:BannerlistComponent) {
     this.fb = fb;
     this.origimages = [];
     this.images = [];
@@ -335,6 +335,48 @@ export class BanneraddComponent implements OnInit {
           }, error => {
             console.log("Oooops!");
           });
+    }
+  }
+  editInlineFieldforInactive(fld_name,item,itemval){
+    var fld_val = 2;
+    if(fld_val != itemval){
+      // var link =this.serverurl+'updatemediainline';
+      var link =this._commonservices.nodesslurl1+'updatemediainline';
+      // var link =this._commonservices.nodesslurl+'updatemediainline';
+      var data = {_id: item._id,fieldname:fld_name,filedvalue:fld_val};
+
+      this._http.post(link, data)
+          .subscribe(res => {
+            let result:any;
+            result = res;
+            if(result.status == 'error'){
+             // this.inlineerror = result.msg;
+              return true;
+            }
+            item.isSortindexClicked = false;
+            item.isLabelClicked = false;
+            item.isStatusClicked = false;
+            if(result.status == 'success'){
+              if(fld_name == 'sortindex'){
+                item.sortindex = fld_val;
+              }
+              if(fld_name == 'label'){
+                item.label = fld_val;
+              }
+              if(fld_name == 'status'){
+                item.status = fld_val;
+              }
+            }
+          },error => {
+            item.isSortindexClicked = false;
+            item.isLabelClicked = false;
+            item.isStatusClicked = false;
+            console.log("Oooops!");
+          });
+    }else{
+      item.isSortindexClicked = false;
+      item.isLabelClicked = false;
+      item.isStatusClicked = false;
     }
   }
   cropimg1(template: TemplateRef<any>){

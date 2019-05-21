@@ -175,7 +175,7 @@
     <div class="form-group">
       <div class="col-md-4 control-label text-left"><label>Display for*:</label></div>
       <div class="col-md-8">
-        <select [formControl]="dataForm.controls['displayfor']" multiple="multiple" style="height: 100px;">
+        <select [formControl]="dataForm.controls['displayfor']" multiple="multiple" class="selecttype">
           <option value="">Select value</option>
           <optgroup label="User">
             <option value="Dancer">Dancer</option>
@@ -299,6 +299,7 @@
       </div>
     </div>
     <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+
   </form>
 </div>
 

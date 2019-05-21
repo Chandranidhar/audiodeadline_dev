@@ -130,7 +130,8 @@
                           <div class="col-md-4 col-sm-6 col-xs-12 n-socialsinglepostcontentinner" *ngFor="let item of artistxpsignbanner">
                             <div class="n-socialsinglepostimgwrapper">
                               <!--<img src="https://api.audiodeadline.com/nodeserver/uploads/banner/beautiful-images-26824-27540-hd-wallpapers-1554903788-resized.jpg">-->
-                              <img src="{{fileurl}}/{{uploadfile}}/{{item.origimage}}">
+                              <img *ngIf="item.origimage!=null && item.origimage!=''" src="{{fileurl}}{{uploadfile}}/{{item.origimage}}">
+                              <img *ngIf="item.origimage==null || item.origimage==''" src="{{fileurl}}{{uploadfile}}/{{item.image}}">
                             </div>
                             <!-----------live share urls start------------------>
                             <div class="n-socialsinglepostbottom" *ngIf="_commonservices.envflag=='live'">

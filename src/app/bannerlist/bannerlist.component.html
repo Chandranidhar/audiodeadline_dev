@@ -202,8 +202,8 @@
                        <th>Action</th>-->
 
                       <th>Date</th>
-                      <th>Title</th>
-                      <th>Banner Image</th>
+                      <th class="clstitle">Title</th>
+                      <th class="clsimg">Banner Image</th>
                       <th>Uploaded By</th>
                       <th>End Date</th>
                       <th>Display for</th>
@@ -217,11 +217,11 @@
                     <tr *ngFor="let item of bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
                       <td class="empycell"></td>
                       <td data-label="Date">{{item.newstartdate}}</td>
-                      <td data-label="Title" style="min-width: 150px;">
+                      <td data-label="Title">
                         <span *ngIf="!item.isLabelClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'label')">{{item.label}}</span><span *ngIf="item.isLabelClicked"><input type="text" name="label" value="{{item.label}}" (blur)="editInlineField($event,'label',item,item.label)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 135px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>
                       </td>
                       <td data-label="Banner Image" class="text-center">
-                        <img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}">
+                        <img style="max-width: 140px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 140px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 140px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}">
                       </td>
                       <td data-label="Uploaded By">{{item.fullname}}</td>
                       <td data-label="End Date">{{item.newenddate}}</td>

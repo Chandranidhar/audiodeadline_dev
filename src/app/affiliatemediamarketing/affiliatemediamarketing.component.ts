@@ -57,6 +57,7 @@ export class AffiliatemediamarketingComponent implements OnInit {
           let result=data['results'];
          console.log(result);
           this.ticketsalebanner = result.res;
+
          // console.log(this.ticketsalebanner);
 
 

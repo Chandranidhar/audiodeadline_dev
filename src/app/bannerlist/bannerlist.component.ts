@@ -229,7 +229,9 @@ export class BannerlistComponent implements OnInit {
                 }
             }
 
-            var link =this.serverurl+'updatemediainline';
+            // var link =this.serverurl+'updatemediainline';
+            var link =this._commonservices.nodesslurl1+'updatemediainline';
+            // var link =this._commonservices.nodesslurl+'updatemediainline';
             var data = {_id: item._id,fieldname:fld_name,filedvalue:fld_val};
 
             this._http.post(link, data)
@@ -267,6 +269,7 @@ export class BannerlistComponent implements OnInit {
             item.isStatusClicked = false;
         }
     }
+
 
     selectblur(item){
         item.isStatusClicked = false;

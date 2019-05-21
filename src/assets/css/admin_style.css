@@ -855,7 +855,20 @@ img:focus, *img:focus{
 .dashboard1form label{ text-transform:uppercase; font-size:16px; color:#404040;   font-family:'OpenSans-Semibold';}
 .dashboard1form input[type="text"], .dashboard1form input[type="password"], .dashboard1form input[type="email"]{width: 100%; height: 42px; box-sizing: border-box; border-radius:0px; box-shadow:none;  border: 1px solid #ccc; margin-bottom: 0px; font-size: 14px; font-family: 'OpenSans-Semibold'; padding: 0 20px 0 20px; outline: none;}
 
-.dashboard1form input[type="date"]{width: 100%; height: 42px; box-sizing: border-box; border-radius:0px; box-shadow:none;  border: 1px solid #ccc; margin-bottom: 10px; font-size: 14px; font-family: 'OpenSans-Semibold'; padding: 0 20px 0 20px; outline: none;}
+.dashboard1form input[type="date"]{
+    width: 100%;
+    height: 42px;
+    box-sizing: border-box;
+    border-radius: 0px;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-family: 'OpenSans-Semibold';
+    padding: 10px 20px;
+    outline: none;
+    line-height: 42px;
+}
 
 
 .dashboard1form select{ width: 100%; height: 42px; box-sizing: border-box; border-radius:0px; box-shadow:none; border: 1px solid #ccc; margin-bottom: 10px; font-size: 14px; font-family: 'OpenSans-Semibold'; padding: 0 20px 0 20px; outline: none;}
@@ -2740,6 +2753,13 @@ a.copybtn, a:hover.copybtn{
 .clstitle{
     width: 16%;
 }
+.clsimg{
+    width: 16%;
+}
+.selecttype{
+    height: 180px !important;
+}
+
 
 /*.adminlisttabledashboard .adminbtnred{
     margin-top: 10px;
