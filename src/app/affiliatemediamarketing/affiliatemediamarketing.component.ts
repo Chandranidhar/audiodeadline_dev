@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,TemplateRef } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {Commonservices} from '../app.commonservices';
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {ImageCroppedEvent} from "ngx-image-cropper";
 declare const FB: any;
 
 @Component({
@@ -28,8 +30,19 @@ export class AffiliatemediamarketingComponent implements OnInit {
   public ticketsalebanner:any = [];
   public merchbanner:any = [];
   public artistxpsignbanner:any = [];
+    public selectedFile:any;
+    public tempUploadFilename:any;
+    public rawimage:any;
+    public base64image:any;
+    public errormsg:any='';
+    public sponserimg:any="";
+    public sponserurl:any="";
+    public flag:any=0;
+    modalRef: BsModalRef;
+    modalRef1: BsModalRef;
+    public userdetails:any;
 
-  constructor(private _http: HttpClient, private router: Router, userdata: CookieService, private _commonservices: Commonservices, private activeRoute: ActivatedRoute) {
+  constructor(private _http: HttpClient, private router: Router, userdata: CookieService, private _commonservices: Commonservices, private activeRoute: ActivatedRoute,private modalService: BsModalService) {
 
     this.serverurl=_commonservices.url;
     this.fileurl = _commonservices.fileurl;
@@ -37,6 +50,17 @@ export class AffiliatemediamarketingComponent implements OnInit {
       this.affiliatename = this.usercookie.get('username');
       this.username = this.usercookie.get('username');
       console.log(this.affiliatename);
+      let userdata2: any;
+      userdata2= userdata.get('userdetails');
+      userdata2 = JSON.parse(userdata2);
+      if (typeof (userdata2) == 'undefined'){
+          this.router.navigateByUrl('/login');
+      }
+      else {
+          this.affiliatename = userdata2.username;
+          this.sponserurl = userdata2.sponserurl;
+          this.sponserimg = userdata2.sponserimage;
+      }
     this.uploadfile = 'banner';
     // this.getticketsalebanner();
     this.getmechandisebanner();
@@ -46,8 +70,29 @@ export class AffiliatemediamarketingComponent implements OnInit {
       this.LI_CLIENT_ID=_commonservices.LI_CLIENT_ID;
       this.LI_CLIENT_SECRET=_commonservices.LI_CLIENT_SECRET;
   }
+    getUserDetails(){
+        var link =this.serverurl+'dashboard';
+        var data = {_id: this.userdata.get('user_id')};
 
-  ngOnInit() {
+        this._http.post(link, data)
+            .subscribe(res => {
+
+                let result:any;
+                result = res;
+                if (result.status == 'success' && typeof(result.item) != 'undefined'){
+                    let userdet = result.item;
+                    this.userdetails = userdet;
+                    this.username = userdet.username;
+                    this.sponserurl = userdet.sponserurl;
+                    this.sponserimg = userdet.sponserimage;
+                }
+            },error => {
+                console.log("Oooops!");
+            });
+    }
+
+
+    ngOnInit() {
       this.activeRoute.data.forEach((data) => {
           //PRE LOAD DATA PRIOR
           /*console.log('route data for profile');
@@ -158,6 +203,125 @@ export class AffiliatemediamarketingComponent implements OnInit {
          },function(response){
          // console.log(response);
          });
+    }
+    openmodal(template:TemplateRef<any>){
+        this.modalRef1=this.modalService.show(template);
+    }
+    updatesponserurl(){
+
+        this.flag= 1-this.flag;
+        let dataval:any ={sponserurl:this.sponserurl,id:this.userdata.get('user_id')};
+        let data:any = {data: dataval,source:'user'};
+        console.log(data);
+        if(this.sponserurl!='' && this.sponserurl!=null){
+            let link = this._commonservices.nodesslurl+'addorupdatedata';
+            this._http.post(link,data)
+                .subscribe(res=>{
+                    let result:any = {};
+                    result = res;
+                    console.log(result);
+                });
+            return this.sponserurl;
+            this.getUserDetails();
+        }else{
+            this.errormsg = "You haven't updated your Sponser URL!";
+        }
+
+    }
+    changesponserimage(event){
+        this.selectedFile = event.target.files[0];
+
+        const uploadData = new FormData();
+        uploadData.append('file', this.selectedFile);
+
+        this._http.post(this._commonservices.uploadurl, uploadData)
+
+            .subscribe(value =>{
+                let res:any;
+                res = value;
+                console.log(res);
+                if(res.error_code == 0){
+                    this.sponserimg = res.filename;
+                    /*this.tempimgpath = this._commonservices.fileurl;
+
+                     this.image_pic = this.tempUploadFilename;
+                     this.showLoader = 0;
+                     this.addpicturearray.push({image_pic:this.image_pic,privacy:'public',title_pic:'',desc_pic:''});*/
+                    /*for(let i in this.addpicturearray){
+                     this.addmusicarray[i].murl = this.sanitizer.bypassSecurityTrustResourceUrl(this._commonservices.siteurl + 'nodeserver/uploads/audio/' + this.user_id + '/' + this.addmusicarray[i].music);
+                     }*/
+
+                }
+            });
+    }
+    decline(): void {
+        this.modalRef.hide();
+    }
+    decline1(): void {
+        this.modalRef1.hide();
+    }
+    cropimg1(template: TemplateRef<any>){
+        //noinspection TypeScriptValidateTypes
+        this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+        this.rawimage = '';
+        let link = this._commonservices.phpurl+'getbase64image1.php';
+        // let link = 'https://developmentapi.audiodeadline.com/getbase64image1.php';
+        let data = {fileurl: this.sponserimg};
+
+        this._http.post(link, data)
+            .subscribe(res => {
+                let result:any;
+                result = res;
+                console.log(result);
+                console.log(result.data);
+                this.rawimage = result.data;
+            });
+    }
+    crop1(){
+        this.rawimage = '';
+        let link = this._commonservices.phpurl+'saveCropImage1.php';
+        let data = {filename: this.sponserimg,base64image:this.base64image,cropwidth:1920,cropheight:401};
+
+        this._http.post(link, data)
+            .subscribe(res => {
+                // var result = res.text();
+                let result:any;
+                result = res;
+                console.log(result);
+                this.sponserimg = '';
+                this.sponserimg = result.data;
+                this.modalRef.hide();
+            }, error => {
+                console.log("Oooops!");
+            });
+    }
+
+    imageCropped(event: ImageCroppedEvent) {
+        this.base64image = event.base64;
+    }
+
+    updatesponserimage(){
+        let dataval:any ={sponserimage:this.sponserimg,id:this.userdata.get('user_id')};
+        let data:any = {data: dataval,source:'user'};
+        console.log(data);
+        if(this.sponserimg!='' && this.sponserimg!=null){
+            let link = this._commonservices.nodesslurl+'addorupdatedata';
+            this._http.post(link,data)
+                .subscribe(res=>{
+                    let result:any = {};
+                    result = res;
+                    console.log(result);
+                    if(result.status == "success"){
+                        this.modalRef1.hide();
+                        return this.sponserimg;
+                        this.getUserDetails();
+                    }
+                });
+
+        }else{
+            this.errormsg = "You haven't updated your Sponser Logo!";
+        }
+
     }
 
 

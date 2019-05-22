@@ -32,6 +32,7 @@ export class Commonservices{
     nodesslurl1:any;
     envflag:any;
     fileurl_new:any;
+    public pictureuploadurl;
     constructor(private http: HttpClient,userdata: CookieService,private router: Router) {
 
         this.envflag='dev';
@@ -62,6 +63,7 @@ export class Commonservices{
             // this.uploadncropurlnew = 'https://audiodeadline.com/fileuploadandcropnew.php';
             this.fileurl = 'https://developmentapi.audiodeadline.com/nodeserver/uploads/';
             this.fileurl_new = 'https://developmentapi.audiodeadline.com/nodeserver/uploads/';
+            this.pictureuploadurl = 'https://developmentapi.audiodeadline.com/fileupload_picture.php';
             // this.fileurl = 'https://audiodeadline.com/nodeserver/uploads/';
             this.FB_APP_ID = '906815096194208';
             this.FB_APP_SECRET = 'f569451eb41a239d2045ebf115a3bcc7';
@@ -96,6 +98,7 @@ export class Commonservices{
             this.uploadncropurlnew = 'https://api.audiodeadline.com/fileuploadandcropnew.php';
             // this.uploadncropurlnew = 'https://audiodeadline.com/fileuploadandcropnew.php';
             this.fileurl = 'https://api.audiodeadline.com/nodeserver/uploads/';
+            this.pictureuploadurl = 'https://api.audiodeadline.com/fileupload_picture.php';
             // this.fileurl = 'https://audiodeadline.com/nodeserver/uploads/';
             this.FB_APP_ID = '906815096194208';
             this.FB_APP_SECRET = 'f569451eb41a239d2045ebf115a3bcc7';

@@ -219,7 +219,8 @@
            <div class="sponsorblocknew_block1_updateblock">
              <div class="sponsorblocknew_block1_updateblock_wrapper">
 
-               <img src="../../assets/images/your_logo_here.png">
+               <img *ngIf="sponserimg=='' || sponserimg==null" src="../../assets/images/your_logo_here.png">
+               <img *ngIf="sponserimg!='' && sponserimg!=null" src="{{_commonservices.fileurl}}{{sponserimg}}">
 
              </div>
            </div>
@@ -235,9 +236,10 @@
               <div class="sponsorblocknew_block1_updateblock">
                 <div class="sponsorblocknew_block1_updateblock_wrapper">
 
-                  <p (click)="flag= 1-flag;">{{sponserurl}}</p>
+                  <p *ngIf="sponserurl=='' || sponserurl==null" (click)="flag= 1-flag;">https://yoursponserurl.com</p>
+                  <p *ngIf="sponserurl!='' && sponserurl!=null" (click)="flag= 1-flag;">{{sponserurl}}</p>
                   <input type="text" *ngIf="flag==1" [(ngModel)]="sponserurl" >
-
+                  <p  *ngIf="(sponserurl=='' || sponserurl==null) " class="alert-danger">{{errormsg}}</p>
                 </div>
               </div>
 
@@ -652,14 +654,40 @@
 <app-adminfooter></app-adminfooter>
 <ng-template #templatesponserlogo>
 
-  <div class="modal-body text-center modalcls n-modalcls">
+  <div class="modal-body copetitionpreview text-center modalcls n-modalcls">
+    <a style="cursor: pointer;" (click)="decline1()" class="closebtn">X</a>
     <div class="formnewpopupheader">
       <h4>Manage Sponser Logo</h4>
     </div>
+    <input style="display: none" type="file" (change)="changesponserimage($event)" #fileInput>
+
     <div class="text-center">
-      <img src="../../assets/images/n-adminlogo.png">
-      <input type="button" value="UPDATE Sponser Logo" class="btn adminbtnred">
+      <img *ngIf="sponserimg=='' || sponserimg==null" src="../../assets/images/your_logo_here.png">
+      <div class="manage_imgblock"><img *ngIf="sponserimg!='' && sponserimg!=null" src="{{_commonservices.fileurl}}{{sponserimg}}"></div>
+      <div class="clearfix"></div>
+      <div class="popupbtnwrapper">
+      <input *ngIf="sponserimg!='' && sponserimg!=null" type="button" (click)="cropimg1(croptemplate1)" value="CROP" class="cropselectbtn cropselectbtnpopup">
+      <div class="file btn btnimageupload btnimageuploadpopup"  (click)="fileInput.click()"> Select File </div>
+      <div class="clearfix"></div>
+    </div>
+      <p class="alert-danger" *ngIf="sponserimg=='' || sponserimg==null">{{errormsg}}</p>
+      <input type="button" value="UPDATE Sponser Logo" class="btn adminbtnred" (click)="updatesponserimage()">
     </div>
 
+  </div>
+</ng-template>
+<ng-template #croptemplate1>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="decline()" class="closebtn">X</a>
+    <div *ngIf="!rawimage" style="text-align: center;"><img style="width: 200px;" src="{{fileurl}}line-loader.gif" ></div>
+    <div *ngIf="rawimage">
+      <image-cropper
+              [imageBase64]="rawimage"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1.1"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage" class="copebtnwrapper text-center"><input type="button" value="save" (click)="crop1()" class="cropselectbtn"><input type="button" value="cancel" (click)="decline()" class="cropselectbtn cancelbtn"></div>
   </div>
 </ng-template>

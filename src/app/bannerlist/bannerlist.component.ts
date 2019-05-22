@@ -300,16 +300,62 @@ export class BannerlistComponent implements OnInit {
     }
     changerole(item:any){
 
-        console.log(item.fan);
-        let dataval:any ={item:1};
+        // console.log(item.fan);
+        if(item.fan == true){
+            item.fan = 1;
+
+        }else{
+            item.fan = 0;
+        }
+        if(item.model == true){
+            item.model = 1;
+
+        }else{
+            item.model = 0;
+        }
+        if(item.dancer == true){
+            item.dancer = 1;
+
+        }else{
+            item.dancer = 0;
+        }
+        if(item.musician == true){
+            item.musician = 1;
+
+        }else{
+            item.musician = 0;
+        }
+        if(item.producer == true){
+            item.producer = 1;
+
+        }else{
+            item.producer = 0;
+        }
+        if(item.affiliate == true){
+            item.affiliate = 1;
+
+        }else{
+            item.affiliate = 0;
+        }
+        if(item.ambassador == true){
+            item.ambassador = 1;
+
+        }else{
+            item.ambassador = 0;
+        }
+        // console.log(item);
+        let dataval:any ={fan:item.fan,musician : item.musician, dancer: item.dancer, producer: item.producer, model:item.model, affiliate:item.affiliate, ambassador:item.ambassador,id:item._id};
         let data:any = {data: dataval,source:'media'};
         console.log(data);
-        /*let link = this._commonservices.nodesslurl+'addorupdatedata';
+        let link = this._commonservices.nodesslurl+'addorupdatedata';
         this._http.post(link,data)
             .subscribe(res=>{
                 let result:any = {};
                 result = res;
                 console.log(result);
-            });*/
+                if(result.status == "success"){
+                    this.getBannerList();
+                }
+            });
     }
 }

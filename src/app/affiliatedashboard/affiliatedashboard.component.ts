@@ -7,6 +7,7 @@ import {Commonservices} from '../app.commonservices';
 import {throwErrorIfNoChangesMode} from "@angular/core/src/render3/errors";
 import {template} from "@angular/core/src/render3";
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
+import {ImageCroppedEvent} from "ngx-image-cropper";
 declare const FB: any;
 
 @Component({
@@ -29,7 +30,7 @@ export class AffiliatedashboardComponent implements OnInit {
     public FB_APP_SECRET;
     public LI_CLIENT_ID;
     public LI_CLIENT_SECRET;
-    modalRef: BsModalRef;
+
     public randomstr;
     public fb_access_token;
     public fbimg;
@@ -42,14 +43,14 @@ export class AffiliatedashboardComponent implements OnInit {
     public instabannerlist2;
     public uploadfolder;
     public fileurl;
-    public flag:any=0;
+
     public defaultadmedia;
     public defaultadimage;
     public defaultxpmedia;
     public defaultxpimage;
     public sponsorList;
     public bannerlist;
-    public sponserurl:any="https://yoursponserurl.com";
+
     public affiliatename;
     public afforderlist:any = [];
     public affunderme:any = [];
@@ -65,6 +66,16 @@ export class AffiliatedashboardComponent implements OnInit {
     public tablename:any="user";
     public affunderme_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate", "parent", "admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
     public affunderme_modify_header:any={'added time':"Date Added",'firstname':"First Name",'email':'Email','lastname':'Last Name'};
+    public selectedFile:any;
+    public tempUploadFilename:any;
+    public rawimage:any;
+    public base64image:any;
+    public errormsg:any='';
+    public sponserimg:any="";
+    public sponserurl:any="";
+    public flag:any=0;
+    modalRef: BsModalRef;
+    modalRef1: BsModalRef;
 
 
 
@@ -94,10 +105,12 @@ export class AffiliatedashboardComponent implements OnInit {
         userdata2 = JSON.parse(userdata2);
         if (typeof (userdata2) == 'undefined'){
             this.router.navigateByUrl('/login');
-        }else{
+        }
+        else{
             this.userid = userdata2._id;
             this.affiliatename = userdata2.username;
             this.sponserurl = userdata2.sponserurl;
+            this.sponserimg = userdata2.sponserimage;
             console.log(this.sponserurl);
            /* this.getUserDetails();
             this.getBannerList1();
@@ -132,6 +145,12 @@ export class AffiliatedashboardComponent implements OnInit {
 
 
         });
+    }
+    decline(): void {
+        this.modalRef.hide();
+    }
+    decline1(): void {
+        this.modalRef1.hide();
     }
     getafflist(){
         let link = this._commonservices.nodesslurl+'datalist';
@@ -171,7 +190,8 @@ export class AffiliatedashboardComponent implements OnInit {
                     let userdet = result.item;
                     this.userdetails = userdet;
                     this.username = userdet.username;
-
+                    this.sponserurl = userdet.sponserurl;
+                    this.sponserimg = userdet.sponserimage;
                     this.userlink = 'https://audiodeadline.com/signup/'+this.username;
                     if(userdet.parent != 0 && userdet.parent != ''){
                         this.getEnrollerDetails(userdet.parent);
@@ -454,7 +474,7 @@ export class AffiliatedashboardComponent implements OnInit {
         window.open('https://www.tumblr.com/widgets/share/tool?canonicalUrl='+encodeURIComponent(this.userlink)+'&title=Audio Deadline&caption=');
     }
     openmodal(template:TemplateRef<any>){
-        this.modalRef=this.modalService.show(template);
+        this.modalRef1=this.modalService.show(template);
     }
     updatesponserurl(){
 
@@ -462,15 +482,111 @@ export class AffiliatedashboardComponent implements OnInit {
         let dataval:any ={sponserurl:this.sponserurl,id:this.userdata.get('user_id')};
         let data:any = {data: dataval,source:'user'};
         console.log(data);
-        let link = this._commonservices.nodesslurl+'addorupdatedata';
-         this._http.post(link,data)
-         .subscribe(res=>{
-         let result:any = {};
-         result = res;
-         console.log(result);
-         });
-        return this.sponserurl;
+        if(this.sponserurl!='' && this.sponserurl!=null){
+            let link = this._commonservices.nodesslurl+'addorupdatedata';
+            this._http.post(link,data)
+                .subscribe(res=>{
+                    let result:any = {};
+                    result = res;
+                    console.log(result);
+                });
+            return this.sponserurl;
+            this.getUserDetails();
+        }else{
+            this.errormsg = "You haven't updated your Sponser URL!";
+        }
+
     }
+    changesponserimage(event){
+        this.selectedFile = event.target.files[0];
+
+        const uploadData = new FormData();
+        uploadData.append('file', this.selectedFile);
+
+        this._http.post(this._commonservices.uploadurl, uploadData)
+
+            .subscribe(value =>{
+                let res:any;
+                res = value;
+                console.log(res);
+                if(res.error_code == 0){
+                    this.sponserimg = res.filename;
+                    /*this.tempimgpath = this._commonservices.fileurl;
+
+                    this.image_pic = this.tempUploadFilename;
+                    this.showLoader = 0;
+                    this.addpicturearray.push({image_pic:this.image_pic,privacy:'public',title_pic:'',desc_pic:''});*/
+                    /*for(let i in this.addpicturearray){
+                     this.addmusicarray[i].murl = this.sanitizer.bypassSecurityTrustResourceUrl(this._commonservices.siteurl + 'nodeserver/uploads/audio/' + this.user_id + '/' + this.addmusicarray[i].music);
+                     }*/
+
+                }
+            });
+    }
+    cropimg1(template: TemplateRef<any>){
+        //noinspection TypeScriptValidateTypes
+        this.modalRef = this.modalService.show(template, {class: 'modal-lg'});
+        this.rawimage = '';
+        let link = this._commonservices.phpurl+'getbase64image1.php';
+        // let link = 'https://developmentapi.audiodeadline.com/getbase64image1.php';
+        let data = {fileurl: this.sponserimg};
+
+        this._http.post(link, data)
+            .subscribe(res => {
+                let result:any;
+                result = res;
+                console.log(result);
+                console.log(result.data);
+                this.rawimage = result.data;
+            });
+    }
+    crop1(){
+        this.rawimage = '';
+        let link = this._commonservices.phpurl+'saveCropImage1.php';
+        let data = {filename: this.sponserimg,base64image:this.base64image,cropwidth:1920,cropheight:401};
+
+        this._http.post(link, data)
+            .subscribe(res => {
+                // var result = res.text();
+                let result:any;
+                result = res;
+                console.log(result);
+                this.sponserimg = '';
+                this.sponserimg = result.data;
+                this.modalRef.hide();
+            }, error => {
+                console.log("Oooops!");
+            });
+    }
+
+    imageCropped(event: ImageCroppedEvent) {
+        this.base64image = event.base64;
+    }
+
+    updatesponserimage(){
+        let dataval:any ={sponserimage:this.sponserimg,id:this.userdata.get('user_id')};
+        let data:any = {data: dataval,source:'user'};
+        console.log(data);
+        if(this.sponserimg!='' && this.sponserimg!=null){
+            let link = this._commonservices.nodesslurl+'addorupdatedata';
+            this._http.post(link,data)
+                .subscribe(res=>{
+                    let result:any = {};
+                    result = res;
+                    console.log(result);
+                    if(result.status == "success"){
+                        this.modalRef1.hide();
+                        return this.sponserimg;
+                        this.getUserDetails();
+                    }
+                });
+
+        }else{
+            this.errormsg = "You haven't updated your Sponser Logo!";
+        }
+
+    }
+
 }
 
 function makeid() {

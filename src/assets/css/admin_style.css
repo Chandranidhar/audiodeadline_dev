@@ -891,8 +891,13 @@ img:focus, *img:focus{
     background: -ms-linear-gradient(top, rgba(235,203,58,1) 0%, rgba(237,210,75,1) 50%, rgba(230,193,7,1) 51%, rgba(230,193,7,1) 100%);
     background: linear-gradient(to bottom, rgba(235,203,58,1) 0%, rgba(237,210,75,1) 50%, rgba(230,193,7,1) 51%, rgba(230,193,7,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebcb3a', endColorstr='#e6c107', GradientType=0 );*/
-    margin: 0px 5px;
+    /*margin: 0px 5px;*/
+    margin: 10px 5px 0px 0px;
 }
+
+.loginbtn2:first-child, .loginbtn2:first-child:hover{margin-left: 0px !important;}
+
+
 /*
 
 .loginbtn2, .loginbtn2:hover{ width:auto; display:inline-block; margin:0px 0; cursor:pointer; border-radius:0px; margin-bottom:0px; font-family:'OpenSans-Semibold'; font-size:22px; color:#000; text-transform:uppercase; border:none; padding:5px 15px; border-radius:4px; background: rgba(235,203,58,1);
@@ -4124,3 +4129,81 @@ a.copybtn, a:hover.copybtn{
     margin-top: 10px!important;
     text-align: center!important;
 }
+
+
+
+
+
+
+
+.formnewpopup .embed-responsive {
+    position: relative;
+    display: block;
+    height: 0;
+    overflow: hidden;
+    width: 49%;
+    margin-top: 10px;
+    margin-right: 1%;
+}
+
+.formnewpopup .embed-responsive:nth-child(2n+2){
+    margin-right: 0;
+}
+
+.formnewpopup .form-group .col-md-8.text-left .col-md-4 {
+    margin-top: 7px;
+    padding-left: 0px;
+    height: 100px !important;
+    padding-right: 10px;
+}
+
+.formnewpopup .form-group .col-md-8.text-left .col-md-4.control-label.text-left {
+    height: auto !important;
+}
+
+
+.popupbtnwrapper{ width: 224px; margin: 0 auto;}
+
+ .btnimageuploadpopup {
+    width: 140px!important;
+    display: inline-block!important;
+
+    cursor: pointer!important;
+     font-family: 'OpenSans-Semibold';
+    font-size: 18px;
+    color: #000!important;
+    text-transform: uppercase;
+    border: none!important;
+    padding: 5px 15px!important;
+    border-radius: 4px!important;
+    background: rgba(235,203,58,1)!important;
+
+    margin: 10px 1px 0px 1px!important;
+     float: left;
+}
+
+
+
+
+
+
+.cropselectbtnpopup {
+    width: 80px!important;
+    display: inline-block!important;
+    cursor: pointer; float: left;
+
+    font-family: 'OpenSans-Semibold';
+    font-size: 18px!important;
+    color: #000!important;
+    text-transform: uppercase;
+    border: none!important;
+    padding: 5px 15px!important;
+    border-radius: 4px!important;
+    background: rgba(67,179,2,1)!important;
+    margin: 10px 1px 0px 1px!important;
+}
+
+.manage_imgblock img{max-width: 100%!important;}
+
+
+.copebtnwrapper{ padding-top: 5px;}

@@ -166,8 +166,11 @@
 
 <app-adminfooter></app-adminfooter>
 <ng-template #templateimage>
-  <div class="modal-body text-center modalcls">
-    <p>Banner Image</p>
+  <div class="modal-body copetitionpreview text-center modalcls">
+    <a style="cursor: pointer;" (click)="decline()" class="closebtn">X</a>
+    <div class="formnewpopupheader">
+      <h4>Banner Image</h4>
+    </div>
     <div class="text-center">
       <img style="max-width: 500px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{tempimage}}">
     </div>

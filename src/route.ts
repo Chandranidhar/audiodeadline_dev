@@ -266,6 +266,7 @@ const appRoutes: Routes = [
     { path: 'competition-stats', component: CompetitionStatsComponent},
     { path: 'media-interest-report', component: MediaInterestReportComponent},
     { path: 'affiliatemediamarketing', component: AffiliatemediamarketingComponent,resolve: {results: TestresolveService},data: { object: 'mediamarketdata' }},
+    { path: 'ambassadormediamarketing', component: AffiliatemediamarketingComponent,resolve: {results: TestresolveService},data: { object: 'mediamarketdata' }},
 
     { path: 'upcomingevents', component: UpcomingeventsComponent},
     { path: 'affiliatetree', component: AffiliatetreeComponent},

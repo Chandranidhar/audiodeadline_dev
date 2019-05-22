@@ -180,17 +180,17 @@
                     <td data-label="Display For">
                       <div class="newcheckboxdiv">
                         <div>
-                          <input id="checkbox1" type="checkbox" name="checkbox" value="1" [checked]="item.musicians==1 || item.dancer==1 || item.model==1 || item.producer==1 ||  item.fan==1"><label>Users</label>
+                          <input id="checkbox1" type="checkbox" name="checkbox" value="1" [checked]="item.musicians==1 || item.dancer==1 || item.model==1 || item.producer==1 ||  item.fan==1" (change)="allcheck(item,$event,'user')"><label>Users</label>
                           <div class="newcheckboxsubdiv">
-                            <div><input id="subcheckbox1" type="checkbox" name="subcheckbox1" [checked]="item.musicians==1"><label>Musician</label></div>
-                            <div><input id="subcheckbox2" type="checkbox" name="subcheckbox2" [checked]="item.dancer==1" ><label>Dancers</label></div>
-                            <div><input id="subcheckbox3" type="checkbox" name="subcheckbox3" [checked]="item.model==1"><label>Model</label></div>
-                            <div><input id="subcheckbox4" type="checkbox" name="subcheckbox4" [checked]="item.producer==1"><label>Producer</label></div>
-                            <div><input id="subcheckbox5" type="checkbox" name="subcheckbox5" [checked]="item.fan==1" ><label>Fan</label></div>
+                            <div><input id="subcheckbox1" type="checkbox" name="subcheckbox1" [checked]="item.musicians==1" (change)="checkval(item,$event,'musicians')"><label>Musician</label></div>
+                            <div><input id="subcheckbox2" type="checkbox" name="subcheckbox2" [checked]="item.dancer==1" (change)="checkval(item,$event,'dancer')"><label>Dancers</label></div>
+                            <div><input id="subcheckbox3" type="checkbox" name="subcheckbox3" [checked]="item.model==1" (change)="checkval(item,$event,'model')"><label>Model</label></div>
+                            <div><input id="subcheckbox4" type="checkbox" name="subcheckbox4" [checked]="item.producer==1" (change)="checkval(item,$event,'producer')"><label>Producer</label></div>
+                            <div><input id="subcheckbox5" type="checkbox" name="subcheckbox5" [checked]="item.fan==1" (change)="checkval(item,$event,'fan')" ><label>Fan</label></div>
                           </div>
                         </div>
-                        <div><input id="checkbox6" type="checkbox" name="checkbox6" [checked]="item.signupaffiliate==1"><label>Affiliates</label>  </div>
-                        <div><input id="checkbox7" type="checkbox" name="checkbox7" [checked]="item.ambassadors==1"><label>Ambassadors</label>  </div>
+                        <div><input id="checkbox6" type="checkbox" name="checkbox6" [checked]="item.signupaffiliate==1" (change)="checkval(item,$event,'signupaffiliate')"><label>Affiliates</label>  </div>
+                        <div><input id="checkbox7" type="checkbox" name="checkbox7" [checked]="item.ambassadors==1" (change)="checkval(item,$event,'ambassadors')"><label>Ambassadors</label>  </div>
                       </div>
 
                       <!--{{item.parentname}}-->

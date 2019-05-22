@@ -8,10 +8,57 @@
     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right afiliatedashboard">
       <div class="dashboard_right_wrapper">
         <div class="dashboard1_div1">
+          <div class="n-adminheadercls text-center sponsorblocknew">
+
+
+            <h3>Manage sponsor logos & URL</h3>
+
+
+            <div class="sponsorblocknew_block1">
+
+              <h2>sponsor logos</h2>
+
+              <div class="sponsorblocknew_block1_updateblock">
+                <div class="sponsorblocknew_block1_updateblock_wrapper">
+
+                  <img *ngIf="sponserimg=='' || sponserimg==null" src="../../assets/images/your_logo_here.png">
+                  <img *ngIf="sponserimg!='' && sponserimg!=null" src="{{_commonservices.fileurl}}{{sponserimg}}">
+
+                </div>
+              </div>
+              <div class="clearfix"></div>
+
+              <input type="button" value="Update" class="btn adminbtnred" (click)="openmodal(templatesponserlogo)">
+            </div>
+
+            <div class="sponsorblocknew_block1">
+
+              <h2>sponsor url</h2>
+
+              <div class="sponsorblocknew_block1_updateblock">
+                <div class="sponsorblocknew_block1_updateblock_wrapper">
+
+                  <p *ngIf="sponserurl=='' || sponserurl==null" (click)="flag= 1-flag;">https://yoursponserurl.com</p>
+                  <p *ngIf="sponserurl!='' && sponserurl!=null" (click)="flag= 1-flag;">{{sponserurl}}</p>
+                  <input type="text" *ngIf="flag==1" [(ngModel)]="sponserurl" >
+                  <p  *ngIf="(sponserurl=='' || sponserurl==null) " class="alert-danger">{{errormsg}}</p>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+              <input type="button" value="Update" class="btn adminbtnred" (click)="updatesponserurl()">
+            </div>
+
+            <div class="clearfix"></div>
+
+
+          </div>
           <div class="n-adminheadercls n-adminheaderclsnp text-center">
             <h4>Social Media Banners</h4>
             <div class="n-adminheaderclssub">
-              <h5>Share these banners with your friends to help spread the word about<br> <span>AudioDeadline</span> and <span>ArtistXP’s</span> exciting experience. </h5>
+             <!-- <h5>Share these banners with your friends to help spread the word about<br> <span>AudioDeadline</span> and <span>ArtistXP’s</span> exciting experience. </h5>-->
+              <h5>Share these banners with your followers and friends to start promoting now!<br>Anyone that signs up under you as an artist or a fan of an artist that purchases anything from <span>ArtistXP</span> and <span>AudioDeadline</span>, whether that be a ticket for the show or some sick merch, you get a commission.  Know someone with some powerful persuasion skills? Have them join as an affiliate and earn a commission from their follower's purchases.
+              </h5>
 
             </div>
           </div>
@@ -255,3 +302,42 @@
 </div>
 
 <app-adminfooter></app-adminfooter>
+<ng-template #templatesponserlogo>
+
+  <div class="modal-body copetitionpreview text-center modalcls n-modalcls">
+    <a style="cursor: pointer;" (click)="decline1()" class="closebtn">X</a>
+    <div class="formnewpopupheader">
+      <h4>Manage Sponser Logo</h4>
+    </div>
+    <input style="display: none" type="file" (change)="changesponserimage($event)" #fileInput>
+
+    <div class="text-center">
+      <img *ngIf="sponserimg=='' || sponserimg==null" src="../../assets/images/your_logo_here.png">
+      <div class="manage_imgblock"><img *ngIf="sponserimg!='' && sponserimg!=null" src="{{_commonservices.fileurl}}{{sponserimg}}"></div>
+      <div class="clearfix"></div>
+      <div class="popupbtnwrapper">
+        <input *ngIf="sponserimg!='' && sponserimg!=null" type="button" (click)="cropimg1(croptemplate1)" value="CROP" class="cropselectbtn cropselectbtnpopup">
+        <div class="file btn btnimageupload btnimageuploadpopup"  (click)="fileInput.click()"> Select File </div>
+        <div class="clearfix"></div>
+      </div>
+      <p class="alert-danger" *ngIf="sponserimg=='' || sponserimg==null">{{errormsg}}</p>
+      <input type="button" value="UPDATE Sponser Logo" class="btn adminbtnred" (click)="updatesponserimage()">
+    </div>
+
+  </div>
+</ng-template>
+<ng-template #croptemplate1>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="decline()" class="closebtn">X</a>
+    <div *ngIf="!rawimage" style="text-align: center;"><img style="width: 200px;" src="{{fileurl}}line-loader.gif" ></div>
+    <div *ngIf="rawimage">
+      <image-cropper
+              [imageBase64]="rawimage"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1.1"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage" class="copebtnwrapper text-center"><input type="button" value="save" (click)="crop1()" class="cropselectbtn"><input type="button" value="cancel" (click)="decline()" class="cropselectbtn cancelbtn"></div>
+  </div>
+</ng-template>
