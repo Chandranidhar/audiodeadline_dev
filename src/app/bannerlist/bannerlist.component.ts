@@ -298,7 +298,71 @@ export class BannerlistComponent implements OnInit {
         //noinspection TypeScriptValidateTypes
         this.modalRef = this.modalService.show(template, {class: 'modal-md addmedialist'});
     }
+    /*allcheck(item){
+        if(item.user == true){
+            item.fan = 1;
+            item.model = 1;
+            item.dancer = 1;
+            item.musician = 1;
+            item.producer = 1;
+        }else{
+            item.fan = 0;
+            item.model =0;
+            item.dancer = 0;
+            item.musician = 0;
+            item.producer = 0;
+        }
+        let dataval:any ={fan:item.fan,musician : item.musician, dancer: item.dancer, producer: item.producer, model:item.model, affiliate:item.affiliate, ambassador:item.ambassador,id:item._id};
+        let data:any = {data: dataval,source:'media'};
+        console.log(data);
+        let link = this._commonservices.nodesslurl+'addorupdatedata';
+        this._http.post(link,data)
+            .subscribe(res=>{
+                let result:any = {};
+                result = res;
+                console.log(result);
+                if(result.status == "success"){
+                    this.getBannerList();
+                }
+            });
+    }*/
+    allcheck(eventdata,event){
+
+        // var link = this.serverurl+'updateblogchange';
+
+        let data = eventdata;
+        if(event.target.checked){
+            data.dancer = 1;
+            data.model = 1;
+            data.musician = 1;
+            data.producer = 1;
+            data.fan = 1;
+        }else{
+            data.dancer = 0;
+            data.model = 0;
+            data.musician = 0;
+            data.producer = 0;
+            data.fan = 0;
+
+        }
+
+        let dataval:any ={fan:data.fan,musician : data.musician, dancer: data.dancer, producer: data.producer, model:data.model, affiliate:data.affiliate, ambassador:data.ambassador,id:data._id};
+        let data:any = {data: dataval,source:'media'};
+        console.log(data);
+        let link = this._commonservices.nodesslurl+'addorupdatedata';
+        this._http.post(link,data)
+            .subscribe(res=>{
+                let result:any = {};
+                result = res;
+                console.log(result);
+                if(result.status == "success"){
+                    this.getBannerList();
+                }
+            });
+
+    }
     changerole(item:any){
+
 
         // console.log(item.fan);
         if(item.fan == true){

@@ -227,8 +227,8 @@
                       <td data-label="Display for">
                         <div class="newcheckboxdiv">
                           <div>
-                            <input id="checkbox1" type="checkbox" name="checkbox" value="user"  [(ngModel)]="item.user" (click)="openrolediv(item._id)"><label>User</label>
-                            <div class="newcheckboxsubdiv" *ngIf="rolediv[item._id]==1">
+                            <input id="checkbox1" type="checkbox" name="checkbox" value="user" [(ngModel)]="item.user" (click)="allcheck(item,$event)"><label>User</label>
+                            <div class="newcheckboxsubdiv">
                               <div><input id="subcheckbox1" type="checkbox" name="checkbox" [(ngModel)]="item.fan" value="Fan" (change)="changerole(item)"><label>Fan</label></div>
                               <div><input id="subcheckbox2" type="checkbox" name="checkbox" value="Dancer" [(ngModel)]="item.dancer" (change)="changerole(item)"><label>Dancers</label></div>
                               <div><input id="subcheckbox3" type="checkbox" name="checkbox" value="Musician" [(ngModel)]="item.musician" (change)="changerole(item)"><label>Musician</label></div>

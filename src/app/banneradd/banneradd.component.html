@@ -177,11 +177,12 @@
       <div class="col-md-8">
         <select [formControl]="dataForm.controls['displayfor']" multiple="multiple" class="selecttype">
           <option value="">Select value</option>
-          <optgroup label="User">
-            <option value="Dancer">Dancer</option>
-            <option value="Model">Model</option>
-            <option value="Producer">Producer</option>
-            <option value="Musician">Musician</option>
+          <optgroup label="User" (click)="changeuserrole($event)">
+            <!--<option value="User" [selected]="changeuserrole()">User</option>-->
+            <option value="Dancer" >Dancer</option>
+            <option value="Model" >Model</option>
+            <option value="Producer" >Producer</option>
+            <option value="Musician" >Musician</option>
             <option value="Fan">Fan</option>
           </optgroup>
           <option value="Ambassador">Ambassador</option>

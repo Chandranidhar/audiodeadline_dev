@@ -58,6 +58,8 @@ export class BanneraddComponent implements OnInit {
   modalRef: BsModalRef;
   public base64image;
   public rawimage;
+  public role:any;
+  public displayfor:any=[];
 
   constructor(fb: FormBuilder,public _commonservices : Commonservices,private _http: HttpClient,private router: Router,private modalService: BsModalService, userdata: CookieService, public bannerlist:BannerlistComponent) {
     this.fb = fb;
@@ -292,6 +294,23 @@ export class BanneraddComponent implements OnInit {
         formval.affiliate = 1;
       }
     }
+    /*if(this.dataForm.controls['displayfor'].value !='' || this.dataForm.controls['displayfor'].value !=null){
+      console.log(this.dataForm.controls['displayfor'].value);
+      if(this.dataForm.controls['displayfor'].value.indexOf("User")>-1){
+        formval.dancer = 1;
+        formval.model = 1;
+        formval.producer = 1;
+        formval.musician = 1;
+        formval.fan = 1;
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Ambassador")>-1){
+        formval.ambassador = 1;
+        console.log(formval.ambassador);
+      }
+      if(this.dataForm.controls['displayfor'].value.indexOf("Affiliate")>-1){
+        formval.affiliate = 1;
+      }
+    }*/
     console.log(formval);
     if (this.dataForm.valid) {
       // var link = this.serverurl+'addmedia';
@@ -337,47 +356,32 @@ export class BanneraddComponent implements OnInit {
           });
     }
   }
-  editInlineFieldforInactive(fld_name,item,itemval){
-    var fld_val = 2;
-    if(fld_val != itemval){
-      // var link =this.serverurl+'updatemediainline';
-      var link =this._commonservices.nodesslurl1+'updatemediainline';
-      // var link =this._commonservices.nodesslurl+'updatemediainline';
-      var data = {_id: item._id,fieldname:fld_name,filedvalue:fld_val};
-
-      this._http.post(link, data)
-          .subscribe(res => {
-            let result:any;
-            result = res;
-            if(result.status == 'error'){
-             // this.inlineerror = result.msg;
-              return true;
-            }
-            item.isSortindexClicked = false;
-            item.isLabelClicked = false;
-            item.isStatusClicked = false;
-            if(result.status == 'success'){
-              if(fld_name == 'sortindex'){
-                item.sortindex = fld_val;
-              }
-              if(fld_name == 'label'){
-                item.label = fld_val;
-              }
-              if(fld_name == 'status'){
-                item.status = fld_val;
-              }
-            }
-          },error => {
-            item.isSortindexClicked = false;
-            item.isLabelClicked = false;
-            item.isStatusClicked = false;
-            console.log("Oooops!");
-          });
-    }else{
-      item.isSortindexClicked = false;
-      item.isLabelClicked = false;
-      item.isStatusClicked = false;
+  changeuserrole(event){
+    /*console.log(event);
+    console.log(event.srcElement);*/
+    //console.log(event.srcElement.attributes[2].nodeValue);
+    console.log(event.target);
+    let target = event.target || event.srcElement || event.currentTarget;
+    console.log(target.val);
+    console.log(target);
+    console.log(target.tagName);
+    if(target.tagName=='OPTGROUP') {
+      this.displayfor = [];
+      this.displayfor.push('Dancer', 'Model', 'Producer', 'Musician', 'Fan');
+      this.dataForm.controls['displayfor'].setValue(this.displayfor);
     }
+
+    // console.log(event.currentTarget);
+    // console.log(this.dataForm.controls['displayfor'].value);
+   /* // if(this.dataForm.controls['displayfor'].value.indexOf('User')>-1){
+
+    console.log(event.currentTarget);
+    console.log(this.dataForm.controls['displayfor'].value);*/
+    // }
+  }
+  singlerole(){
+
+
   }
   cropimg1(template: TemplateRef<any>){
     //noinspection TypeScriptValidateTypes
