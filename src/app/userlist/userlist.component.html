@@ -139,6 +139,17 @@
                     <li>
                       <div>
                         <div class="input-group col-md-12">
+                          <input style="border-radius: 0;" placeholder="Search By Date" name="searchText3" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
                           <select class="form-control input-lg" [(ngModel)]="searchByRole" name="searchByRole">
                             <option value="">Search By Role</option>
                             <option value="">All</option>
@@ -165,7 +176,7 @@
             </div>
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
-                <div class="tablediv" *ngIf="userlist!=null && userlist.length>0">
+                <div class="tablediv" >
 
                   <table>
                     <thead>
@@ -192,20 +203,20 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of userlist | namefilter : searchText | serchbyrole : searchByRole | compfilter : searchText2 : 'status' | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <tr *ngFor="let item of userlist | namefilter : searchText | userdatesearch : searchText3 | serchbyrole : searchByRole | compfilter : searchText2 : 'status' | paginate: { itemsPerPage: 10, currentPage: p }">
                       <td class="empycell"></td>
-                      <td data-label="Date" style="min-width: 95px;">{{(item.added_time*1000) | date :  "MM/dd/yyyy"}}</td>
+                      <td data-label="Date" style="min-width: 95px;">{{(item.added_time) | date :"MM/dd/yyyy"}}</td>
                       <td data-label="First">{{item.firstname}}</td>
                       <td data-label="Last">{{item.lastname}}</td>
-                      <td data-label="Enroller">{{item.parentname}}</td>
+                      <td data-label="Enroller">{{item.parent}}</td>
                       <td data-label="Phone">{{item.phone}}</td>
                       <td data-label="Role" style="min-width: 100px;">
                         <div class="newcheckboxdiv">
-                          <div><input id="checkbox1" type="checkbox" name="checkbox" [checked]="item.musicians" (change)="cngChk($event,item,'musicians')"><label>Musician</label></div>
-                          <div><input id="checkbox2" type="checkbox" name="checkbox" [checked]="item.dancer" (change)="cngChk($event,item,'dancer')"><label>Dancer</label></div>
-                          <div><input id="checkbox3" type="checkbox" name="checkbox" [checked]="item.model" (change)="cngChk($event,item,'model')"><label>Model</label></div>
-                          <div><input id="checkbox4" type="checkbox" name="checkbox" [checked]="item.signupaffiliate" (change)="cngChk($event,item,'signupaffiliate')"><label>Affiliate</label></div>
-                          <div><input id="checkbox5" type="checkbox" name="checkbox" [checked]="item.fan" disabled="disabled"><label>Fan</label></div>
+                          <div><input id="checkbox1" type="checkbox" name="checkbox" [checked]="item.musicians==1" (change)="cngChk($event,item,'musicians')"><label>Musician</label></div>
+                          <div><input id="checkbox2" type="checkbox" name="checkbox" [checked]="item.dancer==1" (change)="cngChk($event,item,'dancer')"><label>Dancer</label></div>
+                          <div><input id="checkbox3" type="checkbox" name="checkbox" [checked]="item.model==1" (change)="cngChk($event,item,'model')"><label>Model</label></div>
+                          <div><input id="checkbox4" type="checkbox" name="checkbox" [checked]="item.signupaffiliate==1" (change)="cngChk($event,item,'signupaffiliate')"><label>Affiliate</label></div>
+                          <div><input id="checkbox5" type="checkbox" name="checkbox" [checked]="item.fan==1" disabled="disabled"><label>Fan</label></div>
                         </div>
                         <!--<div>
                           <div><span><input type="checkbox" [checked]="item.musicians" (change)="cngChk($event,item,'musicians')"></span><label>Musician</label></div>
@@ -224,31 +235,10 @@
                         <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i><!--<span>Delete</span>--></a>
                       </td>
 
-                      <!--<td>{{item.fullname}}</td>
-                      <td>{{item.email}}</td>
-                      <td>{{item.parentname}}</td>
-                      <td>{{item.phone}}</td>
-                      <td style="text-transform: capitalize">{{item.gender}}</td>
-                      <td data-label="Added on" style="min-width: 95px;">{{(item.added_time*1000) | date :  "MM/dd/yyyy"}}</td>
-                      <td data-label="Role" style="min-width: 100px;">
-                        <div>
-                          <div><span><input type="checkbox" [checked]="item.musicians" (change)="cngChk($event,item,'musicians')"></span><label>Musician</label></div>
-                          <div><span><input type="checkbox" [checked]="item.dancer" (change)="cngChk($event,item,'dancer')"></span><label>Dancer</label></div>
-                          <div><span><input type="checkbox" [checked]="item.model" (change)="cngChk($event,item,'model')"></span><label>Model</label></div>
-                          <div><span><input type="checkbox" [checked]="item.signupaffiliate" (change)="cngChk($event,item,'signupaffiliate')"></span><label>Affiliate</label></div>
-                          <div><span><input type="checkbox" [checked]="item.fan" disabled="disabled"></span><label>Fan</label></div>
-                        </div>
-                      </td>
-                      <td data-label="Status">
-                        <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
-                        <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
-                      </td>
-                      <td data-label="Action" class="whitebtnlists">
-                        <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-close"></i>&lt;!&ndash;<span>Delete</span>&ndash;&gt;</a>
-                      </td>-->
+
                       <td class="empycell"></td>
                     </tr>
-                    <tr *ngIf="!(userlist | namefilter : searchText | serchbyrole : searchByRole | compfilter : searchText2 : 'status').length && !loadinglist">
+                    <tr *ngIf="!(userlist | namefilter : searchText | userdatesearch : searchText3  | serchbyrole : searchByRole | compfilter : searchText2 : 'status').length && !loadinglist">
                       <td class="empycell"></td>
                       <td colspan="8" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
                       <td class="empycell"></td>
@@ -260,105 +250,11 @@
                     </tr>
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(userlist | namefilter : searchText | serchbyrole : searchByRole | compfilter : searchText2 : 'status').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
-                </div>
-                <div class="tablediv" *ngIf="affiliateuserlist!=null && affiliateuserlist.length>0">
 
-                  <table>
-                    <thead>
-                    <tr>
-                      <th class="empycell"></th>
-                      <!--<th>Name</th>
-                      <th>Email</th>
-                      <th>Enroller</th>
-                      <th>Phone</th>
-                      <th>Gender</th>
-                      <th>Added on</th>
-                      <th>Role</th>
-                      <th>Status</th>
-                      <th>Action</th>-->
-                      <th>Date</th>
-                      <th>First</th>
-                      <th>Last</th>
-                      <th>Enroller</th>
-                      <th>Phone</th>
-                      <th>Role</th>
-                      <th class="text-center">Status</th>
-                      <th class="text-center">Action</th>
-                      <th class="empycell"></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let item of affiliateuserlist | namefilter : searchText | serchbyrole : searchByRole | compfilter : searchText2 : 'status' | paginate: { itemsPerPage: 10, currentPage: p }">
-                      <td class="empycell"></td>
-                      <td data-label="Date" style="min-width: 95px;">{{(item.added_time*1000) | date :  "MM/dd/yyyy"}}</td>
-                      <td data-label="Firstname">{{item.firstname}}</td>
-                      <td data-label="Lastname">{{item.lastname}}</td>
-                      <td data-label="Enroller">{{item.fullname}}</td>
-                      <td data-label="Phone">{{item.phone}}</td>
-                      <td data-label="Role" style="min-width: 100px;">
-                        <div class="newcheckboxdiv">
-                          <div><input id="checkbox1" type="checkbox" name="checkbox" [checked]="item.musicians" (change)="cngChk($event,item,'musicians')"><label>Musician</label></div>
-                          <div><input id="checkbox2" type="checkbox" name="checkbox" [checked]="item.dancer" (change)="cngChk($event,item,'dancer')"><label>Dancer</label></div>
-                          <div><input id="checkbox3" type="checkbox" name="checkbox" [checked]="item.model" (change)="cngChk($event,item,'model')"><label>Model</label></div>
-                          <div><input id="checkbox4" type="checkbox" name="checkbox" [checked]="item.signupaffiliate" (change)="cngChk($event,item,'signupaffiliate')"><label>Affiliate</label></div>
-                          <div><input id="checkbox5" type="checkbox" name="checkbox" [checked]="item.fan" disabled="disabled"><label>Fan</label></div>
-                        </div>
-                        <!--<div>
-                          <div><span><input type="checkbox" [checked]="item.musicians" (change)="cngChk($event,item,'musicians')"></span><label>Musician</label></div>
-                          <div><span><input type="checkbox" [checked]="item.dancer" (change)="cngChk($event,item,'dancer')"></span><label>Dancer</label></div>
-                          <div><span><input type="checkbox" [checked]="item.model" (change)="cngChk($event,item,'model')"></span><label>Model</label></div>
-                          <div><span><input type="checkbox" [checked]="item.signupaffiliate" (change)="cngChk($event,item,'signupaffiliate')"></span><label>Affiliate</label></div>
-                          <div><span><input type="checkbox" [checked]="item.fan" disabled="disabled"></span><label>Fan</label></div>
-                        </div>-->
-                      </td>
-                      <td data-label="Status" class="text-center">
-                        <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
-                        <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
-                      </td>
-                      <td data-label="Action" class="whitebtnlists text-center">
-                        <a href="javascript:void(0)" class="loginbtn2 btnedit btnwhite" (click)="openEditModal(edituser)"><i class="fa fa-pencil-square-o"></i></a>
-                        <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i><!--<span>Delete</span>--></a>
-                      </td>
+                  <pagination-controls  *ngIf="(userlist | namefilter : searchText | userdatesearch : searchText3  | serchbyrole : searchByRole | compfilter : searchText2 : 'status').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
 
-                      <!--<td>{{item.fullname}}</td>
-                      <td>{{item.email}}</td>
-                      <td>{{item.parentname}}</td>
-                      <td>{{item.phone}}</td>
-                      <td style="text-transform: capitalize">{{item.gender}}</td>
-                      <td data-label="Added on" style="min-width: 95px;">{{(item.added_time*1000) | date :  "MM/dd/yyyy"}}</td>
-                      <td data-label="Role" style="min-width: 100px;">
-                        <div>
-                          <div><span><input type="checkbox" [checked]="item.musicians" (change)="cngChk($event,item,'musicians')"></span><label>Musician</label></div>
-                          <div><span><input type="checkbox" [checked]="item.dancer" (change)="cngChk($event,item,'dancer')"></span><label>Dancer</label></div>
-                          <div><span><input type="checkbox" [checked]="item.model" (change)="cngChk($event,item,'model')"></span><label>Model</label></div>
-                          <div><span><input type="checkbox" [checked]="item.signupaffiliate" (change)="cngChk($event,item,'signupaffiliate')"></span><label>Affiliate</label></div>
-                          <div><span><input type="checkbox" [checked]="item.fan" disabled="disabled"></span><label>Fan</label></div>
-                        </div>
-                      </td>
-                      <td data-label="Status">
-                        <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
-                        <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
-                      </td>
-                      <td data-label="Action" class="whitebtnlists">
-                        <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-close"></i>&lt;!&ndash;<span>Delete</span>&ndash;&gt;</a>
-                      </td>-->
-                      <td class="empycell"></td>
-                    </tr>
-                    <tr *ngIf="!(affiliateuserlist | namefilter : searchText | serchbyrole : searchByRole | compfilter : searchText2 : 'status').length && !loadinglist">
-                      <td class="empycell"></td>
-                      <td colspan="8" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
-                      <td class="empycell"></td>
-                    </tr>
-                    <tr *ngIf="loadinglist">
-                      <td class="empycell"></td>
-                      <td colspan="8" style="text-align: center;"><div class="loadertabledata"></div><!--<img src="../../assets/images/loader.gif" style="width: 100px;">--></td>
-                      <td class="empycell"></td>
-                    </tr>
-                    </tbody>
-                  </table>
-                  <pagination-controls  *ngIf="(affiliateuserlist | namefilter : searchText | serchbyrole : searchByRole | compfilter : searchText2 : 'status').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
                 </div>
+
               </div>
             </div>
           </div>

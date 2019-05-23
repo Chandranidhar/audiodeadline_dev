@@ -67,7 +67,7 @@
 <app-adminheader></app-adminheader>
 
 <div class="container-fluid dashboard_body">
-  <!--<div class="dashboard_wrappertop">
+ <!-- <div class="dashboard_wrappertop">
     <div class="dashboradtoplogo">
       <img src="../../assets/images/logo.png">
     </div>
@@ -83,11 +83,146 @@
             <h4>Sponsor List</h4>
           </div>
           <div class="dashboardwrapper">
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="search by date" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <a (click)="openAddModal(sponser)" class="loginbtn2"><i class="fa fa-plus"></i> Add Sponsers</a>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
             <div class="tabcontentwrapper">
+              <div class="tabcontentwrapper">
+                <div class="adminlisttable adminlisttabledashboard">
+                  <div class="tablediv">
+
+                    <table>
+                      <thead>
+                      <tr>
+                        <th class="empycell"></th>
+                        <th>Name Of Sponser</th>
+                        <th>Type Of Sponser</th>
+                        <th>Banner</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let item of sponsorList">
+                        <td class="empycell"></td>
+                        <td style="min-width: 166px;">{{item.sponser}}</td>
+                        <td data-label="Title" style="min-width: 150px;">
+                          <span *ngIf="!item.sponsorList" style="cursor: pointer;">{{item.type_of_sponser}}</span>
+                         <!-- <span *ngIf="item.isLabelClicked"><input type="text" name="label" value="{{item.sponser}}" (blur)="sponsorList($event,'label',item,item.sponser)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 135px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>-->
+                        </td>
+                        <td data-label="Title" style="min-width: 150px;">
+                         <!-- <span *ngIf="!item.sponsorList" style="cursor: pointer;">{{fileurl}}{{item.banner}}</span>-->
+                          <img style="max-width: 230px;" src="{{fileurl}}{{item.banner}}">
+                        </td>
+                        <!--<td data-label="Banner Image" class="text-center">
+                          <img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}">
+                        </td>-->
+                        <!--<td data-label="Date">{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
+                        <td data-label="# Of Click" style="text-align: center;">
+                          {{item.noofclick}}-->
+                          <!-- <span *ngIf="!item.isSortindexClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'sortindex')">{{item.sortindex}}</span>
+                           <span *ngIf="item.isSortindexClicked"><input type="number" name="sortindex" value="{{item.sortindex}}" (blur)="editInlineField($event,'sortindex',item,item.sortindex)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 70px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>-->
+                     <!--   </td>-->
+        <!-- <td data-label="# Of Signups" style="text-align: center;">{{item.noofsignup}}</td>-->
+                        <td data-label="Status" class="statuscls">
+                          <!--<span *ngIf="!sponsorList" [ngClass]="(item.status == 1? 'statusactive' : (item.status == 0 ? 'statusinactive' : 'statuspendinng'))">{{getstatusname(item.status)}}</span>-->
+                         <!-- <span *ngIf="sponsorList && !item.status" [ngClass]="(item.status == 1? 'statusactive' : (item.status == 2? 'statusinactive' : 'statuspendinng'))" (click)="clickedfunction(item,'status')" style="cursor: pointer">{{getstatusname(item.status)}}</span>-->
+                          <span  class="statusclsdropdown">
+                          <select name="status"  (change)="selectblur($event,item)">
+                            <option value="1" [selected]="item.status == 1">Active</option>
+                            <option value="0" [selected]="item.status == 0">Inactive</option>
+
+                          </select>
+                          <br><span style="color: #ff0000;">{{inlineerror}}</span>
+                        </span>
+                        </td>
+                        <td data-label="Action" class="whitebtnlists">
+                          <a class="loginbtn2 btnedit btnwhite" (click)="openEditModal(editsponser,item._id)"><i class="fa fa-pencil-square-o"></i></a>
+                          <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i></a>
+                        </td>
+                        <!--<td data-label="Type" style="min-width: 166px;">{{getTypeName(item.type)}}</td>
+                        <td data-label="Sponsor" style="text-align: center;">{{getSponsorName(item.sponsor)}}</td>
+                        <td data-label="Image"><img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}"></td>
+                        &lt;!&ndash;<td data-label="Image" style="text-align: center;">{{item.noofclick}}</td>&ndash;&gt;
+
+                        <td data-label="Sort Index">
+                          <span *ngIf="!isadmin" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))">{{getStatusName(item.status)}}</span>
+                          <span *ngIf="isadmin && !item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item,'status')" style="cursor: pointer">{{getStatusName(item.status)}}</span>
+                          <span *ngIf="isadmin && item.isStatusClicked">
+                            <select name="status" (change)="editInlineField($event,'status',item,item.status)" (blur)="selectblur(item)">
+                              <option value="1" [selected]="item.status == 1">Active</option>
+                              <option value="2" [selected]="item.status == 2">Inactive</option>
+                              <option value="3" [selected]="item.status == 3">Pending</option>
+                            </select>
+                            <br><span style="color: #ff0000;">{{inlineerror}}</span>
+                          </span>
+                        </td>
+                        <td data-label="Action">
+                          <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
+                        </td>-->
+                      </tr>
+                      <!--<tr *ngIf="!bannerlist ">
+                        <td class="empycell"></td>
+                        <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                        <td class="empycell"></td>
+                      </tr>
+                      <tr *ngIf="loadinglist">
+                        <td class="empycell"></td>
+                        <td colspan="7" style="text-align: center;"><div class="loadertabledata"></div></td>
+                        <td class="empycell"></td>
+                      </tr>-->
+                      </tbody>
+                    </table>
+                    <!--<pagination-controls  *ngIf="(bannerlist | datefilter : searchText3 | bannerfiltertext : searchText | bannerfilter : searchType | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                  </div>
+                </div>
+                <div class="tabcontentwrapperoverlay"></div>
+              </div>
+              <!--<div class="row socialsinglepostlists">
+                <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost" [ngStyle]="{'border-bottom':bannerlist.length ? '1px solid #d6d6d6' : 'none' }">
+                  <div class="row socialsinglepostcontent" *ngIf="!sponsorList.length" style="text-align: center; color: #ee680f; font-family: 'OpenSans-Semibold'; font-size: 19px;">No Record Found</div>
+                  <div class="row socialsinglepostcontent" *ngIf="sponsorList.length">
+                    <div class="sponsorblock" *ngFor="let sp of sponsorList" [ngClass]="{'hide': (!(bannerlist | bannerbysponsor: sp.name).length)}">
+                      <h2>{{sp.label}}</h2>
+                      <div class="col-md-3 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist | bannerbysponsor: sp.name">
+                        <div class="socialsinglepostimgwrapper">
+                          <img src="{{fileurl}}{{uploadfolder}}{{item.image}}">
+                        </div>
+                        <div class="socialsinglepostright">
+                          <div class="btnsocialsharenewlists">
+                            <a class="btn btnsocialsharenew btnfb" (click)="postinfb(item.sponsor,item.name,item.image,affiliatename)"><span>Post In Facebook</span></a>
+                            <a class="btn btnsocialsharenew btntwit" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Twitter</span></a>
+                            <a class="btn btnsocialsharenew btnin" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Linkedin</span></a>
+                            <a class="btn btnsocialsharenew btntumblr" href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}&posttype=link" target="_blank"><span>Post In Tumblr</span></a>
+                            <a class="btn btnsocialsharenew btngplus" href="https://plus.google.com/share?url=http%3A%2F%2Faudiodeadline.com%2Fsharetool22.php%3Ftype%3Dticketsale%26sponsorname%3D{{item.sponsor}}%26media_id%3D{{item.name}}%26image%3D{{item.image}}%26affiliate%3D{{affiliatename}}" target="_blank"><span>Post In Google+</span></a>
+                            <a class="btn btnsocialsharenew btngrapurl" (click)="copyText('http://audiodeadline.com/sharetool22.php?type=ticketsale&sponsorname='+item.sponsor+'&media_id='+item.name+'&image='+item.image+'&affiliate='+affiliatename)"><span>Grab URL</span></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>-->
               <div class="row socialsinglepostlists">
                 <div class="col-md-12 col-sm-12 col-xs-12 socialsinglepost" [ngStyle]="{'border-bottom':bannerlist.length ? '1px solid #d6d6d6' : 'none' }">
-                  <div class="row socialsinglepostcontent" *ngIf="!bannerlist.length" style="text-align: center; color: #ee680f; font-family: 'OpenSans-Semibold'; font-size: 19px;">No Record Found</div>
-                  <div class="row socialsinglepostcontent" *ngIf="bannerlist.length">
+                  <div class="row socialsinglepostcontent" *ngIf="!sponsorList.length" style="text-align: center; color: #ee680f; font-family: 'OpenSans-Semibold'; font-size: 19px;">No Record Found</div>
+                  <div class="row socialsinglepostcontent" *ngIf="sponsorList.length">
                     <div class="sponsorblock" *ngFor="let sp of sponsorList" [ngClass]="{'hide': (!(bannerlist | bannerbysponsor: sp.name).length)}">
                       <h2>{{sp.label}}</h2>
                       <div class="col-md-3 col-sm-6 col-xs-12 socialsinglepostcontentinner" *ngFor="let item of bannerlist | bannerbysponsor: sp.name">
@@ -118,19 +253,129 @@
   </div>
 </div>
 
-<app-adminfooter></app-adminfooter>
+  <app-adminfooter></app-adminfooter>
 
 <ng-template #template>
-  <div class="modal-body text-center modalcls modalclswrapper">
-    <h1>Add or Edit Mail Body</h1>
-    <h2>Subject</h2>
-    <input type="text" name="mailsubject" [(ngModel)]="mailsubject">
-    <h2>Mail Body</h2>
-    <ck-editor name="mailbody" [(ngModel)]="mailbody" skin="moono-lisa" language="en" [fullPage]="false"></ck-editor>
-    <div class="text-center activebtnclsnew">
-      <button type="button" class="btnedit" (click)="confirm()" >Save</button>
-      <button type="button" class="btndelete" (click)="decline()" >Cancel</button>
+  <div class="modal-body text-center modalcls">
+    <p>Are you sure to delete this sponser?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm1()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline1()" >No</button>
     </div>
 
+  </div>
+</ng-template>
+<ng-template #editsponser>
+  <div class="modal-body text-center modalcls n-modalcls">
+   <app-sponsorlist [id]="id"></app-sponsorlist>
+  </div>
+</ng-template>
+
+<ng-template #sponser>
+  <div class="modal-body text-center modalcls n-modalcls">
+    <div class="formnewpopupheader">
+      <h4>Add Sponser</h4>
+    </div>
+
+    <div class="dashboard1form formnewpopup">
+      <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)" class="form-horizontal">
+        <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Sponser</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="promocode" placeholder="Sponser*" [formControl]="dataForm.controls['sponser']">
+            <span *ngIf ="dataForm.controls['sponser'].touched && !dataForm.controls['sponser'].valid" class="has-error"> Sponser field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Type of Sponsor</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="type_of_sponser" placeholder="Type of Sponsor*" [formControl]="dataForm.controls['type_of_sponser']">
+            <span *ngIf ="dataForm.controls['type_of_sponser'].touched && !dataForm.controls['type_of_sponser'].valid" class="has-error"> Type of Sponsor field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Banner</label>
+          </div>
+        <div class="col-md-8">
+
+          <input type="file" class="form-control" name="banner" placeholder="Banner*" [formControl]="dataForm.controls['banner']"  (change)="changesponserimage($event)" #fileInput>
+          <!--<span *ngIf ="dataForm.controls['banner'].touched && !dataForm.controls['banner'].valid" class="has-error"> Type of Sponsor field can not be blank</span>-->
+
+        </div>
+
+          <div class="manage_imgblock"><img *ngIf="sponserimg!='' && sponserimg!=null" src="{{_commonservices.fileurl}}{{sponserimg}}"></div>
+          <input *ngIf="sponserimg!='' && sponserimg!=null" type="button" (click)="cropimg1(croptemplate1)" value="CROP" class="cropselectbtn cropselectbtnpopup">
+        </div>
+          <div class="form-group">
+            <div class="col-md-4 control-label text-left">
+              <label>*Status</label>
+            </div>
+            <div class="col-md-8">
+              <select class="form-control"  name="status"  [formControl]="dataForm.controls['status']">
+                <option value="1">Select Status</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </select>
+              <!--<input type="text" class="form-control" name="status" placeholder="Status*" [formControl]="dataForm.controls['status']">-->
+              <span *ngIf ="dataForm.controls['status'].touched && !dataForm.controls['status'].valid" class="has-error"> Status field can not be blank</span>
+            </div>
+          </div>
+        <!--<div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Banner</label>
+          </div>
+          <div class="col-md-8">
+            <select class="form-control"  name="type"  [formControl]="dataForm.controls['type']">
+              <option value="">Select One</option>
+              <option value="flat">Flat</option>
+              <option value="percentage">Percentage</option>
+            </select>
+            <span *ngIf ="dataForm.controls['type'].touched && !dataForm.controls['type'].valid" class="has-error"> Type field can not be blank</span>
+          </div>
+        </div>-->
+        <!--<div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Start Date</label>
+          </div>
+          <div class="col-md-8">
+            <input type="date" class="form-control" name="startdate" placeholder="Startdate" [formControl]="dataForm.controls['startdate']">
+            <span *ngIf ="dataForm.controls['startdate'].touched && !dataForm.controls['startdate'].valid" class="has-error">startdate amount field can not be blank</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*End Date</label>
+          </div>
+          <div class="col-md-8">
+            <input type="date" class="form-control" name="enddate" placeholder="End Date" [formControl]="dataForm.controls['enddate']">
+            <span *ngIf ="dataForm.controls['enddate'].touched && !dataForm.controls['enddate'].valid" class="has-error">end date amount field can not be blank</span>
+          </div>
+        </div>-->
+
+        <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+          </form>
+    </div>
+  </div>
+</ng-template>
+<ng-template #croptemplate1>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="decline()" class="closebtn">X</a>
+    <div *ngIf="!rawimage" style="text-align: center;"><img style="width: 200px;" src="{{fileurl}}line-loader.gif" ></div>
+    <div *ngIf="rawimage">
+      <image-cropper
+              [imageBase64]="rawimage"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1.1"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage" class="copebtnwrapper text-center"><input type="button" value="save" (click)="crop1()" class="cropselectbtn"><input type="button" value="cancel" (click)="decline()" class="cropselectbtn cancelbtn"></div>
   </div>
 </ng-template>

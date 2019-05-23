@@ -151,6 +151,7 @@ import {DemoMaterialModule} from '../material-module';
 import { BannerfiltertextPipe } from './bannerfiltertext.pipe';
 import { DatefilterPipe } from './datefilter.pipe';
 import { DateblogpipePipe } from './dateblogpipe.pipe';
+import { UserdatesearchPipe } from './userdatesearch.pipe';
 
 
 @NgModule({
@@ -285,7 +286,8 @@ import { DateblogpipePipe } from './dateblogpipe.pipe';
     SavedcardsComponent,
     BannerfiltertextPipe,
     DatefilterPipe,
-    DateblogpipePipe
+    DateblogpipePipe,
+    UserdatesearchPipe
   ],
   imports: [
     ImageCropperModule,

@@ -40,7 +40,8 @@ export class ManageCompetitionSignupComponent implements OnInit {
   public competitionlist;
   public genrelist;
 
-  constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService,private sanitizer:DomSanitizer,public activeRoute:ActivatedRoute) {
+  constructor(fb: FormBuilder, private _commonservices: Commonservices,private _http: HttpClient,
+              private modalService: BsModalService,private sanitizer:DomSanitizer,public activeRoute:ActivatedRoute) {
     this.fb = fb;
     this.serverurl=_commonservices.url;
     this.fileurl=_commonservices.fileurl;

@@ -119,6 +119,23 @@ export class TestresolveService implements Resolve<EndpointComponent> {
             });
             });
         }
+        if(route.data.object == 'blogsresolve'){
+
+            endpoint=route.data.object;
+
+            console.log(endpoint);
+            console.log(state);
+
+            return new Promise((resolve) => { this.getblogsList().subscribe(api_object => {
+                if (api_object) {
+                    return resolve(api_object);
+                } else { // id not found
+                    // this.router.navigateByUrl('/login');
+                    return true;
+                }
+            });
+            });
+        }
         if(route.data.object == 'orderlistaff'){
 
             endpoint=route.data.object;
@@ -206,6 +223,32 @@ export class TestresolveService implements Resolve<EndpointComponent> {
 
 
         }
+        if(route.data.object=='sponserlistresolve'){
+            endpoint=route.data.object;
+            console.log(endpoint);
+            console.log(state);
+            return new Promise((resolve)=>{this.sponserlist().subscribe(api_object=>{
+                if(api_object){
+                    return resolve(api_object);
+                }
+                else{
+                    return true;
+                }
+            })})
+        }
+        if(route.data.object=='userlistresolve'){
+            endpoint=route.data.object;
+            console.log(endpoint);
+            console.log(state);
+            return new Promise((resolve)=>{this.userlist().subscribe(api_object=>{
+                if(api_object){
+                    return resolve(api_object);
+                }
+                else{
+                    return true;
+                }
+            })})
+        }
 
     }
 
@@ -276,6 +319,22 @@ export class TestresolveService implements Resolve<EndpointComponent> {
     affiliatelist(){
         let link=this.url+'datalist';
         let result=this._http.post(link,({'source':'user_affiliate'})).pipe(map(res=>res));
+        return result;
+    }
+    getblogsList(){
+        let link=this.url+'datalist';
+        // let result=this._http.post(link,({'source':'newmediaview ',"condition":{"username":val}})).pipe(map(res=>res));
+        let result=this._http.post(link,({'source':'newmediaview'})).pipe(map(res=>res));
+        return result;
+    }
+    sponserlist(){
+        let link=this.url+'datalist';
+        let result=this._http.post(link,({'source':'sponser'})).pipe(map(res=>res));
+        return result;
+    }
+    userlist(){
+        let link=this.url+'datalist';
+        let result=this._http.post(link,({'source':'all_users'})).pipe(map(res=>res));
         return result;
     }
 // {"condition":{"parent": "banetest"},"source": "newcommision"}

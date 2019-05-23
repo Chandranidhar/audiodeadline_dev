@@ -153,7 +153,7 @@ const appRoutes: Routes = [
     { path: 'edit-ambassador/:id', component: AdmineditComponent},
     // { path: 'affiliate-list', component: AffiliatelistComponent},
     { path: 'affiliate-list', component: AffiliatelistComponent,resolve:{results:TestresolveService},data:{object:'affiliateresolve'}},
-    { path: 'user-list', component: UserlistComponent},
+    // { path: 'user-list', component: UserlistComponent},
     { path: 'my-account', component: MyaccountComponent},
     { path: 'update-profile', component: UpdateprofileComponent},
     { path: 'change-password', component: ChangepasswordComponent},
@@ -176,7 +176,7 @@ const appRoutes: Routes = [
     { path: 'affiliate-report', component: AffiliatereportComponent},
     { path: 'blogs', component: BlogsComponent},
     { path: 'blog-details/:id', component: BlogdetailsComponent},
-    { path: 'sponsor-list', component: SponsorlistComponent},
+    // { path: 'sponsor-list', component: SponsorlistComponent},
     { path: 'resetpassword/:accesscode', component: ResetpasswordComponent},
     { path: 'ambassador-signup', component: AmbassadorsignupComponent},
     { path: 'ambassador-opportunity', component: AmbassadoropportunityComponent},
@@ -267,10 +267,11 @@ const appRoutes: Routes = [
     { path: 'media-interest-report', component: MediaInterestReportComponent},
     { path: 'affiliatemediamarketing', component: AffiliatemediamarketingComponent,resolve: {results: TestresolveService},data: { object: 'mediamarketdata' }},
     { path: 'ambassadormediamarketing', component: AffiliatemediamarketingComponent,resolve: {results: TestresolveService},data: { object: 'mediamarketdata' }},
-
-    { path: 'upcomingevents', component: UpcomingeventsComponent},
+    { path: 'upcomingevents', component: UpcomingeventsComponent,resolve: {results: TestresolveService},data: { object: 'blogsresolve'}},
+    // { path: 'upcomingevents', component: UpcomingeventsComponent},
     { path: 'affiliatetree', component: AffiliatetreeComponent},
-
+    { path: 'user-list', component: UserlistComponent,resolve:{results:TestresolveService},data:{object:'userlistresolve'}},
+    { path: 'sponsor-list', component: SponsorlistComponent,resolve:{results:TestresolveService},data:{object:'sponserlistresolve'}},
 
     { path: 'events-old', component: EventsOldComponent},
     { path: 'invite-friends', component: InviteFriendsComponent},

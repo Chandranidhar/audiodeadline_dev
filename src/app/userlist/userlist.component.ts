@@ -5,7 +5,7 @@ import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import { HttpClient } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {Router} from '@angular/router';
-
+import {ActivatedRoute} from '@angular/router';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
@@ -22,7 +22,7 @@ export class UserlistComponent implements OnInit {
     public p: number = 1;
     modalRef: BsModalRef;
     public serverurl;
-    public userlist;
+    public userlist:any=[];
     public affiliateuserlist:any=[];
     public idx;
     public searchText;
@@ -31,12 +31,15 @@ export class UserlistComponent implements OnInit {
     public username;
     public isadmin;
     public roles;
+    public searchText3:any;
+
 
     public dataForm: FormGroup;
     public fb;
 
 
-    constructor(fb: FormBuilder, private _commonservices: Commonservices, private _http: HttpClient, private modalService: BsModalService, userdata: CookieService, private router: Router) {
+    constructor(fb: FormBuilder, private _commonservices: Commonservices, private _http: HttpClient, private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute) {
+        this.searchText3='';
         this.fb = fb;
         this.serverurl = _commonservices.url;
         this.username = '';
@@ -76,15 +79,16 @@ export class UserlistComponent implements OnInit {
                 this.username = userdata2.username;
             }
 
-            if(userdata2.signupaffiliate == 1){
+           /* if(userdata2.signupaffiliate == 1){
                 this.getaffiliateuserlist();
 
             }else {
 
                 this.getUserList();
             }
-
+*/
         }
+
     }
 
     ngOnInit() {
@@ -106,6 +110,16 @@ export class UserlistComponent implements OnInit {
             currentpassword: [""],
             password: [""],
             confirmpassword: [""],
+        });
+        this.activeRoute.data.forEach((data)=>{
+            console.log('json',data['results']);
+            console.log(data);
+            console.log(data['results']);
+            let result=data['results'];
+            console.log(result);
+            this.userlist=result.res;
+            console.log('Data');
+            console.log(this.userlist);
         });
 
 
