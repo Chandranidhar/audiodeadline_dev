@@ -330,7 +330,7 @@ export class BannerlistComponent implements OnInit {
 
         // var link = this.serverurl+'updateblogchange';
 
-        let data = eventdata;
+        var data = eventdata;
         if(event.target.checked){
             data.dancer = 1;
             data.model = 1;
@@ -347,10 +347,10 @@ export class BannerlistComponent implements OnInit {
         }
 
         let dataval:any ={fan:data.fan,musician : data.musician, dancer: data.dancer, producer: data.producer, model:data.model, affiliate:data.affiliate, ambassador:data.ambassador,id:data._id};
-        let data:any = {data: dataval,source:'media'};
-        console.log(data);
+        let data1:any = {data: dataval,source:'media'};
+        console.log(data1);
         let link = this._commonservices.nodesslurl+'addorupdatedata';
-        this._http.post(link,data)
+        this._http.post(link,data1)
             .subscribe(res=>{
                 let result:any = {};
                 result = res;
