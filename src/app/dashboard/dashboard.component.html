@@ -439,8 +439,8 @@
                                                         <tr>
                                                             <th class="empycell"></th>
                                                             <th>Date</th>
-                                                            <th>First</th>
-                                                            <th>Last</th>
+                                                            <th>Name</th>
+                                                            <!--<th>Last</th>-->
                                                             <th>Email</th>
                                                             <th>Competition</th>
                                                             <th>Genre</th>
@@ -449,16 +449,17 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <tr>
+
+                                                        <tr *ngFor="let item of userlist;let i=index;">
                                                             <td class="empycell"></td>
-                                                            <td style="min-width: 95px;" data-label="Date">03/06/2019</td>
-                                                            <td data-label="First">Angelica</td>
-                                                            <td data-label="Last">Winkler</td>
-                                                            <td data-label="Email">angelica@betoparedes.com</td>
-                                                            <td data-label="Competition">VOCALIST COMPETITION</td>
-                                                            <td data-label="Genre">Pop</td>
+                                                            <td style="min-width: 95px;" data-label="Date">{{commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
+                                                            <td data-label="First">{{item.name}}</td>
+                                                            <!--<td data-label="Last">{{item.lastname}}</td>-->
+                                                            <td data-label="Email">{{item.email}}</td>
+                                                            <td data-label="Competition">{{item.competitionname}}</td>
+                                                            <td data-label="Genre">{{item.genrename}}</td>
                                                             <td data-label="Status" class="text-center">
-                                                                <span style="cursor: pointer;">Pending</span>
+                                                                <span style="cursor: pointer;">{{getStatusName(item.status)}}</span>
                                                                 <!--<span>
                                                                     <select name="status">
                                                                       <option value="1">Approved</option>
@@ -470,16 +471,16 @@
 
                                                             <td class="empycell"></td>
                                                         </tr>
-                                                        <tr><td class="empycell"></td><td colspan="7" class="norecordfound">No Record Found</td><td class="empycell"></td></tr>
+                                                        <tr *ngIf="userlist==null || userlist.length == 0"><td class="empycell"></td><td colspan="7" class="norecordfound">No Record Found</td><td class="empycell"></td></tr>
                                                         <tr>
                                                             <td class="empycell"></td>
                                                             <!--<td colspan="7" style="text-align: center;">
                                                                 <div class="loadertabledata"></div>
                                                             </td>-->
                                                             <td colspan="7" style="text-align: center;" class="tablebuttondiv">
-                                                                <a [routerLink]="['/competition-signup']" class="btn adminbtnred">View all Sign-Ups</a>
+                                                                <a [routerLink]="['/manage-competition-signup']" class="btn adminbtnred">View all Sign-Ups</a>
                                                             </td>
-                                                            <td class="empycell"></td>
+                                                            <!--<td class="empycell"></td>-->
                                                         </tr>
                                                         </tbody>
                                                     </table><!--

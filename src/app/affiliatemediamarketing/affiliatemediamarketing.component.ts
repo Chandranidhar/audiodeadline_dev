@@ -53,13 +53,15 @@ export class AffiliatemediamarketingComponent implements OnInit {
       let userdata2: any;
       userdata2= userdata.get('userdetails');
       userdata2 = JSON.parse(userdata2);
+      this.getUserDetails();
       if (typeof (userdata2) == 'undefined'){
           this.router.navigateByUrl('/login');
       }
       else {
           this.affiliatename = userdata2.username;
-          this.sponserurl = userdata2.sponserurl;
-          this.sponserimg = userdata2.sponserimage;
+          /*this.sponserurl = userdata2.sponserurl;
+          this.sponserimg = userdata2.sponserimage;*/
+
       }
     this.uploadfile = 'banner';
     // this.getticketsalebanner();
@@ -72,7 +74,7 @@ export class AffiliatemediamarketingComponent implements OnInit {
   }
     getUserDetails(){
         var link =this.serverurl+'dashboard';
-        var data = {_id: this.userdata.get('user_id')};
+        var data = {_id: this.usercookie.get('user_id')};
 
         this._http.post(link, data)
             .subscribe(res => {
@@ -210,7 +212,7 @@ export class AffiliatemediamarketingComponent implements OnInit {
     updatesponserurl(){
 
         this.flag= 1-this.flag;
-        let dataval:any ={sponserurl:this.sponserurl,id:this.userdata.get('user_id')};
+        let dataval:any ={sponserurl:this.sponserurl,id:this.usercookie.get('user_id')};
         let data:any = {data: dataval,source:'user'};
         console.log(data);
         if(this.sponserurl!='' && this.sponserurl!=null){
@@ -301,7 +303,7 @@ export class AffiliatemediamarketingComponent implements OnInit {
     }
 
     updatesponserimage(){
-        let dataval:any ={sponserimage:this.sponserimg,id:this.userdata.get('user_id')};
+        let dataval:any ={sponserimage:this.sponserimg,id:this.usercookie.get('user_id')};
         let data:any = {data: dataval,source:'user'};
         console.log(data);
         if(this.sponserimg!='' && this.sponserimg!=null){

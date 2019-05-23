@@ -109,8 +109,9 @@ export class AffiliatedashboardComponent implements OnInit {
         else{
             this.userid = userdata2._id;
             this.affiliatename = userdata2.username;
-            this.sponserurl = userdata2.sponserurl;
-            this.sponserimg = userdata2.sponserimage;
+            this.getUserDetails();
+            //this.sponserurl = userdata2.sponserurl;
+            //this.sponserimg = userdata2.sponserimage;
             console.log(this.sponserurl);
            /* this.getUserDetails();
             this.getBannerList1();

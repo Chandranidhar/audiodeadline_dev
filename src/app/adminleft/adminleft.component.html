@@ -126,7 +126,7 @@
     <ul class="dropdown-menu">
       <li [ngClass]="router.url === '/competition-list' ? 'dashboardcls' : ''"><a  [routerLink]="['/competition-list']">Competition List</a></li>
       <li [ngClass]="router.url === '/genre-list' ? 'dashboardcls' : ''"><a  [routerLink]="['/genre-list']">Genre List</a></li>
-      <li [ngClass]="router.url === '/competition-signup' ? 'dashboardcls' : ''" ><a [routerLink]="['/competition-signup']">Competition Sign-ups</a></li>
+      <!--<li [ngClass]="router.url === '/competition-signup' ? 'dashboardcls' : ''" ><a [routerLink]="['/competition-signup']">Competition Sign-ups</a></li>-->
       <li  [ngClass]="router.url === '/manage-competition-signup' ? 'dashboardcls' : ''" ><a [routerLink]="['/manage-competition-signup']">Manage Competition Sign-Ups</a></li>
       <li [ngClass]="router.url === '/competition-stats' ? 'dashboardcls' : ''"><a  [routerLink]="['/competition-stats']">Competition Stats</a></li>
     </ul>
@@ -140,9 +140,9 @@
     </ul>
   </li>
 
-  <li *ngIf="userdetails.admin == 1" [ngClass]="router.url === '/sponsor-list' ? 'dashboardcls' : ''">
+  <!--<li *ngIf="userdetails.admin == 1" [ngClass]="router.url === '/sponsor-list' ? 'dashboardcls' : ''">
     <a [routerLink]="['/sponsor-list']">Sponsor List</a>
-  </li>
+  </li>-->
 
   <li *ngIf="userdetails.signupaffiliate==1 " [ngClass]="router.url === '/affiliatemediamarketing' ? 'dashboardcls' : ''">
     <a [routerLink]="['/affiliatemediamarketing']">Media Marketing</a>
@@ -156,7 +156,7 @@
   </li>
 
   <li *ngIf="userdetails.signupaffiliate==1 || userdetails.ambassador==1" [ngClass]="router.url === '/upcomingevents' ? 'dashboardcls' : ''">
-    <a [routerLink]="['/upcomingevents']">Upcoming Blogs</a>
+    <a [routerLink]="['/upcomingevents']">Blogs</a>
   </li>
 
   <li [ngClass]="router.url === '/commission-list' ? 'dashboardcls' : ''">
@@ -164,7 +164,7 @@
   </li>
 
   <li class="dropdown" *ngIf="userdetails.admin == 1" [ngClass]="router.url === '/event-list' ? 'dashboardcls' : ''">
-    <a [routerLink]="['/event-list']" >Event/Blog Management</a>
+    <a [routerLink]="['/event-list']" >Blog Management</a>
   </li>
 
   <!--<li [ngClass]="router.url === '/my-order' ? 'dashboardcls' : ''"><a [routerLink]="['/my-order']">My Order</a></li>-->

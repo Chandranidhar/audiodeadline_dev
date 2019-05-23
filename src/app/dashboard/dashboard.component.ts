@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
     public serverurl;
     public dataForm: FormGroup;
     public fb;
-    private userlist: any;
+    public userlist: any=[];
     private idx: number;
 
     datasource:any;
@@ -81,6 +81,7 @@ export class DashboardComponent implements OnInit {
         }
         this.ambassadorlist();
         this.affiliatelist();
+        this.getUserList();
 
     }
 
@@ -105,6 +106,39 @@ export class DashboardComponent implements OnInit {
             confirmpassword:[""],
 
         });
+    }
+    getStatusName(status){
+        var satatuname = 'Pending';
+        if(status == 1){
+            satatuname = 'Approved';
+        }
+        if(status == 2){
+            satatuname = 'Declined';
+        }
+        return satatuname;
+    }
+
+    getUserList(){
+
+        // var link =this.serverurl+'getcompetitionsignuplist';
+        var link =this._commonservices.nodesslurl1+'getcompetitionsignuplist';
+        var data = {};
+
+        this._http.post(link, data)
+            .subscribe(res => {
+                let result:any;
+                result = res;
+                this.userlist = result.item;
+                /*for(let i=0;i<4;i++){
+                    this.userlist.push(result.item[i]);
+                    break;
+                }*/
+                console.log('this.userlist');
+                console.log(this.userlist);
+            },error => {
+
+                console.log("Oooops!");
+            });
     }
     ambassadorlist() {
         let link = this._commonservices.nodesslurl + 'datalist';
