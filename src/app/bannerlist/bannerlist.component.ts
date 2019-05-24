@@ -34,6 +34,7 @@ export class BannerlistComponent implements OnInit {
     public arrayforrole:any = [];
     public mediaid:any = '';
     public item;
+    // public searchText3;
 
     constructor(private _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router) {
         this.serverurl=_commonservices.url;
@@ -53,6 +54,7 @@ export class BannerlistComponent implements OnInit {
             this.isadmin = userdata2.admin;
         }
         this.getBannerList();
+        this.searchText3='';
         // this.arrayforrole.push("Fan");
     }
 

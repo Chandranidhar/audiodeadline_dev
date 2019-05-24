@@ -147,8 +147,9 @@
                           <!--<input type="date" class="form-control input-lg dtrange" placeholder="search by date" autocomplete="off" [(ngModel)]="searchDate" name="searchDate" />-->
                           <input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
                                  [(ngModel)]="searchText3"
-                                 [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
-                          <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
                         </div>
                       </div>
                     </li>
@@ -213,7 +214,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item of bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
+                    <tr *ngFor="let item of bannerlist | bannerfilter : searchType | dateblogpipe : searchText3 | bannerfilter2: searchStatus | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
                       <td class="empycell"></td>
                       <td data-label="Date">{{item.newstartdate}}</td>
                       <td data-label="Title">
@@ -295,7 +296,7 @@
                         <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
                       </td>-->
                     </tr>
-                    <tr *ngIf="!(bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus).length && !loadinglist">
+                    <tr *ngIf="!(bannerlist | bannerfilter : searchType | dateblogpipe : searchText3 | bannerfilter2: searchStatus).length && !loadinglist">
                       <td class="empycell"></td>
                       <td colspan="8" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
                       <td class="empycell"></td>
@@ -307,7 +308,7 @@
                     </tr>
                     </tbody>
                   </table>
-                  <pagination-controls  *ngIf="(bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  <pagination-controls  *ngIf="(bannerlist | bannerfilter : searchType | dateblogpipe : searchText3 | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
                 </div>
               </div>
               <div class="tabcontentwrapperoverlay"></div>
