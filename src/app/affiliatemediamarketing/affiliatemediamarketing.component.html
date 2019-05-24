@@ -8,6 +8,15 @@
     <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right afiliatedashboard">
       <div class="dashboard_right_wrapper">
         <div class="dashboard1_div1">
+          <div class="n-adminheadercls n-adminheaderclsnp text-center">
+            <h4>Social Media Banners</h4>
+            <div class="n-adminheaderclssub">
+              <!-- <h5>Share these banners with your friends to help spread the word about<br> <span>AudioDeadline</span> and <span>ArtistXP’s</span> exciting experience. </h5>-->
+              <h5>Share these banners with your followers and friends to start promoting now!
+                Anyone that signs up under you as an artist or a fan of an artist that purchases anything from ArtistXP and AudioDeadline, whether that be a ticket for the show or some sick merch, you get a commission. Know someone with some powerful persuasion skills? Have them join as an affiliate and earn a commission from their follower's purchases.</h5>
+
+            </div>
+          </div>
           <div class="n-adminheadercls text-center sponsorblocknew">
 
 
@@ -15,52 +24,39 @@
 
 
             <div class="sponsorblocknew_block1">
+              <div class="sponsorblocknew_block1_wrapper">
+                <h2>sponsor logos</h2>
 
-              <h2>sponsor logos</h2>
+                <div class="sponsorblocknew_block1_updateblock">
+                  <div class="sponsorblocknew_block1_updateblock_wrapper">
 
-              <div class="sponsorblocknew_block1_updateblock">
-                <div class="sponsorblocknew_block1_updateblock_wrapper">
+                    <img *ngIf="sponserimg=='' || sponserimg==null" src="../../assets/images/your_logo_here.png">
+                    <img *ngIf="sponserimg!='' && sponserimg!=null" src="{{_commonservices.fileurl}}{{sponserimg}}">
 
-                  <img *ngIf="sponserimg=='' || sponserimg==null" src="../../assets/images/your_logo_here.png">
-                  <img *ngIf="sponserimg!='' && sponserimg!=null" src="{{_commonservices.fileurl}}{{sponserimg}}">
-
+                  </div>
                 </div>
-              </div>
-              <div class="clearfix"></div>
 
-              <input type="button" value="Update" class="btn adminbtnred" (click)="openmodal(templatesponserlogo)">
+                <input type="button" value="Update" class="btn adminbtnred" (click)="openmodal(templatesponserlogo)">
+              </div>
+
             </div>
 
             <div class="sponsorblocknew_block1">
+              <div class="sponsorblocknew_block1_wrapper">
+                <h2>sponsor url</h2>
+                <div class="sponsorblocknew_block1_updateblock">
+                  <div class="sponsorblocknew_block1_updateblock_wrapper">
 
-              <h2>sponsor url</h2>
-
-              <div class="sponsorblocknew_block1_updateblock">
-                <div class="sponsorblocknew_block1_updateblock_wrapper">
-
-                  <p *ngIf="sponserurl=='' || sponserurl==null" (click)="flag= 1-flag;">https://yoursponserurl.com</p>
-                  <p *ngIf="sponserurl!='' && sponserurl!=null" (click)="flag= 1-flag;">{{sponserurl}}</p>
-                  <input type="text" *ngIf="flag==1" [(ngModel)]="sponserurl" >
-                  <p  *ngIf="(sponserurl=='' || sponserurl==null) " class="alert-danger">{{errormsg}}</p>
+                    <p *ngIf="sponserurl=='' || sponserurl==null" (click)="flag= 1-flag;">https://yoursponserurl.com</p>
+                    <p *ngIf="sponserurl!='' && sponserurl!=null" (click)="flag= 1-flag;">{{sponserurl}}</p>
+                    <input type="text" *ngIf="flag==1" [(ngModel)]="sponserurl" >
+                    <p  *ngIf="(sponserurl=='' || sponserurl==null) " class="alert-danger">{{errormsg}}</p>
+                  </div>
                 </div>
+                <input type="button" value="Update" class="btn adminbtnred" (click)="updatesponserurl()">
               </div>
-
-              <div class="clearfix"></div>
-              <input type="button" value="Update" class="btn adminbtnred" (click)="updatesponserurl()">
             </div>
 
-            <div class="clearfix"></div>
-
-
-          </div>
-          <div class="n-adminheadercls n-adminheaderclsnp text-center">
-            <h4>Social Media Banners</h4>
-            <div class="n-adminheaderclssub">
-             <!-- <h5>Share these banners with your friends to help spread the word about<br> <span>AudioDeadline</span> and <span>ArtistXP’s</span> exciting experience. </h5>-->
-              <h5>Share these banners with your followers and friends to start promoting now!<br>Anyone that signs up under you as an artist or a fan of an artist that purchases anything from <span>ArtistXP</span> and <span>AudioDeadline</span>, whether that be a ticket for the show or some sick merch, you get a commission.  Know someone with some powerful persuasion skills? Have them join as an affiliate and earn a commission from their follower's purchases.
-              </h5>
-
-            </div>
           </div>
 
           <div class="dashboardwrapper">

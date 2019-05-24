@@ -268,6 +268,23 @@
     .formdivwrapper .formtopdetials .form-control {
         width: 79%;
     }
+
+    .sponsorblocknew_block1 {
+        flex-basis: 100% !important;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+    }
+    .sponsorblocknew_block1_wrapper {
+        display: block;
+    }
+    .sponsorblocknew_block1 h2 {
+        text-align: center;
+        margin-right: 0px;
+    }
+    .n-adminheadercls h3 {
+        font-size: 44px;
+    }
 }
 
 @media screen and (max-width:991px){
@@ -275,11 +292,11 @@
 
     .sponsorblocknew_block1{ width: 100%; float: none;   border-right: none; margin-top: 30px;}
 
-    .sponsorblocknew_block1_updateblock{ width: 100%; height: auto; margin: 10px auto; position: relative; text-align: center;}
+    .sponsorblocknew_block1_updateblock{ width: 100%; height: auto; margin: 20px auto; position: relative; text-align: center;}
 
     .sponsorblocknew_block1_updateblock_wrapper{ width: 100%; height:auto; display: block; text-align: center; vertical-align: middle;}
 
-    .sponsorblocknew_block1:nth-of-type(2){ border-top: solid 1px #ccc; padding-top: 30px;}
+    .sponsorblocknew_block1:nth-of-type(2){ border-top: solid 1px #ccc; padding-top: 20px; margin-top: 10px;}
 
     .sponsorblocknew_block1 input[type="text"]{ height: auto!important;}
 

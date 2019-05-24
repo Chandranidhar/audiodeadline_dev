@@ -2578,7 +2578,7 @@ a.copybtn, a:hover.copybtn{
     margin-top: 0px;
     max-width: 100%;
     text-align: center !important;
-    display: inline-block;
+    flex: 1 100%;
     text-transform: uppercase;
 }
 
@@ -3147,7 +3147,7 @@ a.copybtn, a:hover.copybtn{
 
 .n-adminheaderclssub{
     border-top:1px solid #333;
-    padding-top: 20px;
+    padding: 20px 20px 0px;
     margin-top: 30px;
 }
 
@@ -4083,11 +4083,43 @@ a.copybtn, a:hover.copybtn{
     border: solid 1px #ccc;
     margin-bottom: 20px!important;
 }
-.sponsorblocknew{ border-top: solid 1px #1b1b1b!important;}
+.sponsorblocknew{
+    border-top: solid 1px #1b1b1b!important;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: stretch;
+    flex-wrap: wrap;
+}
 
 
-.sponsorblocknew_block1{ width: 50%; float: left;   border-right: solid 1px #ccc; margin-top: 30px;}
+.sponsorblocknew_block1{
+    flex:1;
+    margin-top: 30px;
+    padding: 10px;
+    flex-basis: 50%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+}
 .sponsorblocknew_block1:nth-of-type(2){ border: none;}
+
+.sponsorblocknew_block1_wrapper{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid #353535;
+    padding: 15px;
+    height: 100%;
+}
+
 
 .sponsorblocknew_block1 h2 {
     font-family: 'RalewaySemiBold';
@@ -4097,21 +4129,24 @@ a.copybtn, a:hover.copybtn{
     margin: 0px;
     line-height: normal;
     letter-spacing: 0px;
-    margin-top: 0px; margin-bottom: 10px;
+    margin-bottom: 0px;
     max-width: 100%;
-    text-align: center !important;
-    display: inline-block;
+    text-align: left;
     text-transform: uppercase;
+    margin-right: 10px;
 }
-.sponsorblocknew_block1_updateblock{ width: 100%; height: 100px; margin: 10px auto; position: relative;}
+/*.sponsorblocknew_block1_updateblock {
+    width: 112px;
+    height: 100px;
+}*/
 
-.sponsorblocknew_block1_updateblock_wrapper{ width: 100vw; height:100px; display: table-cell; text-align: center; vertical-align: middle;}
+.sponsorblocknew_block1_updateblock_wrapper{ }
 
 .sponsorblocknew_block1_updateblock_wrapper p{ font-size: 18px!important; margin: 0!important; padding: 0!important; word-break: break-all; line-height: 28px!important;}
 
 .sponsorblocknew_block1 img{  width: auto; max-height: 100%;}
 
-.sponsorblocknew_block1 .adminbtnred{ margin-top: 20px!important;}
+.sponsorblocknew_block1 .adminbtnred{ margin-top: 0px!important; margin: 0 !important;}
 
 
 .modal-body .adminbtnred{ display: block; margin-top: 25px!important;}
