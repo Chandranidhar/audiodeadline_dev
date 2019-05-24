@@ -322,9 +322,9 @@ export class TestresolveService implements Resolve<EndpointComponent> {
         return result;
     }
     getblogsList(){
-        let link=this.url+'datalist';
-        // let result=this._http.post(link,({'source':'newmediaview ',"condition":{"username":val}})).pipe(map(res=>res));
-        let result=this._http.post(link,({'source':'newmediaview'})).pipe(map(res=>res));
+        let serverurl:any = "https://developmentapi.audiodeadline.com/server.php?q=";
+        let link=serverurl+'bloglist';
+        let result=this._http.post(link,({})).pipe(map(res=>res));
         return result;
     }
     sponserlist(){
