@@ -22,6 +22,7 @@
   <h4 *ngIf="routes.url.indexOf('/edit-admin')>-1">Edit Admin</h4>
   <h4 *ngIf="routes.url.indexOf('/edit-affiliate')>-1">Edit Affiliate</h4>
   <h4 *ngIf="routes.url.indexOf('/edit-ambassador')>-1">Edit Ambassador</h4>
+  <h4 *ngIf="routes.url.indexOf('/edit-user')>-1">Edit User</h4>
 </div>
 
 <div class="dashboard1form formnewpopup">
@@ -95,10 +96,23 @@
             <div><input type="checkbox" name="checkbox" value="5"><label>Fan</label></div>
           </div>-->
           <select multiple="multiple"  [formControl]="dataForm.controls['role']" style="height: 100px;">
+
             <option value="admin">Admin</option>
             <option value="ambassador">Ambassador</option>
             <option value="affiliate">Affiliate</option>
-            <optgroup label="User">
+            <option value="user">User</option>
+          </select>
+        </div>
+            <div class="typeuserrole" *ngIf="array.indexOf('user') > -1 || array.indexOf('affiliate') > -1">
+              <div class="newcheckboxdiv text-left">
+                <div><input type="checkbox" name="musicians" [formControl]="dataForm.controls['musicians']" [checked]="userdetails.musicians==1" (change)="checkval($event,'musicians')"><label>Musician</label></div>
+                <div><input type="checkbox" name="dancer"  [formControl]="dataForm.controls['dancer']" [checked]="userdetails.dancer==1" (change)="checkval($event,'dancer')"><label>Dancer</label></div>
+                <div><input type="checkbox" name="model" [formControl]="dataForm.controls['model']"  [checked]="userdetails.model==1" (change)="checkval($event,'model')"><label>Model</label></div>
+                <div><input type="checkbox" name="producer" [formControl]="dataForm.controls['producer']" [checked]="userdetails.producer==1" (change)="checkval($event,'producer')"><label>Producer</label></div>
+                <div><input type="checkbox" name="fan" [formControl]="dataForm.controls['fan']"  [checked]="userdetails.fan==1" (change)="checkval($event,'fan')"><label>Fan</label></div>
+              </div>
+            </div>
+           <!-- <optgroup label="User">
               <option value="dancer">Dancer</option>
               <option value="fan">Fan</option>
               <option value="model">Model</option>
@@ -106,8 +120,7 @@
               <option value="producer">Producer</option>
             </optgroup>
 
-          </select>
-        </div>
+
         <!--<span *ngIf ="dataForm.controls['role'].touched && !dataForm.controls['role'].valid" class="has-error">Role field can not be blank</span>-->
       </div>
     </div>

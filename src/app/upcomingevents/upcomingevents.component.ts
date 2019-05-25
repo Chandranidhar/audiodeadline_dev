@@ -14,12 +14,18 @@ export class UpcomingeventsComponent implements OnInit {
   public userdetails:any=[];
   public bloglist:any=[];
   public userdetail:any;
+  public searchText;
+  public searchText2;
+  public searchText3;
 
   constructor(public activeRoute:ActivatedRoute,private _commonservices: Commonservices,private _http: HttpClient, public usercookie:CookieService) {
 
     this.userdata = usercookie;
     this.userdetail = JSON.parse(this.userdata.get('userdetails'));
     console.log(this.userdetail);
+    this.searchText='';
+    this.searchText2='';
+    this.searchText3='';
 
   }
 

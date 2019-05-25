@@ -231,7 +231,8 @@
                         <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
                       </td>
                       <td data-label="Action" class="whitebtnlists text-center">
-                        <a href="javascript:void(0)" class="loginbtn2 btnedit btnwhite" (click)="openEditModal(edituser)"><i class="fa fa-pencil-square-o"></i></a>
+                        <!--<a href="javascript:void(0)" class="loginbtn2 btnedit btnwhite" (click)="openEditModal(edituser)"><i class="fa fa-pencil-square-o"></i></a>-->
+                        <a href="javascript:void(0)" class="loginbtn2 btnedit btnwhite" [routerLink]="['/edit-user',item._id]" ><i class="fa fa-pencil-square-o"></i></a>
                         <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i><!--<span>Delete</span>--></a>
                       </td>
 

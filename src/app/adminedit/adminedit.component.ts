@@ -20,6 +20,7 @@ export class AdmineditComponent implements OnInit {
     public userid;
     public array:any=[];
     routes:any;
+    userdetails:any;
 
     constructor(fb: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router,private route:ActivatedRoute){
         this.userid = '';
@@ -57,7 +58,13 @@ export class AdmineditComponent implements OnInit {
             state: ["", Validators.required],
             zip: ["", Validators.required],
             rsvp: [false],
-            signupaffiliate: [false]
+            signupaffiliate: [false],
+            musicians: 0,
+            dancer: 0,
+            model: 0,
+            producer: 0,
+            fan: 0,
+
         });
     }
 
@@ -71,6 +78,7 @@ export class AdmineditComponent implements OnInit {
                 result = res;
                 if (result.status == 'success' && typeof(result.item) != 'undefined') {
                     let userdet = result.item;
+                    this.userdetails=result.item;;
                     this.dataForm.controls['firstname'].setValue(userdet.firstname);
                     this.dataForm.controls['lastname'].setValue(userdet.lastname);
                     this.dataForm.controls['phone'].setValue(userdet.phone);
@@ -81,6 +89,11 @@ export class AdmineditComponent implements OnInit {
                     this.dataForm.controls['city'].setValue(userdet.city);
                     this.dataForm.controls['state'].setValue(userdet.state);
                     this.dataForm.controls['zip'].setValue(userdet.zip);
+                    this.dataForm.controls['dancer'].setValue(userdet.dancer);
+                    this.dataForm.controls['model'].setValue(userdet.model);
+                    this.dataForm.controls['musicians'].setValue(userdet.musicians);
+                    this.dataForm.controls['producer'].setValue(userdet.producer);
+                    this.dataForm.controls['fan'].setValue(userdet.fan);
                     console.log(userdet);
                     if (userdet.admin == 1) {
                         this.array.push('admin');
@@ -98,33 +111,23 @@ export class AdmineditComponent implements OnInit {
                             /*this.dataForm.controls['role'].setValue(this.array);
                             this.dataForm.controls['role'].setValue("ambassador");*/
                         }
-                        if (userdet.dancer == 1) {
-                            this.array.push('dancer');
-                           /* this.dataForm.controls['role'].setValue(this.array);
-                            this.dataForm.controls['role'].setValue("dancer");
-*/
+
+                        if (userdet.dancer == 1 || userdet.fan == 1 || userdet.model == 1 || userdet.musicians == 1 || userdet.producer == 1) {
+                            this.array.push('user');
                         }
 
-                        if (userdet.fan == 1) {
+                   /*     if (userdet.fan == 1) {
                             this.array.push('fan');
-                            /*this.dataForm.controls['role'].setValue(this.array);
-                            this.dataForm.controls['role'].setValue("fan");*/
-                        }
+                         }
                         if (userdet.model == 1) {
                             this.array.push('model');
-                            /*this.dataForm.controls['role'].setValue(this.array);
-                            this.dataForm.controls['role'].setValue("model");*/
                         }
                         if (userdet.musicians == 1) {
                             this.array.push('musicians');
-                           /* this.dataForm.controls['role'].setValue(this.array);
-                            this.dataForm.controls['role'].setValue("musicians");*/
                         }
                         if (userdet.producer == 1) {
                             this.array.push('producer');
-                            /*this.dataForm.controls['role'].setValue(this.array);
-                            this.dataForm.controls['role'].setValue("producer");*/
-                        }
+                         }*/
                     }
 
                     this.dataForm.controls['role'].setValue(this.array);
@@ -134,7 +137,21 @@ export class AdmineditComponent implements OnInit {
                 console.log("Oooops!");
             });
     }
+    checkval(event,type){
+        if(event.target.checked){
+            if(type=='fan'){
+                this.dataForm.controls['fan'].setValue(1);
+                this.dataForm.controls['model'].setValue(0);
+                this.dataForm.controls['musicians'].setValue(0);
+                this.dataForm.controls['producer'].setValue(0);
+                this.dataForm.controls['dancer'].setValue(0);
+            }
+            //this.dataForm.controls[type].setValue(1);
+        }else{
+            this.dataForm.controls[type].setValue(0);
+        }
 
+    }
     dosubmit(formval){
        console.log(formval);
         let x: any;
@@ -150,7 +167,7 @@ export class AdmineditComponent implements OnInit {
         if(this.dataForm.controls['role'].value.indexOf('ambassador')>-1){
             formval.ambassador=1;
         }
-        if(this.dataForm.controls['role'].value.indexOf('dancer')>-1){
+       /* if(this.dataForm.controls['role'].value.indexOf('dancer')>-1){
             formval.dancer=1;
         }
         if(this.dataForm.controls['role'].value.indexOf('fan')>-1){
@@ -164,7 +181,7 @@ export class AdmineditComponent implements OnInit {
         }
         if(this.dataForm.controls['role'].value.indexOf('producer')>-1){
             formval.producer=1;
-        }
+        }*/
 
         var link = this.serverurl + 'updateuser';
         if(this.dataForm.valid){
@@ -189,8 +206,9 @@ export class AdmineditComponent implements OnInit {
                 musicians: formval.musicians,
                 producer: formval.producer,
             };
-            console.log(formval.signupaffiliate);
-            console.log(this.dataForm.controls['role'].value);
+            console.log('Data');
+            console.log(data);
+           // return;
 
             this._http.post(link, data)
                 .subscribe(res => {
@@ -206,6 +224,9 @@ export class AdmineditComponent implements OnInit {
                         }
                         if(this.routes.url.indexOf('/edit-admin')>-1){
                             this.router.navigate(['/admin-list']);
+                        }
+                        if(this.routes.url.indexOf('/edit-user')>-1){
+                            this.router.navigate(['/user-list']);
                         }
 
 

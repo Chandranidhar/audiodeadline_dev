@@ -151,6 +151,7 @@ const appRoutes: Routes = [
     { path: 'edit-admin/:id', component: AdmineditComponent},
     { path: 'edit-affiliate/:id', component: AdmineditComponent},
     { path: 'edit-ambassador/:id', component: AdmineditComponent},
+    { path: 'edit-user/:id', component: AdmineditComponent},
     // { path: 'affiliate-list', component: AffiliatelistComponent},
     { path: 'affiliate-list', component: AffiliatelistComponent,resolve:{results:TestresolveService},data:{object:'affiliateresolve'}},
     // { path: 'user-list', component: UserlistComponent},

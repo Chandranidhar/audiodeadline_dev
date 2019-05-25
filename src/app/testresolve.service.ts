@@ -219,9 +219,6 @@ export class TestresolveService implements Resolve<EndpointComponent> {
 
     }
 }
-
-
-
         }
         if(route.data.object=='sponserlistresolve'){
             endpoint=route.data.object;
@@ -264,7 +261,6 @@ export class TestresolveService implements Resolve<EndpointComponent> {
         return result;
 
     }
-
     getOrderListForAffiliate(){
 
         let link2= this.url+'datalist';
@@ -322,9 +318,9 @@ export class TestresolveService implements Resolve<EndpointComponent> {
         return result;
     }
     getblogsList(){
-        let serverurl:any = "https://developmentapi.audiodeadline.com/server.php?q=";
-        let link=serverurl+'bloglist';
-        let result=this._http.post(link,({})).pipe(map(res=>res));
+        let link:any = this.url+'datalist';
+        // let link=serverurl+'bloglist';
+        let result=this._http.post(link,({'source':'blogview'})).pipe(map(res=>res));
         return result;
     }
     sponserlist(){
