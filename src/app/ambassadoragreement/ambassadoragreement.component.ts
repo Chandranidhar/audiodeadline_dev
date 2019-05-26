@@ -39,7 +39,8 @@ export class AmbassadoragreementComponent implements OnInit {
   ngOnInit() {
   }
     getUserDetails(){
-        var link =this.serverurl+'dashboard';
+        // var link =this.serverurl+'dashboard';
+        var link =this._commonservices.nodesslurl+'dashboardpost';
         var data = {_id: this.userid};
 
         this._http.post(link, data)

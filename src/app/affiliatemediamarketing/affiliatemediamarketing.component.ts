@@ -73,7 +73,8 @@ export class AffiliatemediamarketingComponent implements OnInit {
       this.LI_CLIENT_SECRET=_commonservices.LI_CLIENT_SECRET;
   }
     getUserDetails(){
-        var link =this.serverurl+'dashboard';
+        // var link =this.serverurl+'dashboard';
+        var link =this._commonservices.nodesslurl+'dashboardpost';
         var data = {_id: this.usercookie.get('user_id')};
 
         this._http.post(link, data)

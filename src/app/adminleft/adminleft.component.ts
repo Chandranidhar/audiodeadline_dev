@@ -39,7 +39,8 @@ export class AdminleftComponent implements OnInit {
             userdata2 =JSON.parse(userdata2);
             this.userid = userdata2._id;
             this.username = userdata2.username;
-            if(userdata2.admin == 1){
+            this.getUserDetails();
+           /* if(userdata2.admin == 1){
                 this.userroles.push('admin');
             }
             if(userdata2.signupaffiliate == 1){
@@ -59,8 +60,8 @@ export class AdminleftComponent implements OnInit {
             }
             if(userdata2.fan == 1){
                 this.userroles.push('fan');
-            }
-            this.getUserDetails();
+            }*/
+            // this.getUserDetails();
         }
 
 
@@ -74,7 +75,8 @@ export class AdminleftComponent implements OnInit {
     }
 
     getUserDetails(){
-        var link =this.serverurl+'dashboard';
+        // var link =this.serverurl+'dashboard';
+        var link =this._commonservices.nodesslurl+'dashboardpost';
         var data = {_id: this.userid};
 
         this._http.post(link, data)
