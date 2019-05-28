@@ -24,7 +24,8 @@
 
       <ul *ngIf="userdata.get('user_id')=='' ">
       <li><a [routerLink]="['/login']">Login</a></li>
-      <li><a href="https://artistxp.com/" target="_blank">Sign Up<!--Register--></a></li>
+        <li><a *ngIf="_commonservices.envflag=='live'" href="https://artistxp.com/" target="_blank">Sign Up<!--Register--></a></li>
+        <li><a *ngIf="_commonservices.envflag=='dev'" href="https://development.artistxp.com/" target="_blank">Sign Up<!--Register--></a></li>
     </ul>
 
 
