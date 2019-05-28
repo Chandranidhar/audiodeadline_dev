@@ -1,0 +1,350 @@
+<!--
+<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <h4>Media List</h4>
+          <div class="tablediv">
+            <div class="tabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchStatus" [(ngModel)]="searchStatus" class="form-control input-lg">
+                            <option value="">Search By Status</option>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                            <option value="3">Pending</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchType" [(ngModel)]="searchType" class="form-control input-lg">
+                            <option value="">Search By Type</option>
+                            <option value="">All</option>
+                            <option *ngFor="let item of bannerTypeList" value="{{item.val}}">{{item.label}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a [routerLink]="['/add-media']" class="loginbtn2"><i class="fa fa-plus"></i> Add Media</a>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <table>
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Uploaded By</th>
+                <th>Type</th>
+                <th>Sponsor</th>
+                <th>Image</th>
+                <th>No Of Click</th>
+                <th>Sort Index</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td style="min-width: 150px;"><span *ngIf="!item.isLabelClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'label')">{{item.label}}</span><span *ngIf="item.isLabelClicked"><input type="text" name="label" value="{{item.label}}" (blur)="editInlineField($event,'label',item,item.label)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 135px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span></td>
+                <td>{{item.uname}}</td>
+                <td style="min-width: 166px;">{{getTypeName(item.type)}}</td>
+                <td style="text-align: center;">{{getSponsorName(item.sponsor)}}</td>
+                <td><img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}"></td>
+                <td style="text-align: center;">{{item.noofclick}}</td>
+                <td style="text-align: center;"><span *ngIf="!item.isSortindexClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'sortindex')">{{item.sortindex}}</span><span *ngIf="item.isSortindexClicked"><input type="number" name="sortindex" value="{{item.sortindex}}" (blur)="editInlineField($event,'sortindex',item,item.sortindex)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 70px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span></td>
+                <td>
+                  <span *ngIf="!isadmin" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))">{{getStatusName(item.status)}}</span>
+                  <span *ngIf="isadmin && !item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item,'status')" style="cursor: pointer">{{getStatusName(item.status)}}</span>
+                  <span *ngIf="isadmin && item.isStatusClicked">
+                    <select name="status" (change)="editInlineField($event,'status',item,item.status)" (blur)="selectblur(item)">
+                      <option value="1" [selected]="item.status == 1">Active</option>
+                      <option value="2" [selected]="item.status == 2">Inactive</option>
+                      <option value="3" [selected]="item.status == 3">Pending</option>
+                    </select>
+                    <br><span style="color: #ff0000;">{{inlineerror}}</span>
+                  </span>
+                </td>
+                &lt;!&ndash;<td *ngIf="!isadmin">
+                  <span *ngIf="item.status == 0" class="statusinactive">Inactive</span>
+                  <span *ngIf="item.status == 1" class="statusactive">Active</span>
+                </td>
+                <td *ngIf="isadmin">
+                  <span *ngIf="item.status == 0" class="statusinactive" style="cursor: pointer" (click)="cngstatus(item)">Inactive</span>
+                  <span *ngIf="item.status == 1" class="statusactive" style="cursor: pointer" (click)="cngstatus(item)">Active</span>
+                </td>&ndash;&gt;
+                <td>
+                  <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
+                </td>
+              </tr>
+              <tr *ngIf="!(bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus).length && !loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td></tr>
+              <tr *ngIf="loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;"><img src="../../assets/images/loader.gif" style="width: 100px;"></td></tr>
+              </tbody>
+            </table>
+            <pagination-controls  *ngIf="(bannerlist | bannerfilter : searchType | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-body text-center modalcls">
+    <p>Are you sure to delete this Banner?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>
+
+  </div>
+</ng-template>-->
+
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <!--<div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>Media List</h4>
+          </div>
+          <div class="dashboardwrapper">
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="search by title" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <!--<input type="date" class="form-control input-lg dtrange" placeholder="search by date" autocomplete="off" [(ngModel)]="searchDate" name="searchDate" />-->
+                          <input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchStatus" [(ngModel)]="searchStatus" class="form-control input-lg">
+                            <option value="">Search By Status</option>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                            <option value="3">Pending</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchType" [(ngModel)]="searchType" class="form-control input-lg">
+                            <option value="">Search By Type</option>
+                            <option value="">All</option>
+                            <option *ngFor="let item of bannerTypeList" value="{{item.val}}">{{item.label}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a (click)="openAddModal(addmedialist)" class="loginbtn2"><i class="fa fa-plus"></i> Add Media</a>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="tablediv">
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="empycell"></th>
+                      <!-- <th>Name</th>
+                       <th>Uploaded By</th>
+                       <th>Type</th>
+                       <th>Sponsor</th>
+                       <th>Image</th>
+                       <th>No Of Click</th>
+                       <th>Sort Index</th>
+                       <th>Status</th>
+                       <th>Action</th>-->
+                      <th>Start Date</th>
+                      <th class="clstitle">Title</th>
+                      <th class="clsimg">Banner Image</th>
+                      <th>Uploaded By</th>
+                      <th>End Date</th>
+                      <th>Display for</th>
+                      <th>Status</th>
+                      <th>Action</th>
+
+                      <th class="empycell"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of bannerlist | bannerfilter : searchType | dateblogpipe : searchText3 | bannerfilter2: searchStatus | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td class="empycell"></td>
+                      <td data-label="Date">{{item.newstartdate}}</td>
+                      <td data-label="Title">
+                        <span *ngIf="!item.isLabelClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'label')">{{item.label}}</span><span *ngIf="item.isLabelClicked"><input type="text" name="label" value="{{item.label}}" (blur)="editInlineField($event,'label',item,item.label)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 135px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>
+                      </td>
+                      <td data-label="Banner Image" class="text-center">
+                        <img style="max-width: 140px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 140px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 140px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}">
+                      </td>
+                      <td data-label="Uploaded By">{{item.fullname}}</td>
+                      <td data-label="End Date">{{item.newenddate}}</td>
+                      <td data-label="Display for">
+                        <div class="newcheckboxdiv">
+                          <div>
+                            <input id="checkbox1" type="checkbox" name="checkbox" value="user" [(ngModel)]="item.user" (click)="allcheck(item,$event)"><label>User</label>
+                            <div class="newcheckboxsubdiv">
+                              <div><input id="subcheckbox1" type="checkbox" name="checkbox" [(ngModel)]="item.fan" value="Fan" (change)="changerole(item)"><label>Fan</label></div>
+                              <div><input id="subcheckbox2" type="checkbox" name="checkbox" value="Dancer" [(ngModel)]="item.dancer" (change)="changerole(item)"><label>Dancers</label></div>
+                              <div><input id="subcheckbox3" type="checkbox" name="checkbox" value="Musician" [(ngModel)]="item.musician" (change)="changerole(item)"><label>Musician</label></div>
+                              <div><input id="subcheckbox4" type="checkbox" name="checkbox" value="Model" [(ngModel)]="item.model" (change)="changerole(item)"><label>Model</label></div>
+                              <div><input id="subcheckbox5" type="checkbox" name="checkbox" value="Producer"  [(ngModel)]="item.producer" (change)="changerole(item)"><label>Producer</label></div>
+                              <!--<div><input id="subcheckbox6" type="checkbox" name="checkbox" value="6"><label>DJ</label></div>-->
+                            </div>
+                          </div>
+                          <div><input id="checkbox2" type="checkbox" name="checkbox" value="Affiliate" [(ngModel)]="item.affiliate" (change)="changerole(item)"><label>Affiliates</label>  </div>
+                          <div><input id="checkbox3" type="checkbox" name="checkbox" value="Ambassador" [(ngModel)]="item.ambassador" (change)="changerole(item)"><label>Ambassadors</label></div>
+                        </div>
+                        <!--<span><input type="checkbox" name="checkbox" value="1" checked="checked"></span><label>User</label>
+                        <div class="newcheckboxsubdiv">
+                          &lt;!&ndash;<div><input id="checkbox1" type="checkbox" name="checkbox" value="1" checked="checked"><label>Fan</label>  </div>
+                          <div><input id="checkbox2" type="checkbox" name="checkbox" value="2"><label>Dancers</label>  </div>&ndash;&gt;
+                          <div><span><input type="checkbox" name="checkbox" value="1" checked="checked"></span><label>Fan</label></div>
+                          <div><span><input type="checkbox" name="checkbox" value="2"></span><label>Dancers</label></div>
+                          <div><span><input type="checkbox" name="checkbox" value="3"></span><label>Vocalist</label></div>
+                          <div><span><input type="checkbox" name="checkbox" value="4"></span><label>Model</label></div>
+                          <div><span><input type="checkbox" name="checkbox" value="5"></span><label>Producer</label></div>
+                          <div><span><input type="checkbox" name="checkbox" value="6"></span><label>DJ</label></div>
+                        </div>
+                      </div>
+                      <div><span><input type="checkbox" name="checkbox" value="2"></span><label>Affiliates</label></div>
+                      <div><span><input type="checkbox" name="checkbox" value="3"></span><label>Ambassadors</label></div>-->
+
+
+                      </td>
+                      <td data-label="Status" class="statuscls">
+                        <span *ngIf="!isadmin" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && !item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item,'status')" style="cursor: pointer">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && item.isStatusClicked" class="statusclsdropdown">
+                          <select name="status" (change)="editInlineField($event,'status',item,item.status)" (blur)="selectblur(item)">
+                            <option value="1" [selected]="item.status == 1">Active</option>
+                            <option value="2" [selected]="item.status == 2">Inactive</option>
+                            <option value="3" [selected]="item.status == 3">Pending</option>
+                          </select>
+                          <br><span style="color: #ff0000;">{{inlineerror}}</span>
+                        </span>
+                      </td>
+                      <td data-label="Action" class="whitebtnlists text-center">
+                        <a href="javascript:void(0)" class="loginbtn2 btnedit btnwhite" (click)="openEditModal(editmedialist,item._id)"><i class="fa fa-pencil-square-o"></i><!--<span>Delete</span>--></a>
+                        <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i><!--<span>Delete</span>--></a>
+                      </td>
+                      <td class="empycell"></td>
+                      <!--<td data-label="Type" style="min-width: 166px;">{{getTypeName(item.type)}}</td>
+                      <td data-label="Sponsor" style="text-align: center;">{{getSponsorName(item.sponsor)}}</td>
+                      <td data-label="Image"><img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}"></td>
+                      &lt;!&ndash;<td data-label="Image" style="text-align: center;">{{item.noofclick}}</td>&ndash;&gt;
+                      <td data-label="No Of Click" style="text-align: center;"><span *ngIf="!item.isSortindexClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'sortindex')">{{item.sortindex}}</span><span *ngIf="item.isSortindexClicked"><input type="number" name="sortindex" value="{{item.sortindex}}" (blur)="editInlineField($event,'sortindex',item,item.sortindex)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 70px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span></td>
+                      <td data-label="Sort Index">
+                        <span *ngIf="!isadmin" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && !item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item,'status')" style="cursor: pointer">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && item.isStatusClicked">
+                          <select name="status" (change)="editInlineField($event,'status',item,item.status)" (blur)="selectblur(item)">
+                            <option value="1" [selected]="item.status == 1">Active</option>
+                            <option value="2" [selected]="item.status == 2">Inactive</option>
+                            <option value="3" [selected]="item.status == 3">Pending</option>
+                          </select>
+                          <br><span style="color: #ff0000;">{{inlineerror}}</span>
+                        </span>
+                      </td>
+                      <td data-label="Action">
+                        <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
+                      </td>-->
+                    </tr>
+                    <tr *ngIf="!(bannerlist | bannerfilter : searchType | dateblogpipe : searchText3 | bannerfilter2: searchStatus).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="8" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="8" style="text-align: center;"><div class="loadertabledata"></div><!--<img src="../../assets/images/loader.gif" style="width: 100px;">--></td>
+                      <td class="empycell"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls  *ngIf="(bannerlist | bannerfilter : searchType | dateblogpipe : searchText3 | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                </div>
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+
+<ng-template #template>
+  <div class="modal-body text-center modalcls">
+    <p>Are you sure to delete this Banner?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>
+
+  </div>
+</ng-template>
+
+
+<ng-template #addmedialist>
+  <div class="modal-body text-center modalcls n-modalcls">
+    <app-banneradd></app-banneradd>
+  </div>
+</ng-template>
+
+<ng-template #editmedialist>
+  <div class="modal-body text-center modalcls n-modalcls">
+    <app-banneredit [id]="mediaid"></app-banneredit>
+  </div>
+</ng-template>
+

@@ -1,0 +1,589 @@
+<!--
+<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop"><div class="dashboradtoplogo"><img src="../../assets/images/logo.png"></div></div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <h4>Affiliate List</h4>
+          <div class="tablediv">
+            <div class="tabletopbar">
+              <div class="pull-right">
+                <form id="filter">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg" placeholder="Search" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <table>
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Enroller</th>
+                <th>Phone</th>
+                <th>Address</th>
+                <th>Added on</th>
+                <th>RSVP</th>
+                <th>No Of Click</th>
+                <th>No of Signups</th>
+                <th>Status</th>
+                <th>Grab Url</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of userlist | namefilter : searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td data-label="Name">{{item.fullname}}</td>
+                <td data-label="Email">{{item.email}}</td>
+                <td data-label="Enroller">{{item.parentname}}</td>
+                <td data-label="Phone">{{item.phone}}</td>
+                <td data-label="Address">{{(item.fulladdress.length > 5)?item.fulladdress:''}}</td>
+                <td data-label="Added on">{{(item.added_time*1000) | date :  "MM/dd/yyyy"}}</td>
+                <td data-label="RSVP">
+                  <a *ngIf="item.rsvp == true" class="statusactive">Yes</a>
+                  <a *ngIf="item.rsvp != true" class="statusinactive">No</a>
+                </td>
+                <td data-label="No Of Clicks">{{item.noofclick}}</td>
+                <td data-label="No of Signups">{{item.child}}</td>
+                <td data-label="Status">
+                  <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
+                  <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
+                </td>
+                <td data-label="Grab Url">
+                  <button (click)="copyText('https://audiodeadline.com/signup/'+item.username+'/'+defaultadmedia)" value="click to copy" class="btn"><i class="fa fa-clone" aria-hidden="true"></i><span>Audiodeadline Signup Link</span></button>
+                  <button (click)="copyText('https://artistxp.com/signup/'+item.username+'/'+defaultxpmedia)" value="click to copy" class="btn"><i class="fa fa-clone" aria-hidden="true"></i><span>ArtistXP Signup Link</span></button>
+                </td>
+                <td data-label="Action">
+                  <a href="javascript:void(0)" class="btn loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
+                </td>
+              </tr>
+              <tr *ngIf="!(userlist | namefilter : searchText).length && !loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td></tr>
+              <tr *ngIf="loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;"><img src="../../assets/images/loader.gif" style="width: 100px;"></td></tr>
+              </tbody>
+            </table>
+            <pagination-controls  *ngIf="(userlist | namefilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-body text-center modalcls">
+    <p>Are you sure to delete this affiliate?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>
+
+  </div>
+</ng-template>-->
+
+
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <!--<div class="dashboard_wrappertop"><div class="dashboradtoplogo"><img src="../../assets/images/logo.png"></div></div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>Affiliates Manager</h4>
+          </div>
+          <div class="dashboardwrapper affidashboardbg2">
+            <!--<div class="tabletopbar newtabletopbar newtabletopbarfilter">
+              &lt;!&ndash;<div class="pull-right">
+                <form id="filter">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="Search" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>&ndash;&gt;
+            </div>-->
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="tablediv affiliatetree affidashboardbg2">
+                  <lib-listing class="formfilterdiv" *ngIf="affiliatelistarray!=null && affiliatelistarray.length>0"
+                               [datasource]="affiliatelistarray"
+                               [skip]="affiliatearray_skip"
+                               [modify_header_array]="affiliatelistarray_modify_header"
+                               [sourcedata]="affiliatelisttablename"
+                               [statusarr]="affiliatestatusarray"
+                               [jwttoken]="jwttoken"
+                               [apiurl]="apiurl"
+                               [updateendpoint]="updateurl"
+                               [date_search_source]="date_search_source"
+                               [date_search_endpoint]="date_search_endpoint"
+                               [search_settings]="search_settings"
+                               [editroute]="editroute1"
+                               [deleteendpoint]="deleteval">
+                  </lib-listing>
+                  <!--<table>
+                    <thead>
+                    <tr>
+                      &lt;!&ndash;<th>Name</th>
+                      <th>Address</th>
+                      <th>Added on</th>
+                      <th>Email</th>
+                      <th>Enroller</th>
+                      <th>Phone</th>
+                      <th>RSVP</th>
+                      <th>No Of Click</th>
+                      <th>No of Signups</th>
+                      <th>Status</th>
+                      <th>Grab Url</th>
+                      <th>Action</th>&ndash;&gt;
+                      <th class="empycell"></th>
+                      <th>Date</th>
+                      <th>First</th>
+                      <th>Last</th>
+                      <th>Phone</th>
+                      <th>State</th>
+                      <th>Enroller</th>
+                      <th># Of Click</th>
+                      <th># of Signups</th>
+                      <th class="text-center">Status</th>
+                      <th>Grab Url</th>
+                      <th class="text-center">Action</th>
+                      <th class="empycell"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of userlist | namefilter : searchText | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td class="empycell"></td>
+                      <td data-label="Date">{{(item.added_time*1000) | date :  "MM/dd/yyyy"}}</td>
+                      <td data-label="First">Jane</td>
+                      <td data-label="Last">Doe</td>
+                      <td data-label="Phone">{{item.phone}}</td>
+                      <td data-label="State">Ohio</td>
+                      <td data-label="Enroller">{{item.parentname}}</td>
+                      <td data-label="# Of Click">{{item.noofclick}}</td>
+                      <td data-label="# of Signups">{{item.child}}</td>
+                      <td data-label="Status" class="text-center">
+                        <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
+                        <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
+                      </td>
+                      <td data-label="Grab Url" class="graburlcls">
+                        <button (click)="copyText('https://audiodeadline.com/signup/'+item.username+'/'+defaultadmedia)" value="click to copy" class="btn linktxt1">&lt;!&ndash;<i class="fa fa-clone" aria-hidden="true"></i>&ndash;&gt;<span>Audiodeadline Signup Link</span></button>
+                        <button (click)="copyText('https://artistxp.com/signup/'+item.username+'/'+defaultxpmedia)" value="click to copy" class="btn linktxt2">&lt;!&ndash;<i class="fa fa-clone" aria-hidden="true"></i>&ndash;&gt;<span>ArtistXP Signup Link</span></button>
+                      </td>
+                      <td data-label="Action" class="whitebtnlists text-center">
+                        &lt;!&ndash;<a href="javascript:void(0)" class="btn loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-close"></i>&lt;!&ndash;<span>Delete</span>&ndash;&gt;</a>&ndash;&gt;
+                        <a href="javascript:void(0)" class="loginbtn2 btnedit btnwhite" (click)="openEditModal(editaffiliate)"><i class="fa fa-pencil-square-o"></i></a>
+                        <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i></a>
+                        <a href="javascript:void(0)" class="loginbtn2 btnview tooltip btnwhite"><i class="fa fa-eye"></i><span class="tooltiptext">View Tree</span></a>
+
+                      </td>
+                      <td class="empycell"></td>
+
+
+                      &lt;!&ndash;<td data-label="Name">{{item.fullname}}</td>
+                      <td data-label="Email">{{item.email}}</td>
+                      <td data-label="Enroller">{{item.parentname}}</td>
+                      <td data-label="Phone">{{item.phone}}</td>
+                      <td data-label="Address">{{(item.fulladdress.length > 5)?item.fulladdress:''}}</td>
+                      <td data-label="Added on">{{(item.added_time*1000) | date :  "MM/dd/yyyy"}}</td>
+                      <td data-label="RSVP">
+                        <a *ngIf="item.rsvp == true" class="statusactive">Yes</a>
+                        <a *ngIf="item.rsvp != true" class="statusinactive">No</a>
+                      </td>
+                      <td data-label="No Of Clicks">{{item.noofclick}}</td>
+                      <td data-label="No of Signups">{{item.child}}</td>
+                      <td data-label="Status">
+                        <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
+                        <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
+                      </td>
+                      <td data-label="Grab Url">
+                        <button (click)="copyText('https://audiodeadline.com/signup/'+item.username+'/'+defaultadmedia)" value="click to copy" class="btn"><i class="fa fa-clone" aria-hidden="true"></i><span>Audiodeadline Signup Link</span></button>
+                        <button (click)="copyText('https://artistxp.com/signup/'+item.username+'/'+defaultxpmedia)" value="click to copy" class="btn"><i class="fa fa-clone" aria-hidden="true"></i><span>ArtistXP Signup Link</span></button>
+                      </td>
+                      <td data-label="Action">
+                        <a href="javascript:void(0)" class="btn loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
+                      </td>&ndash;&gt;
+
+                    </tr>
+                    <tr *ngIf="!(userlist | namefilter : searchText).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="11" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="11" style="text-align: center;">
+                        <div class="loadertabledata"></div>&lt;!&ndash;<img src="../../assets/images/loader.gif" style="width: 100px;">&ndash;&gt;
+                      </td>
+                      <td class="empycell"></td>
+                    </tr>
+                    </tbody>
+                  </table>-->
+                  <!--<pagination-controls  *ngIf="(userlist | namefilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                </div>
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+
+<ng-template #template>
+  <div class="modal-body text-center modalcls">
+    <p>Are you sure to delete this affiliate?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>
+
+  </div>
+</ng-template>
+
+
+<ng-template #editaffiliate>
+  <!--<div class="modal-body text-center modalcls n-modalcls">
+    <div class="formnewpopupheader">
+      <h4> Edit affiliate</h4>
+    </div>
+
+    <div class="dashboard1form formnewpopup">
+      <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)" class="form-horizontal">
+        <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*First Name</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="firstname" placeholder="First Name*" [formControl]="dataForm.controls['firstname']">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Last Name</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="lastname" placeholder="Last Name*" [formControl]="dataForm.controls['lastname']">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Phone</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="phone" placeholder="Phone*" [formControl]="dataForm.controls['phone']">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Email</label>
+          </div>
+          <div class="col-md-8">
+            <input readonly="readonly" type="text" class="form-control" name="email*" placeholder="Email*" [formControl]="dataForm.controls['email']">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Username</label>
+          </div>
+          <div class="col-md-8">
+            <input readonly="readonly" type="text" class="form-control" name="username*" placeholder="Username*" [formControl]="dataForm.controls['username']">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Address</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="address" placeholder="Address*" [formControl]="dataForm.controls['address']">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Address2</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="address2" placeholder="Address2" [formControl]="dataForm.controls['address2']">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*City</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="city" placeholder="City*" [formControl]="dataForm.controls['city']">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*State</label>
+          </div>
+          <div class="col-md-8">
+            <select class="form-control" name="state" [formControl]="dataForm.controls['state']">
+              <option value="">Select State</option>
+              <option *ngFor="let item of state2" value="{{item.abbreviation}}">{{item.name}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Zip Code</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="zip" placeholder="Zip Code*" [formControl]="dataForm.controls['zip']">
+          </div>
+        </div>
+
+        <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+
+
+      </form>
+    </div>
+    &lt;!&ndash;<div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>&ndash;&gt;
+
+  </div>-->
+
+  <div class="modal-body text-center modalcls n-modalcls">
+    <div class="formnewpopupheader">
+      <h4>Edit affiliate</h4>
+    </div>
+    <div class="dashboard1form formnewpopup">
+      <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)" class="form-horizontal">
+        <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*First Name</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="firstname" placeholder="First Name*" [formControl]="dataForm.controls['firstname']">
+            <span *ngIf ="dataForm.controls['firstname'].touched && !dataForm.controls['firstname'].valid" class="has-error">First Name field can not be blank</span>
+          </div>
+
+
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Last Name</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="lastname" placeholder="Last Name*" [formControl]="dataForm.controls['lastname']">
+            <span *ngIf ="dataForm.controls['lastname'].touched && !dataForm.controls['lastname'].valid" class="has-error">Last Name field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Phone</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="phone" placeholder="Phone*" [formControl]="dataForm.controls['phone']">
+            <span *ngIf ="dataForm.controls['phone'].touched && !dataForm.controls['phone'].valid" class="has-error">Phone field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Email</label>
+          </div>
+          <div class="col-md-8">
+            <input readonly="readonly" type="text" class="form-control" name="email" placeholder="Email*" [formControl]="dataForm.controls['email']">
+            <span *ngIf ="dataForm.controls['email'].touched && !dataForm.controls['email'].valid" class="has-error">Email field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Username</label>
+          </div>
+          <div class="col-md-8">
+            <input readonly="readonly" type="text" class="form-control" name="username" placeholder="Username*" [formControl]="dataForm.controls['username']">
+            <span *ngIf ="dataForm.controls['username'].touched && !dataForm.controls['username'].valid" class="has-error">Username field can not be blank</span>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Role</label>
+          </div>
+          <div class="col-md-8">
+            <select class="form-control" name="role" [formControl]="dataForm.controls['role']">
+              <option value="">Select Role</option>
+              <option value="admin">Admin</option>
+              <option value="ambassador">Ambassador</option>
+              <option value="affiliate">Affiliate</option>
+              <option value="user">User</option>
+              <option value="deactivateaccount">Deactivate Account</option>
+            </select>
+            <div class="typeuserrole" *ngIf="dataForm.value['role']=='user'">
+              <div class="newcheckboxdiv text-left">
+                <div><input type="checkbox" name="checkbox" value="1" checked="checked"><label>Musician</label></div>
+                <div><input type="checkbox" name="checkbox" value="2"><label>Dancer</label></div>
+                <div><input type="checkbox" name="checkbox" value="3"><label>Model</label></div>
+                <div><input type="checkbox" name="checkbox" value="5"><label>Fan</label></div>
+              </div>
+            </div>
+            <!--   <span *ngIf ="dataForm.controls['state'].touched && !dataForm.controls['state'].valid" class="has-error">State field can not be blank</span>-->
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Address</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="address" placeholder="Address*" [formControl]="dataForm.controls['address']">
+            <span *ngIf ="dataForm.controls['address'].touched && !dataForm.controls['address'].valid" class="has-error">Address field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Address2</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="address2" placeholder="Address2" [formControl]="dataForm.controls['address2']">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*City</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="city" placeholder="City*" [formControl]="dataForm.controls['city']">
+            <span *ngIf ="dataForm.controls['city'].touched && !dataForm.controls['city'].valid" class="has-error">City field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*State</label>
+          </div>
+          <div class="col-md-8">
+            <select class="form-control" name="state" [formControl]="dataForm.controls['state']">
+              <option value="">Select State</option>
+              <!--   <option *ngFor="let item of state2" value="{{item.abbreviation}}">{{item.name}}</option>-->
+            </select>
+            <span *ngIf ="dataForm.controls['state'].touched && !dataForm.controls['state'].valid" class="has-error">State field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>*Zip Code</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="zip" placeholder="Zip Code*" [formControl]="dataForm.controls['zip']">
+            <span *ngIf ="dataForm.controls['zip'].touched && !dataForm.controls['zip'].valid" class="has-error">Zip Code field can not be blank</span>
+          </div>
+        </div>
+
+        <div class="form-group cardonfilediv">
+          <div class="col-md-4 control-label text-left">
+            <label>Card on File</label>
+          </div>
+          <div class="col-md-8">
+            <div class="cardinfo">
+              <input type="text" class="form-control" name="cardonfile" placeholder="Card On File" [formControl]="dataForm.controls['cardonfile']">
+              <span class="cardlist"><img src="../../assets/images/img-card1.png"><img src="../../assets/images/img-card2.png"><img src="../../assets/images/img-card3.png"><img src="../../assets/images/img-card4.png"></span>
+            </div>
+            <span *ngIf ="dataForm.controls['cardonfile'].touched && !dataForm.controls['cardonfile'].valid" class="has-error">Card on file field can not be blank</span>
+          </div>
+        </div>
+
+        <div class="form-group cardonfilediv">
+          <div class="col-md-4 control-label text-left">
+            <label>Expiration date</label>
+          </div>
+          <div class="col-md-8">
+            <input type="date" class="form-control" name="expirydate" placeholder="Expiry Date" [formControl]="dataForm.controls['expirydate']">
+            <span *ngIf ="dataForm.controls['expirydate'].touched && !dataForm.controls['expirydate'].valid" class="has-error">Expiry Date field can not be blank</span>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>CSV</label>
+          </div>
+          <div class="col-md-8">
+            <input type="text" class="form-control" name="zip" placeholder="CSV" [formControl]="dataForm.controls['csv']">
+            <span *ngIf ="dataForm.controls['csv'].touched && !dataForm.controls['csv'].valid" class="has-error">Put CSV number here</span>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>Current Password</label>
+          </div>
+          <div class="col-md-8">
+            <input readonly="readonly" type="password" class="form-control" name="currentpassword" placeholder="current Password" [formControl]="dataForm.controls['currentpassword']">
+            <span *ngIf ="dataForm.controls['currentpassword'].touched && !dataForm.controls['currentpassword'].valid" class="has-error">Current Password field can not be blank</span>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>Password</label>
+          </div>
+          <div class="col-md-8">
+            <input type="password" class="form-control" name="password" placeholder="Password" [formControl]="dataForm.controls['password']">
+            <span *ngIf ="dataForm.controls['password'].touched && !dataForm.controls['password'].valid" class="has-error">Password field can not be blank</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-4 control-label text-left">
+            <label>Confirm Password</label>
+          </div>
+          <div class="col-md-8">
+            <input type="password" class="form-control" name="confirmpassword"  placeholder="Confirm Password" [formControl]="dataForm.controls['confirmpassword']">
+            <span *ngIf ="dataForm.hasError('mismatchedPasswords') && dataForm.controls['confirmpassword'].valid" class="has-error">Passwords must match</span>
+          </div>
+        </div>
+
+        <input type="submit" name="submit" value="Update" class="loginbtn2">
+
+      </form>
+    </div>
+  </div>
+
+
+</ng-template>

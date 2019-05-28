@@ -1,0 +1,693 @@
+
+@media screen and (max-width:1900px) {
+    .formdivwrapper .formtopdetials .form-control {
+        width: 64%;
+        margin-left: 8px;
+    }
+    .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
+        padding: 13px 5px !important;
+        font-size: 11px;
+    }
+}
+
+@media screen and (max-width:1800px) {
+    .dashboard_left ul li {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width:1666px) {
+
+    .n-adminfooter .footerrightdivsocial{
+        width: auto !important;
+    }
+
+
+    .dashboard_left ul li {
+        font-size: 13px;
+    }
+
+    .tablediv table th, .tablediv table td {
+        font-size: 13px !important;
+    }
+    .order-deatils-pg .formdivwrapper {
+        width: 96%;
+        margin: 50px auto;
+    }
+    .formtopdetials .formtopdetialsbtns {
+        width: 94%;
+    }
+    .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
+        padding: 13px 8px !important;
+        font-size: 13px;
+    }
+    .btngrapurl {
+        padding: 11px 8px;
+        font-size: 16px;
+    }
+
+    .btnnew {
+        width: 30px;
+        height: 30px;
+    }
+    .n-btnsocialsharenew span .fa {
+        font-size: 16px;
+    }
+}
+
+
+@media screen and (max-width:1540px) {
+    .n-adminfooter .footerrightdivsocial {
+        width: auto !important;
+    }
+}
+
+
+@media screen and (max-width:1366px) {
+
+
+    .dashboard_left ul li {
+        font-size: 13px;
+    }
+    .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
+        padding: 13px 7px !important;
+        font-size: 11px;
+    }
+
+    .formtopdetials .formtopdetialsbtns {
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width:1300px) {
+
+    .formdivwrapper .formtopdetials .form-control {
+        width: 56%;
+        margin-left: 8px;
+    }
+    .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
+        padding: 13px 6px !important;
+        font-size: 11px;
+    }
+    .formtopdetials .formtopdetialsbtns {
+        width: 100%;
+    }
+
+    .btngrapurl {
+        padding: 7px 6px;
+        font-size: 13px;
+    }
+    .tabcontentwrapper .adminlisttable {
+        width: 98%;
+    }
+    .n-sponsorblocklists {
+        padding: 15px;
+    }
+
+    .dashboard_left{ width:21%; }
+    .dashboard_right{   width:79%; }
+    .dbblog .fa{ font-size:36px;  color:#fff;}
+}
+
+
+@media screen and (max-width:1280px) {
+    .n-adminfooter .footerrightdiv {
+        display: inline-block;
+    }
+
+    .n-adminfooter .footerrightdiv .row {
+        display: inline-flex;
+    }
+
+    .n-adminfooter .footernav ul {
+        float: none!important;
+        margin: 0 auto;
+    }
+    .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
+        padding: 13px 2px ;
+        font-size: 11px;
+    }
+
+    .ma-formdivwrapper .control-label label {
+        font-size: 14px;
+    }
+
+    .n-socialsinglepostimgwrapper {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .btnnew {
+        width: 24px;
+        height: 24px;
+        padding: 1px 2px;
+    }
+    .n-btnsocialsharenew span .fa {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width:1199px) {
+    .n-adminfooter .footerrightdiv .row {
+        display: block;
+    }
+
+    .formdivwrapper .formtopdetials .adminbtnred, .formdivwrapper .formtopdetials .adminbtnred:hover {
+        padding: 13px 10px !important;
+        font-size: 14px;
+    }
+
+    .tablediv table tr:nth-child(odd) {
+        background-color: #313131;
+    }
+
+    .inviteyourfriendform .form-row {
+        align-items: baseline;
+    }
+
+    .dropdown.open .dropdown-menu li {
+        text-align: center;
+    }
+    .dashboard_left{ width:100%; float:none; min-height:inherit; text-align:center; height:auto;padding: 0 0 0px 0;}
+    .dashboard_left h2{ text-align:center;}
+    .dashboard_wrappertop img{ width:250px; display:block; margin:0 auto;}
+    .dashboard_right{   width:96%; margin:0 auto; float:none; min-height:inherit; border:none; padding:10px 0;}
+
+    /*    .tablediv { overflow-x:auto; width:100%; margin:0 auto;}*/
+
+    .dbblog {
+        width: 48%;
+        margin: 1%;
+        float: left;
+        border-radius: 5px;
+    }
+    .dbblog span {
+        font-size: 20px;
+    }
+    .affidashboardwhatsnew ul {
+        padding: 30px 40px 30px;
+        margin-bottom: 0px;
+    }
+
+    .affidashboardwhatsnew {
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+    .n-socialsinglepostlistsbg1, .n-socialsinglepostlistsbg2 {
+        padding: 30px;
+    }
+    .n-socialsinglepost{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .n-sponsorblocklists {
+        padding: 20px 15px 30px;
+    }
+    .tabcontentwrapper .adminlisttable {
+        position: relative;
+        z-index: 9;
+        margin: 0 auto;
+        width: 100%;
+        display: block;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+}
+
+
+
+@media screen and (min-width:1199px) {
+    .tabcontentwrapper {
+        min-height: 80vh;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 1199px){
+    .n-admin_header_container .navbar-toggle {
+        display: block !important;
+    }
+}
+
+@media (max-width: 1199px){
+    /*.formfilterdiv .mat-form-field .mat-form-field-infix {
+        top: -112px;
+    }*/
+    .n-adminfooter .footerrightdivsocial{
+        width: 100% !important;
+    }
+    .n-admin_header_container .navbar-toggle {
+        display: block !important;
+    }
+    .barnew{display:block !important;margin-left: 20px;}
+    .sub-menu {display:none}
+    .tabletopbar ul {
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+    }
+    .n-admin_logo {
+        width: 293px;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        margin: 0 auto;
+        display: block;
+        padding-left: 100px;
+    }
+    .inviteyourfriendnewblockinfo .form-horizontal label {
+        width: 115px;
+        margin-right: 10px;
+        font-size: 13px;
+    }
+    .formdivwrapper .formtopdetials .form-control {
+        width: 79%;
+    }
+
+    .sponsorblocknew_block1 {
+        flex-basis: 100% !important;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+    }
+    .sponsorblocknew_block1_wrapper {
+        display: block;
+    }
+    .sponsorblocknew_block1 h2 {
+        text-align: center;
+        margin-right: 0px;
+    }
+    .n-adminheadercls h3 {
+        font-size: 44px;
+    }
+}
+
+@media screen and (max-width:991px){
+
+
+    .sponsorblocknew_block1{ width: 100%; float: none;   border-right: none; margin-top: 30px;}
+
+    .sponsorblocknew_block1_updateblock{ width: 100%; height: auto; margin: 20px auto; position: relative; text-align: center;}
+
+    .sponsorblocknew_block1_updateblock_wrapper{ width: 100%; height:auto; display: block; text-align: center; vertical-align: middle;}
+
+    .sponsorblocknew_block1:nth-of-type(2){ border-top: solid 1px #ccc; padding-top: 20px; margin-top: 10px;}
+
+    .sponsorblocknew_block1 input[type="text"]{ height: auto!important;}
+
+    .modal-body .adminbtnred{ display: block; margin-top: 25px!important;}
+
+    .sponsorblocknew_block1_updateblock_wrapper p{word-break: break-all;}
+
+    .sponsorblocknew_block1 img {
+        width: auto;
+        max-height:inherit;
+        max-width: 100%;
+    }
+
+    .formdivwrapper .formtopdetials .form-control {
+        width: 80%;
+        margin-left: 8px;
+    }
+    .formdivwrapper .formtopdetials span {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .order-deatils-pg .inviteyourfriendnewblock {
+        display: inline-block;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    .formdivwrapper .formtopdetials .col-xs-6{
+        width: 100%;
+    }
+
+
+    .n-audiodeadeline_admin_header .n-audiodeadeline_admin_header_user {
+        justify-content: center;
+    }
+
+    .myorderblock .newtabletopbar h4 {
+        font-size: 30px;
+        word-wrap: break-word;
+    }
+
+    .n-adminfooter .copyrightdiv {
+        width: 100% !important;
+    }
+    .tablediv table td{text-align: right !important;}
+
+    .tabblock .tablists ul li.nav-item a.nav-link {font-size: 20px; line-height: 24px;  padding: 15px 15px;}
+    .tablediv table td.tablebuttondiv{border:0px !important;border-bottom: 0px solid #ffffff !important;}
+    .tablediv table td.norecordfound{border:0px !important;border-bottom: 0px solid #ffffff !important; font-size: 16px;}
+    .tablediv table td.norecordfound{border:0px !important;border-bottom: 0px solid #ffffff !important; font-size: 16px;}
+    .tablediv table td.tablebuttondiv{ padding-left: 0px !important;}
+    .tablediv table td.empycell{border:0px !important;border-bottom: 0px solid #ffffff !important; display: none;}
+    .tablediv table tr:last-child td.empycell {border-bottom: 0px solid #ddd !important;}
+    .tablediv table tr:last-child td {border-bottom: 0px solid #ddd !important;}
+    .newcheckboxdiv {text-align: left; float: right;}
+    .tablediv table th, .tablediv table td {border-bottom: 1px solid #646464 !important;}
+    .tablediv table td {padding: 10px;}
+    .tablediv.affiliatetree table.mat-table tr:nth-child(even){
+        background-color: #353434;
+    }
+
+    .n-audiodeadeline_admin_header .n-audiodeadeline_admin_header_user .n-audiodeadeline_user {
+        width: 37px;
+        height: auto;
+    }
+
+
+    .tablediv.affiliatetree table th, .tablediv.affiliatetree table td {
+        width: 100%;
+    }
+
+    .n-socialsinglepostcontentinner {
+        padding: 0px;
+        width: 48.33%;
+        margin: .5% 1%;
+    }
+    .n-sponsorblocklists {
+        justify-content: center;
+    }
+
+    .tablediv table td.text-center {
+        text-align: right !important;
+    }
+    .tablediv .btnedit, .tablediv .btndelete, .tablediv .btnedit:hover, .tablediv .btndelete:hover {
+        display: inline-block;
+        float: none;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tablediv table {
+        border: 0;
+    }
+
+    .tablediv table caption {
+        font-size: 1.3em;
+    }
+
+    .tablediv table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    .tablediv table tr {
+        border-bottom: 0px solid #ddd;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: .625em;
+    }
+
+    .tablediv table td {
+        border-bottom: 1px solid #ddd;
+        display: inline-block;
+        width: 100%;
+        font-size: 13px;
+        text-align: right;
+        padding-left: 25%;
+    }
+
+    .adminlisttable .whitebtnlists {
+        text-align: right!important;
+    }
+
+
+    .tablediv table td button, .tablediv table td button:hover{
+        float: right;
+    }
+/*
+    .tablediv table td::after {
+        !*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        *!
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -33%;
+    }*/
+    .tablediv table td:first-child::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label) !important;
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -18px;
+        /* z-index: 999; */
+        color: #fff;
+    }
+    .adminlisttable.adminlisttabledashboard .tablediv table tr {
+        display: table-row !important;
+    }
+
+
+    .tablediv table td:last-child::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label) !important;
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        /* z-index: 999; */
+        color: #fff;
+    }
+
+    .tablediv table td::after {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -33%;
+    }
+
+    .tablediv table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(title);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -33%;
+    }
+
+    .tablediv table td:last-child {
+        border-bottom: 0;
+    }
+
+
+/*    .formfilterdiv table td::before {
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        margin-left: -33%;
+    }
+
+    .formfilterdiv table td:nth-of-type(2):before { content: "First Name"; }
+    .formfilterdiv table td:nth-of-type(3):before { content: "Last Name"; }
+    .formfilterdiv table td:nth-of-type(4):before { content: "Email"; }
+    .formfilterdiv table td:nth-of-type(5):before { content: "Enroller"; }
+    .formfilterdiv table td:nth-of-type(6):before { content: "Date Added"; }*/
+
+
+    .login_wrapper{ width:80%; padding-left:5%; padding-right:5%;}
+    .login_formbox{ width:90%; margin:0 auto;}
+
+    .dashboard1form{ width:96%;}
+
+    .fpassword{ float:none; margin:10px auto;}
+    .login_formbox .loginbtn{ float:none; margin:0 auto;}
+
+
+
+
+
+
+
+    .tablediv table td::before{
+
+    }
+
+
+
+}
+
+@media screen and (max-width: 767px) {
+    .n-socialsinglepostcontentinner {
+        padding: 0px;
+        width: 98.33%;
+        margin: 1%;
+    }
+
+    .dbblog {
+        width: 98%;
+        margin: 1%;
+        float: left;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .dbblog span{font-size: 24px;}
+    .btnsocialsharenew {
+        width: 100%;
+    }
+
+    .tablediv .btnedit, .tablediv .btndelete, .tablediv .btnedit:hover, .tablediv .btndelete:hover {
+        display: inline-block;
+        float: none;
+        margin-left: 2px;
+    }
+    .dashboard1_div1 {
+        margin: 20px;
+    }
+
+    .tabletopbar ul {
+        justify-content: center;
+    }
+
+    .tablediv .btnedit, .tablediv .btndelete, .tablediv .btnedit:hover, .tablediv .btndelete:hover {
+        float: none;
+    }
+    .n-socialsinglepostlistsbg1, .n-socialsinglepostlistsbg2 {
+        padding: 15px;
+    }
+
+}
+
+
+@media screen and (max-width:540px) {
+    .n-admin_logo {
+        padding-left: 0;
+    }
+    .dashboard_left ul li.homecls a {
+        padding: 15px 10px;
+    }
+    .dashboard_left ul li a {
+        display: block;
+        padding: 10px 10px;
+    }
+    .dashboard_left ul ul li a {
+        color: #fff;
+        display: block;
+        padding: 6px 10px;
+    }
+
+    .n-audiodeadeline_admin_header .navbar-nav {
+        float: left;
+        margin: 0;
+        width: auto !important;
+    }
+    .n-audiodeadeline_admin_header .n-audiodeadeline_admin_header_user {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 8px;
+    }
+
+    .tabblock .tablists ul{
+        flex-wrap: wrap;
+    }
+
+    .n-admin_header_container {
+        flex-wrap: wrap;
+    }
+    .n-audiodeadeline_admin_header {
+        height: auto;
+        text-align: center;
+    }
+    .n-admin_logo {
+        margin: 0;
+        width: 236px;
+        text-align: right;
+    }
+    .n-admin_logo img{
+        max-width: 50% !important;
+    }
+    .inviteyourfriend .btnred {margin-top: 10px; margin-bottom: 5px;}
+    .n-affidashboardwhatsnewheadercls .row .col-md-3{padding:0 !important;}
+    .n-affidashboardwhatsnewheadercls .row .col-md-9{padding:0 !important;}
+    .affidashboardwhatsnew ul li {padding: 15px 5px;}
+    .affidashboardwhatsnew ul {padding: 30px; margin-bottom: 0px;}
+    .adminlisttabledashboard h4 {font-size: 18px; line-height: normal;}
+    .userdashboardsocialsinglepostlist {margin-top: 20px;}
+    .n-sponsorblocklists {padding: 15px;}
+    .n-sponsorblockheader h2 {font-size: 18px;}
+    .n-socialsinglepostcontentinner {margin: 3% 1%;}
+    .inviteyourfriend h2 {font-size: 24px;}
+    .inviteyourfriend h5 {font-size: 18px; margin-top: 10px;}
+    .userdashboardinvitefriend {margin-top: 30px;}
+    .btngrapurl {margin-top: 5px;}
+
+    .n-adminheadercls h3 {
+        font-size: 32px;
+    }
+    .n-adminheadercls p {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .affidashboardwhatsnew ul li h1 {
+        font-size: 15px;
+        line-height: 20px;
+    }
+
+    .n-btnsocialsharenewlists {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .btnnew {
+        margin: 3px;
+    }
+
+    .dbblog{ margin:0 auto; float:none; border-radius:5px; margin-bottom:15px;}
+    .btnsocialsharenew {
+        font-size: 14px;
+    }
+    .n-adminheadercls h4 {
+        font-size: 30px;
+    }
+}
+
+
+@media screen and (max-width:480px) {
+    .n-socialsinglepostimgwrapper {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+}

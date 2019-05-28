@@ -1,0 +1,220 @@
+<!--
+<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <h4>My Order</h4>
+          <div class="tablediv">
+            <div class="tabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input style="border-radius: 0;" placeholder="Search By DateRange" name="searchDate" class="form-control input-lg"
+                                 [(ngModel)]="searchDate"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg" placeholder="Search" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <table>
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Enroller</th>
+                <th>Sponsor</th>
+                <th>Product</th>
+                <th>Transaction Id</th>
+                <th>Total</th>
+                <th>Promocode</th>
+                <th>Discount</th>
+                <th>Order Time</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of orderlist | oreder1 : searchText | oreder2 : searchDate | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{item.fullname}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.phone}}</td>
+                <td>{{item.affiliatename}}</td>
+                <td style="text-transform: uppercase;">{{item.sponsor}}</td>
+                <td style="text-transform: uppercase;">{{item.productname}}</td>
+                <td>{{item.transactionId}}</td>
+                <td style="word-break: keep-all;">${{showtwoDecnum(item.total)}}</td>
+                <td>{{item.promocode}}</td>
+                <td style="word-break: keep-all;">{{(item.discount)?'$'+showtwoDecnum(item.discount):''}}</td>
+                <td>{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>
+              </tr>
+              <tr *ngIf="!(orderlist | oreder1 : searchText | oreder2 : searchDate).length && !loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td></tr>
+              <tr *ngIf="loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;"><img src="../../assets/images/loader.gif" style="width: 100px;"></td></tr>
+              </tbody>
+            </table>
+            <pagination-controls  *ngIf="(orderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+-->
+
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <!--  <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>My Order</h4>
+          </div>
+          <div class="dashboardwrapper">
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input style="border-radius: 0;" placeholder="Search By DateRange" name="searchDate" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchDate"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="Search" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="tablediv">
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="empycell"></th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Phone</th>
+                      <th>Enroller</th>
+                      <th>Sponsor</th>
+                      <th>Product</th>
+                      <th>Transaction Id</th>
+                      <th>Total</th>
+                      <th>Promocode</th>
+                      <th>Discount</th>
+                      <th>Order Time</th>
+
+                      <!---FOR Affiliate/ Ambassador------>
+                      <!--<th>Name</th>
+                      <th>Email</th>
+                      <th>Order ID</th>
+                      <th>Date/Time</th>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Total</th>-->
+                      <!---------->
+                      <th class="empycell"></th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of orderlist | oreder1 : searchText | oreder2 : searchDate | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td class="empycell"></td>
+                      <td data-label="Name">{{item.fullname}}</td>
+                      <td data-label="Email">{{item.email}}</td>
+                      <td data-label="Phone">{{item.phone}}</td>
+                      <td data-label="Enroller">{{item.affiliatename}}</td>
+                      <td data-label="Sponsor" style="text-transform: uppercase;">{{item.sponsor}}</td>
+                      <td data-label="Product" style="text-transform: uppercase;">{{item.productname}}</td>
+                      <td data-label="Transaction Id">{{item.transactionId}}</td>
+                      <td data-label="Total" style="word-break: keep-all;">${{showtwoDecnum(item.total)}}</td>
+                      <td data-label="Promocode">{{item.promocode}}</td>
+                      <td data-label="Discount" style="word-break: keep-all;">{{(item.discount)?'$'+showtwoDecnum(item.discount):''}}</td>
+                      <td data-label="Order Time">{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>
+
+                      <!---FOR Affiliate/ Ambassador------>
+                      <!-- <td data-label="Name">{{item.fullname}}</td>
+                       <td data-label="Email">{{item.email}}</td>
+                       <td data-label="Order ID">{{item.productid}}</td>
+                       <td data-label="Date/Time">{{(item.added_time*1000) | date :  "MM/dd/yyyy hh:mma" }}</td>
+                       <td data-label="Product" style="text-transform: uppercase;">{{item.productname}}</td>
+                       <td data-label="Quantity">{{item.qty}}</td>
+                       <td data-label="Total">${{showtwoDecnum(item.total)}}</td>-->
+                      <!---------->
+
+                      <td class="empycell"></td>
+
+                    </tr>
+                    <tr *ngIf="!(orderlist | oreder1 : searchText | oreder2 : searchDate).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="11" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td colspan="11" style="text-align: center;"><div class="loadertabledata"></div></td>
+                    </tr>
+
+                    <!---FOR Affiliate/ Ambassador------>
+                    <!--<tr *ngIf="!(orderlist | oreder1 : searchText | oreder2 : searchDate).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="7" style="text-align: center;"><div class="loadertabledata"></div></td>
+                      <td class="empycell"></td>
+                    </tr>-->
+                    <!---FOR Affiliate/ Ambassador------>
+
+                    </tbody>
+                  </table>
+                  <pagination-controls  *ngIf="(orderlist | oreder1 : searchText | oreder2 : searchDate).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>

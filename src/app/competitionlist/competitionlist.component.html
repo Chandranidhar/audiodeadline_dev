@@ -1,0 +1,299 @@
+<!--
+<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <h4>Competition List</h4>
+          <div class="tablediv">
+            <div class="tabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchText2" [(ngModel)]="searchText2" class="form-control input-lg">
+                            <option value="">Search By Status</option>
+                            <option value="">All Status</option>
+                            <option value="0">Inactive</option>
+                            <option value="1">Active</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg" placeholder="Search By Name" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a [routerLink]="['/add-competition']" class="loginbtn2"><i class="fa fa-plus"></i> Add Competition</a>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <table>
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Date</th>
+                <th>No Of Signup</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of competitionlist | compfilter : searchText : 'name' | compfilter : searchText2 : 'status' | paginate: { itemsPerPage: 10, currentPage: p }">
+                <td>{{item.competitionname}}</td>
+                <td>{{item.description}}</td>
+                <td><img *ngIf="item.image1" style="width: 230px;" src="{{fileurl}}{{item.image1}}"></td>
+                <td>{{(item.startdate*1000) | date :  "MM/dd/yyyy" }} - {{(item.enddate*1000) | date :  "MM/dd/yyyy" }}</td>
+                <td>
+                  <div>
+                    <div><label style="margin-right: 5px; color: #FF8C00;">Pending: </label><span>{{item.pendinguser}}</span></div>
+                    <div><label style="margin-right: 5px; color: #63ad1d;">Approved: </label><span>{{item.approveduser}}</span></div>
+                    <div><label style="margin-right: 5px; color: #b52121;">Declined: </label><span>{{item.declineduser}}</span></div>
+                    <div><label style="margin-right: 5px; color: #0186eb;">Total: </label><span>{{item.totaluser}}</span></div>
+                  </div>
+                </td>
+                <td>
+                  <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
+                  <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
+                </td>
+                <td>
+                  <a class="loginbtn2 btnedit" (click)="managesetting(settingtemplate,item)"><i class="fa fa-cog"></i><span>Manage Settings</span></a>
+                  <a class="loginbtn2 btnedit" [routerLink]="['/edit-competition',item._id]"><i class="fa fa-pencil"></i><span>Edit</span></a>
+                  <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
+                </td>
+              </tr>
+              <tr *ngIf="!(competitionlist | compfilter : searchText : 'name' | compfilter : searchText2 : 'status' ).length && !loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td></tr>
+              <tr *ngIf="loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;"><img src="../../assets/images/loader.gif" style="width: 100px;"></td></tr>
+              </tbody>
+            </table>
+            <pagination-controls  *ngIf="(competitionlist | compfilter : searchText : 'name' | compfilter : searchText2 : 'status' ).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<ng-template #template>
+  <div class="modal-body text-center modalcls ">
+    <p>Are you sure to delete this Competition?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #settingtemplate>
+  <div class="modal-body text-center modalcls modalclsnew">
+    <div>
+      <h2>Manage Competition Settings: <span>{{updatedcompetition.competitionname}}</span></h2>
+      <div class="form-group"><label>Back story required?</label><input type="checkbox" [checked]="updatedcompetition.backstoryrequired" (change)="checkValue($event,'backstoryrequired')"></div>
+      <div class="form-group"><label>Photos required?</label><input type="checkbox" [checked]="updatedcompetition.photorequired" (change)="checkValue($event,'photorequired')"></div>
+      <div class="form-group" [hidden]="!updatedcompetition.photorequired"><label>Number of photos?</label><input  class="form-control" type="number" [(ngModel)]="updatedcompetition.noofphoto" class="form-control"></div>
+      <div class="form-group"><label>Videos required?</label><input type="checkbox" [checked]="updatedcompetition.videorequired" (change)="checkValue($event,'videorequired')"></div>
+      <div class="form-group"[hidden]="!updatedcompetition.videorequired"><label>Number of Videos?</label><input   class="form-control" type="number" [(ngModel)]="updatedcompetition.noofvideo"></div>
+      <div class="form-group"><label>Music required?</label><input type="checkbox" [checked]="updatedcompetition.musicrequired" (change)="checkValue($event,'musicrequired')"></div>
+      <div class="form-group" [hidden]="!updatedcompetition.musicrequired"><label>Number of Music?</label><input  class="form-control" type="number" [(ngModel)]="updatedcompetition.noofmusic"></div>
+      <div class="form-group"><input type="button" class="newsubbtn" value="save" (click)="savemanagesettings(loadingtemplate,successtemplate)"></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loadingtemplate>
+  <div class="modal-body text-center modalclsnew">
+    <p style="margin: 0;"><img src="../../assets/images/loader.gif" style="width: 100px;"></p>
+  </div>
+</ng-template>
+
+<ng-template #successtemplate>
+  <div class="modal-body text-center modalclsnew">
+    <h2 style="margin: 0;"><span>Competition setting updated successfully.</span></h2>
+  </div>
+</ng-template>-->
+
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <!--  <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>Competition List</h4>
+          </div>
+          <div class="dashboardwrapper">
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchText2" [(ngModel)]="searchText2" class="form-control input-lg">
+                            <option value="">Search By Status</option>
+                            <option value="">All Status</option>
+                            <option value="0">Inactive</option>
+                            <option value="1">Active</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="Search By Title/Active Date/Status" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <a (click)="openAddModal(addcompetition)" class="loginbtn2"><i class="fa fa-plus"></i> Add Competition</a>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <div class="tabcontentwrapper">
+
+              <div class="adminlisttable adminlisttabledashboard">
+                <!--<h4>Competition List</h4>-->
+                <div class="tablediv">
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="empycell"></th>
+                      <th>Date</th>
+                      <th>Title</th>
+                      <th class="descriptiondiv">Description</th>
+                      <th>Image</th>
+                      <th># Of Signup</th>
+                      <th>End Date</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                      <th class="empycell"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of competitionlist | compfilter : searchText : 'name' | compfilter : searchText2 : 'status' | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td class="empycell">&nbsp;</td>
+                      <td data-label="Date">{{(item.startdate*1000) | date :  "MM/dd/yyyy" }}</td>
+                      <td data-label="Title">{{item.competitionname}}</td>
+                      <td data-label="Description">{{item.description}}</td>
+                      <td data-label="Image"><img *ngIf="item.image1" style="width: 230px;" src="{{fileurl}}{{item.image1}}"></td>
+                      <td data-label="# Of Signup">
+                        <div>
+                          <div><label style="margin-right: 5px; color: #FF8C00;">Pending: </label><span>{{item.pendinguser}}</span></div>
+                          <div><label style="margin-right: 5px; color: #63ad1d;">Approved: </label><span>{{item.approveduser}}</span></div>
+                          <div><label style="margin-right: 5px; color: #b52121;">Declined: </label><span>{{item.declineduser}}</span></div>
+                          <div><label style="margin-right: 5px; color: #0186eb;">Total: </label><span>{{item.totaluser}}</span></div>
+                        </div>
+                      </td>
+                      <td data-label="End Date">{{(item.enddate*1000) | date :  "MM/dd/yyyy" }}</td>
+                      <td data-label="Status" class="text-center">
+                        <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
+                        <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
+                      </td>
+                      <td data-label="Action" class="whitebtnlists text-center">
+                        <a class="loginbtn2 btnedit btnwhite" (click)="managesetting(settingtemplate,item)"><i class="fa fa-cog"></i><!--<span>Manage Settings</span>--></a>
+                        <a class="loginbtn2 btnedit btnwhite" (click)="openEditModal(editcompetition,item._id)"><i class="fa fa-pencil-square-o"></i><!--<span>Edit</span>--></a>
+                        <a href="javascript:void(0)" class="loginbtn2 btndelete btnwhite" (click)="openDelModal(template,item)"><i class="fa fa-trash"></i><!--<span>Delete</span>--></a>
+                      </td>
+                      <td class="empycell">&nbsp;</td>
+                    </tr>
+                    <tr *ngIf="!(competitionlist | compfilter : searchText : 'name' | compfilter : searchText2 : 'status' ).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="8" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="8" style="text-align: center;"><div class="loadertabledata"></div><!--<img src="../../assets/images/loader.gif" style="width: 100px;">--></td>
+                      <td class="empycell"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls  *ngIf="(competitionlist | compfilter : searchText : 'name' | compfilter : searchText2 : 'status' ).length" (pageChange)="p = $event" maxSize="3" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                </div>
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+
+<ng-template #template>
+  <div class="modal-body text-center modalcls ">
+    <p>Are you sure to delete this Competition?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #settingtemplate>
+  <div class="modal-body text-center modalcls modalclsnew">
+    <div>
+      <h2>Manage Competition Settings: <span>{{updatedcompetition.competitionname}}</span></h2>
+      <div class="form-group"><label>Back story required?</label><input type="checkbox" [checked]="updatedcompetition.backstoryrequired" (change)="checkValue($event,'backstoryrequired')"></div>
+      <div class="form-group"><label>Photos required?</label><input type="checkbox" [checked]="updatedcompetition.photorequired" (change)="checkValue($event,'photorequired')"></div>
+      <div class="form-group" [hidden]="!updatedcompetition.photorequired"><label>Number of photos?</label><input  class="form-control" type="number" [(ngModel)]="updatedcompetition.noofphoto" class="form-control"></div>
+      <div class="form-group"><label>Videos required?</label><input type="checkbox" [checked]="updatedcompetition.videorequired" (change)="checkValue($event,'videorequired')"></div>
+      <div class="form-group"[hidden]="!updatedcompetition.videorequired"><label>Number of Videos?</label><input   class="form-control" type="number" [(ngModel)]="updatedcompetition.noofvideo"></div>
+      <div class="form-group"><label>Music required?</label><input type="checkbox" [checked]="updatedcompetition.musicrequired" (change)="checkValue($event,'musicrequired')"></div>
+      <div class="form-group" [hidden]="!updatedcompetition.musicrequired"><label>Number of Music?</label><input  class="form-control" type="number" [(ngModel)]="updatedcompetition.noofmusic"></div>
+      <div class="form-group"><input type="button" class="newsubbtn" value="save" (click)="savemanagesettings(loadingtemplate,successtemplate)"></div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #loadingtemplate>
+  <div class="modal-body text-center modalclsnew">
+    <p style="margin: 0;"><img src="../../assets/images/loader.gif" style="width: 100px;"></p>
+  </div>
+</ng-template>
+
+<ng-template #successtemplate>
+  <div class="modal-body text-center modalclsnew">
+    <h2 style="margin: 0;"><span>Competition setting updated successfully.</span></h2>
+  </div>
+</ng-template>
+
+<ng-template #addcompetition>
+  <div class="modal-body text-center modalcls n-modalcls">
+    <app-competitionadd></app-competitionadd>
+  </div>
+</ng-template>
+
+<ng-template #editcompetition>
+  <div class="modal-body text-center modalcls n-modalcls">
+    <app-competitionedit [id]="paramid"></app-competitionedit>
+  </div>
+</ng-template>

@@ -1,0 +1,142 @@
+<!--
+<app-header></app-header>
+<div class="blogblock">
+  <div class="blogwrappernew">
+    <div class="row">
+      <div class="col-xs-12 ">
+        <div class="tab-content">
+          <div class="singleblogwrapper blogdetailpage" *ngIf="blogdet">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 blogcontentarea">
+                <h2>{{blogdet.title}}</h2>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <div class="blogimgwrapperouter"></div>
+              </div>
+              <div class="col-lg-12 col-md-12 blogcontentarea">
+                <p [innerHTML]="getDesc(blogdet)"></p>
+              </div>
+            </div>
+            <span class="hrdivider"></span>
+            <div class="row bottomsociallinks">
+              <div class="col-lg-6 col-md-6">
+                <div class="weblinks">
+                  <span class="weblinksspan1"> By  {{blogdet.parentname}}</span>
+                  <span class="weblinksspan2">{{(blogdet.added_time*1000) | date :  "MMM d, yyyy" }}</span>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <ul class="socialmenu">
+                  <li><img src="assets/images/blog-sharelink.png"></li>
+                  <li><img src="assets/images/blog-fbicon.png"></li>
+                  <li><img src="assets/images/blog-twicon.png"></li>
+                  <li><img src="assets/images/blog-linkdinicon.png"></li>
+                  <li><img src="assets/images/blog-gplusicon.png"></li>
+                </ul>
+              </div>
+            </div>
+            <span class="hrdivider"></span>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 gallerydiv" *ngIf="blogdet.images">
+                <h2>Images</h2>
+                <div class="row no-margine col-container">
+                  <div class="col-1-5 col colcolor" *ngFor="let item of blogdet.images">
+                    <div class="imgwrapper">
+                      <div class="videoWrapper">
+                        <img src="{{siteurl}}nodeserver/uploads/{{item}}" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 gallerydiv" *ngIf="blogdet.videos">
+                <h2>Videos</h2>
+                <div class="row no-margine col-container">
+                  <div class="col-1-5 col colcolor" *ngFor="let item of blogdet.videos">
+                    <div class="imgwrapper">
+                      <div class="videoWrapper">
+                        <img src="https://i.ytimg.com/vi/{{item}}/hqdefault.jpg" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>-->
+
+<app-header></app-header>
+<div class="blogblock">
+  <div class="blogwrappernew">
+    <div class="row">
+      <div class="col-xs-12 ">
+        <div class="tab-content">
+          <div class="singleblogwrapper blogdetailpage" *ngIf="blogdet">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 blogcontentarea">
+                <h2>{{blogdet.title}}</h2>
+              </div>
+              <div class="col-lg-12 col-md-12">
+                <div class="blogimgwrapperouter"></div>
+              </div>
+              <div class="col-lg-12 col-md-12 blogcontentarea">
+                <p [innerHTML]="getDesc(blogdet)"></p>
+              </div>
+            </div>
+            <span class="hrdivider"></span>
+            <div class="row bottomsociallinks">
+              <div class="col-lg-6 col-md-6">
+                <div class="weblinks">
+                  <span class="weblinksspan1"> By  {{blogdet.parentname}}</span>
+                  <span class="weblinksspan2">{{(blogdet.added_time*1000) | date :  "MMM d, yyyy" }}</span>
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <ul class="socialmenu">
+                  <li><img src="assets/images/blog-sharelink.png"></li>
+                  <li><img src="assets/images/blog-fbicon.png"></li>
+                  <li><img src="assets/images/blog-twicon.png"></li>
+                  <li><img src="assets/images/blog-linkdinicon.png"></li>
+                  <li><img src="assets/images/blog-gplusicon.png"></li>
+                </ul>
+              </div>
+            </div>
+            <span class="hrdivider"></span>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 gallerydiv" *ngIf="blogdet.images">
+                <h2>Images</h2>
+                <div class="row no-margine col-container">
+                  <div class="col-1-5 col colcolor" *ngFor="let item of blogdet.images">
+                    <div class="imgwrapper">
+                      <div class="videoWrapper">
+                        <img src="{{siteurl}}nodeserver/uploads/{{item}}" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 gallerydiv" *ngIf="blogdet.videos">
+                <h2>Videos</h2>
+                <div class="row no-margine col-container">
+                  <div class="col-1-5 col colcolor" *ngFor="let item of blogdet.videos">
+                    <div class="imgwrapper">
+                      <div class="videoWrapper">
+                        <img src="https://i.ytimg.com/vi/{{item}}/hqdefault.jpg" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

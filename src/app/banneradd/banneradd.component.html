@@ -1,0 +1,337 @@
+<!--
+<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <h4> Add Media</h4>
+          <div class="dashboard1form">
+            <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)">
+              <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+              <div class="form-group">
+                <label>Name*:</label>
+                <input type="text" class="form-control" name="label" placeholder="Name*" [formControl]="dataForm.controls['label']">
+                <span *ngIf="dataForm.controls['label'].touched && dataForm.controls['label'].hasError('blank')" class="has-error"> *Name field can not be blank</span>
+                <span *ngIf="dataForm.controls['label'].touched && dataForm.controls['label'].hasError('invalid')" class="has-error"> *Name field contains only alphanumeric or space</span>
+              </div>
+              <div class="form-group">
+                <label>Type*:</label>
+                <select class="form-control" name="type" [formControl]="dataForm.controls['type']" (change)="cngtype($event.target.value)">
+                  <option value="">Select Type</option>
+                  <option *ngFor="let item of bannerTypeList" value="{{item.val}}">{{item.label}}</option>
+                </select>
+                <span *ngIf ="dataForm.controls['type'].touched && !dataForm.controls['type'].valid" class="has-error">*Please select type.</span>
+              </div>
+              <div class="form-group" *ngIf="dataForm.controls['type'].value == '2'">
+                <label>Sponsor*:</label>
+                <select class="form-control" name="sponsor" [formControl]="dataForm.controls['sponsor']">
+                  <option value="">Select Sponsor</option>
+                  <option *ngFor="let item of sponsorList" value="{{item.name}}">{{item.label}}</option>
+                </select>
+                <span *ngIf ="dataForm.controls['sponsor'].touched && !dataForm.controls['sponsor'].valid" class="has-error">*Please select sponsor.</span>
+              </div>
+              <div class="form-group" *ngIf="dataForm.controls['type'].value">
+                <label>Image*</label>
+                <div class="clearfix"></div>
+                <input style="display: none" type="file" (change)="onFileChanged($event)" accept=".jpg,.jpeg,.png" #fileInput>
+                <input type="button" (click)="fileInput.click()" value="Select File" class="cropselectbtn">
+                <span style="font-size: 14px;">*Please upload bigger than {{imagewidth}}X{{imageheight}}</span>
+                <div class="clearfix"></div>
+                <span *ngIf="imageserror" class="has-error" style="margin: 0;">*Please upload image</span>
+                <span *ngIf="uploaderror" class="has-error" style="margin: 0;">{{uploaderror}}</span>
+                <div *ngIf="imageloading">
+                  <div class="col-md-4" style="height: 200px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+                    <img style="width: 100%" src="{{fileurl}}line-loader.gif" >
+                  </div>
+                </div>
+                <div class="col-md-12" style="padding: 0;" *ngIf="image">
+                  <div class="col-md-9" style="margin: 15px 0 0 0; padding: 0;">
+                    <img style="max-width: 400px; max-height: 400px;" src="{{fileurl}}{{uploadfolder}}{{image}}" >
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="form-group" *ngIf="dataForm.controls['type'].value == '2'">
+                <label>Image 2*</label>
+                <div class="clearfix"></div>
+                <input style="display: none" type="file" (change)="onFileChanged2($event)" accept=".jpg,.jpeg,.png" #fileInput2>
+                <input type="button" (click)="fileInput2.click()" value="Select File" class="cropselectbtn">
+                <span style="font-size: 14px;">*Please upload bigger than {{imagewidth2}}X{{imageheight2}}</span>
+                <div class="clearfix"></div>
+                <span *ngIf="imageserror2" class="has-error" style="margin: 0;">*Please upload image</span>
+                <span *ngIf="uploaderror2" class="has-error" style="margin: 0;">{{uploaderror2}}</span>
+                <div *ngIf="imageloading2">
+                  <div class="col-md-4" style="height: 200px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+                    <img style="width: 100%" src="{{fileurl}}line-loader.gif" >
+                  </div>
+                </div>
+                <div class="col-md-12" style="padding: 0;" *ngIf="image2">
+                  <div class="col-md-9" style="margin: 15px 0 0 0; padding: 0;">
+                    <img style="max-width: 400px; max-height: 400px;" src="{{fileurl}}{{uploadfolder}}{{image2}}" >
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="form-group" *ngIf="dataForm.controls['type'].value == '2'">
+                <label>Image 3*</label>
+                <div class="clearfix"></div>
+                <input style="display: none" type="file" (change)="onFileChanged3($event)" accept=".jpg,.jpeg,.png" #fileInput3>
+                <input type="button" (click)="fileInput3.click()" value="Select File" class="cropselectbtn">
+                <span style="font-size: 14px;">*Please upload bigger than {{imagewidth3}}X{{imageheight3}}</span>
+                <div class="clearfix"></div>
+                <span *ngIf="imageserror3" class="has-error" style="margin: 0;">*Please upload image</span>
+                <span *ngIf="uploaderror3" class="has-error" style="margin: 0;">{{uploaderror3}}</span>
+                <div *ngIf="imageloading3">
+                  <div class="col-md-4" style="height: 200px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+                    <img style="width: 100%" src="{{fileurl}}line-loader.gif" >
+                  </div>
+                </div>
+                <div class="col-md-12" style="padding: 0;" *ngIf="image3">
+                  <div class="col-md-9" style="margin: 15px 0 0 0; padding: 0;">
+                    <img style="max-width: 400px; max-height: 400px;" src="{{fileurl}}{{uploadfolder}}{{image3}}" >
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+
+<ng-template #croptemplate1>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="close()" class="closebtn">X</a>
+    <div *ngIf="!rawimage" style="text-align: center;"><img style="width: 200px;" src="{{fileurl}}line-loader.gif" ></div>
+    <div *ngIf="rawimage">
+      <image-cropper
+              [imageBase64]="rawimage"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="3.67"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage"><input type="button" value="save" (click)="crop1()" class="cropselectbtn"><input type="button" value="cancel" (click)="close()" class="cropselectbtn cancelbtn"></div>
+  </div>
+</ng-template>
+
+<ng-template #croptemplate2>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="close()" class="closebtn">X</a>
+    <div *ngIf="!rawimage" style="text-align: center;"><img style="width: 200px;" src="{{fileurl}}line-loader.gif" ></div>
+    <div *ngIf="rawimage">
+      <image-cropper
+              [imageBase64]="rawimage"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1.51"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage"><input type="button" value="save" (click)="crop2()" class="cropselectbtn"><input type="button" value="cancel" (click)="close()" class="cropselectbtn cancelbtn"></div>
+  </div>
+</ng-template>-->
+
+<!--<div class="container-fluid dashboard_body">
+  <div class="dashboard_wrappertop"><img src="../../assets/images/logo.png"></div>
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>-->
+
+<div class="formnewpopupheader">
+  <h4>Add media</h4>
+</div>
+
+<div class="dashboard1form formnewpopup">
+  <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)" class="form-horizontal">
+    <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left"><label>Title*:</label></div>
+      <div class="col-md-8">
+        <input type="text" class="form-control" name="label" placeholder="Name*" [formControl]="dataForm.controls['label']">
+        <span *ngIf="dataForm.controls['label'].touched && dataForm.controls['label'].hasError('blank')" class="has-error"> *Name field can not be blank</span>
+        <span *ngIf="dataForm.controls['label'].touched && dataForm.controls['label'].hasError('invalid')" class="has-error"> *Name field contains only alphanumeric or space</span>
+      </div>
+    </div>
+    <!---->
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left"><label>Display for*:</label></div>
+      <div class="col-md-8">
+        <select [formControl]="dataForm.controls['displayfor']" multiple="multiple" class="selecttype">
+          <option value="">Select value</option>
+          <optgroup label="User" (click)="changeuserrole($event)">
+            <!--<option value="User" [selected]="changeuserrole()">User</option>-->
+            <option value="Dancer" >Dancer</option>
+            <option value="Model" >Model</option>
+            <option value="Producer" >Producer</option>
+            <option value="Musician" >Musician</option>
+            <option value="Fan">Fan</option>
+          </optgroup>
+          <option value="Ambassador">Ambassador</option>
+          <option value="Affiliate">Affiliate</option>
+        </select>
+
+        <span *ngIf ="dataForm.controls['displayfor'].touched && !dataForm.controls['displayfor'].valid" class="has-error">*Please select the value.</span>
+      </div>
+    </div>
+    <!---->
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left"><label>Display for*:</label></div>
+      <div class="col-md-8">
+        <select class="form-control" name="type" [formControl]="dataForm.controls['type']" (change)="cngtype($event.target.value)">
+          <option value="">Select Type</option>
+          <option *ngFor="let item of bannerTypeList" value="{{item.val}}">{{item.label}}</option>
+        </select>
+        <span *ngIf ="dataForm.controls['type'].touched && !dataForm.controls['type'].valid" class="has-error">*Please select type.</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left">
+        <label>*Start Date</label>
+      </div>
+      <div class="col-md-8">
+        <input type="date" class="form-control" name="startdate" placeholder="Startdate" [formControl]="dataForm.controls['startdate']" (blur)="_commonservices.inputUntouch(dataForm,'startdate')">
+        <span *ngIf ="dataForm.controls['startdate'].touched && !dataForm.controls['startdate'].valid" class="has-error">startdate amount field can not be blank</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-md-4 control-label text-left">
+        <label>*End Date</label>
+      </div>
+      <div class="col-md-8">
+        <input type="date" class="form-control" name="enddate" placeholder="End Date" [formControl]="dataForm.controls['enddate']" (blur)="_commonservices.inputUntouch(dataForm,'enddate')">
+        <span *ngIf ="dataForm.controls['enddate'].touched && !dataForm.controls['enddate'].valid" class="has-error">end date amount field can not be blank</span>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="dataForm.controls['type'].value == '2'">
+      <div class="col-md-4 control-label text-left"><label>Sponsor*:</label></div>
+      <div class="col-md-8">
+        <select class="form-control" name="sponsor" [formControl]="dataForm.controls['sponsor']">
+          <option value="">Select Sponsor</option>
+          <option *ngFor="let item of sponsorList" value="{{item.name}}">{{item.label}}</option>
+        </select>
+        <span *ngIf ="dataForm.controls['sponsor'].touched && !dataForm.controls['sponsor'].valid" class="has-error">*Please select sponsor.</span>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="dataForm.controls['type'].value">
+      <div class="col-md-4 control-label text-left"><label>Image*</label></div>
+      <div class="col-md-8">
+        <input style="display: none" type="file" (change)="onFileChanged($event)" accept=".jpg,.jpeg,.png" #fileInput>
+        <input type="button" (click)="fileInput.click()" value="Select File" class="cropselectbtn">
+        <span style="font-size: 14px;">*Please upload bigger than {{imagewidth}}X{{imageheight}}</span>
+        <div class="clearfix"></div>
+        <span *ngIf="imageserror" class="has-error" style="margin: 0;">*Please upload image</span>
+        <span *ngIf="uploaderror" class="has-error" style="margin: 0;">{{uploaderror}}</span>
+        <div *ngIf="imageloading">
+          <div class="col-md-4" style="height: 200px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+            <img style="width: 100%" src="{{fileurl}}line-loader.gif" >
+          </div>
+        </div>
+        <div class="col-md-12" style="padding: 0;" *ngIf="image1">
+          <div class="col-md-9" style="margin: 15px 0 0 0; padding: 0;">
+            <img style="width: 100%; height: auto;" src="{{fileurl}}{{uploadfolder}}{{image1}}" >
+          </div>
+          <!--<div class="col-md-9" style="height: auto; max-height: 421px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+            <input type="button" (click)="cropimg1(croptemplate1)" value="CROP" class="cropselectbtn">
+          </div>-->
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="dataForm.controls['type'].value == '2'">
+      <div class="col-md-4 control-label text-left"><label>Image 2*</label></div>
+      <div class="col-md-8">
+        <input style="display: none" type="file" (change)="onFileChanged2($event)" accept=".jpg,.jpeg,.png" #fileInput2>
+        <input type="button" (click)="fileInput2.click()" value="Select File" class="cropselectbtn">
+        <span style="font-size: 14px;">*Please upload bigger than {{imagewidth2}}X{{imageheight2}}</span>
+        <div class="clearfix"></div>
+        <span *ngIf="imageserror2" class="has-error" style="margin: 0;">*Please upload image</span>
+        <span *ngIf="uploaderror2" class="has-error" style="margin: 0;">{{uploaderror2}}</span>
+        <div *ngIf="imageloading2">
+          <div class="col-md-4" style="height: 200px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+            <img style="width: 100%" src="{{fileurl}}line-loader.gif" >
+          </div>
+        </div>
+        <div class="col-md-12" style="padding: 0;" *ngIf="image2">
+          <div class="col-md-9" style="margin: 15px 0 0 0; padding: 0;">
+            <img style="width: 100%; height: auto;" src="{{fileurl}}{{uploadfolder}}{{image2}}" >
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="dataForm.controls['type'].value == '2'">
+      <div class="col-md-4 control-label text-left"><label>Image 3*</label></div>
+      <div class="col-md-8">
+        <input style="display: none" type="file" (change)="onFileChanged3($event)" accept=".jpg,.jpeg,.png" #fileInput3>
+        <input type="button" (click)="fileInput3.click()" value="Select File" class="cropselectbtn">
+        <span style="font-size: 14px;">*Please upload bigger than {{imagewidth3}}X{{imageheight3}}</span>
+        <div class="clearfix"></div>
+        <span *ngIf="imageserror3" class="has-error" style="margin: 0;">*Please upload image</span>
+        <span *ngIf="uploaderror3" class="has-error" style="margin: 0;">{{uploaderror3}}</span>
+        <div *ngIf="imageloading3">
+          <div class="col-md-4" style="height: 200px; overflow: hidden; margin: 15px 0 0 0; padding: 0;">
+            <img style="width: 100%" src="{{fileurl}}line-loader.gif" >
+          </div>
+        </div>
+        <div class="col-md-12" style="padding: 0;" *ngIf="image3">
+          <div class="col-md-9" style="margin: 15px 0 0 0; padding: 0;">
+            <img style="width: 100%; height: auto;" src="{{fileurl}}{{uploadfolder}}{{image3}}" >
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+
+  </form>
+</div>
+
+<ng-template #croptemplate1>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="close()" class="closebtn">X</a>
+    <div *ngIf="!rawimage" style="text-align: center;"><img style="width: 200px;" src="{{fileurl}}line-loader.gif" ></div>
+    <div *ngIf="rawimage">
+      <image-cropper
+              [imageBase64]="rawimage"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="3.67"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage"><input type="button" value="save" (click)="crop1()" class="cropselectbtn"><input type="button" value="cancel" (click)="close()" class="cropselectbtn cancelbtn"></div>
+  </div>
+</ng-template>
+
+<ng-template #croptemplate2>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="close()" class="closebtn">X</a>
+    <div *ngIf="!rawimage" style="text-align: center;"><img style="width: 200px;" src="{{fileurl}}line-loader.gif" ></div>
+    <div *ngIf="rawimage">
+      <image-cropper
+              [imageBase64]="rawimage"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1.51"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage"><input type="button" value="save" (click)="crop2()" class="cropselectbtn"><input type="button" value="cancel" (click)="close()" class="cropselectbtn cancelbtn"></div>
+  </div>
+</ng-template>

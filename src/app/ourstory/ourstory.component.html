@@ -1,0 +1,130 @@
+<app-header></app-header>
+
+<div class="as_hostflii_titlebar">
+  <h2>Our Story </h2>
+</div>
+
+<div class="kb_ourstory_block1">
+  <div class="row col-container">
+    <div class="col col-md-12 kb_ourstory_block1_leftimg">
+      <img src="../../assets/images/kbourstoryblock1leftimg.jpg">
+
+      <div class="kb_ourstory_block1_container">
+        <h2>MISSION STATEMENT</h2>
+        <p>To give independent artists a platform to showcase their unique talents</p>
+
+        <h2>VISION STATEMENT</h2>
+        <p>To create a supportive environment for artists and their talent to help inspire and promote art and social relationships.</p>
+
+      </div>
+      <h4>Message from CEO Beto Paredes</h4>
+      <div class="banneraudioblock">
+
+        <div class="ready-player-1">
+          <audio crossorigin>
+            <source src="../../assets/songs/BetosVisionedited.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+
+      </div>
+
+    </div>
+    <!--<div class="col col-md-4 kb_ourstory_block1_rightimg">
+        <div class="kb-video-container">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/n_dZNLr2cME?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>-->
+  </div>
+
+
+
+</div>
+
+<div class="as_hostflii_wrapper4 kb_ourstory_block2">
+  <div class="as_hostflii_container">
+    <div class="doubleimgwrapperblock">
+      <div class="asupbgimgwrapper">
+        <img src="../../assets/images/kbourstoryblock2img1.jpg">
+        <div class="border_wrapper"></div>
+      </div>
+      <div class="asupbgimgwrapper">
+        <img src="../../assets/images/kbourstoryblock2img2.jpg">
+        <div class="border_wrapper"></div>
+      </div>
+    </div>
+    <div class="astextcontainer">
+      <p><span>Can you</span> imagine what it would be like to be in the room with Jimi Hendrix or Jay Z while they were making their music? With our brand-new show, AudioDeadline, we are going to give you front row seats to the action so that you can experience firsthand the intimate journey that an artist goes through creating a song from beginning to end. We are giving more opportunities for recording artists to fulfill their dreams of working in a real sound studio and possibly become famous. They will only have 8 hours to collaborate and come up with a completely new song that everyone will love. Will they be able to pull it off or will they fall flat?</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="as_hostflii_wrapper4 kb_ourstory_block3">
+  <div class="as_hostflii_container">
+    <div class="asupbgimgwrapper">
+      <img src="../../assets/images/kbourstoryblock3img1.jpg">
+      <div class="border_wrapper">
+        <div class="astextcontainer">
+          <p><span>The AudioDeadline</span> show will be live-streamed via our innovative website, <span>ArtistXP</span>, where you will have a single place that consolidates all of your other social media accounts. Your Facebook, Instagram, Twitter and also your music accounts like YouTube, SoundCloud, ReverbNation will all be accessible. This is a network made especially for artists, but with fans in mind. Make your artist or fan profile, share music and media to collaborate with other users, trade links to gain exposure, enter our competitions, chat easily with your friends and fans, and so much more. We leave no one behind with our original features and state-of-the-art technology. </p>
+        </div>
+      </div>
+    </div>
+    <!--<div class="astextcontainer">
+      <p><span>The AudioDeadline</span> show will be live-streamed via our innovative website, <span>ArtistXP</span>, where you will have a single place that consolidates all of your other social media accounts. Your Facebook, Instagram, Twitter and also your music accounts like YouTube, SoundCloud, ReverbNation will all be accessible. This is a network made especially for artists, but with fans in mind. Make your artist or fan profile, share music and media to collaborate with other users, trade links to gain exposure, enter our competitions, chat easily with your friends and fans, and so much more. We leave no one behind with our original features and state-of-the-art technology. </p>
+    </div>-->
+  </div>
+</div>
+
+
+
+<div class="as_hostflii_wrapper4 kb_ourstory_block4">
+  <div class="as_hostflii_container">
+    <div class="kb_ourstory_block4_inner">
+      <div class="asupbgimgwrapper">
+        <img src="../../assets/images/kbourstoryblock4imgleft.jpg">
+      </div>
+      <div class="astextcontainer">
+        <p>Once an artist makes their profile on <span>ArtistXP</span>, they can immediately begin trading traffic with other artists to gain massive exposure! We call this the Artist Exchange.  This is a never-before-seen tool within the music industry that will help artists find a wider audience through promoting each other. They can choose links from another artist’s profile to display on their own profile, meanwhile, the other artist will come in and pick out the links they like to display on their own page. This way, both artists will be exposed to even more fans and followers on ArtistXP. <span class="bluetxtnw">Musicians, dancers, and models</span> can all utilize this feature. That’s what our motto is all about, All Rise Together (ART).</p>
+
+        <div class="kb_ourstory_block4_btnlock">
+          <a class="kb_ourstory_block4_link" href="https://artistxp.com/" target="_blank"> Join ArtistXP </a>
+          <div class="asjoinmovementuplogo">
+            <img src="../../assets/images/asjoinmovementuplogo.png">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>
+
+<script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function() { startplayer(); }, false);
+  var player;
+
+  function startplayer()
+  {
+    player = document.getElementById('music_player');
+    player.controls = false;
+  }
+
+  function play_aud()
+  {
+    player.play();
+  }
+  function pause_aud()
+  {
+    player.pause();
+  }
+  function stop_aud()
+  {
+    player.pause();
+    player.currentTime = 0;
+  }
+  function change_vol()
+  {
+    player.volume=document.getElementById("change_vol").value;
+  }
+</script>

@@ -1,0 +1,803 @@
+<!--
+<div class="container-fluid dashboard_body">
+    <div class="dashboard_wrappertop"><div class="dashboradtoplogo"><img src="../../assets/images/logo.png"></div></div>
+    <div class="row rowmaindiv">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+            <app-adminleft></app-adminleft>
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+            <div class="dashboard_right_wrapper">
+                <div class="dashboard1_div1">
+                    <h4>Dashboard</h4>
+                    <div class="dashboardwrapper">
+                        <div class=" dbblog dblog1">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-black-tie" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Admin Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/admin-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dbblog dblog2">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-life-ring" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Affiliate List</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/affiliate-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dbblog dblog2">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-life-ring" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Ambassador List</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/ambassador-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dbblog dblog3">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-users" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>User List</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/user-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class=" dbblog dblog4">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-newspaper-o" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Blog Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/blog-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="dbblog dblog6">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-archive" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Product Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/product-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="dbblog dblog7">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-bullhorn" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Competition Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/competition-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="dbblog dblog8">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-newspaper-o" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Media Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/media-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div class=" dbblog dblog5">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-user" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>My Account</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/my-account']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>-->
+
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+    <!--<div class="dashboard_wrappertop"><div class="dashboradtoplogo"><img src="../../assets/images/logo.png"></div></div>-->
+    <div class="row rowmaindiv">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+            <app-adminleft></app-adminleft>
+        </div>
+        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+            <div class="dashboard_right_wrapper">
+                <div class="dashboard1_div1">
+                    <div class="n-adminheadercls">
+                        <h4>Admin Dashboard</h4>
+                    </div>
+                    <div class="dashboardwrapper">
+                        <div class="tabblock">
+                            <div class="tabtitleblock">
+                                <h1>USER MANAGEMENT</h1>
+                            </div>
+                            <div class="tablists">
+                                <tabset>
+                                    <tab heading="Ambassador" id="um">
+                                        <div class="tabcontentwrapper">
+                                            <div class="adminlisttable adminlisttabledashboard">
+                                                <h4>Ambassador List</h4>
+                                                <div class="tablediv affiliatetree actionsectionhide"> <!---actionsectionhide--->
+                                                    <lib-listing class="formfilterdiv" *ngIf="ambassadorlistarray!=null && ambassadorlistarray.length>0" [datasource]="ambassadorlistarray" [skip]="ambassadorlistarray_skip" [modify_header_array]=" ambassadorlistarray_modify_header" [sourcedata]="ambassadortablename" [statusarr]="ambassadorstatusarray" ></lib-listing>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="tabcontentwrapperoverlay"></div>
+                                        </div>
+                                    </tab>
+                                    <tab heading="Affiliate">
+                                        <div class="tabcontentwrapper">
+                                            <div class="adminlisttable adminlisttabledashboard">
+                                                <h4>Affiliate List</h4>
+                                                <div class="tablediv affiliatetree actionsectionhide">
+                                                    <!--<table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="empycell"></th>
+                                                            <th>Date</th>
+                                                            <th>First</th>
+                                                            <th>Last</th>
+                                                            <th>State</th>
+                                                            <th>Enroller</th>
+                                                            <th class="text-center"># Of Click</th>
+                                                            <th class="text-center"># of Signups</th>
+                                                            <th class="text-center">Status</th>
+                                                            <th class="empycell"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <td data-label="Date">03/13/2019</td>
+                                                            <td data-label="First">Jane</td>
+                                                            <td data-label="Last">Doe</td>
+                                                            <td data-label="State">Ohio</td>
+                                                            <td data-label="Enroller">ID</td>
+                                                            <td data-label="# Of Click" class="text-center">1</td>
+                                                            <td data-label="# of Signups" class="text-center">1</td>
+                                                            <td data-label="Status" class="text-center">
+                                                                &lt;!&ndash; <a class="statusinactive" href="javascript:void(0)">Inactive</a>&ndash;&gt;
+                                                                <a class="statusactive" href="javascript:void(0)">Active</a>
+                                                            </td>
+                                                            <td class="empycell"></td>
+
+                                                        </tr>
+                                                        &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
+                                                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <td data-label="Date">03/13/2019</td>
+                                                            <td data-label="First">Jane</td>
+                                                            <td data-label="Last">Doe</td>
+                                                            <td data-label="State">Ohio</td>
+                                                            <td data-label="Enroller">ID</td>
+                                                            <td data-label="# Of Click" class="text-center">1</td>
+                                                            <td data-label="# of Signups" class="text-center">1</td>
+                                                            <td data-label="Status" class="text-center">
+                                                                &lt;!&ndash; <a class="statusinactive" href="javascript:void(0)">Inactive</a>&ndash;&gt;
+                                                                <a class="statusactive" href="javascript:void(0)">Active</a>
+                                                            </td>
+                                                            <td class="empycell"></td>
+
+                                                        </tr>
+                                                        &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
+                                                        &lt;!&ndash;&#45;&#45;list single start-&ndash;&gt;
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <td data-label="Date">03/13/2019</td>
+                                                            <td data-label="First">Jane</td>
+                                                            <td data-label="Last">Doe</td>
+                                                            <td data-label="State">Ohio</td>
+                                                            <td data-label="Enroller">ID</td>
+                                                            <td data-label="# Of Click" class="text-center">1</td>
+                                                            <td data-label="# of Signups" class="text-center">1</td>
+                                                            <td data-label="Status" class="text-center">
+                                                                &lt;!&ndash; <a class="statusinactive" href="javascript:void(0)">Inactive</a>&ndash;&gt;
+                                                                <a class="statusactive" href="javascript:void(0)">Active</a>
+                                                            </td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        &lt;!&ndash;&#45;&#45;list single end-&ndash;&gt;
+
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <td colspan="8" class="norecordfound">No Record Found</td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            &lt;!&ndash; <td colspan="12" style="text-align: center;"><div class="loadertabledata"></div></td>&ndash;&gt;
+                                                            <td colspan="8" style="text-align: center;" class="tablebuttondiv">
+                                                                <a  [routerLink]="['/affiliate-list']" class="btn adminbtnred">Manage Affiliates</a>
+                                                            </td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>-->
+                                                    <lib-listing class="formfilterdiv" *ngIf="affiliatelistarray!=null && affiliatelistarray.length>0" [datasource]="affiliatelistarray" [skip]="affiliatelistarray_skip" [modify_header_array]="affiliatelistarray_modify_header" [sourcedata]="affiliatetablename" [statusarr]="affiliateliststatusarray"></lib-listing>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="tabcontentwrapperoverlay"></div>
+                                        </div>
+                                    </tab>
+                                    <tab heading="User">
+                                        <div class="tabcontentwrapper">
+
+                                            <div class="adminlisttable adminlisttabledashboard">
+                                                <h4>User List</h4>
+                                                <div class="tablediv">
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="empycell"></th>
+                                                            <th>Date</th>
+                                                            <th>First</th>
+                                                            <th>Last</th>
+                                                            <th>Enroller</th>
+                                                            <th>Role</th>
+                                                            <th class="text-center">Status</th>
+                                                            <th class="empycell"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <td data-label="Date" style="min-width: 95px;">03/13/2019</td>
+                                                            <td data-label="First">Jane <!--{{item.firstname}}--></td>
+                                                            <td data-label="Last">Doe <!--{{item.lastname}}--></td>
+                                                            <td data-label="Enroller"></td>
+                                                            <td data-label="Role" style="min-width: 100px;">
+                                                                <div class="newcheckboxdiv">
+                                                                    <div><input id="checkbox1" type="checkbox" name="checkbox" value="1" checked="checked"><label>Musician</label></div>
+                                                                    <div><input id="checkbox2" type="checkbox" name="checkbox" value="2"><label>Dancer</label></div>
+                                                                    <div><input id="checkbox3" type="checkbox" name="checkbox" value="3"><label>Model</label></div>
+                                                                    <div><input id="checkbox4" type="checkbox" name="checkbox" value="4"><label>Affiliate</label></div>
+                                                                    <div><input id="checkbox5" type="checkbox" name="checkbox" value="5" disabled="disabled"><label>Fan</label></div>
+                                                                </div>
+                                                                <!--<div>
+                                                                  <div><span><input type="checkbox" [checked]="item.musicians" (change)="cngChk($event,item,'musicians')"></span><label>Musician</label></div>
+                                                                  <div><span><input type="checkbox" [checked]="item.dancer" (change)="cngChk($event,item,'dancer')"></span><label>Dancer</label></div>
+                                                                  <div><span><input type="checkbox" [checked]="item.model" (change)="cngChk($event,item,'model')"></span><label>Model</label></div>
+                                                                  <div><span><input type="checkbox" [checked]="item.signupaffiliate" (change)="cngChk($event,item,'signupaffiliate')"></span><label>Affiliate</label></div>
+                                                                  <div><span><input type="checkbox" [checked]="item.fan" disabled="disabled"></span><label>Fan</label></div>
+                                                                </div>-->
+                                                            </td>
+                                                            <td data-label="Status" class="text-center">
+                                                                <!--<a class="statusinactive" href="javascript:void(0)">Inactive</a>-->
+                                                                <a class="statusactive" href="javascript:void(0)">Active</a>
+                                                            </td>
+
+                                                            <td class="empycell"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <td colspan="6" class="norecordfound">No Record Found</td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <!--<td colspan="6" style="text-align: center;"><div class="loadertabledata"></div></td>-->
+                                                            <td colspan="6" style="text-align: center;" class="tablebuttondiv">
+                                                                <a [routerLink]="['/user-list']" class="btn adminbtnred">Manage Users</a>
+                                                            </td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="tabcontentwrapperoverlay"></div>
+                                        </div>
+                                    </tab>
+                                </tabset>
+                            </div>
+                        </div>
+
+                        <div class="tabblock">
+                            <div class="tabtitleblock">
+                                <h1>Competition Management</h1>
+                            </div>
+                            <div class="tablists">
+                                <tabset>
+                                    <tab heading="Active Competitions" id="cm">
+                                        <div class="tabcontentwrapper">
+
+                                            <div class="adminlisttable adminlisttabledashboard">
+                                                <h4>Competition List</h4>
+                                                <div class="tablediv">
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="empycell"></th>
+                                                            <th>Date</th>
+                                                            <th>Name</th>
+                                                            <th class="text-center"># Of Signup</th>
+                                                            <th class="text-center">End Date</th>
+                                                            <th class="empycell"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <td data-label="Date">04/01/2019</td>
+                                                            <td data-label="Name">DANCER COMPETITION</td>
+                                                            <td data-label="# Of Signup" class="text-center">
+                                                                <div>
+                                                                    <div><label style="margin-right: 5px; color: #FF8C00;">Pending: </label><span>4</span></div>
+                                                                    <div><label style="margin-right: 5px; color: #63ad1d;">Approved: </label><span>2</span></div>
+                                                                    <div><label style="margin-right: 5px; color: #b52121;">Declined: </label><span>0</span></div>
+                                                                    <div><label style="margin-right: 5px; color: #0186eb;">Total: </label><span>6</span></div>
+                                                                </div>
+                                                            </td>
+                                                            <td data-label="End Date" class="text-center">04/15/2019</td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        <tr><td class="empycell"></td>
+                                                            <td colspan="4" class="norecordfound">No Record Found</td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <!--<td colspan="4" class="text-center">
+                                                                <div class="loadertabledata"></div>
+                                                            </td>-->
+                                                            <td colspan="4" style="text-align: center;" class="tablebuttondiv">
+                                                                <a [routerLink]="['/competition-list']" class="btn adminbtnred">Manage Competitions</a>
+                                                            </td>
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                  <!--  <pagination-controls *ngIf="(competitionlist | compfilter : searchText : 'name' | compfilter : searchText2 : 'status' ).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                                                </div>
+                                            </div>
+                                            <div class="tabcontentwrapperoverlay"></div>
+                                        </div>
+                                    </tab>
+                                    <tab heading="Recent Sign-ups">
+                                        <div class="tabcontentwrapper">
+                                            <div class="adminlisttable adminlisttabledashboard">
+                                                <h4>All Signups For Competition</h4>
+                                                <div class="tablediv">
+                                                    <table>
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="empycell"></th>
+                                                            <th>Date</th>
+                                                            <th>Name</th>
+                                                            <!--<th>Last</th>-->
+                                                            <th>Email</th>
+                                                            <th>Competition</th>
+                                                            <th>Genre</th>
+                                                            <th class="text-center">Status</th>
+                                                            <th class="empycell"></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        <tr *ngFor="let item of userlist;let i=index;">
+                                                            <td class="empycell"></td>
+                                                            <td style="min-width: 95px;" data-label="Date">{{commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
+                                                            <td data-label="First">{{item.name}}</td>
+                                                            <!--<td data-label="Last">{{item.lastname}}</td>-->
+                                                            <td data-label="Email">{{item.email}}</td>
+                                                            <td data-label="Competition">{{item.competitionname}}</td>
+                                                            <td data-label="Genre">{{item.genrename}}</td>
+                                                            <td data-label="Status" class="text-center">
+                                                                <span style="cursor: pointer;">{{getStatusName(item.status)}}</span>
+                                                                <!--<span>
+                                                                    <select name="status">
+                                                                      <option value="1">Approved</option>
+                                                                      <option value="2">Declined</option>
+                                                                      <option value="0">Pending</option>
+                                                                    </select>
+                                                               </span>-->
+                                                            </td>
+
+                                                            <td class="empycell"></td>
+                                                        </tr>
+                                                        <tr *ngIf="userlist==null || userlist.length == 0"><td class="empycell"></td><td colspan="7" class="norecordfound">No Record Found</td><td class="empycell"></td></tr>
+                                                        <tr>
+                                                            <td class="empycell"></td>
+                                                            <!--<td colspan="7" style="text-align: center;">
+                                                                <div class="loadertabledata"></div>
+                                                            </td>-->
+                                                            <td colspan="7" style="text-align: center;" class="tablebuttondiv">
+                                                                <a [routerLink]="['/manage-competition-signup']" class="btn adminbtnred">View all Sign-Ups</a>
+                                                            </td>
+                                                            <!--<td class="empycell"></td>-->
+                                                        </tr>
+                                                        </tbody>
+                                                    </table><!--
+                                                    <pagination-controls *ngIf="(userlist | compuserfilter : searchText : 'name' | compuserfilter : searchText2 : 'competition' | compuserfilter : searchText3 : 'genre' | compuserfilter : searchText4 : 'status' | oreder2 : searchText5).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+                                                </div>
+                                            </div>
+
+                                            <div class="tabcontentwrapperoverlay"></div>
+                                        </div>
+                                    </tab>
+                                </tabset>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="dashboardwrapper">
+                        <div class=" dbblog dblog1">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-black-tie" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Admin Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/admin-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dbblog dblog2">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-life-ring" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Affiliate List</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/affiliate-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dbblog dblog2">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-life-ring" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Ambassador List</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/ambassador-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dbblog dblog3">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-users" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>User List</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"  class="linktd">
+                                        <a [routerLink]="['/user-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class=" dbblog dblog4">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-newspaper-o" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Blog Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/blog-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="dbblog dblog6">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-archive" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Product Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/product-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="dbblog dblog7">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-bullhorn" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Competition Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/competition-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="dbblog dblog8">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-newspaper-o" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>Media Management</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/media-list']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div class=" dbblog dblog5">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td><i class="fa fa-user" aria-hidden="true"></i></td>
+                                    <td>
+                                        <span>My Account</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="linktd">
+                                        <a [routerLink]="['/my-account']" class="viewdetail"> View Details <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+
+
+<ng-template #template>
+    <div class="modal-body text-center modalcls">
+        <p>Are you sure to delete this User?</p>
+        <div class="text-center">
+            <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+            <button type="button" class="btndelete" (click)="decline()" >No</button>
+        </div>
+
+    </div>
+</ng-template>
+
+<ng-template #editambassador>
+    <div class="modal-body text-center modalcls n-modalcls">
+        <div class="formnewpopupheader">
+            <h4>Edit Ambassador</h4>
+        </div>
+        <div class="dashboard1form formnewpopup">
+            <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)" class="form-horizontal">
+                <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*First Name</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="firstname" placeholder="First Name*" [formControl]="dataForm.controls['firstname']">
+                        <span *ngIf ="dataForm.controls['firstname'].touched && !dataForm.controls['firstname'].valid" class="has-error">First Name field can not be blank</span>
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Last Name</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="lastname" placeholder="Last Name*" [formControl]="dataForm.controls['lastname']">
+                        <span *ngIf ="dataForm.controls['lastname'].touched && !dataForm.controls['lastname'].valid" class="has-error">Last Name field can not be blank</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Phone</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="phone" placeholder="Phone*" [formControl]="dataForm.controls['phone']">
+                        <span *ngIf ="dataForm.controls['phone'].touched && !dataForm.controls['phone'].valid" class="has-error">Phone field can not be blank</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Email</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly="readonly" type="text" class="form-control" name="email" placeholder="Email*" [formControl]="dataForm.controls['email']">
+                        <span *ngIf ="dataForm.controls['email'].touched && !dataForm.controls['email'].valid" class="has-error">Email field can not be blank</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Username</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input readonly="readonly" type="text" class="form-control" name="username" placeholder="Username*" [formControl]="dataForm.controls['username']">
+                        <span *ngIf ="dataForm.controls['username'].touched && !dataForm.controls['username'].valid" class="has-error">Username field can not be blank</span>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Role</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="role" [formControl]="dataForm.controls['role']">
+                            <option value="">Select Role</option>
+                            <option value="admin">Admin</option>
+                            <option value="ambassador">Ambassador</option>
+                            <option value="affiliate">Affiliate</option>
+                            <option value="user">User</option>
+                        </select>
+                        <div class="typeuserrole" *ngIf="dataForm.value['role']=='user'">
+                            <div class="newcheckboxdiv text-left">
+                                <div><input type="checkbox" name="checkbox" value="1" checked="checked"><label>Musician</label></div>
+                                <div><input type="checkbox" name="checkbox" value="2"><label>Dancer</label></div>
+                                <div><input type="checkbox" name="checkbox" value="3"><label>Model</label></div>
+                                <div><input type="checkbox" name="checkbox" value="5"><label>Fan</label></div>
+                            </div>
+                        </div>
+                        <!--   <span *ngIf ="dataForm.controls['state'].touched && !dataForm.controls['state'].valid" class="has-error">State field can not be blank</span>-->
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Address</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="address" placeholder="Address*" [formControl]="dataForm.controls['address']">
+                        <span *ngIf ="dataForm.controls['address'].touched && !dataForm.controls['address'].valid" class="has-error">Address field can not be blank</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Address2</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="address2" placeholder="Address2" [formControl]="dataForm.controls['address2']">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*City</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="city" placeholder="City*" [formControl]="dataForm.controls['city']">
+                        <span *ngIf ="dataForm.controls['city'].touched && !dataForm.controls['city'].valid" class="has-error">City field can not be blank</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*State</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select class="form-control" name="state" [formControl]="dataForm.controls['state']">
+                            <option value="">Select State</option>
+                            <!--   <option *ngFor="let item of state2" value="{{item.abbreviation}}">{{item.name}}</option>-->
+                        </select>
+                        <span *ngIf ="dataForm.controls['state'].touched && !dataForm.controls['state'].valid" class="has-error">State field can not be blank</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4 control-label text-left">
+                        <label>*Zip Code</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" name="zip" placeholder="Zip Code*" [formControl]="dataForm.controls['zip']">
+                        <span *ngIf ="dataForm.controls['zip'].touched && !dataForm.controls['zip'].valid" class="has-error">Zip Code field can not be blank</span>
+                    </div>
+                </div>
+
+
+                <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+
+            </form>
+        </div>
+    </div>
+</ng-template>
+
+
+
+

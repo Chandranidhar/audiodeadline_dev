@@ -1,0 +1,125 @@
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <!--<app-adminleft></app-adminleft>-->
+      <ul>
+        <li class="homecls">
+          <a [routerLink]="['/']" target="_blank">Home</a>
+        </li>
+
+        <li class="dashboardcls">
+          <a [routerLink]="['/user-dashboard']">Dashboard</a>
+        </li>
+
+        <li>
+          <a [routerLink]="['/upcomingevents']">Upcoming Events</a>
+        </li>
+        <li>
+          <a [routerLink]="['/invite-friends']">Invite Friends</a>
+        </li>
+
+        <li><a [routerLink]="['/my-order']">My Order</a></li>
+
+        <li><a [routerLink]="['/my-account']">My Account</a></li>
+
+        <li><a href="javascript:void(0)" (click)="commonservice.logout()">Log out </a></li>
+
+      </ul>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right afiliatedashboard">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <div class="n-adminheadercls n-adminheaderclsnp text-center">
+            <h4>INVITE YOUR FRIENDS</h4>
+            <p>To join in on this <span>incredible experience!</span></p>
+          </div>
+
+          <div class="dashboardwrapper">
+            <div class="tabcontentwrapper tabcontentwrappertransparent">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="row n-socialsinglepostlists n-socialsinglepostlistsbg1 n-socialsinglepostlistsbgsame">
+                  <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost">
+                    <div class="row n-socialsinglepostcontent">
+                      <div class="n-sponsorblock">
+                        <div class="n-sponsorblocklists">
+                          <div class="col-md-12 col-sm-12 col-xs-12 inviteyourfriend">
+                            <div class="inviteyourfriendform mt0">
+                              <form name="dataForm" novalidate="" class="ng-pristine ng-invalid ng-touched">
+
+                                <div class="form-row">
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>INVITE FRIENDS VIA YOUR ONLINE ADDRESS BOOK</label>
+                                    <select class="form-control" name="type">
+                                      <option value="select service" selected>select service</option>
+                                      <option value="2">select service 1</option>
+                                      <option value="3">select service 2</option>
+                                      <option value="4">select service 3</option>
+                                      <option value="5">select service 4</option>
+                                      <option value="6">select service 5</option>
+                                    </select>
+                                    <span class="has-error"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts">get contacts</button>
+                                  </div>
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>INVITE FRIENDS VIA SOCIAL MEDIA</label>
+                                    <select class="form-control" name="type">
+                                      <option value="select service" selected>select service</option>
+                                      <option value="2">select service 1</option>
+                                      <option value="3">select service 2</option>
+                                      <option value="4">select service 3</option>
+                                      <option value="5">select service 4</option>
+                                      <option value="6">select service 5</option>
+                                    </select>
+                                    <span class="has-error"> *select field can not be blank</span>
+
+                                    <button class="btnred" name="getcontacts">send social invite</button>
+                                  </div>
+                                </div>
+                                <div class="form-row">
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>Enter Your Friends' Email Addresses</label>
+                                    <input type="text" class="form-control" name="emailaddress" placeholder="email address">
+                                    <span class="has-error"> *select field can not be blank</span>
+                                  </div>
+                                </div>
+
+                                <div class="form-row">
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>Audiodeadline Email message</label>
+                                    <textarea class="form-control" id="audiodeadlineemailmsg" rows="3" placeholder="" value="ArtistXP Email messageqw"></textarea>
+                                    <span class="has-error"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts">send email invite</button>
+                                  </div>
+                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                    <label>ArtistXP Email message</label>
+                                    <textarea class="form-control" id="artistxpemailmessage" rows="3" placeholder="" value="ArtistXP Email message"></textarea>
+                                    <span class="has-error"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts">send email invite</button>
+                                  </div>
+                                </div>
+
+
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tabcontentwrapperoverlay"></div>
+                </div>
+
+              </div>
+              <!--<div class="tabcontentwrapperoverlay"></div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>

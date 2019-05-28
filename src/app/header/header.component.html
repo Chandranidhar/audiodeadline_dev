@@ -1,0 +1,172 @@
+
+<!--<script type="text/javascript">
+    function toggleMenu() {
+        var menuDropdown = document.getElementById('menu-box');
+        if(menuDropdown.style.display == "none") { // if is menuBox displayed, hide it
+            menuDropdown.style.display = "block";
+        }
+        else { // if is menuBox hidden, display it
+            menuDropdown.style.display = "none";
+        }
+    }
+</script>-->
+
+
+
+
+<div class="container-fluid newtop1">
+
+  <div class="newtop1_wrapper">
+
+    <ul *ngIf="userdata.get('user_id')!='' " class="logoutul">
+      <li><a (click)="commonservices.logout()">Log out</a></li>
+    </ul>
+
+      <ul *ngIf="userdata.get('user_id')=='' ">
+      <li><a [routerLink]="['/login']">Login</a></li>
+      <li><a href="https://artistxp.com/" target="_blank">Sign Up<!--Register--></a></li>
+    </ul>
+
+
+    <div class="newcartdiv"><a href="javascript:void(0)"><span>Cart (0)</span></a></div>
+  </div>
+
+
+</div>
+
+<div class="container-fluid newhomemenubody">
+  <div class="newhomemenuwrapper">
+
+    <div class="new_homelogo"><a href="/"><img src="../../assets/images/logo.png"></a> </div>
+
+    <div class="new_homemenu">
+      <nav class="navbar navbar-default">
+        <div class="navbar-header">
+          <span class="responsivemenu">MENU</span>
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" data-hover="dropdown" data-animations="fadeInDown">
+          <ul class="nav navbar-nav">
+            <li class="lidiv0" [ngClass]="{'active': url == ''}"><a class="dropdown-toggle" [routerLink]="['']"> home </a></li>
+            <li class="lidiv1" [ngClass]="{'active': url == 'hostflii'}"><a class="dropdown-toggle" [routerLink]="['/hostflii/']"> Host Flii </a></li>
+            <!--<li class="lidiv2" [ngClass]="{'active': url == 'event'}"><a class="dropdown-toggle" [routerLink]="['/event']"> EVENTS </a></li>-->
+
+            <li class="lidiv2"><a class="dropdown-toggle" (click)="dropdownmenunew1()"> EVENTS </a>
+              <ul id="menu-box-1" class="fadein" *ngIf="menubox1==1">
+                <li class="lidiv0" [ngClass]="{'active': url == 'event'}"><a class="dropdown-toggle" [routerLink]="['/event/']">event </a></li>
+                <li class="lidiv0" [ngClass]="{'active': url == 'pastevent'}"><a class="dropdown-toggle" [routerLink]="['/pastevent/']"> past event </a></li>
+              </ul>
+
+            </li>
+
+            <li class="lidiv3">
+              <a class="dropdown-toggle" (click)="dropdownmenunew()"> OUR STORY </a>
+              <ul id="menu-box" class="fadein" *ngIf="menubox==1">
+               <!-- <li class="lidiv0" > Our Story </a></li>-->
+                <li class="lidiv0" [ngClass]="{'active': url == 'ourstory'}"><a class="dropdown-toggle" [routerLink]="['/ourstory/']"> OUR STORY </a></li>
+                <li class="lidiv1" [ngClass]="{'active': url == 'team'}"><a class="dropdown-toggle" [routerLink]="['/team/']"> Team </a></li>
+                <li class="lidiv2" [ngClass]="{'active': url == 'partnerships'}"><a class="dropdown-toggle" [routerLink]="['/partnerships']"> Partners </a></li>
+                <!--<li class="lidiv3" [ngClass]="{'active': url == 'joinmovement'}"><a class="dropdown-toggle" [routerLink]="['/joinmovement']"> Join The Movement </a></li>-->
+                <!--<li class="lidiv4" [ngClass]="{'active': url == 'thedeadlineexperience'}"><a class="dropdown-toggle" [routerLink]="['/thedeadlineexperience']"> The deadline experience </a></li>-->
+                <!--<li class="lidiv5" [ngClass]="{'active': url == 'competition'}"><a class="dropdown-toggle" [routerLink]="['/competition']"> Competition </a></li>-->
+              </ul>
+            </li>
+            <li class="lidiv4" [ngClass]="{'active': url == 'competition'}"><a class="dropdown-toggle" [routerLink]="['/competition']"> Competition </a></li>
+            <li class="lidiv5" [ngClass]="{'active': url == 'ticket-sale'}"><a class="dropdown-toggle" [routerLink]="['/ticket-sale']"> GET TICKETS </a></li>
+            <li class="lidiv6" [ngClass]="{'active': url == 'joinmovement'}"><a class="dropdown-toggle" [routerLink]="['/joinmovement']"> Join The Movement </a></li>
+            <li class="lidiv7" [ngClass]="{'active': url == 'thedeadlineexperience'}"><a class="dropdown-toggle" [routerLink]="['/thedeadlineexperience']"> The deadline experience </a></li>
+            <!--<li class="lidiv8"><a class="dropdown-toggle" href="https://shopaudiodeadline.com/shopnew" target="_blank"> Shop </a></li>-->
+            <li class="lidiv9" [ngClass]="{'active': url == 'contactus'}"><a class="dropdown-toggle" [routerLink]="['/contactus/']"> Contact Us </a></li>
+
+            <!--<li class="lidiv0" [ngClass]="{'active': url == ''}"><a class="dropdown-toggle" [routerLink]="['']"> home </a></li>
+            <li class="lidiv1" [ngClass]="{'active': url == 'hostflii'}"><a class="dropdown-toggle" [routerLink]="['/hostflii']"> Host Flii Stylz </a></li>
+            <li class="lidiv2" [ngClass]="{'active': (url == 'ticket-sale' || url == 'ticket-sale/:param1' || url == 'ticket-sale/:param1/:param2' || url == 'ticket-sale/:param1/:param2/:param3')}"><a class="dropdown-toggle" [routerLink]="['/ticket-sale']"> Get Streaming Tickets </a></li>
+            <li class="lidiv4" [ngClass]="{'active': url == 'dates'}"><a class="dropdown-toggle" [routerLink]="['/dates/']"> Dates </a></li>
+            <li class="lidiv5" [ngClass]="{'active': url == 'team'}"><a class="dropdown-toggle" [routerLink]="['/team/']"> Team </a></li>
+            <li class="lidiv6"><a class="dropdown-toggle" target="_blank" href="https://artistxp.com/"> ArtistXP Social </a></li>
+            <li class="lidiv7" [ngClass]="{'active': url == 'LaEvent'}"><a class="dropdown-toggle" [routerLink]="['/LaEvent']" > La Event </a></li>
+            <li class="lidiv7" [ngClass]="{'active': url == 'contactus'}"><a class="dropdown-toggle" [routerLink]="['/contactus']" > Contact </a></li>-->
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="clearfix"></div>
+
+  </div>
+</div>
+
+
+
+
+<!--
+<div class="container-fluid topheaderblock topheadernewblock">
+  <div class="row">
+    <div class="container topheaderblockwrapper">
+      <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 topheaderblocklogo">
+        <div class="toplogo">
+          <a [routerLink]="['']"><img src="../../assets/images/logo.png" alt="logo"></a>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 topheadernewblockright" *ngIf="url != 'LaEvent' && url != 'ticket-sale' && url != 'ticket-sale/:param1' && url != 'ticket-sale/:param1/:param2' && url != 'ticket-sale/:param1/:param2/:param3'">
+        <div class="topheadernewblockrightcontent">
+          <h1>Get Tickets to the Premier AudioDeadline.com Experience Event!</h1>
+          <h2>Saturday, May 11th, 2019 Starting at 12:00 PM Pacific Time!</h2>
+          <h3>“Join our Celebrity VMA Award winning Host Flii Stylz for this incredible online streaming event!”</h3>
+          <a class="visitfllistyle" [routerLink]="['/ticket-sale']">Click here for Ticket Information NOW!</a>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+<div class="container-fluid topmenublock">
+  <div class="container-fluid topmenu">
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+        <span class="responsivemenu">MENU</span>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbarshatter-collapse-1" data-hover="dropdown" data-animations="fadeInDown">
+        <ul class="nav navbar-nav">
+          <li class="lidiv0" [ngClass]="{'active': url == ''}"><a class="dropdown-toggle" [routerLink]="['']"> home </a></li>
+          <li class="lidiv1" [ngClass]="{'active': url == 'host-flii-stylz'}"><a class="dropdown-toggle" [routerLink]="['/host-flii-stylz']"> Host Flii Stylz </a></li>
+          <li class="lidiv2" [ngClass]="{'active': (url == 'ticket-sale' || url == 'ticket-sale/:param1' || url == 'ticket-sale/:param1/:param2' || url == 'ticket-sale/:param1/:param2/:param3')}"><a class="dropdown-toggle" [routerLink]="['/ticket-sale']"> Get Streaming Tickets </a></li>
+          <li class="lidiv4" [ngClass]="{'active': url == 'dates'}"><a class="dropdown-toggle" [routerLink]="['/dates/']"> Dates </a></li>
+          <li class="lidiv5" [ngClass]="{'active': url == 'team'}"><a class="dropdown-toggle" [routerLink]="['/team/']"> Team </a></li>
+          <li class="lidiv6"><a class="dropdown-toggle" target="_blank" href="https://artistxp.com/"> ArtistXP Social </a></li>
+          <li class="lidiv7" [ngClass]="{'active': url == 'LaEvent'}"><a class="dropdown-toggle" [routerLink]="['/LaEvent']" > La Event </a></li>
+
+         &lt;!&ndash; <li class="lidiv8" [ngClass]="{'active': url == 'shatterblokevent'}"><a class="dropdown-toggle" target="_blank" href="https://shopaudiodeadline.com/shop" > Shop </a></li>&ndash;&gt;
+
+          <li class="lidiv7" [ngClass]="{'active': url == 'contactus'}"><a class="dropdown-toggle" [routerLink]="['/contactus']" > Contact </a></li>
+
+
+
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="border1"></div>
+
+<ng-template #template>
+
+  <div class="modal-body text-center videomodal">
+    <div class="closedideo" (click)="modalRef.hide()" style="cursor: pointer;"></div>
+    <div class="videoiframe-container">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/MROXcmq-zfM?rel=0&autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</ng-template>-->

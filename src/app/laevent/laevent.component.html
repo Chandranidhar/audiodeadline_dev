@@ -1,0 +1,209 @@
+<app-header></app-header>
+<div class="container-fluid neweventrsvp">
+  <div class="container-fluid multi_bg_example_eventrsvp">
+    <div class="row">
+      <div class="container landingwrapper_neweventrsvp">
+        <div class="img1wrapper_neweventrsvp">
+          <img src="../../assets/images/girlimg-neweventrsvp.png">
+        </div>
+        <div class="txt1wrapper_neweventrsvp">
+          <div class="txtdiv1">
+            <img src="../../assets/images/txtdiv1-neweventrsvp.png" class="txtdiv1img">
+            <h2 data-text="Networking event">Networking event</h2>
+            <h2 data-text="in Los Angeles, CA!">in Los Angeles, CA!</h2>
+            <h6 data-text="What an incredible time, Grammy winners, industry executives and major entertainment industry movers we are all here! We are sure you will recognize a few people yourselves!">What an incredible time, Grammy winners, industry executives and major entertainment industry movers were all here! We are sure you will recognize a few people yourselves!</h6>
+            <h6 class="txtbluecolor" data-text="Check out the photos from our incredible smash event.">Check out the photos from our incredible smash event.</h6>
+            <!--<h3>Come meet our host <span class="yellowtext">Flii Stylz</span> and Co-Host <span class="yellowtext">Sandra Sago</span> in person!</h3>-->
+            <div class="landingformwrapper_neweventrsvp">
+              <div class="landingformheader_neweventrsvp">
+                <h1>RSVP NOW!</h1>
+              </div>
+              <div class="landingforminnerwrapper_neweventrsvp">
+                <div role="form" class="nersvp" id="nersvpformid" lang="en-US" dir="ltr">
+                  <div class="screen-reader-response"></div>
+                  <form action="/new-event-rsvp/#wpcf7-f306-p301-o1" method="post" class="formnewevent" role="form" name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value,template)">
+                    <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-first-name">
+                          <input type="text" name="your-first-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="First Name*" [formControl]="dataForm.controls['firstname']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['firstname'].touched && !dataForm.controls['firstname'].valid" class="wpcf7-not-valid-tip">First Name field can not be blank</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-last-name">
+                          <input type="text" name="your-last-name" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Last Name*" [formControl]="dataForm.controls['lastname']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['lastname'].touched && !dataForm.controls['lastname'].valid" class="wpcf7-not-valid-tip">Last Name field can not be blank</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-active-phone">
+                          <input type="tel" name="your-active-phone" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-tel wpcf7-validates-as-required wpcf7-validates-as-tel form-control" aria-required="true" aria-invalid="false" placeholder="Telephone*" [formControl]="dataForm.controls['phone']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['phone'].touched && !dataForm.controls['phone'].valid" class="wpcf7-not-valid-tip">Phone field can not be blank</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-active-email">
+                          <input type="text" name="your-active-email" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" placeholder="Email*" [formControl]="dataForm.controls['email']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['email'].touched && !dataForm.controls['email'].valid" class="wpcf7-not-valid-tip">Email field can not be blank ! </span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-active-email">
+                          <input type="text" name="your-username" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email form-control" aria-required="true" aria-invalid="false" placeholder="Username*" [formControl]="dataForm.controls['username']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['username'].touched && !dataForm.controls['username'].valid" class="wpcf7-not-valid-tip">Please enter valid username</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap password">
+                          <input type="password" name="password" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Password*" [formControl]="dataForm.controls['password']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['password'].touched && !dataForm.controls['password'].valid" class="wpcf7-not-valid-tip">Please fill in the required field.</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap password">
+                          <input type="password" name="password" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Confirm Password*" [formControl]="dataForm.controls['confirmpassword']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['confirmpassword'].touched && !dataForm.controls['confirmpassword'].valid" class="wpcf7-not-valid-tip">Please fill in the required field.</span>
+                    <div *ngIf ="dataForm.hasError('mismatchedPasswords') && dataForm.controls['confirmpassword'].valid " class="wpcf7-not-valid-tip">
+                      <strong>Passwords must match</strong>
+                    </div>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-address">
+                          <input type="text" name="your-address" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Address*" [formControl]="dataForm.controls['address']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['address'].touched && !dataForm.controls['address'].valid" class="wpcf7-not-valid-tip">Address field can not be blank</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-second-address">
+                          <input type="text" name="your-second-address" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Address2" [formControl]="dataForm.controls['address2']">
+                        </span>
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-city">
+                          <input type="text" name="your-city" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="City*" [formControl]="dataForm.controls['city']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['city'].touched && !dataForm.controls['city'].valid" class="wpcf7-not-valid-tip">City field can not be blank</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-state">
+                          <select name="your-state" class="wpcf7-form-control wpcf7-select wpcf7-validates-as-required" aria-required="true" aria-invalid="false" [formControl]="dataForm.controls['state']">
+                            <option value="">Select State*</option>
+                            <option *ngFor="let item of state2" value="{{item.abbreviation}}">{{item.name}}</option>
+                          </select>
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['state'].touched && !dataForm.controls['state'].valid" class="wpcf7-not-valid-tip">State field can not be blank</span>
+                    <p>
+                      <label>
+                        <span class="wpcf7-form-control-wrap your-zip-code">
+                          <input type="text" name="your-zip-code" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required form-control" aria-required="true" aria-invalid="false" placeholder="Zip Code*" [formControl]="dataForm.controls['zip']">
+                        </span>
+                      </label>
+                    </p>
+                    <span *ngIf ="dataForm.controls['zip'].touched && !dataForm.controls['zip'].valid" class="wpcf7-not-valid-tip">Zip Code field can not be blank</span>
+                    <p>
+                      <button type="submit" class="btnbuyticket_ss">Submit</button>
+                    </p>
+                    <div class="wpcf7-response-output wpcf7-display-none"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <p>We will have <span class="pinktext">upcoming events</span> that we are excited to share with you! You can RSVP to these events in advance!</p>
+
+              <button type="button" class="btnbuyticket_ss upcomingbtn" onclick="location.href='javascript:void(0);'">Check Out Upcoming Events</button>
+
+          </div>
+          <img src="../../assets/images/eventrsvpimgmain.png" class="neweventrsvpimgmain">
+          <img src="../../assets/images/neweventrsvpimg1.png" class="neweventrsvpimg1">
+          <img src="../../assets/images/neweventrsvpimg2.png" class="neweventrsvpimg2">
+          <div class="wipicwrapper">
+            <div class="title">
+              <img src="../../assets/images/eventtitle.png" alt="eventtitle">
+            </div>
+            <div class="itemswrapper">
+              <div class="carousel slide" id="mypicitemCarousel">
+                <div class="carousel-inner">
+                  <!--<div class="item" *ngFor="let slide of slideno; let i = index" [ngClass]="{'active': i === 0}">-->
+                  <div class="item">
+                    <!--<div class="picitem" *ngFor="let item of imagearr | slice: (slide*5):((slide+1)*5)">-->
+                    <div class="picitem" *ngFor="let item of imagearr">
+                      <div class="borderwrapper">
+                        <div class="imgwrapper">
+                          <img src="{{fileurl}}{{uploadfolder}}{{item}}" alt="{{item}}" (click)="zoominage(item,imagegal)">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="arrows">
+                  <div class="leftarrow">
+                    <a data-slide="prev" href="#mypicitemCarousel" class=""> <p class="arrowicon"><img src="../../assets/images/venueleftarrow.png" alt="#"></p></a>
+                  </div>
+                  <div class="rightarrow">
+                    <a data-slide="next" href="#mypicitemCarousel" class=""><p class="arrowicon"><img src="../../assets/images/venuerightarrow.png" alt="#"></p></a>
+                  </div>
+                </div>
+                <!-- /.control-box -->
+
+              </div><!-- /#myCarousel -->
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
+
+<ng-template #template>
+  <div class="modal-body text-center signupeamilbody  neweventrsvpeamilbody">
+    <p style="margin: 0;"><span>RSVP data submitted successfully.</span></p>
+
+  </div>
+</ng-template>
+
+
+<ng-template #imagegal>
+  <div class="modal-body newgallcls">
+    <a (click)="closemodal()" class="clsclose"><i class="fa fa-close"></i></a>
+    <div style="text-align: center;">
+      <img *ngIf="zoomimg" src="{{fileurl}}{{uploadfolder}}{{zoomimg}}" alt="{{zoomimg}}" style="max-width: 100%;">
+    </div>
+    <div class="arrownextprevclsnew">
+      <div class="clsprevarrow">
+        <a style="cursor: pointer;" (click)="previmg()" *ngIf="showleft"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+      </div>
+      <div class="clsnextarrow">
+        <a style="cursor: pointer;" (click)="nextimg()" *ngIf="showright"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+</ng-template>

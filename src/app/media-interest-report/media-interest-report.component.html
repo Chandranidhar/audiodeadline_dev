@@ -1,0 +1,179 @@
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>media interest report</h4>
+          </div>
+          <div class="dashboardwrapper">
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg newtabletopbarsearchfield" placeholder="search by title" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <!--<input type="date" class="form-control input-lg newtabletopbarsearchfield" placeholder="search by date" autocomplete="off" [(ngModel)]="searchDate" name="searchDate" />-->
+                          <input style="border-radius: 0;" placeholder="Search By Date Range" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
+                        <!--  <input style="border-radius: 0;" placeholder="Search By DateRange" name="searchDate" autocomplete="off" class="form-control input-lg"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>-->
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchStatus" [(ngModel)]="searchStatus" class="form-control input-lg">
+                            <option value="">Search By Status</option>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
+                            <option value="3">Pending</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchType" [(ngModel)]="searchType" class="form-control input-lg">
+                            <option value="">Search By Type</option>
+                            <option value="">All</option>
+                            <option *ngFor="let item of bannerTypeList" value="{{item.val}}">{{item.label}}</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="tablediv">
+
+                  <table>
+                    <thead>
+                    <tr>
+                      <th class="empycell"></th>
+                      <th>Type</th>
+                      <th>Title</th>
+                      <th>Banner Image</th>
+                      <th>Active Date</th>
+                      <th># Of Click</th>
+                      <th># Of Signups</th>
+                      <th>Status</th>
+                      <th class="empycell"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item of bannerlist | bannerfiltertext : searchText | bannerfilter : searchType | bannerfilter2: searchStatus | datefilter : searchText3 | orderby: 'sortindex' | paginate: { itemsPerPage: 10, currentPage: p }">
+                      <td class="empycell"></td>
+                      <td data-label="Type" style="min-width: 166px;">{{getTypeName(item.type)}}</td>
+                      <td data-label="Title" style="min-width: 150px;">
+                        <span *ngIf="!item.isLabelClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'label')">{{item.label}}</span><span *ngIf="item.isLabelClicked"><input type="text" name="label" value="{{item.label}}" (blur)="editInlineField($event,'label',item,item.label)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 135px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>
+                      </td>
+                      <td data-label="Banner Image" class="text-center" >
+                        <img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}" (click)="openpopup(item.image,templateimage)"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}" (click)="openpopup(item.image2,templateimage)"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}" (click)="openpopup(item.image3,templateimage)">
+                      </td>
+                      <td data-label="Date">{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</td>
+                      <td data-label="# Of Click" style="text-align: center;">
+                        {{item.noofclick}}
+                       <!-- <span *ngIf="!item.isSortindexClicked" style="cursor: pointer;" (click)="isClickedFunc(item,'sortindex')">{{item.sortindex}}</span>
+                        <span *ngIf="item.isSortindexClicked"><input type="number" name="sortindex" value="{{item.sortindex}}" (blur)="editInlineField($event,'sortindex',item,item.sortindex)" style="box-sizing: border-box; border-radius: 0px; box-shadow: none; border: 1px solid #ccc; font-size: 14px; font-family: 'OpenSans-Semibold'; width: 70px; height: 33px; padding: 0 5px;"><br><span style="color: #ff0000;">{{inlineerror}}</span></span>-->
+                      </td>
+                      <td data-label="# Of Signups" style="text-align: center;">{{item.noofsignup}}</td>
+                      <td data-label="Status" class="statuscls">
+                        <span *ngIf="!isadmin" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && !item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item,'status')" style="cursor: pointer">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && item.isStatusClicked" class="statusclsdropdown">
+                          <select name="status" (change)="editInlineField($event,'status',item,item.status)" (blur)="selectblur(item)">
+                            <option value="1" [selected]="item.status == 1">Active</option>
+                            <option value="2" [selected]="item.status == 2">Inactive</option>
+                            <option value="3" [selected]="item.status == 3">Pending</option>
+                          </select>
+                          <br><span style="color: #ff0000;">{{inlineerror}}</span>
+                        </span>
+                      </td>
+                      <td class="empycell"></td>
+                      <!--<td data-label="Type" style="min-width: 166px;">{{getTypeName(item.type)}}</td>
+                      <td data-label="Sponsor" style="text-align: center;">{{getSponsorName(item.sponsor)}}</td>
+                      <td data-label="Image"><img style="max-width: 230px;" src="{{fileurl}}{{uploadfolder}}{{item.image}}"><br><img *ngIf="item.image2" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image2}}"><br><img *ngIf="item.image3" style="max-width: 230px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{item.image3}}"></td>
+                      &lt;!&ndash;<td data-label="Image" style="text-align: center;">{{item.noofclick}}</td>&ndash;&gt;
+
+                      <td data-label="Sort Index">
+                        <span *ngIf="!isadmin" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && !item.isStatusClicked" [ngClass]="(item.status == 1 ? 'statusactive' : (item.status == 2 ? 'statusinactive' : 'statuspendinng'))" (click)="isClickedFunc(item,'status')" style="cursor: pointer">{{getStatusName(item.status)}}</span>
+                        <span *ngIf="isadmin && item.isStatusClicked">
+                          <select name="status" (change)="editInlineField($event,'status',item,item.status)" (blur)="selectblur(item)">
+                            <option value="1" [selected]="item.status == 1">Active</option>
+                            <option value="2" [selected]="item.status == 2">Inactive</option>
+                            <option value="3" [selected]="item.status == 3">Pending</option>
+                          </select>
+                          <br><span style="color: #ff0000;">{{inlineerror}}</span>
+                        </span>
+                      </td>
+                      <td data-label="Action">
+                        <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
+                      </td>-->
+                    </tr>
+                    <tr *ngIf="!(bannerlist | datefilter : searchText3 | bannerfiltertext : searchText | bannerfilter : searchType | bannerfilter2: searchStatus).length && !loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="7" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td>
+                      <td class="empycell"></td>
+                    </tr>
+                    <tr *ngIf="loadinglist">
+                      <td class="empycell"></td>
+                      <td colspan="7" style="text-align: center;"><div class="loadertabledata"></div></td>
+                      <td class="empycell"></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <pagination-controls  *ngIf="(bannerlist | datefilter : searchText3 | bannerfiltertext : searchText | bannerfilter : searchType | bannerfilter2: searchStatus).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                </div>
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>
+<ng-template #templateimage>
+  <div class="modal-body copetitionpreview text-center modalcls">
+    <a style="cursor: pointer;" (click)="decline()" class="closebtn">X</a>
+    <div class="formnewpopupheader">
+      <h4>Banner Image</h4>
+    </div>
+    <div class="text-center">
+      <img style="max-width: 500px; margin-top:10px;" src="{{fileurl}}{{uploadfolder}}{{tempimage}}">
+    </div>
+
+  </div>
+</ng-template>

@@ -1,0 +1,119 @@
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <!--<div class="dashboard_wrappertop">
+    <div class="dashboradtoplogo">
+      <img src="../../assets/images/logo.png">
+    </div>
+  </div>-->
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <app-adminleft></app-adminleft>
+    </div>
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right afiliatedashboard">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1">
+          <div class="n-adminheadercls text-center">
+            <h4>Blogs</h4>
+            <p>Keep yourself up to date on AudioDeadline/ArtistXP’s latest events and <br>features right here!</p>
+          </div>
+
+          <div class="dashboardwrapper">
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <!--<li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <select name="searchText7" [(ngModel)]="searchText7" class="form-control input-lg">
+                            <option value="">Select One</option>
+                            <option value="event">Event</option>
+                            <option value="blog">Blog</option>
+                          </select>
+                        </div>
+                      </div>
+                    </li>-->
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <!--<input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                          <owl-date-time [pickerType]="'calendar'" #dt1></owl-date-time>-->
+                          <input style="border-radius: 0;" placeholder="Search By Date" name="searchDate" autocomplete="off" class="form-control input-lg dtrange"
+                                 [(ngModel)]="searchText3"
+                                 [selectMode]="'range'"
+                                 [owlDateTimeTrigger]="dtRange1" [owlDateTime]="dtRange1">
+                          <owl-date-time [pickerType]="'calendar'" #dtRange1></owl-date-time>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li>
+                      <div>
+                        <div class="input-group col-md-12">
+                          <input type="text" class="form-control input-lg" placeholder="Search by title" autocomplete="off" [(ngModel)]="searchText" name="searchText" />
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="tablediv affidashboardwhatsnew">
+                      <div class="n-affidashboardwhatsnewheadercls text-center">
+                        <h2>What’s New?</h2>
+                      </div>
+                      <ul *ngIf="bloglist!=null || bloglist.length>0">
+                        <li *ngFor="let item of bloglist  | blogfilter : searchText | datefilter : searchText3 | paginate: { itemsPerPage: 10, currentPage: p }">
+                          <div class="row">
+                            <div class="col-md-3">
+                              <h1>{{item.title}}</h1>
+                              <p class="affidashboardwhatsnewpara">
+                                <span>{{item.parentname}}</span>
+                                <!--<span>{{(item.added_time) | date :"MM/dd/yyyy"}}</span>-->
+                                <span>{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</span>
+                              </p>
+                              <!--<p class="affidashboardwhatsnewpara"><span>{{item.parentname}}</span><span>{{(item.added_time) | date :"MM/dd/yyyy"}}</span></p>-->
+                            </div>
+                            <div class="col-md-9">
+                              <!--<p>Are you ready to witness our first competition show live?! Artist are bringing their A-game to start preparing for this unique viewer experience. We go Live June 1st, 2019! Don’t forget to indulge yourself in to the artist community on ArtistXP.com and vote for your favorite artists that you would love to see go head on into this 8-hour collaboration right in front of your eyes!....<span class="txtred"><a href="javascript">Read More</a></span></p></div>-->
+                              <!--<p>{{item.description}}&lt;!&ndash;....<span class="txtred"><a href="javascript">Read More</a></span>&ndash;&gt;</p></div>-->
+                              <div  [innerHTML]="item.description | safehtml:300"></div></div>
+                            </div>
+                        </li>
+                        <li *ngIf="!(bloglist | datefilter : searchText3  | blogfilter : searchText).length ">
+                          <div class="row">
+                          <div class="col-md-12" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</div>
+                          </div>
+                        </li>
+                      </ul>
+
+                      <!--<div class="text-center">
+                        <a href="javascript:void(0)" target="_blank" class="btn adminbtnred">View All Blogs</a>
+                      </div>-->
+
+                    </div>
+                    <pagination-controls  *ngIf="(bloglist | datefilter : searchText3  | blogfilter : searchText).length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
+                  </div>
+                </div>
+
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<app-adminfooter></app-adminfooter>

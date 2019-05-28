@@ -1,0 +1,82 @@
+
+<app-header></app-header>
+
+<div class="as_hostflii_titlebar">
+  <h2>Past Events</h2>
+</div>
+
+
+<div class="as_hostflii_wrapper4 pastevent-wrapper">
+  <div class="as_hostflii_container">
+    <div class="asupbgimgwrapper pstevnt_block1 pstevnt_block1">
+
+      <div class="pst_evnt_content">
+        <h2>
+          Networking Event on November
+          <span>30th, 2018</span>
+        </h2>
+        <p>
+          Our networking event was a smash! The event had <span>5 grammy awards winners,</span> our co-host <span>Sandra</span> and music industry titans! See below for image recap of the event!
+
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="kb_eventsblock2 pstevntblk2">
+  <div class="kb_eventsblock2wrapper">
+    <!--<img src="../../assets/images/kbeventsblock2imgtopleft.png" class="kbeventsblock2imgtopleft">-->
+    <!--<img src="../../assets/images/kbeventsblock2imgtopright.png" class="kbeventsblock2imgtopright">-->
+    <div class="kb_eventsblock2content">
+
+      <div class="fgfgfd">
+
+        <ul><img src="../../assets/images/kbeventsblock2imgtopleftsml.png" class="kbeventsblock2imgtopleftsml">
+
+          <h2>Event Picture:</h2>
+        </ul>
+
+        <div class="row image_wrapper">
+          <div class="col-md-3" *ngFor="let item of imagearr">
+            <div class="image_inner_container">
+              <img src="{{fileurl}}{{uploadfolder}}{{item}}" alt="{{item}}" (click)="zoominage(item,imagegal)">
+            </div>
+          </div>
+          <!--<div class="col-md-3 col-sm-6 col-xs-12">-->
+          <!--<div class="for_outerline">-->
+          <!--<div class="image_inner_container">-->
+          <!--<img src="https://api.audiodeadline.com/nodeserver/uploads/laevenimg/eventimg2.jpg">-->
+          <!--</div>-->
+          <!--</div>-->
+          <!--</div>-->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #imagegal>
+  <div class="modal-body newgallcls">
+    <a (click)="closemodal()" class="clsclose"><i class="fa fa-close"></i></a>
+    <div style="text-align: center;">
+      <img *ngIf="zoomimg" src="{{fileurl}}{{uploadfolder}}{{zoomimg}}" alt="{{zoomimg}}" style="max-width: 100%;">
+    </div>
+    <div class="arrownextprevclsnew">
+      <div class="clsprevarrow">
+        <a style="cursor: pointer;" (click)="previmg()" *ngIf="showleft"><i class="fa fa-angle-left" aria-hidden="true"></i></a>
+      </div>
+      <div class="clsnextarrow">
+        <a style="cursor: pointer;" (click)="nextimg()" *ngIf="showright"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<app-footer></app-footer>
