@@ -314,6 +314,7 @@ export class TestresolveService implements Resolve<EndpointComponent> {
     }
     affiliatelist(){
         let link=this.url+'datalist';
+        // let result=this._http.post(link,({'source':'user_affiliate'})).pipe(map(res=>res));
         let result=this._http.post(link,({'source':'user_affiliate'})).pipe(map(res=>res));
         return result;
     }

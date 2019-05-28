@@ -48,13 +48,28 @@ export class AffiliatelistComponent implements OnInit {
     public fb;
     public datasource:any;
     affiliatelistarray:any[];
-    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    public dataflag:any = false;
+    public grab_link: any = [];
+    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
     affiliatelistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Nmae",'email':"Email",'parent':"Enroller"};
     affiliatelisttablename:any="user";
 
     deleteval:any= 'deletesingledata';
     affiliatestatusarray:any=[{val:1,name:"Active"},{val:2,name:"Inactive"}];
     updateurl:any = 'addorupdatedata';
+
+   /*----------------------*/
+    adminlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","parent","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","fb_access_token","fb_access_token_expire_in","fullname","unixtime"];
+    adminlistarray_modify_header:any={'added_time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email"};
+    // admintablename:'all_users';
+    admintablename:any='user';
+    // updateurl:any = 'addorupdatedata';
+    // apiurl:any;
+    // jwttoken:any;
+    // deleteval:any= 'deletesingledata';
+    adminstatusarray:any=[{val:1,name:'Active'},{val:0,name:'Inactive'}];
+    adminlistarray:any=[];
+    /*----------------------*/
 
     constructor(fb: FormBuilder, public _commonservices: Commonservices,private _http: HttpClient,private modalService: BsModalService, userdata: CookieService, private router: Router,public activeRoute:ActivatedRoute) {
         this.userdata = userdata;
@@ -65,7 +80,40 @@ export class AffiliatelistComponent implements OnInit {
         this.defaultxpmedia = '';
         this.jwttoken = this.userdata.get('jwttoken');
         this.apiurl = _commonservices.nodesslurl;
-
+        if(_commonservices.envflag=="live"){
+            this.grab_link =[
+                {
+                    col_name: 'grab_url',
+                    field_name: 'username'
+                },
+                {
+                    label: 'artistxp grab url',
+                    url: 'https://artistxp.com/',
+                    action: 'null'
+                }, {
+                    label: 'Audiodeadline grab url',
+                    url: 'https://audiodeadline.com/',
+                    action: 'null'
+                }
+            ];
+        }
+        if(_commonservices.envflag=="dev"){
+            this.grab_link =[
+                {
+                    col_name: 'grab_url',
+                    field_name: 'username'
+                },
+                {
+                    label: 'artistxp grab url',
+                    url: 'https://development.artistxp.com/',
+                    action: 'null'
+                }, {
+                    label: 'Audiodeadline grab url',
+                    url: 'https://development.audiodeadline.com/',
+                    action: 'null'
+                }
+            ];
+        }
         let userdata2: any;
         userdata2= userdata.get('userdetails');
 
@@ -80,6 +128,7 @@ export class AffiliatelistComponent implements OnInit {
             this.getUserList();
             this.getBannerList1();
             this.getBannerList2();
+            this.adminlist();
         }
         //this.affiliatelist();
     }
@@ -109,8 +158,14 @@ export class AffiliatelistComponent implements OnInit {
           console.log(data);
           console.log(data['results']);
           let result=data['results'];
-          console.log(result);
+          // console.log(result);
           this.affiliatelistarray=result.res;
+          console.log(this.affiliatelistarray);
+          /*setTimeout(()=>{
+              this.dataflag = true;
+              console.log(this.dataflag);
+          },2000);*/
+
       });
 
     }
@@ -126,6 +181,21 @@ export class AffiliatelistComponent implements OnInit {
         });
 
 }*/
+
+
+    adminlist(){
+        let link=this._commonservices.nodesslurl+'datalist';
+        this._http.post(link,{"source":"all_admin"})
+            .subscribe(res=> {
+                let result:any;
+                result=res;
+                this.adminlistarray=result.res;
+                console.log(this.adminlistarray);
+            });
+
+
+
+    }
 
     getUserList(){
         this.loadinglist = true;

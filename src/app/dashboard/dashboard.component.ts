@@ -24,17 +24,32 @@ export class DashboardComponent implements OnInit {
     public dataForm: FormGroup;
     public fb;
     public userlist: any=[];
+    grab_link: any = [
+        {
+            col_name: 'grab_url',
+            field_name: 'username'
+        },
+        {
+            label: 'artistxp grab url',
+            url: 'https://development.artistxp.com/',
+            action: 'null'
+        }, {
+            label: 'Audiodeadline grab url',
+            url: 'https://development.audiodeadline.com/',
+            action: 'null'
+        }
+    ];
     private idx: number;
 
     datasource:any;
     ambassadorlistarray:any=[];
-    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
+    ambassadorlistarray_skip:any=["_id","grab_url", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
     ambassadorlistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'email':'Email','lastname':'Last Name','parent':'Enroller'};
     // tablename:'user';
     ambassadortablename:'user_ambassador';
     ambassadorstatusarray:any=[{val:1,name:'Active'},{val:2,name:'Inactive'}];
     affiliatelistarray:any[];
-    affiliatelistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
+    affiliatelistarray_skip:any=["_id","grab_url", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
     affiliatelistarray_modify_header:any={'added time':'Date Added','firstname':'First Name','lastname':'Last Name','email':'email','parent':'Enroller'};
     affiliateliststatusarray:any=[{val:1,name:'Active'},{val:2,name:'Inactive'}];
     affiliatetablename:'user_affiliate';

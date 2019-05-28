@@ -36,7 +36,22 @@ export class AdminlistComponent implements OnInit {
     public editroute1:any='edit-admin';
     datasource:any;
     adminlistarray:any=[];
-    adminlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","parent","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","fb_access_token","fb_access_token_expire_in","fullname","unixtime"];
+    grab_link: any = [
+        {
+            col_name: 'grab_url',
+            field_name: 'username'
+        },
+        {
+            label: 'artistxp grab url',
+            url: 'https://artistxp.com/',
+            action: 'null'
+        }, {
+            label: 'Audiodeadline grab url',
+            url: 'https://development.audiodeadline.com/',
+            action: 'null'
+        }
+    ];
+    adminlistarray_skip:any=["_id","grab_url", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","parent","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","fb_access_token","fb_access_token_expire_in","fullname","unixtime"];
     adminlistarray_modify_header:any={'added_time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email"};
     // admintablename:'all_users';
     admintablename:any='user';
@@ -72,19 +87,7 @@ export class AdminlistComponent implements OnInit {
 
         });
     }
-    /*adminlist(){
-        let link=this._commonservices.nodesslurl+'datalist';
-        this._http.post(link,{"source":"all_admin"})
-         .subscribe(res=> {
-              let result:any;
-              result=res;
-              this.adminlistarray=result.res;
-              console.log(this.adminlistarray);
-        });
 
-
-
-}*/
 
     getUserList(){
         this.loadinglist = true;

@@ -44,8 +44,10 @@ export class AmbassadorlistComponent implements OnInit {
     public editroute1:any='edit-ambassador';
     jwttoken:any;
     apiurl:any;
+
     ambassadorlistarray:any[];
-    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    grab_link:any[];
+    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
     ambassadorlist_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email",'parent':"Enroller"};
     deleteval:any = 'deletesingledata';
 
@@ -62,6 +64,40 @@ export class AmbassadorlistComponent implements OnInit {
         this.defaultxpmedia = '';
        this.jwttoken = this.userdata.get('jwttoken');
         this.apiurl = _commonservices.nodesslurl;
+        if(_commonservices.envflag=="live"){
+            this.grab_link =[
+                {
+                    col_name: 'grab_url',
+                    field_name: 'username'
+                },
+                {
+                    label: 'artistxp grab url',
+                    url: 'https://artistxp.com/',
+                    action: 'null'
+                }, {
+                    label: 'Audiodeadline grab url',
+                    url: 'https://audiodeadline.com/',
+                    action: 'null'
+                }
+            ];
+        }
+        if(_commonservices.envflag=="dev"){
+            this.grab_link =[
+                {
+                    col_name: 'grab_url',
+                    field_name: 'username'
+                },
+                {
+                    label: 'artistxp grab url',
+                    url: 'https://development.artistxp.com/',
+                    action: 'null'
+                }, {
+                    label: 'Audiodeadline grab url',
+                    url: 'https://development.audiodeadline.com/',
+                    action: 'null'
+                }
+            ];
+        }
         let userdata2: any;
         userdata2= userdata.get('userdetails');
 
