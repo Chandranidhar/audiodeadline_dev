@@ -123,6 +123,7 @@ import {AmbassadoropportunityComponent} from "./app/ambassadoropportunity/ambass
 import {TermsandconditionsComponent} from "./app/termsandconditions/termsandconditions.component";
 import {ReturnsrefundsComponent} from "./app/returnsrefunds/returnsrefunds.component";
 import {SavedcardsComponent} from "./app/savedcards/savedcards.component";
+import {AffiliateTreeComponent} from "./app/affiliate-tree/affiliate-tree.component";
 
 
 const appRoutes: Routes = [
@@ -282,6 +283,7 @@ const appRoutes: Routes = [
     { path: 'termsandconditions', component: TermsandconditionsComponent},
     { path: 'returnsrefunds', component: ReturnsrefundsComponent},
     { path: 'savedcards', component: SavedcardsComponent},
+    { path: 'affiliate-tree/:username/:item/:children', component: AffiliateTreeComponent},
     { path: '**', component: TicketsaleComponent},
     // { path: '/ticket-sale-test/**', component: TicketsaleComponent},
 

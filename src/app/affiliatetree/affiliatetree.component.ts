@@ -16,6 +16,7 @@ export class AffiliatetreeComponent implements OnInit {
   public userdata;
   datasource:any;
   listarray:any=[];
+  custombutton:any={};
   // listarray_skip:any=['_id','password','rsvp','signupaffiliate','status','gender','phone','parentname','admin','ambassador','dancer','model','musicians','fan','parent'];
   listarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate", "parent", "admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
   listarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'email':'Email','lastname':'Last Name'};      //'added_time' has been replaced with 'added time' , because of library declaration
@@ -37,6 +38,17 @@ export class AffiliatetreeComponent implements OnInit {
           this.listarray = result.res;
           console.log(this.listarray);
         });
+    if(_commonservices.envflag=="live"){
+      /*for grab url in live*/
+
+      this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'https://audiodeadline.com/affiliate-tree'};
+    }
+    if(_commonservices.envflag=="dev"){
+      /*for grab url in development*/
+
+      /*for tree view.. fields are nothing but those fieldnames which will be added in route of affiliate-tree*/
+      this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'https://development.audiodeadline.com/affiliate-tree'};
+    }
 
   }
 

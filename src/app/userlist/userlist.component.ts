@@ -58,8 +58,8 @@ export class UserlistComponent implements OnInit {
                 val: 'Model'
             },
             {
-                key: 'signupaffiliate',
-                val: 'Affiliate'
+                key: 'producer',
+                val: 'producer'
             },
             {
                 key: 'fan',
@@ -100,7 +100,7 @@ export class UserlistComponent implements OnInit {
             username: [""],
             role: [""],
             address: [""],
-            address2: [""],
+            // address2: [""],
             city: [""],
             state: [""],
             zip: [""],
@@ -214,7 +214,7 @@ export class UserlistComponent implements OnInit {
             tval = 1;
         }
 
-        var link = this.serverurl + 'changerole';
+        var link = this._commonservices.nodesslurl1 + 'newchangerole';
         var data = {_id: item._id, type: utype, tval: tval};
         this._http.post(link, data)
             .subscribe(res => {
@@ -227,13 +227,13 @@ export class UserlistComponent implements OnInit {
                         item.dancer = tval;
                     if (utype == 'model')
                         item.model = tval;
-                    if (utype == 'signupaffiliate')
-                        item.signupaffiliate = tval;
+                    if (utype == 'producer')
+                        item.producer = tval;
 
-                    if (item.musicians == 1 || item.dancer == 1 || item.model == 1) {
+                    if (item.musicians == 1 || item.dancer == 1 || item.model == 1 || item.producer ==1) {
                         this.cngChk2(item, 0);
                     }
-                    if (item.musicians == 0 && item.dancer == 0 && item.model == 0) {
+                    if (item.musicians == 0 && item.dancer == 0 && item.model == 0 || item.producer ==0) {
                         this.cngChk2(item, 1);
                     }
 
@@ -245,7 +245,7 @@ export class UserlistComponent implements OnInit {
     }
 
     cngChk2(item, tval) {
-        var link = this.serverurl + 'changerole';
+        var link = this._commonservices.nodesslurl1 + 'newchangerole';
         var data = {_id: item._id, type: 'fan', tval: tval};
         this._http.post(link, data)
             .subscribe(res => {

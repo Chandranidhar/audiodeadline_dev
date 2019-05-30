@@ -53,7 +53,7 @@ export class AdmineditComponent implements OnInit {
             role: ["", Validators.required],
             username: [""],
             address: ["", Validators.required],
-            address2: [""],
+            // address2: [""],
             city: ["", Validators.required],
             state: ["", Validators.required],
             zip: ["", Validators.required],
@@ -86,7 +86,7 @@ export class AdmineditComponent implements OnInit {
                     this.dataForm.controls['email'].setValue(userdet.email);
                     this.dataForm.controls['username'].setValue(userdet.username);
                     this.dataForm.controls['address'].setValue(userdet.address);
-                    this.dataForm.controls['address2'].setValue(userdet.address2);
+                    // this.dataForm.controls['address2'].setValue(userdet.address2);
                     this.dataForm.controls['city'].setValue(userdet.city);
                     this.dataForm.controls['state'].setValue(userdet.state);
                     this.dataForm.controls['zip'].setValue(userdet.zip);
@@ -194,7 +194,7 @@ export class AdmineditComponent implements OnInit {
                 email: formval.email,
                 username: formval.username,
                 address: formval.address,
-                address2: formval.address2,
+                // address2: formval.address2,
                 city: formval.city,
                 state: formval.state,
                 zip: formval.zip,

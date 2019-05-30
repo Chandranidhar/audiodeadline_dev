@@ -319,8 +319,6 @@
 
                     </tbody>
                   </table>-->
-                  <!----------------using listing library (material) starts here------------------------->
-
                   <table *ngIf="listarray==null || listarray.length==0">
                     <!--<thead>
                     <tr>
@@ -362,10 +360,17 @@
                     <!-- <tr *ngIf="loadinglist"> <td class="empycell"></td><td colspan="12" style="color: #ee680f; padding: 16px; text-align: center;"><div class="loadertabledata"></div></td> <td class="empycell"></td></tr>-->
                     </tbody>
                   </table>
-                  <lib-listing class="formfilterdiv" *ngIf="listarray!=null && listarray.length>0"  [datasource]="listarray" [skip]="listarray_skip" [modify_header_array]="listarray_modify_header" [sourcedata]="tablename"  [statusarr]="statusarray"></lib-listing>
+                  <!----------------using listing library (material) starts here------------------------->
+
+
+                  <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="listarray!=null && listarray.length>0"  [datasource]="listarray" [skip]="listarray_skip" [modify_header_array]="listarray_modify_header" [sourcedata]="tablename"  [custombutton]="custombutton" [statusarr]="statusarray"></lib-listing>
                   <!----------------using listing library (material) ends here--------------------------->
 
                   <!--<pagination-controls  maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>-->
+
+
+
+
                 </div>
 
               </div>

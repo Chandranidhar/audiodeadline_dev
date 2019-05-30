@@ -1,11 +1,13 @@
-import { Component, OnInit,TemplateRef } from '@angular/core';
+import { Component, OnInit,TemplateRef,ViewChild,ElementRef ,AfterViewInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import { FormGroup, FormControl, FormBuilder} from '@angular/forms';
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {Commonservices} from '../app.commonservices';
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {ImageCroppedEvent} from "ngx-image-cropper";
+import {Validators} from "@angular/forms";
 declare const FB: any;
 
 @Component({
@@ -14,7 +16,11 @@ declare const FB: any;
   styleUrls: ['./affiliatemediamarketing.component.css'],
   providers: [Commonservices]
 })
-export class AffiliatemediamarketingComponent implements OnInit {
+export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
+    @ViewChild('gsharelink1') gsharelink1: ElementRef;
+    @ViewChild('gsharelink2') gsharelink2: ElementRef;
+    @ViewChild('gsharelink3') gsharelink3: ElementRef;
+    @ViewChild('gsharelink4') gsharelink4: ElementRef;
   commonservices:Commonservices;
   private userdata: CookieService;
   public serverurl;
@@ -41,11 +47,15 @@ export class AffiliatemediamarketingComponent implements OnInit {
     modalRef: BsModalRef;
     modalRef1: BsModalRef;
     public userdetails:any;
+    public socialmediaerror:any = 0;
+    public dataForm: FormGroup;
+    private fb;
 
-  constructor(private _http: HttpClient, private router: Router, userdata: CookieService, private _commonservices: Commonservices, private activeRoute: ActivatedRoute,private modalService: BsModalService) {
+  constructor(private _http: HttpClient, private router: Router, userdata: CookieService, public _commonservices: Commonservices, private activeRoute: ActivatedRoute,private modalService: BsModalService, fb: FormBuilder) {
+      this.fb = fb;
 
-    this.serverurl=_commonservices.url;
-    this.fileurl = _commonservices.fileurl;
+      this.serverurl=_commonservices.url;
+      this.fileurl = _commonservices.fileurl;
       this.usercookie = userdata;
       this.affiliatename = this.usercookie.get('username');
       this.username = this.usercookie.get('username');
@@ -63,10 +73,10 @@ export class AffiliatemediamarketingComponent implements OnInit {
           this.sponserimg = userdata2.sponserimage;*/
 
       }
-    this.uploadfile = 'banner';
-    // this.getticketsalebanner();
-    this.getmechandisebanner();
-    this.getartistxpsignupbanner();
+      this.uploadfile = 'banner';
+      // this.getticketsalebanner();
+      this.getmechandisebanner();
+      this.getartistxpsignupbanner();
       this.FB_APP_ID=_commonservices.FB_APP_ID;
       this.FB_APP_SECRET=_commonservices.FB_APP_SECRET;
       this.LI_CLIENT_ID=_commonservices.LI_CLIENT_ID;
@@ -96,24 +106,63 @@ export class AffiliatemediamarketingComponent implements OnInit {
 
 
     ngOnInit() {
-      this.activeRoute.data.forEach((data) => {
-          //PRE LOAD DATA PRIOR
-          /*console.log('route data for profile');
+        this.activeRoute.data.forEach((data) => {
+            //PRE LOAD DATA PRIOR
+            /*console.log('route data for profile');
            console.log('json',data['results']);
            console.log(data['results'].item);*/
-          // console.log('json',data['results']);
-          let result=data['results'];
-         console.log(result);
-          this.ticketsalebanner = result.res;
+            // console.log('json',data['results']);
+            let result=data['results'];
+            console.log(result);
+            this.ticketsalebanner = result.res;
+            // console.log(this.ticketsalebanner);
+        });
+        this.dataForm = this.fb.group({
+            /*fullname: ["", Validators.required],*/
+            socialinvite: [""],
+            contactinvite: [""],
+            // email: ["", ContactusComponent.validateEmail],
+            /* email:  ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],*/
+            /*phoneno: ["", Validators.required],*/
+            message: ["", Validators.required],
+        });
 
-         // console.log(this.ticketsalebanner);
+    }
+    ngAfterViewInit(){
 
 
+    }
 
-      });
-  }
+    sendsocialinvite(){
+        console.log("this.dataForm.controls['socialinvite'].value");
+        console.log(this.dataForm.controls['socialinvite'].value);
+        this.socialmediaerror = 0;
+        if(this.dataForm.controls['socialinvite'].value==""){
+            this.socialmediaerror = 1;
+        }
+        if(this.dataForm.controls['socialinvite'].value=="twitter"){
+            setTimeout(()=> {
+                this.gsharelink1.nativeElement.click();
+            }, 500);
+        }
+        if(this.dataForm.controls['socialinvite'].value=="linkedin"){
+            setTimeout(()=> {
+                this.gsharelink3.nativeElement.click();
+            }, 500);
+        }
+        if(this.dataForm.controls['socialinvite'].value=="tumblr"){
+            setTimeout(()=> {
+                this.gsharelink4.nativeElement.click();
+            }, 500);
+        }
+        if(this.dataForm.controls['socialinvite'].value=="facebook"){
+            setTimeout(()=> {
+                this.gsharelink2.nativeElement.click();
+            }, 500);
+        }
+    }
 
-  /*getticketsalebanner(){
+    /*getticketsalebanner(){
 
     let link = this._commonservices.nodesslurl+'datalist';
     this._http.post(link,{source:'mediaview',condition:{"type":7,"status":1}})
@@ -127,31 +176,31 @@ export class AffiliatemediamarketingComponent implements OnInit {
         });
   }*/
 
-  getmechandisebanner(){
+    getmechandisebanner(){
 
-    let link = this._commonservices.nodesslurl+'datalist';
-    this._http.post(link,{source:'mediaview',condition:{"type":8,"status":1}})
-        .subscribe(res=>{
+        let link = this._commonservices.nodesslurl+'datalist';
+        this._http.post(link,{source:'mediaview',condition:{"type":8,"status":1}})
+            .subscribe(res=>{
 
-          let result:any;
-          result = res;
-          this.merchbanner = result.res;
+                let result:any;
+                result = res;
+                this.merchbanner = result.res;
 
 
-        });
-  }
+            });
+    }
 
-  getartistxpsignupbanner(){
+    getartistxpsignupbanner(){
 
-    let link = this._commonservices.nodesslurl+'datalist';
-    this._http.post(link,{source:'mediaview',condition:{"type":9,"status":1}})
-        .subscribe(res=>{
+        let link = this._commonservices.nodesslurl+'datalist';
+        this._http.post(link,{source:'mediaview',condition:{"type":9,"status":1}})
+            .subscribe(res=>{
 
-          let result:any;
-          result = res;
-          this.artistxpsignbanner = result.res;
-        });
-  }
+                let result:any;
+                result = res;
+                this.artistxpsignbanner = result.res;
+            });
+    }
 
     copyText(val: string){
         let selBox = document.createElement('textarea');
@@ -170,7 +219,7 @@ export class AffiliatemediamarketingComponent implements OnInit {
     postinfb(username,media_id,image){
         var link = this._commonservices.phpurllive+'sharetool22.php?type=ticketsale&sponsorname=&media_id='+media_id+'&image='+image+'&affiliate='+username;
 
-       /* console.log('link');
+        /* console.log('link');
         console.log(link);*/
         FB.ui({
             method: 'feed',
@@ -185,27 +234,27 @@ export class AffiliatemediamarketingComponent implements OnInit {
 
     postinfb2(username,media_id,image){
         var link = this._commonservices.phpurllive+'sharetool2.php?media_id='+media_id+'&username='+username+'&image='+image;
-          FB.ui({
-         method: 'feed',
-         link: link,
-         name: " ",
-         caption:" ",
-         description: " "
-         },function(response){
-         // console.log(response);
-         });
+        FB.ui({
+            method: 'feed',
+            link: link,
+            name: " ",
+            caption:" ",
+            description: " "
+        },function(response){
+            // console.log(response);
+        });
     }
     postinfb3(username,media_id,image){
         let link = this._commonservices.phpurllive+'sharetool23.php?media_id='+media_id+'&username='+username+'&image='+image;
-          FB.ui({
-         method: 'feed',
-         link: link,
-         name: " ",
-         caption:" ",
-         description: " "
-         },function(response){
-         // console.log(response);
-         });
+        FB.ui({
+            method: 'feed',
+            link: link,
+            name: " ",
+            caption:" ",
+            description: " "
+        },function(response){
+            // console.log(response);
+        });
     }
     openmodal(template:TemplateRef<any>){
         this.modalRef1=this.modalService.show(template);

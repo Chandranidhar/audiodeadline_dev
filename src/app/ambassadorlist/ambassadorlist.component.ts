@@ -45,9 +45,10 @@ export class AmbassadorlistComponent implements OnInit {
     jwttoken:any;
     apiurl:any;
 
-    ambassadorlistarray:any[];
-    grab_link:any[];
-    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    ambassadorlistarray:any=[];
+    custombutton:any={};
+    grab_link:any=[];
+    ambassadorlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname","children"];
     ambassadorlist_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email",'parent':"Enroller"};
     deleteval:any = 'deletesingledata';
 
@@ -80,6 +81,7 @@ export class AmbassadorlistComponent implements OnInit {
                     action: 'null'
                 }
             ];
+            this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'https://audiodeadline.com/affiliate-tree'};
         }
         if(_commonservices.envflag=="dev"){
             this.grab_link =[
@@ -97,6 +99,7 @@ export class AmbassadorlistComponent implements OnInit {
                     action: 'null'
                 }
             ];
+            this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'https://development.audiodeadline.com/affiliate-tree'};
         }
         let userdata2: any;
         userdata2= userdata.get('userdetails');

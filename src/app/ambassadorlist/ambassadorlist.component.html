@@ -123,7 +123,7 @@
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
                 <div class="tablediv affiliatetree affidashboardbg2">
-                  <lib-listing class="formfilterdiv" *ngIf="ambassadorlistarray!=null && ambassadorlistarray.length>0"
+                  <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="ambassadorlistarray!=null && ambassadorlistarray.length>0"
                                [datasource]="ambassadorlistarray"
                                [skip]="ambassadorlistarray_skip"
                                [modify_header_array]="ambassadorlist_modify_header"
@@ -137,7 +137,8 @@
                                [search_settings]="search_settings"
                                [editroute]="editroute1"
                                [deleteendpoint]="deleteval"
-                               [grab_link]="grab_link">
+                               [grab_link]="grab_link"
+                               [custombutton]="custombutton">
                   </lib-listing>
                   <!--<table>
                     <thead>

@@ -23,6 +23,7 @@ export class AffiliatelistComponent implements OnInit {
     date_search_source: any='user_affiliate';
     date_search_endpoint: any='datalist';
     search_settings:any={datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",field:"unixtime"}],textsearch:[{label:"Search By Name",field:'fullname'}]};
+    custombutton: any={};
 
 
 
@@ -50,7 +51,7 @@ export class AffiliatelistComponent implements OnInit {
     affiliatelistarray:any[];
     public dataflag:any = false;
     public grab_link: any = [];
-    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname"];
+    affiliatearray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname","children"];
     affiliatelistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Nmae",'email':"Email",'parent':"Enroller"};
     affiliatelisttablename:any="user";
 
@@ -58,7 +59,7 @@ export class AffiliatelistComponent implements OnInit {
     affiliatestatusarray:any=[{val:1,name:"Active"},{val:2,name:"Inactive"}];
     updateurl:any = 'addorupdatedata';
 
-   /*----------------------*/
+   /*-----------test purpose-----------*/
     adminlistarray_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","parent","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","fb_access_token","fb_access_token_expire_in","fullname","unixtime"];
     adminlistarray_modify_header:any={'added_time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email"};
     // admintablename:'all_users';
@@ -81,6 +82,7 @@ export class AffiliatelistComponent implements OnInit {
         this.jwttoken = this.userdata.get('jwttoken');
         this.apiurl = _commonservices.nodesslurl;
         if(_commonservices.envflag=="live"){
+            /*for grab url in live*/
             this.grab_link =[
                 {
                     col_name: 'grab_url',
@@ -96,8 +98,10 @@ export class AffiliatelistComponent implements OnInit {
                     action: 'null'
                 }
             ];
+            this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'https://audiodeadline.com/affiliate-tree'};
         }
         if(_commonservices.envflag=="dev"){
+            /*for grab url in development*/
             this.grab_link =[
                 {
                     col_name: 'grab_url',
@@ -113,6 +117,8 @@ export class AffiliatelistComponent implements OnInit {
                     action: 'null'
                 }
             ];
+            /*for tree view.. fields are nothing but those fieldnames which will be added in route of affiliate-tree*/
+            this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'https://development.audiodeadline.com/affiliate-tree'};
         }
         let userdata2: any;
         userdata2= userdata.get('userdetails');
@@ -129,6 +135,8 @@ export class AffiliatelistComponent implements OnInit {
             this.getBannerList1();
             this.getBannerList2();
             this.adminlist();
+            console.log('this.grab_link');
+            console.log(this.grab_link);
         }
         //this.affiliatelist();
     }

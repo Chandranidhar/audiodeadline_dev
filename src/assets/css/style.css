@@ -23611,6 +23611,35 @@ span.spangreen{
 }
 /*SUBRATA END CSS*/
 
+.custom-data-modal .mat-dialog-container {
+    min-width: 500px!important; border:solid 5px #cc3333!important;
+}
+
+.custom-data-modal .mat-dialog-container iframe {
+    width: 100%;
+    box-shadow: none!important;
+    border: solid 1px #ddd;     min-height: 275px;
+}
+
+.custom-data-modal .example-card{ display:none!important;}
+
+.mat-tree-node{ min-height: 25px!important; border-top:solid 1px #ccc!important;  background: #fff!important;}
+.mat-tree{  background: #ccc!important;}
+
+ .mat-icon-button{ height: 24px; }
+
+.formfilterdivnew .cursor:last-child i{ display: none!important;}
+
+.formfilterdivnew .cursor:last-child{ background-image: url(../../assets/images/treelistL.png) !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center !important; display: inline-block; width: 24px; height: 24px;}
+
+
+@media only screen and (max-width: 1040px) {
+    .custom-data-modal .mat-dialog-container { min-width: inherit!important;}
+
+}
 
 
 

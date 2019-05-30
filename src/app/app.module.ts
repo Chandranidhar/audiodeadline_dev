@@ -152,6 +152,7 @@ import { BannerfiltertextPipe } from './bannerfiltertext.pipe';
 import { DatefilterPipe } from './datefilter.pipe';
 import { DateblogpipePipe } from './dateblogpipe.pipe';
 import { UserdatesearchPipe } from './userdatesearch.pipe';
+import { AffiliateTreeComponent } from './affiliate-tree/affiliate-tree.component';
 
 
 @NgModule({
@@ -287,7 +288,8 @@ import { UserdatesearchPipe } from './userdatesearch.pipe';
     BannerfiltertextPipe,
     DatefilterPipe,
     DateblogpipePipe,
-    UserdatesearchPipe
+    UserdatesearchPipe,
+    AffiliateTreeComponent
   ],
   imports: [
     ImageCropperModule,
