@@ -124,7 +124,10 @@ import {TermsandconditionsComponent} from "./app/termsandconditions/termsandcond
 import {ReturnsrefundsComponent} from "./app/returnsrefunds/returnsrefunds.component";
 import {SavedcardsComponent} from "./app/savedcards/savedcards.component";
 import {AffiliateTreeComponent} from "./app/affiliate-tree/affiliate-tree.component";
-
+/* category management */
+import {CategoryListComponent} from "./app/category-list/category-list.component";
+import {CategoryAddComponent} from "./app/category-add/category-add.component";
+/* category management */
 
 const appRoutes: Routes = [
 
@@ -284,6 +287,11 @@ const appRoutes: Routes = [
     { path: 'returnsrefunds', component: ReturnsrefundsComponent},
     { path: 'savedcards', component: SavedcardsComponent},
     { path: 'affiliate-tree/:username/:item/:children', component: AffiliateTreeComponent},
+    /* category management */
+    { path: 'category-list', component: CategoryListComponent },
+    { path: 'category-add', component: CategoryAddComponent },
+    { path: 'category-edit/:id', component: CategoryListComponent },
+    /* category management */
     { path: '**', component: TicketsaleComponent},
     // { path: '/ticket-sale-test/**', component: TicketsaleComponent},
 

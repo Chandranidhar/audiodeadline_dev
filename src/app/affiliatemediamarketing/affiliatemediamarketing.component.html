@@ -237,16 +237,13 @@
                                 <div class="form-row">
                                   <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                     <label>INVITE FRIENDS VIA YOUR ONLINE ADDRESS BOOK</label>
-                                    <select class="form-control" name="type">
-                                      <option value="select service" selected>select service</option>
-                                      <option value="2">select service 1</option>
-                                      <option value="3">select service 2</option>
-                                      <option value="4">select service 3</option>
-                                      <option value="5">select service 4</option>
-                                      <option value="6">select service 5</option>
+                                    <select class="form-control" name="type" [formControl]="dataForm.controls['socialcontact']">
+                                      <option value="" selected>select service</option>
+                                      <option value="gmail">Gmail</option>
+                                      <option value="yahoo">Yahoo</option>
                                     </select>
                                     <span class="has-error"> *select field can not be blank</span>
-                                    <button class="btnred" name="getcontacts">get contacts</button>
+                                    <button class="btnred googleContactsButton" name="getcontacts" id="googleres" (click)="getcontacts()">get contacts</button>
                                   </div>
                                   <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                     <label>INVITE FRIENDS VIA SOCIAL MEDIA</label>
@@ -265,23 +262,43 @@
                                 <div class="form-row">
                                   <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                     <label>Enter Your Friends' Email Addresses</label>
-                                    <input type="text" class="form-control" name="emailaddress" placeholder="email address">
-                                    <span class="has-error"> *select field can not be blank</span>
+                                    <!--mat chip for multiple email select and deselect starts here-->
+                                    <mat-form-field class="example-chip-list">
+                                      <mat-chip-list #chipList aria-label="Fruit selection">
+                                        <mat-chip *ngFor="let item of contactarray" [selectable]="selectable"
+                                                  [removable]="removable" (removed)="remove(item)">
+                                          {{item}}
+                                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                        </mat-chip>
+                                        <input matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher" placeholder="New Email..."
+                                               [matChipInputFor]="chipList"
+                                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                               [matChipInputAddOnBlur]="addOnBlur"
+                                               (matChipInputTokenEnd)="add($event)">
+                                        <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                                          Please enter a valid email address
+                                        </mat-error>
+                                        <mat-error *ngIf="emailFormControl.hasError('required')">
+                                          Email is <strong>required</strong>
+                                        </mat-error>
+                                      </mat-chip-list>
+                                    </mat-form-field>
+                                    <!--mat chip for multiple email select and deselect ends here-->
                                   </div>
                                 </div>
 
                                 <div class="form-row">
                                   <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                     <label>Audiodeadline Email message</label>
-                                    <textarea class="form-control" id="audiodeadlineemailmsg" rows="3" placeholder="" value="ArtistXP Email messageqw"></textarea>
-                                    <span class="has-error"> *select field can not be blank</span>
-                                    <button class="btnred" name="getcontacts">send email invite</button>
+                                    <textarea class="form-control" id="audiodeadlineemailmsg" rows="3" placeholder="" value="ArtistXP Email messageqw" [formControl]="dataForm.controls['audiodeadlinemsg']"></textarea>
+                                    <span class="has-error" *ngIf="admsg == 1"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts" (click)="sendaudiodeadlinemsg()">send email invite</button>
                                   </div>
                                   <div class="form-group col-md-6 col-sm-12 col-xs-12">
                                     <label>ArtistXP Email message</label>
-                                    <textarea class="form-control" id="artistxpemailmessage" rows="3" placeholder="" value="ArtistXP Email message"></textarea>
-                                    <span class="has-error"> *select field can not be blank</span>
-                                    <button class="btnred" name="getcontacts">send email invite</button>
+                                    <textarea class="form-control" id="artistxpemailmessage" rows="3" placeholder="" value="ArtistXP Email message" [formControl]="dataForm.controls['artistxpmsg']"></textarea>
+                                    <span class="has-error" *ngIf="axmsg == 1"> *select field can not be blank</span>
+                                    <button class="btnred" name="getcontacts" (click)="sendartistxpmsg()">send email invite</button>
                                   </div>
                                 </div>
 
@@ -367,3 +384,20 @@
 
 </div>
 <!------------------development share urls end-------------->
+
+<!--mat chip for multiple email select and deselect starts here-->
+<!--<mat-form-field class="example-chip-list">
+  <mat-chip-list #chipList aria-label="Fruit selection">
+    <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+              [removable]="removable" (removed)="remove(fruit)">
+      {{fruit.name}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input placeholder="New fruit..."
+           [matChipInputFor]="chipList"
+           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+           [matChipInputAddOnBlur]="addOnBlur"
+           (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+</mat-form-field>-->
+<!--mat chip for multiple email select and deselect ends here-->

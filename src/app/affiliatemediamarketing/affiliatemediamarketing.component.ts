@@ -1,6 +1,6 @@
 import { Component, OnInit,TemplateRef,ViewChild,ElementRef ,AfterViewInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import { FormGroup, FormControl, FormBuilder} from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormGroupDirective, NgForm} from '@angular/forms';
 // import {Http} from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
@@ -8,34 +8,48 @@ import {Commonservices} from '../app.commonservices';
 import {BsModalRef, BsModalService} from "ngx-bootstrap";
 import {ImageCroppedEvent} from "ngx-image-cropper";
 import {Validators} from "@angular/forms";
+import {COMMA, ENTER} from '@angular/cdk/keycodes';             /*for comma , and enter key codes from keyboard*/
+import {MatChipInputEvent} from '@angular/material/chips';
 declare const FB: any;
+declare var $:any;
+declare var gapi:any;
+import {ErrorStateMatcher} from '@angular/material/core';
+
+/** Error when invalid control is dirty, touched, or submitted. */
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        const isSubmitted = form && form.submitted;
+        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    }
+}
+
 
 @Component({
-  selector: 'app-affiliatemediamarketing',
-  templateUrl: './affiliatemediamarketing.component.html',
-  styleUrls: ['./affiliatemediamarketing.component.css'],
-  providers: [Commonservices]
+    selector: 'app-affiliatemediamarketing',
+    templateUrl: './affiliatemediamarketing.component.html',
+    styleUrls: ['./affiliatemediamarketing.component.css'],
+    providers: [Commonservices]
 })
 export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
     @ViewChild('gsharelink1') gsharelink1: ElementRef;
     @ViewChild('gsharelink2') gsharelink2: ElementRef;
     @ViewChild('gsharelink3') gsharelink3: ElementRef;
     @ViewChild('gsharelink4') gsharelink4: ElementRef;
-  commonservices:Commonservices;
-  private userdata: CookieService;
-  public serverurl;
-  public fileurl;
-  public affiliatename:any;
-  public username:any;
-  public uploadfile;
-  public usercookie;
-  public FB_APP_ID:any;
-  public FB_APP_SECRET:any;
-  public LI_CLIENT_ID:any;
-  public LI_CLIENT_SECRET:any;
-  public ticketsalebanner:any = [];
-  public merchbanner:any = [];
-  public artistxpsignbanner:any = [];
+    commonservices:Commonservices;
+    private userdata: CookieService;
+    public serverurl;
+    public fileurl;
+    public affiliatename:any;
+    public username:any;
+    public uploadfile;
+    public usercookie;
+    public FB_APP_ID:any;
+    public FB_APP_SECRET:any;
+    public LI_CLIENT_ID:any;
+    public LI_CLIENT_SECRET:any;
+    public ticketsalebanner:any = [];
+    public merchbanner:any = [];
+    public artistxpsignbanner:any = [];
     public selectedFile:any;
     public tempUploadFilename:any;
     public rawimage:any;
@@ -47,41 +61,117 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
     modalRef: BsModalRef;
     modalRef1: BsModalRef;
     public userdetails:any;
+    public auth2 :any;
+    public admsg :any = 0;
+    public axmsg :any = 0;
     public socialmediaerror:any = 0;
     public dataForm: FormGroup;
     private fb;
+    /*  public clientId:any = '1036664457460-9o9ihhnjrnb3vqhklo72nu5mu7gbp84r.apps.googleusercontent.com';
+    public apiKey:any = 'H1qzKV7Q8iUciTn8arwZPcti';
+    public scopes:any = 'https://www.googleapis.com/auth/contacts.readonly';*/
+    /*mat chip initialisation starts here*/
+    visible = true;
+    selectable = true;
+    removable = true;
+    addOnBlur = true;
+    readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+    contactarray: any= [];
+    public userContacts: any=[];
+    public checkemail: any = 0;
+    /*mat chip initialisation ends here*/
 
-  constructor(private _http: HttpClient, private router: Router, userdata: CookieService, public _commonservices: Commonservices, private activeRoute: ActivatedRoute,private modalService: BsModalService, fb: FormBuilder) {
-      this.fb = fb;
 
-      this.serverurl=_commonservices.url;
-      this.fileurl = _commonservices.fileurl;
-      this.usercookie = userdata;
-      this.affiliatename = this.usercookie.get('username');
-      this.username = this.usercookie.get('username');
-      console.log(this.affiliatename);
-      let userdata2: any;
-      userdata2= userdata.get('userdetails');
-      userdata2 = JSON.parse(userdata2);
-      this.getUserDetails();
-      if (typeof (userdata2) == 'undefined'){
-          this.router.navigateByUrl('/login');
-      }
-      else {
-          this.affiliatename = userdata2.username;
-          /*this.sponserurl = userdata2.sponserurl;
+    emailFormControl = new FormControl('', [
+        Validators.required,
+        Validators.email,
+    ]);
+    matcher = new MyErrorStateMatcher();
+    constructor(private _http: HttpClient, private router: Router, userdata: CookieService, public _commonservices: Commonservices, private activeRoute: ActivatedRoute,private modalService: BsModalService, fb: FormBuilder) {
+        this.fb = fb;
+
+        this.serverurl=_commonservices.url;
+        this.fileurl = _commonservices.fileurl;
+        this.usercookie = userdata;
+        this.affiliatename = this.usercookie.get('username');
+        this.username = this.usercookie.get('username');
+        console.log(this.affiliatename);
+        let userdata2: any;
+        userdata2= userdata.get('userdetails');
+        userdata2 = JSON.parse(userdata2);
+        this.getUserDetails();
+        if (typeof (userdata2) == 'undefined'){
+            this.router.navigateByUrl('/login');
+        }
+        else {
+            this.affiliatename = userdata2.username;
+            /*this.sponserurl = userdata2.sponserurl;
           this.sponserimg = userdata2.sponserimage;*/
 
-      }
-      this.uploadfile = 'banner';
-      // this.getticketsalebanner();
-      this.getmechandisebanner();
-      this.getartistxpsignupbanner();
-      this.FB_APP_ID=_commonservices.FB_APP_ID;
-      this.FB_APP_SECRET=_commonservices.FB_APP_SECRET;
-      this.LI_CLIENT_ID=_commonservices.LI_CLIENT_ID;
-      this.LI_CLIENT_SECRET=_commonservices.LI_CLIENT_SECRET;
-  }
+        }
+        this.uploadfile = 'banner';
+        // this.getticketsalebanner();
+        this.getmechandisebanner();
+        this.getartistxpsignupbanner();
+        this.FB_APP_ID=_commonservices.FB_APP_ID;
+        this.FB_APP_SECRET=_commonservices.FB_APP_SECRET;
+        this.LI_CLIENT_ID=_commonservices.LI_CLIENT_ID;
+        this.LI_CLIENT_SECRET=_commonservices.LI_CLIENT_SECRET;
+    }
+    /*-------------------mat chip functions-----------------*/
+    /*function to add chip*/
+    add(event: MatChipInputEvent): void {
+        if(this.emailFormControl.valid || (this.contactarray!=null && this.contactarray.length>0)){
+            const input = event.input;
+            const value = event.value;
+
+            // Add our input email
+            if ((value || '').trim()) {
+                this.contactarray.push(value.trim());
+            }
+
+            // Reset the input value
+            if (input) {
+                input.value = '';
+            }
+        }
+
+    }
+
+    /*function to add chip*/
+    remove(fruit: any): void {
+        const index = this.contactarray.indexOf(fruit);
+        if (index >= 0) {
+            this.contactarray.splice(index, 1);
+        }
+    }
+    /*-------------------mat chip functions-----------------*/
+    sendaudiodeadlinemsg(){
+         let link :any = this._commonservices.nodesslurl+'audiodeadlineemailsend';
+         let data = {'fullname':this.userdetails.firstname+" "+this.userdetails.lastname,'audiodeadlinemsg':this.dataForm.controls['audiodeadlinemsg'].value,emails:this.contactarray};
+         console.log(data);
+        this._http.post(link,data)
+             .subscribe(res=>{
+                 let result:any;
+                 result = res;
+                 if(result.status == "success"){
+                     this.contactarray = [];
+                 }
+             });
+    }
+    sendartistxpmsg(){
+         let link :any = this._commonservices.nodesslurl+'artistxpemailsend';
+         let data = {'fullname':this.userdetails.firstname+" "+this.userdetails.lastname,'artistxpmsg':this.dataForm.controls['artistxpmsg'].value,emails:this.contactarray};
+         console.log(data);
+        this._http.post(link,data)
+             .subscribe(res=>{
+                 let result:any;
+                 result = res;
+                 if(result.status == "success"){
+                     this.contactarray = [];
+                 }
+             });
+    }
     getUserDetails(){
         // var link =this.serverurl+'dashboard';
         var link =this._commonservices.nodesslurl+'dashboardpost';
@@ -120,17 +210,23 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
         this.dataForm = this.fb.group({
             /*fullname: ["", Validators.required],*/
             socialinvite: [""],
-            contactinvite: [""],
-            // email: ["", ContactusComponent.validateEmail],
-            /* email:  ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],*/
+            socialcontact: [""],
+            emailcontact: ["", AffiliatemediamarketingComponent.validateEmail],
+            /* emailcontact:  ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],*/
             /*phoneno: ["", Validators.required],*/
-            message: ["", Validators.required],
+            audiodeadlinemsg: ["Can you imagine what it would be like to be in the room with Jimi Hendrix or The Beatles while they were making their music? With our brand-new show, AudioDeadline, we are going to give you front row seats to the action so that you can experience firsthand the intimate journey that an artist goes through creating a song from beginning to end. We are giving more opportunities for recording artists to fulfill their dreams of working in a real sound studio and possibly become famous. They will only have 8 hours to collaborate and come up with a completely new song that everyone will love. Will they be able to pull it off or will they fall flat?"],
+            artistxpmsg: ["Be part of the movement that unites musicians, music lovers, and anyone who appreciates artistry together to create new relationships centered around performing art. ArtistXP is a new social media website that invites recording artists, dancers, models, and fans to come together and connect with one another on a single platform. ArtistXP.com is the place to combine all your other social media accounts – including your music ones. Facebook, Instagram, Twitter, SoundCloud, YouTube, ReverbNation, and several others offer plugins that are now all accessible from one spot! This is an exciting tool for artists and fans to utilize to build new connections with each other and discover tons of new media."],
         });
 
+
     }
-    ngAfterViewInit(){
-
-
+    static validateEmail(control: FormControl){
+        if(control.value==''){
+            return { 'invalidemail': true };
+        }
+        if ( !control.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/)) {
+            return { 'invalidemail': true };
+        }
     }
 
     sendsocialinvite(){
@@ -376,5 +472,126 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
 
     }
 
+    ngAfterViewInit(): void {
+        setTimeout(() => this.signIn(), 1000);
+    }
+    signIn() {
+        gapi.load('auth2', () => {
+            this.auth2 = gapi.auth2.init({
+                client_id: '1036664457460-9o9ihhnjrnb3vqhklo72nu5mu7gbp84r.apps.googleusercontent.com',
+                cookie_policy: 'single_host_origin',
+                scope: 'profile email https://www.googleapis.com/auth/contacts.readonly'
+                // scope: 'profile email https://www.googleapis.com/auth/contacts.readonly'
+            });
+            this.auth2.attachClickHandler(document.getElementById('googleres'), {}, this.onSignIn, this.onFailure);
+        })
+    }
+    onFailure(data:any){
+        console.log('onFailure called');
+        console.log(data);
+    }
+    onSignIn = (data: any) => {
+
+       // setTimeout(() => this.fetchmail(), 1000);
+        this.handleAuthorization(data.Zi);
+        console.log('onSignIn');
+        console.log(data);
+        console.log(data.Zi);
+        //console.log(data.WE.Zi);
+    }
+
+    handleAuthorization(authorizationResult) {
+        if (authorizationResult && !authorizationResult.error) {
+            let link:any = "https://www.google.com/m8/feeds/contacts/default/thin?alt=json&access_token=" + authorizationResult.access_token + "&max-results=500&v=3.0";
+            this._http.get(link)
+                .subscribe(res=>{
+                    this.contactarray=[];
+                    //process the response here
+                    let response:any={};
+                    response = res;
+                    console.log('response.gd$email');
+                   /* console.log(response.feed.gd$email);
+                    console.log(response.feed.entry);
+                    console.log(response.feed);*/
+                    for(let v in response.feed.entry){
+                        console.log('response.feed.entry.gd$email');
+                        if(typeof (response.feed.entry[v].gd$email)!='undefined'){
+                            //console.log(response.feed.entry[v].gd$email[0].address);
+                            this.contactarray.push(response.feed.entry[v].gd$email[0].address);
+                        }
+                    }
+                    console.log('contactarray');
+                    console.log(this.contactarray);
+                    console.log(this.contactarray.length);
+                });
+                /*function(response){
+                    var contactarray=[];
+                    //process the response here
+                    console.log(response);
+                    console.log('response.gd$email');
+                    console.log(response.feed.gd$email);
+                    console.log(response.feed.entry);
+                    console.log(response.feed);
+                    for(var v in response.feed.entry){
+                        console.log('response.feed.entry.gd$email');
+                        if(typeof (response.feed.entry[v].gd$email)!='undefined'){
+                            //console.log(response.feed.entry[v].gd$email[0].address);
+                            contactarray.push(response.feed.entry[v].gd$email[0].address);
+                        }
+                    }
+                    console.log('contactarray');
+                    console.log(contactarray);
+                    console.log(contactarray.length);
+                });*/
+        }
+    }
+    fetchmail() {
+        console.log('fetchmail');
+        gapi.load('client:auth2', () => {
+            gapi.client.init({
+                apiKey: 'H1qzKV7Q8iUciTn8arwZPcti',
+                discoveryDocs: ['https://people.googleapis.com/$discovery/rest?version=v1'],
+                clientId: '1036664457460-9o9ihhnjrnb3vqhklo72nu5mu7gbp84r.apps.googleusercontent.com',
+                scope: 'profile email https://www.googleapis.com/auth/contacts.readonly'
+            }).then(() => {
+                return gapi.client.people.people.connections.list({
+                    resourceName:'people/me',
+                    personFields: 'emailAddresses,names'
+                });
+            }).then(
+                (res) => {
+                    console.log("Res: " + JSON.stringify(res));         // to debug
+                    this.userContacts.emit(this.transformToMailListModel(res.result));
+                },
+                error => console.log("ERROR " + JSON.stringify(error))
+            );
+        });
+    }
+    transformToMailListModel(item:any){
+        return item;
+    }
+
+
+
+    /*for google contacts api service*/
+
+    getcontacts(){
+        if(this.dataForm.controls['socialcontact'].value == 'gmail'){
+            console.log('gapi-------------------------');
+            console.log(gapi);
+            setTimeout(()=>{
+                this.signIn();
+            },2000);
+            if(this.contactarray == null || this.contactarray.length == 0){
+                this.checkemail = 1;
+            }
+
+        }
+    }
+    /*functions to access google contacts*/
+
+
+
 
 }
+

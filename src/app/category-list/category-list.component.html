@@ -1,0 +1,79 @@
+
+<!-- load header -->
+<app-adminheader></app-adminheader>
+
+<div class="container-fluid dashboard_body">
+  <div class="row rowmaindiv">
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 dashboard_left">
+      <!-- load left menu -->
+      <app-adminleft></app-adminleft>
+    </div>
+
+    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12 dashboard_right">
+      <div class="dashboard_right_wrapper">
+        <div class="dashboard1_div1 adminlisttable">
+          <div class="n-adminheadercls">
+            <h4>Category Management</h4>
+          </div>
+
+          <div class="dashboardwrapper">
+            <div class="tabletopbar newtabletopbar">
+              <div class="pull-right">
+                <form action="" method="get">
+                  <ul>
+                    <li>
+                      <a href="javascript:void(0)" class="loginbtn2" (click)="openAddModal(addOrEditCategory)"><i class="fa fa-plus"></i> Add Category</a>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+
+            <div class="tabcontentwrapper">
+              <div class="adminlisttable adminlisttabledashboard">
+                <div class="tablediv affiliatetree affidashboardbg2">
+                  <!-- load data list -->
+                  <lib-listing class="formfilterdiv" *ngIf="categoryListArray!=null && categoryListArray.length>0"
+                               [datasource]="categoryListArray"
+                               [skip]="categoryListArray_skip"
+                               [modify_header_array]=" categoryListArray_modify_header"
+                               [sourcedata]="categoryTableName"
+                               [statusarr]="categoryVisibleArray"
+                               jwttoken="jwtToken" 
+                               [apiurl]="apiUrl"
+                               [updateendpoint]="updateurl"
+                               [editroute]="editUrl"
+                               [deleteendpoint]="deleteval"></lib-listing>
+                </div>
+              </div>
+              <div class="tabcontentwrapperoverlay"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+
+<!-- load footer -->
+<app-adminfooter></app-adminfooter>
+
+<!-- load delete modal -->
+<ng-template #template>
+  <div class="modal-body text-center modalcls">
+    <p>Are you sure to delete this admin?</p>
+    <div class="text-center">
+      <button type="button" class="btnedit" (click)="confirm()" >Yes</button>
+      <button type="button" class="btndelete" (click)="decline()" >No</button>
+    </div>
+  </div>
+</ng-template>
+
+<!-- add new category modal modal -->
+<ng-template #addOrEditCategory>
+  <div class="modal-body text-center modalcls n-modalcls">
+    <app-category-add [id]="categoryId"></app-category-add>
+  </div>
+</ng-template>
+<!-- <button *ngIf="router.url.indexOf('category-edit')>1" (click)="openAddModal(addOrEditCategory)"></button> -->

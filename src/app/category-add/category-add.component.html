@@ -1,0 +1,76 @@
+<div class="formnewpopupheader">
+    <h4>{{ formHeader }}</h4>
+</div>
+  
+<div class="dashboard1form formnewpopup">
+    <form class="example-form" [formGroup]="addCategoryForm" (ngSubmit)="addCategoryProcess()">
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left">
+                <label>*Title</label>
+            </div>
+
+            <div class="col-md-8">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Category title" formControlName="title">
+                </mat-form-field>
+                <div style="color: red;" *ngIf="addCategoryFormSubmited && addCategoryFormValidate.title.errors" class="invalid-feedback">
+                    <div *ngIf="addCategoryFormValidate.title.errors.required">Title field is required.</div>
+                    <div *ngIf="addCategoryFormValidate.title.errors.maxlength">Title field cannot contain more than 60 characters!</div>
+                </div>
+                <mat-checkbox formControlName="visible">visible!</mat-checkbox>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left">
+                <label>*Parent category</label>
+            </div>
+            <div class="col-md-8" class="example-full-width">
+                <mat-form-field>
+                    <select matNativeControl formControlName="parentCategory">
+                        <option value="0">Select parent category</option>
+                        <option *ngFor="let category of categoryList" value="{{ category._id }}">{{ category.title }}</option>
+                    </select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left">
+                <label>*Sort number</label>
+            </div>
+            <div class="col-md-8">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Sort number" formControlName="sortNumber">
+                </mat-form-field>
+                <div style="color: red;" *ngIf="addCategoryFormSubmited && addCategoryFormValidate.sortNumber.errors" class="invalid-feedback">
+                    <div *ngIf="addCategoryFormValidate.sortNumber.errors.required">Sort field is required.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-4 control-label text-left">
+                <label>*Category description</label>
+            </div>
+            <div class="col-md-8">
+                <mat-form-field class="example-full-width">
+                    <textarea matInput placeholder="Category description" formControlName="description"></textarea>
+                </mat-form-field>
+                <div style="color: red;" *ngIf="addCategoryFormSubmited && addCategoryFormValidate.description.errors" class="invalid-feedback">
+                    <div *ngIf="addCategoryFormValidate.description.errors.required">Description field is required.</div>
+                    <div *ngIf="addCategoryFormValidate.description.errors.maxlength">Description field cannot contain more than 500 characters!</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button mat-button>{{ buttonTitle }}</button>
+            </div>
+            <div class="col-md-6">
+                <button type="button" mat-button (click)="closeModal();">Close</button>
+            </div>
+        </div>
+    </form>
+</div>
