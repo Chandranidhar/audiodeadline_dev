@@ -1892,13 +1892,18 @@ Use it to make something cool, have fun, and share what you've learned with othe
         width: 960px;
         margin: 0 0 0 100px;
     }
-
+    .powerbysponsorwrapper .ticket_sale_newbanner_wrapper {
+        width: 760px;
+        margin: 0 0 0 100px;
+    }
     .ticket_sale_block2_wrapper {
         width: 960px;
         margin: 0;
         position: relative;
     }
-
+    .powerbysponsorwrapper .ticket_sale_newbanner_textcon h3 {
+        font-size: 28px;
+    }
     .ticket_sale_newbanner_textcon {
         width: 100%;}
 
@@ -1941,6 +1946,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
         width: 60%;
         font-size: 26px;
     }
+    .powerbysponsorwrapper .ticket_sale_newbanner_wrapper {
+        width: 700px;
+    }
+    .powerbysponsorwrapper .ticket_sale_newbanner_textcon h3 {
+        font-size: 26px;
+    }
 }
 
 @media only screen and (max-width: 1420px) {
@@ -1976,6 +1987,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
 
 }
 @media only screen and (max-width: 1400px) {
+    .powerbysponsorwrapper .ticket_sale_newbanner_wrapper {
+        width: 640px;
+    }
+    .powerbysponsorwrapper .ticket_sale_newbanner_textcon h3 {
+        font-size: 24px;
+    }
+
     .newhomeblock4{ border-top:none; margin-top: 0px;  background: url("../images/newhome_block4_bg_2.jpg") no-repeat top center; height: auto; background-size: cover; padding-top: 40px;}
 
     .newhomeblock3{ padding-bottom: 0px;}
@@ -2026,12 +2044,25 @@ Use it to make something cool, have fun, and share what you've learned with othe
 }
 
 @media only screen and (max-width: 1320px) {
+    .powerbysponsorwrapper .ticket_sale_newbanner_wrapper {
+        width: 550px;
+        margin: 0 0 0 100px;
+    }
+    .powerbysponsorwrapper .ticket_sale_newbanner_textcon h2 {
+        font-size: 40px;
+    }
+    .powerbysponsorwrapper .ticket_sale_newbanner_textcon h3 {
+        font-size: 20px;
+        line-height: normal;
+    }
     .asambassadorblock2 .txt6wrapperheader_as {margin-top: 20px; width: 75%;}
     .astextwrapper {left: 32%;}
     .asambassadorblock1 .videoWrapper_outer_as {width: 78%;}
 }
 
 @media only screen and (max-width: 1300px) {
+
+
     .newhomebanner_text h2 {
         width: 70%;
         font-size: 26px;
@@ -2080,6 +2111,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 }
 
 @media only screen and (max-width: 1199px) {
+
+
+    .powerbysponsorwrapper .ticket_sale_newbanner_wrapper {
+        width: 70%;
+        margin: 0 auto;
+    }
     .asambassadorblock1 .landingforminnerwrapper_as .btnbuyticket_as{display: flex; justify-content: center; align-items: center;}
     .asambassadorblock1 .landingformwrapper_as {margin-top: 35px;}
     .astextwrapper {left: 0;position: relative; transform: inherit; width: 100%; text-align: center; padding: 10px; top: 0;}
@@ -2270,6 +2307,39 @@ Use it to make something cool, have fun, and share what you've learned with othe
     .ticket_sale_block4_left .newhomeblock5_imgcon {width: 300px; margin: 15px auto;}
 }
 
+
+@media only screen and (max-width:767px) {
+    .powerbysponsorwrapper .ticket_sale_newbanner_textcon {
+        height: auto;
+    }
+
+    .powerbysponsorwrapper .ticket_sale_newbanner_wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .powerbysponsorwrapper {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        position: relative;
+        flex-wrap: wrap;
+    }
+
+    .powerbysponsorwrapper .powerbysponsorblock {
+        position: relative;
+        background-color: #bb2f2f;
+        padding: 20px 10px;
+        text-align: center;
+        flex: 1 100%;
+    }
+
+    .powerbysponsorwrapper .ticket_sale_newbanner {
+        height: auto;
+        background-size: cover;
+        flex: 1 100%;
+    }
+}
 
 @media only screen and (max-width:480px) {
     .kb_competition_block4 .kb_competition_block4_link {width: 96%;}

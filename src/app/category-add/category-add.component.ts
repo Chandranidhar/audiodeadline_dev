@@ -45,17 +45,17 @@ export class CategoryAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* sign up form validation */
+    /* category form validation */
     this.addCategoryForm = this.formBuilder.group({
       title:          [ null, [ Validators.required, Validators.maxLength(60) ] ],
       visible:        [ null, null ],
-      parentCategory: [ null, null ],
+      parentCategory: [ 0, null ],
       sortNumber:     [ null, [ Validators.required ] ],
       description:    [ null, [ Validators.maxLength(500) ] ]
     });
 
+    /* get category listing data */
     this.getCategoryData();
-   
   }
 
   get addCategoryFormValidate() { return this.addCategoryForm.controls; }
@@ -72,11 +72,9 @@ export class CategoryAddComponent implements OnInit {
       this.categoryList = result.res;
       this.loadinglist = false;
 
+      /* if get categoryId then get the category details and populate into the form */
       if(this.categoryId) {
         this.getCategoryDetails();
-      } else {
-        this.categoryId = null;
-        this.addCategoryFormReset();
       }
 
     }, error => {
@@ -90,16 +88,16 @@ export class CategoryAddComponent implements OnInit {
     let link = this.apiUrl + 'datalist';
     let data = { "source": "category", "condition": { "_id": this.categoryId } };
 
-    /* process to hit the server and get data */
+    /* process to hit the server and get single cataegory details */
     this._http.post(link, data).subscribe( response => {
       let result:any = response;
       this.categoryDataForEdit = result.res;
       this.addCategoryForm.patchValue({ 
-                            title: this.categoryDataForEdit[0].title,
-                            visible: this.categoryDataForEdit[0].visible,
+                            title:          this.categoryDataForEdit[0].title,
+                            visible:        this.categoryDataForEdit[0].visible,
                             parentCategory: this.categoryDataForEdit[0].parentid,
-                            description: this.categoryDataForEdit[0].description,
-                            sortNumber: this.categoryDataForEdit[0].sort_order,
+                            description:    this.categoryDataForEdit[0].description,
+                            sortNumber:     this.categoryDataForEdit[0].sort_order,
                           });
       this.loadinglist = false;
     }, error => {
@@ -123,14 +121,13 @@ export class CategoryAddComponent implements OnInit {
       var data = {
         "source": "category",
         "data": {
-            "visible": visible,
-            "title": formValue.title,
-            "description": formValue.description,
-            "parentid": formValue.parentCategory,
-            "sort_order": formValue.sortNumber,
-            "id": this.categoryId
+            "visible":      visible,
+            "title":        formValue.title,
+            "description":  formValue.description,
+            "parentid":     formValue.parentCategory,
+            "sort_order":   formValue.sortNumber,
+            "id":           this.categoryId
         },
-        
         "sourceobj":["parentid"]
       }
 
@@ -139,6 +136,7 @@ export class CategoryAddComponent implements OnInit {
         let result:any;
         result = response;
         if(result.status == 'success') {
+          this.getCategoryData();
           this.categoryListPage.modalRef.hide();
           this.router.navigate(['category-list']);
         } else {

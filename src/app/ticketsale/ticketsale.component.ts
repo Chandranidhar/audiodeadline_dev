@@ -58,6 +58,8 @@ export class TicketsaleComponent implements OnInit {
     public subtotal_after_promo:any = 9.95;
     public promotype:any = '';
     public disamount1:any=0;
+    public sponserurl: any;
+    public sponserimg: any;
 
     constructor(fb: FormBuilder,private _http: HttpClient, public _commonservices : Commonservices,private route:ActivatedRoute,private router: Router,private modalService: BsModalService, userdata: CookieService) {
 
@@ -67,7 +69,7 @@ export class TicketsaleComponent implements OnInit {
          console.log("this.userdata.get('user_id')");
          console.log(this.userdata.get('user_id'));*/
         console.log(this.userdata.get('user_id'));
-
+        this.getUserDetails();
 
         this.paymenterror = '';
         this.testmode = false;
@@ -879,5 +881,29 @@ if(this.route.snapshot.url[0].path!='ticket-sale' && this.route.snapshot.url[0].
         $('html, body').animate({
             scrollTop: $(".ticket_sale_block2form_block1").offset().top
         }, 1000);
+    }
+
+    getUserDetails(){
+        // var link =this.serverurl+'dashboard';
+        var link =this._commonservices.nodesslurl+'dashboardpost';
+        var data = {_id: this.userdata.get('user_id')};
+
+        this._http.post(link, data)
+            .subscribe(res => {
+
+                let result:any;
+                result = res;
+                if (result.status == 'success' && typeof(result.item) != 'undefined'){
+                    let userdet = result.item;
+                    this.sponserurl = userdet.sponserurl;
+                    this.sponserimg = userdet.sponserimage;
+                    console.log('this.sponserimg----');
+                    console.log(this.sponserimg);
+                    console.log('this.sponserurl-----');
+                    console.log(this.sponserurl);
+                }
+            },error => {
+                console.log("Oooops!");
+            });
     }
 }

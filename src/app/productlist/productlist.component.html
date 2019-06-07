@@ -23,43 +23,29 @@
                 </form>
               </div>
             </div>
+
             <div class="tabcontentwrapper">
               <div class="adminlisttable adminlisttabledashboard">
-                  <div class="tablediv">
-                    <table>
-                      <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Category</th>
-                        <th>Image</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr *ngFor="let item of productlist | namefilter : '' | paginate: { itemsPerPage: 10, currentPage: p }">
-                        <td>{{item.name}}</td>
-                        <td>{{item.category}}</td>
-                        <td><img style="width: 230px;" src="{{item.image}}"></td>
-                        <td>${{item.price}}</td>
-                        <td>
-                          <a *ngIf="item.status == 0" class="statusinactive" href="javascript:void(0)" (click)="cngstatus(item)">Inactive</a>
-                          <a *ngIf="item.status == 1" class="statusactive" href="javascript:void(0)" (click)="cngstatus(item)">Active</a>
-                        </td>
-                        <td>
-                          <a class="loginbtn2 btnedit" [routerLink]="['/edit-product',item._id]"><i class="fa fa-pencil"></i><span>Edit</span></a>
-                          <a href="javascript:void(0)" class="loginbtn2 btndelete" (click)="openDelModal(template,item)"><i class="fa fa-close"></i><span>Delete</span></a>
-                        </td>
-                      </tr>
-                      <tr *ngIf="!(productlist | namefilter : '').length && !loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</td></tr>
-                      <tr *ngIf="loadinglist"><td colspan="25" style="color: #ee680f; padding: 16px; text-align: center;"><img src="../../assets/images/loader.gif" style="width: 100px;"></td></tr>
-                      </tbody>
-                    </table>
-                    <pagination-controls  *ngIf="(productlist | namefilter : '').length" (pageChange)="p = $event" maxSize="9" autoHide="true" responsive="true" class="my-pagination"></pagination-controls>
-                  </div>
-                </div>
+                <div class="tablediv affiliatetree affidashboardbg2">
+
+                  <lib-listing class="formfilterdiv" *ngIf="productlist !=null && productlist.length > 0"
+                    [datasource]="productlist"
+                    [skip]="libList.productListArray_skip"
+                    [modify_header_array]="libList.productListArray_modify_header"
+                    [sourcedata]="libList.productTableName"
+                    [statusarr]="libList.productStatusArray"
+                    jwttoken="jwtToken" 
+                    [apiurl]="apiUrl"
+                    [updateendpoint]="libList.updateurl"
+                    [editroute]="libList.editUrl"
+                    [deleteendpoint]="libList.deleteval"
+                    [date_search_source]="libList.date_search_source"
+                    [date_search_endpoint]="libList.date_search_endpoint"
+                    [search_settings]="libList.search_settings"
+                    [emailarray]="libList.emailarray"></lib-listing>
+
               </div>
+            </div>
           </div>
         </div>
       </div>

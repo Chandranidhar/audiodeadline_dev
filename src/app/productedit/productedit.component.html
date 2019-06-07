@@ -9,26 +9,174 @@
         <div class="dashboard1_div1">
           <h4> Edit Product</h4>
           <div class="dashboard1form">
-            <form name="dataForm" novalidate [formGroup]="dataForm" (ngSubmit)="dosubmit(dataForm.value)">
-              <div *ngIf="is_error" class="singleerror">{{is_error}}</div>
-              <div class="form-group">
-                <label>Name*:</label>
-                <input type="text" class="form-control" name="name" placeholder="Name*" [formControl]="dataForm.controls['name']">
-                <span *ngIf ="dataForm.controls['name'].touched && !dataForm.controls['name'].valid" class="has-error"> Name field can not be blank</span>
-              </div>
-              <div class="form-group">
-                <label>Description*:</label>
-                <textarea class="form-control" name="description" placeholder="Description*" [formControl]="dataForm.controls['description']"></textarea>
-                <span *ngIf ="dataForm.controls['description'].touched && !dataForm.controls['description'].valid" class="has-error"> Description field can not be blank</span>
-              </div>
-              <div class="form-group">
-                <label>Price*:</label>
-                <input type="text" class="form-control" name="price" placeholder="Price*" [formControl]="dataForm.controls['price']">
-                <span *ngIf ="dataForm.controls['price'].touched && dataForm.controls['price'].hasError('blankprice')" class="has-error"> Price field can not be blank</span>
-                <span *ngIf ="dataForm.controls['price'].touched && dataForm.controls['price'].hasError('invalidprice')" class="has-error"> Price contain only numeric value</span>
-              </div>
-              <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
-            </form>
+              <form [formGroup]="editProductForm" (ngSubmit)="updateProductFormSubmit()">
+
+                <div class="row">
+                  <!-- Product name -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Name*:</label>
+                      <mat-form-field>
+                          <input class="form-control" matInput placeholder="Product name" formControlName="name">
+                      </mat-form-field>
+  
+                      <!-- name error message -->
+                      <div style="color: red;" *ngIf="editProductFormValidate.name.touched && editProductFormValidate.name.errors" class="invalid-feedback">
+                          <div *ngIf="editProductFormValidate.name.errors.required">Title field is required.</div>
+                          <div *ngIf="editProductFormValidate.name.errors.maxlength">Title field cannot contain more than 100 characters!</div>
+                      </div>
+                    </div>    
+                  </div>
+                  <!-- Product name end -->
+  
+                  <!-- Category -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Category*:</label>
+                      <mat-form-field>
+                          <select matNativeControl formControlName="category">
+                              <option value="">Select parent category</option>
+                              <option *ngFor="let category of categoryList" value="{{ category._id }}">{{ category.title }}</option>
+                          </select>
+                      </mat-form-field>
+  
+                      <!-- Category error message -->
+                      <div style="color: red;" *ngIf="editProductFormValidate.category.touched && editProductFormValidate.category.errors" class="invalid-feedback">
+                          <div *ngIf="editProductFormValidate.category.errors.required">Title field is required.</div>
+                      </div>
+                    </div>    
+                  </div>
+                  <!-- Category end -->
+                </div>
+  
+                <div class="row">
+                  <!-- featured image -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Featured image*:</label>
+  
+                      <input type="file" class="form-control" formControlName="featuredImage" accept="image/*" />
+                      
+                      <!-- Price error message -->
+                      <div style="color: red;" *ngIf="editProductFormValidate.featuredImage.touched && editProductFormValidate.featuredImage.errors" class="invalid-feedback">
+                          <div *ngIf="editProductFormValidate.featuredImage.errors.required">Please select Featured Image.</div>
+                      </div>
+                    </div>    
+                  </div>
+                  <!-- featured image end -->
+  
+                  <!-- others image -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Others images*:</label>
+  
+                      <input type="file" class="form-control" formControlName="othersImage" accept="image/*" />
+                      
+                      <!-- Price error message -->
+                      <div style="color: red;" *ngIf="editProductFormValidate.othersImage.touched && editProductFormValidate.othersImage.errors" class="invalid-feedback">
+                          <div *ngIf="editProductFormValidate.othersImage.errors.required">Please select others image.</div>
+                      </div>
+                    </div>    
+                  </div>
+                  <!-- others image end -->
+                </div>
+  
+                <!-- Product description -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Description*:</label>
+  
+                      <mat-form-field class="example-full-width">
+                          <textarea matInput placeholder="Product description" class="form-control" formControlName="description"></textarea>
+                      </mat-form-field>
+                      
+                      <!-- Product description error message -->
+                      <div style="color: red;" *ngIf="editProductFormValidate.description.touched && editProductFormValidate.description.errors" class="invalid-feedback">
+                          <div *ngIf="editProductFormValidate.description.errors.required">Description field is required.</div>
+                          <div *ngIf="editProductFormValidate.description.errors.maxlength">Description field cannot contain more than 1000 characters!</div>
+                      </div>
+                    </div>    
+                  </div>
+                </div>
+                <!-- Product description end -->
+  
+                <!-- Product price -->
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label>Price*:</label>
+  
+                      <mat-form-field class="example-full-width">
+                          <input type="number" matInput placeholder="Product price" class="form-control" formControlName="price">
+                      </mat-form-field>
+                      
+                      <!-- Price error message -->
+                      <div style="color: red;" *ngIf="editProductFormValidate.price.touched && editProductFormValidate.price.errors" class="invalid-feedback">
+                          <div *ngIf="editProductFormValidate.price.errors.required">Price field is required.</div>
+                          <div *ngIf="editProductFormValidate.price.errors.max">Price value not more than 1 Billion!</div>
+                      </div>
+                    </div>    
+                  </div>
+                </div>
+                <!-- Product price end -->
+  
+                <!-- Attribute -->
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Attribute*:</label>
+  
+                      <mat-form-field>
+                          <select matNativeControl formControlName="attribute" (change)="changeAttribute()">
+                              <option value="">-- Select --</option>
+                              <option value="size">Size</option>
+                              <option value="color">Color</option>
+                          </select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+  
+                  <ng-container *ngIf="showDiv">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder=" Value" formControlName="attributeValue">
+                        </mat-form-field>
+  
+                        <button type="button" mat-button (click)="addAttribute()">Save</button>
+                      </div>
+                    </div>
+                  </ng-container>
+                </div>
+                <!-- Attribute end -->
+  
+                <!-- attributes added list -->
+                <div class="row" *ngIf="attributes != null && attributes.length > 0">
+                  <div class="col-md-6">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let attribute of attributes; let i = index">
+                            <td>{{ attribute.name }}</td>
+                            <td>{{ attribute.value }}</td>
+                            <td><button type="button" mat-button (click)="deleteAttribute(i)">Delete</button></td>
+                          </tr>
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+                <!-- attributes added list end -->
+  
+                <input type="submit" name="submit" value="SUBMIT" class="loginbtn2">
+              </form>
+
           </div>
         </div>
       </div>

@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
     public dataForm: FormGroup;
     public fb;
     public userlist: any=[];
+    public newuserlist:any=[];
     grab_link: any = [
         {
             col_name: 'grab_url',
@@ -43,13 +44,13 @@ export class DashboardComponent implements OnInit {
 
     datasource:any;
     ambassadorlistarray:any=[];
-    ambassadorlistarray_skip:any=["_id","grab_url", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
+    ambassadorlistarray_skip:any=["_id","grab_url", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","children"];
     ambassadorlistarray_modify_header:any={'added time':"Date Added",'firstname':"First Name",'email':'Email','lastname':'Last Name','parent':'Enroller'};
     // tablename:'user';
     ambassadortablename:'user_ambassador';
     ambassadorstatusarray:any=[{val:1,name:'Active'},{val:2,name:'Inactive'}];
     affiliatelistarray:any[];
-    affiliatelistarray_skip:any=["_id","grab_url", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
+    affiliatelistarray_skip:any=["_id","grab_url", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","children"];
     affiliatelistarray_modify_header:any={'added time':'Date Added','firstname':'First Name','lastname':'Last Name','email':'email','parent':'Enroller'};
     affiliateliststatusarray:any=[{val:1,name:'Active'},{val:2,name:'Inactive'}];
     affiliatetablename:'user_affiliate';
@@ -97,6 +98,7 @@ export class DashboardComponent implements OnInit {
         this.ambassadorlist();
         this.affiliatelist();
         this.getUserList();
+        this.dashboarduserlist();
 
     }
 
@@ -155,6 +157,86 @@ export class DashboardComponent implements OnInit {
                 console.log("Oooops!");
             });
     }
+    dashboarduserlist(){
+        var link=this._commonservices.nodesslurl+'datalist';
+        this._http.post(link,({"source":"all_users"}))
+            .subscribe(res=>{
+                let result:any;
+                result=res;
+                //console.log('dashboarduserlist');
+                console.log(result);
+                this.newuserlist=result.res;
+                console.log(this.newuserlist);
+            })
+    }
+    cngChk(ev, item, type) {
+        var tval = 0;
+        var utype = type;
+        if (ev.target.checked) {
+            tval = 1;
+        }
+
+        var link = this._commonservices.nodesslurl1 + 'newchangerole';
+        var data = {_id: item._id, type: utype, tval: tval};
+        this._http.post(link, data)
+            .subscribe(res => {
+                let result:any;
+                result = res;
+                if (result.status == 'success') {
+                    if (utype == 'musicians')
+                        item.musicians = tval;
+                    if (utype == 'dancer')
+                        item.dancer = tval;
+                    if (utype == 'model')
+                        item.model = tval;
+                    if (utype == 'producer')
+                        item.producer = tval;
+
+                    if (item.musicians == 1 || item.dancer == 1 || item.model == 1 || item.producer ==1) {
+                        this.cngChk2(item, 0);
+                    }
+                    if (item.musicians == 0 && item.dancer == 0 && item.model == 0 || item.producer ==0) {
+                        this.cngChk2(item, 1);
+                    }
+
+
+                }
+            }, error => {
+                console.log("Oooops!");
+            });
+    }
+
+    cngChk2(item, tval) {
+        var link = this._commonservices.nodesslurl1 + 'newchangerole';
+        var data = {_id: item._id, type: 'fan', tval: tval};
+        this._http.post(link, data)
+            .subscribe(res => {
+                let result:any;
+                result = res;
+                if (result.status == 'success') {
+                    item.fan = tval;
+                    console.log('success');
+                }
+            }, error => {
+                console.log("Oooops!");
+            });
+    }
+    cngstatus(item) {
+        var status = 1;
+        if (typeof (item.status) != 'undefined')
+            status = 1 - parseInt(item.status);
+        var link = this.serverurl + 'cngstatus';
+        var data = {_id: item._id, status: status};
+
+        this._http.post(link, data)
+            .subscribe(res => {
+                item.status = status;
+            }, error => {
+                console.log("Oooops!");
+            });
+    }
+
+
     ambassadorlist() {
         let link = this._commonservices.nodesslurl + 'datalist';
         // this._http.post(link,{"source":this.tablename,"condition":{"username":"banetest"}})

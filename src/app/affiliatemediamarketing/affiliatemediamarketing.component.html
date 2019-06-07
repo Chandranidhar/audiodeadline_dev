@@ -242,10 +242,11 @@
                                       <option value="gmail">Gmail</option>
                                       <option value="yahoo">Yahoo</option>
                                     </select>
-                                    <span class="has-error"> *select field can not be blank</span>
+                                    <!--<span class="has-error"> *select field can not be blank</span>-->
                                     <button class="btnred googleContactsButton" name="getcontacts" id="googleres" (click)="getcontacts()">get contacts</button>
                                   </div>
-                                  <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                                  <!--social media services-->
+                                  <!--<div class="form-group col-md-6 col-sm-12 col-xs-12">
                                     <label>INVITE FRIENDS VIA SOCIAL MEDIA</label>
                                     <select class="form-control" name="type" [formControl]="dataForm.controls['socialinvite']">
                                       <option value="" selected>Select Service</option>
@@ -257,7 +258,7 @@
                                     <span class="has-error" *ngIf="socialmediaerror==1"> *select field can not be blank</span>
 
                                     <button class="btnred" name="getcontacts" (click)="sendsocialinvite()">send social invite</button>
-                                  </div>
+                                  </div>-->
                                 </div>
                                 <div class="form-row">
                                   <div class="form-group col-md-6 col-sm-12 col-xs-12">
@@ -278,8 +279,8 @@
                                         <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                                           Please enter a valid email address
                                         </mat-error>
-                                        <mat-error *ngIf="emailFormControl.hasError('required')">
-                                          Email is <strong>required</strong>
+                                        <mat-error *ngIf="emailFormControl.hasError('required') && emailFormControl.touched == true">
+                                          Email is <strong>required</strong>!
                                         </mat-error>
                                       </mat-chip-list>
                                     </mat-form-field>

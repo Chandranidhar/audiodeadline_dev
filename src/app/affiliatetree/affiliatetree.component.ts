@@ -48,6 +48,7 @@ export class AffiliatetreeComponent implements OnInit {
 
       /*for tree view.. fields are nothing but those fieldnames which will be added in route of affiliate-tree*/
       this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'https://development.audiodeadline.com/affiliate-tree'};
+      // this.custombutton={label:'my tree',fields:['username','fullname','children'],url:'localhost:4200/affiliate-tree'};
     }
 
   }

@@ -30,7 +30,7 @@ export class AffiliatedashboardComponent implements OnInit {
     public FB_APP_SECRET;
     public LI_CLIENT_ID;
     public LI_CLIENT_SECRET;
-
+    url:any
     public randomstr;
     public fb_access_token;
     public fbimg;
@@ -57,14 +57,14 @@ export class AffiliatedashboardComponent implements OnInit {
     public commisionlist:any = [];
     public commisiontablename:any='commission_details';
 
-        public commisionlist_skip:any=['_id','added_time','amount','commission','firstname','lastname',''];
+        public commisionlist_skip:any=['_id','added_time','amount','commission','firstname','lastname','added_time'];
     public commision_modify_header:any={'orderid':' Order ID','username':'Name','tier':'Commision Tier','total':'Total($)'};
 
-    public afforderlist_skip:any=["address","affiliate","city","discount","firstname","lastname","media","orderdetails","phone","productid","productname","shipping","sponsor","state","subtotal","tax","useremail","userid","userphone","zip","_id"];
+    public afforderlist_skip:any=["address","affiliate","city","discount","firstname","lastname","media","orderdetails","phone","productid","productname","shipping","sponsor","state","subtotal","tax","useremail","userid","userphone","zip","_id","time"];
     public afforderlist_modify_header:any={'added_time':"Date/Time ",'fullname':"Name",'email':'Email','mode':'Mode','productname':'Product','promocode':'Promo','quantity':'Quantity','total':'Total'};
     public ordertablename:any="order_view";
     public tablename:any="user";
-    public affunderme_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate", "parent", "admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission"];
+    public affunderme_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate", "parent", "admin", "status", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime"];
     public affunderme_modify_header:any={'added time':"Date Added",'firstname':"First Name",'email':'Email','lastname':'Last Name'};
     public selectedFile:any;
     public tempUploadFilename:any;
@@ -76,7 +76,8 @@ export class AffiliatedashboardComponent implements OnInit {
     public flag:any=0;
     modalRef: BsModalRef;
     modalRef1: BsModalRef;
-
+     public bloglist:any=[];
+    userdetail:any;
 
 
     constructor(private _http: HttpClient, private router: Router, userdata: CookieService, private _commonservices: Commonservices, public activeRoute:ActivatedRoute,private modalService: BsModalService){
@@ -103,6 +104,7 @@ export class AffiliatedashboardComponent implements OnInit {
         let userdata2: any;
         userdata2= userdata.get('userdetails');
         userdata2 = JSON.parse(userdata2);
+        this.userdetail=userdata2;
         if (typeof (userdata2) == 'undefined'){
             this.router.navigateByUrl('/login');
         }
@@ -122,6 +124,7 @@ export class AffiliatedashboardComponent implements OnInit {
             this.getBannerList();*/
            this.getafflist();
            this.getCommisionList();
+            this.affiliatebloglist();
         }
     }
 
@@ -140,11 +143,7 @@ export class AffiliatedashboardComponent implements OnInit {
                 this.afforderlist.push(result.res[i]);
             }*/
            this.afforderlist = result.res;
-
             console.log(this.afforderlist);
-
-
-
         });
     }
     decline(): void {
@@ -162,6 +161,23 @@ export class AffiliatedashboardComponent implements OnInit {
                 this.affunderme = result.res;
 
             });
+    }
+    affiliatebloglist(){
+        let link = this._commonservices.nodesslurl+'datalist';
+        this._http.post(link,({"source": "blogview","condition":{}}))
+            .subscribe(res=>{
+                let result:any ;
+                result = res;
+                this.bloglist = result.res;
+                for(let i in result.res){
+                    if(this.userdetail.signupaffiliate == 1 && result.res[i].signupaffiliate==1){
+                        this.bloglist.push(result.res[i]);
+                    }
+
+                }
+
+            });
+
     }
 
     getCommisionList(){

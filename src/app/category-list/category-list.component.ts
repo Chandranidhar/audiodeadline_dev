@@ -28,8 +28,8 @@ export class CategoryListComponent implements OnInit {
   categoryListArray:any = [];
   datasource:any;
   categoryTableName:any='category'
-  categoryListArray_skip:any = [ "created_at", "sort_order8", "_id" ];  
-  categoryListArray_modify_header:any = { "title": "Title", "description": "Description", "visible": "Visible", "sort_order": "Order", "parent": "Parent" };
+  categoryListArray_skip:any = [ "visible", "created_at", "sort_order8", "_id" ];  
+  categoryListArray_modify_header:any = { "title": "Title", "description": "Description", "visibility": "Visibility", "sort_order": "Order", "parent": "Parent" };
   admintablenameTableName:any = 'user';
   updateurl:any = 'addorupdatedata';
   editUrl: any = 'category-edit';
@@ -37,6 +37,20 @@ export class CategoryListComponent implements OnInit {
   jwtToken:any;
   deleteval:any = 'deletesingledata';
   categoryVisibleArray:any = [{ val: 1, name: 'Visible' }, { val: 0, name: 'Not Visible' }];
+
+  
+  /* lib list search setting */
+  date_search_source: any='categorylist_view';
+  date_search_endpoint: any='datalist';
+  emailarray: any = [
+    { val: 'Yes', name: 'Visible'},
+    { val: 'No', name: 'Not Visible'},
+  ];
+  search_settings:any = { 
+                          selectsearch: [{ label:'Search By Visibility', field:'visibility', values:this.emailarray }],
+                          textsearch:   [{ label:"Search", field:'title' }]
+                        };
+
 
   constructor( public Router: Router, public _commonservices: Commonservices, private _http: HttpClient, private modalService: BsModalService, public activeRoute: ActivatedRoute, userdata: CookieService ) {
     this.userData   = userdata;

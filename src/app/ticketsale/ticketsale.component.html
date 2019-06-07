@@ -1,15 +1,26 @@
 <app-header></app-header>
 
-
-<div class="ticket_sale_newbanner">
-    <div class="ticket_sale_newbanner_wrapper">
-        <div class="ticket_sale_newbanner_textcon">
-            <h2>BY PURCHASING TICKETS</h2>
-            <h3>BEFORE <span>July 1st, 2019</span>, YOU WILL GET A CHANCE TO WIN AN ALL-EXPENSE PAID TRIP TO LOS ANGELES, CA,
-                TO BE ON THE AUDIODEADLINE SHOW! </h3>
+<div class="powerbysponsorwrapper">
+    <div class="powerbysponsorblock" *ngIf="sponserimg!='' && sponserurl!=''">
+        <div class="powerbysponsorblockinner">
+            <h1>Powered by </h1>
+            <div class="powerbysponsorblocklogowrapper"><img src="{{_commonservices.fileurl_new}}{{sponserimg}}"></div>
+            <!--<div class="powerbysponsorblocklogowrapper"><img src="../../assets/images/sponsnewlogo1.jpg"></div>-->
+            <a class="btnred" name="getcontacts" target="_blank"  href="{{sponserurl}}">Know More <i class="fa fa-angle-double-right"></i></a>
         </div>
     </div>
+    <div class="ticket_sale_newbanner">
 
+        <div class="ticket_sale_newbanner_wrapper">
+
+            <div class="ticket_sale_newbanner_textcon">
+                <h2>BY PURCHASING TICKETS</h2>
+                <h3>BEFORE <span>July 1st, 2019</span>, YOU WILL GET A CHANCE TO WIN AN ALL-EXPENSE PAID TRIP TO LOS ANGELES, CA,
+                    TO BE ON THE AUDIODEADLINE SHOW! </h3>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <div class="ticket_sale_block2 asticket_sale_block2">

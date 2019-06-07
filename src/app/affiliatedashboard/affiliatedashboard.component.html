@@ -313,14 +313,35 @@
                     </div>
                   </form>
                 </div>-->
-                <div class="row">
-                  <div class="col-md-12">
+                <div class="row" >
+                  <div class="col-md-12" >
                     <div class="tablediv affidashboardwhatsnew">
                       <div class="n-affidashboardwhatsnewheadercls text-center">
                         <h2>What’s New?</h2>
                       </div>
-                      <ul>
-                        <li>
+                      <ul *ngIf="bloglist!=null || bloglist.length>0">
+                        <li  *ngFor="let item of bloglist | slice:0:3">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h1>{{item.title}}</h1>
+                              <p class="affidashboardwhatsnewpara">
+                                <span>{{item.parentname}}</span>
+                                <span>{{_commonservices.unixtodatetimeConverter(0,item.added_time)}}</span>
+                              </p>
+                              <!--<p>Are you ready to witness our first competition show live?! Artist are bringing their A-game to start preparing for this unique viewer experience. We go Live June 1st, 2019! Don’t forget to indulge yourself in to the artist community on ArtistXP.com and vote for your favorite artists that you would love to see go head on into this 8-hour collaboration right in front of your eyes!....<span class="txtred"><a href="javascript">Read More</a></span></p></div>-->
+                              <!--<p>{{item.description}}&lt;!&ndash;....<span class="txtred"><a href="javascript">Read More</a></span>&ndash;&gt;</p></div>-->
+                              <div class="affidashboardwhatsnewparap"  [innerHTML]="item.description | safehtml:300"></div></div>
+                          </div>
+
+                        </li>
+                       <!-- <li *ngIf="!(bloglist)">
+                          <div class="row">
+                            <div class="col-md-12" style="color: #ee680f; padding: 16px; text-align: center;">No Record Found</div>
+                          </div>
+                        </li>-->
+                      </ul>
+                    <!--  <ul>
+                       &lt;!&ndash; <li>
                           <div class="row">
                             <div class="col-md-12">
                               <h1>Competitions Are Coming!</h1>
@@ -328,7 +349,7 @@
                               <div class="affidashboardwhatsnewparap"><p>Are you ready to be apart of our first competition show live?! Artist will need to bring their A-game to start preparing for this unique artist experience. We go Live June 1st, 2019! Don’t forget to indulge yourself in to the artist community on ArtistXP.com and show your fans all that you have to offer! Sign-up now....<span class="txtred"><a href="javascript">Read More</a></span></p></div>
                             </div>
                           </div>
-                        </li>
+                        </li>&ndash;&gt;
                         <li>
                           <div class="row">
                             <div class="col-md-12">
@@ -339,7 +360,7 @@
                              </div>
                           </div>
                         </li>
-                        <li>
+                       &lt;!&ndash; <li>
                           <div class="row">
                             <div class="col-md-12">
                               <h1>Competitions Are Coming!</h1>
@@ -349,8 +370,8 @@
                               </div>
                             </div>
                           </div>
-                        </li>
-                      </ul>
+                        </li>&ndash;&gt;
+                      </ul>-->
                       <div class="text-center">
                         <a [routerLink]="['/upcomingevents']" target="_blank" class="btn adminbtnred">View All Blogs</a>
                       </div>

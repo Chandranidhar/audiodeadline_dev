@@ -214,8 +214,8 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
             emailcontact: ["", AffiliatemediamarketingComponent.validateEmail],
             /* emailcontact:  ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],*/
             /*phoneno: ["", Validators.required],*/
-            audiodeadlinemsg: ["Can you imagine what it would be like to be in the room with Jimi Hendrix or The Beatles while they were making their music? With our brand-new show, AudioDeadline, we are going to give you front row seats to the action so that you can experience firsthand the intimate journey that an artist goes through creating a song from beginning to end. We are giving more opportunities for recording artists to fulfill their dreams of working in a real sound studio and possibly become famous. They will only have 8 hours to collaborate and come up with a completely new song that everyone will love. Will they be able to pull it off or will they fall flat?"],
-            artistxpmsg: ["Be part of the movement that unites musicians, music lovers, and anyone who appreciates artistry together to create new relationships centered around performing art. ArtistXP is a new social media website that invites recording artists, dancers, models, and fans to come together and connect with one another on a single platform. ArtistXP.com is the place to combine all your other social media accounts – including your music ones. Facebook, Instagram, Twitter, SoundCloud, YouTube, ReverbNation, and several others offer plugins that are now all accessible from one spot! This is an exciting tool for artists and fans to utilize to build new connections with each other and discover tons of new media."],
+            audiodeadlinemsg: ["I just found an awesome online streaming show that I think you would be interested in! It is based on a quarterly live streamed show that will showcase artists of all kinds such as, musicians, dancers, producers, and rappers. The artists go head to head in a competition where they show their best work and we get to vote on our favorite artist! When the best of the best is picked by the community, we get to watch them go head to head and collaborate on an original song that they will have only 8-hours to complete! This is a chance to see artists in live action in a real time studio making their creativity come to life. Don’t miss out and check it out now!"],
+            artistxpmsg: ["Come join ArtistXP with me! I just joined this new social media that is full of fun and exciting features that I think you would enjoy too! They are all about a tight knit artist community where independent artists are even closer to their fans than ever before. As an artist you will be able to consolidate where all your work is located no matter what social media you use the most. They can do artist exchanges where it promotes all artists to work together by sharing each other’s artistry! As a fan we have front row seats to watch their creativity bloom. There is so much more it has to offer; all you need to do is come join me in this amazing community. Check it out now!"],
         });
 
 
@@ -581,6 +581,7 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
             console.log(gapi);
             setTimeout(()=>{
                 this.signIn();
+
             },2000);
             if(this.contactarray == null || this.contactarray.length == 0){
                 this.checkemail = 1;

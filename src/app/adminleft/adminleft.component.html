@@ -163,8 +163,8 @@
     <a [routerLink]="['/upcomingevents']">Blogs</a>
   </li>
 
-  <li [ngClass]="router.url === '/commission-list' ? 'dashboardcls' : ''">
-    <a [routerLink]="['/commission-list']" *ngIf="userdetails.admin == 1 || userdetails.signupaffiliate==1">Commission List</a>
+  <li *ngIf="userdetails.admin == 1 || userdetails.signupaffiliate==1" [ngClass]="router.url === '/commission-list' ? 'dashboardcls' : ''">
+    <a [routerLink]="['/commission-list']" >Commission List</a>
   </li>
 
   <li class="dropdown" *ngIf="userdetails.admin == 1" [ngClass]="router.url === '/event-list' ? 'dashboardcls' : ''">
@@ -176,7 +176,7 @@
   <li [ngClass]="router.url === '/my-account' ? 'dashboardcls' : ''"><a [routerLink]="['/my-account']">My Account</a></li>
   <li [ngClass]="router.url === '/savedcards' ? 'dashboardcls' : ''"><a [routerLink]="['/savedcards']">Saved Cards</a></li>
 
-  <li><a href="javascript:void(0)" (click)="logout()">Log out </a></li>
+  <li><a (click)="logout()">Log out </a></li>
 
 </ul>
 

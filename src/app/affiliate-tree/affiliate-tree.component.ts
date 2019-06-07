@@ -70,17 +70,25 @@ export class DynamicDatabase implements OnInit {
 
   isExpandable(node: string): boolean {
     //return this.dataMap.has(node);
-    return true;
+    console.log('isexpandable');
+    // console.log(this.isExpandable(node));
+    console.log(node);
+    let tempnode:any=node;
+    if(tempnode.children == 0){             // if there is no child in tree
+      return false;
+    }else
+      return true;
   }
 }
 
 
 @Injectable()
 export class DynamicDataSource {
-  public userdata: CookieService;
+
   public serverurl;
   public apiurl;
   public jwttoken;
+  public userdetails;
   public arrval:any=[];
 
   dataChange = new BehaviorSubject<DynamicFlatNode[]>([]);
@@ -92,10 +100,14 @@ export class DynamicDataSource {
   }
 
   constructor(private treeControl: FlatTreeControl<DynamicFlatNode>,
-              private database: DynamicDatabase,public _commonservices: Commonservices,public _http: HttpClient) {
+              private database: DynamicDatabase,public _commonservices: Commonservices,public _http: HttpClient,public userdata: CookieService) {
     this.serverurl=_commonservices.url;
     this.apiurl = _commonservices.nodesslurl;
     this.arrval=[];
+    // this.userdata=userdata;
+    let userdetails =  this.userdata.get('userdetails');
+    this.userdetails = JSON.parse(userdetails);
+
   }
 
   connect(collectionViewer: CollectionViewer): Observable<DynamicFlatNode[]> {
@@ -123,8 +135,20 @@ export class DynamicDataSource {
    * Toggle the node, remove from display list
    */
   toggleNode(node: DynamicFlatNode, expand: boolean) {
-    console.log('node');
+    console.log('in togglenode');
+    // expand = false;
     console.log(node);
+    console.log('node.level');
+    console.log(node.level);
+    console.log(this.userdetails);
+    if(this.userdetails.ambassador == 1 && node.level == 3){            // for ambassador , there will be 3 tier
+      expand = false;
+      console.log('ambassador called');
+    }
+    if(this.userdetails.signupaffiliate == 1 && node.level == 2){         // for affiliate , there will be 2 tier
+      expand = false;
+      console.log('affiliate called');
+    }
     console.log(node.item);
 
     let nodeval:any={};
@@ -192,9 +216,10 @@ export class AffiliateTreeComponent implements OnInit {
   public serverurl;
   public apiurl;
   public jwttoken;
+  public userdetails:any;
   public affarray_val;
 
-  @Input()
+  @Input()                                                      // for property-binding of object
   set affuserdata(affuserdata: any) {
     // this.affarray_val = affuserdata;
     // console.log('this.affarray_val');
@@ -206,6 +231,8 @@ export class AffiliateTreeComponent implements OnInit {
     this.serverurl=_commonservices.url;
     this.apiurl = _commonservices.nodesslurl;
     this.jwttoken = this.userdata.get('jwttoken');
+    let userdetails =  this.userdata.get('userdetails');
+    this.userdetails = JSON.parse(userdetails);
     this.affarray_val ={item:this.activeRoute.snapshot.params.item,username:this.activeRoute.snapshot.params.username,children:this.activeRoute.snapshot.params.children};
     // console.log(this.activeRoute.snapshot.params.username);
     // console.log(this.activeRoute.snapshot.params.item);
@@ -215,6 +242,7 @@ export class AffiliateTreeComponent implements OnInit {
   treeControl: FlatTreeControl<DynamicFlatNode>;
 
   dataSource: DynamicDataSource;
+  // userdata: CookieService;
 
   getLevel = (node: DynamicFlatNode) => node.level;
 
@@ -224,7 +252,7 @@ export class AffiliateTreeComponent implements OnInit {
   ngOnInit() {
     //alert(this.apiurl);
     this.treeControl = new FlatTreeControl<DynamicFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource = new DynamicDataSource(this.treeControl, this.database,this._commonservices,this._http);
+    this.dataSource = new DynamicDataSource(this.treeControl, this.database,this._commonservices,this._http,this.userdata);
 
     //this.dataSource.data = database.initialData([{item:'dfsdf',id:1,username:'affiliate123'}]);
     console.log('in constructuctor aff array affarray_val');

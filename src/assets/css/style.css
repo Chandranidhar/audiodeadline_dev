@@ -19288,10 +19288,114 @@ span.spangreen{
 .itemimg{ width: 100%; }
 
 
-.ticket_sale_newbanner{background: url("../images/new_ticket-sale_banner.jpg") center top no-repeat; background-size: 1920px;     position: relative;
+
+.powerbysponsorwrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+}
+
+.powerbysponsorwrapper .ticket_sale_newbanner_wrapper {
+    width: 1360px;
+}
+
+.powerbysponsorblock{
+    position: relative;
+    background-color: #cc3333;
+    padding: 20px;
+    text-align: center;
+    width: 275px;
+    z-index: 99;
+    top: 0;
+    left: 0;
+}
+.ticket_sale_newbanner_wrapper{
+    flex: 1;
+}
+
+
+
+.powerbysponsorblock {
+    position: relative;
+    background-color: #bb2f2f;
+    padding: 10px;
+    text-align: center;
+
+}
+
+/*.powerbysponsorblock:after{
+    content:'';
+    position: absolute;
+    left:0;
+    top:1%;
+    width: 23%;
+    -webkit-clip-path: polygon(0 0, 100% 0%, 80% 100%, 0% 100%);
+    clip-path: polygon(0 0, 100% 0%, 80% 100%, 0% 100%);
+    background-color: #fff;
+
+}*/
+
+.powerbysponsorblockinner {
+    display: block;
+    text-align: center;
+    height: 100%;
+}
+
+.powerbysponsorblockinner h1 {
+    padding: 0;
+    margin: 0;
+    font-family: 'RalewaySemiBold';
+    font-size: 18px;
+    color: #feedbf;
+    text-transform: uppercase;
+    text-align: center;
+}
+.powerbysponsorblockinner .powerbysponsorblocklogowrapper {
+    background-color: #fff;
+    padding: 2px;
+    width: 150px;
+    height: 150px;
+    position: relative;
+    margin: 13px auto;
+    border: 0px solid #000000;
+    overflow: hidden;
+}
+
+.powerbysponsorblockinner .powerbysponsorblocklogowrapper img{min-width:100%; min-height:100%; width:auto; height:auto; position: absolute; top:50%; left: 50%; -webkit-transform: translate(-50%, -50%);-moz-transform: translate(-50%, -50%); -ms-transform: translate(-50%, -50%); -o-transform: translate(-50%, -50%); transform: translate(-50%, -50%); border: 0px solid #4d4e4f; cursor: pointer;object-fit: cover; max-width: 100%;}
+.powerbysponsorblockinner .btnred{
+    display: inline-block;
+    height: auto;
+    text-decoration: none!important;
+    line-height: normal;
+    text-align: center;
+    margin: 0 auto;
+    white-space: normal;
+    border-radius: 3px !important;
+    outline: none;
+    background: transparent;
+    border: 1px solid #feedbf;
+    color: #feedbf;
+    padding: 7px 20px !important;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: "RalewaySemiBold";
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,1);
+    box-shadow: 0px 1px 11px -5px rgba(0,0,0,1);
+}
+
+.powerbysponsorblockinner .btnred i.fa{margin-left: 5px;}
+
+.ticket_sale_newbanner{
+    background: url(../images/new_ticket-sale_banner.jpg) center top no-repeat;
+    background-size: cover;
+    position: relative;
     border-top: solid 15px #1e1e20;
-    height: 250px;
-    border-bottom: solid 15px #1e1e20;}
+    border-bottom: solid 15px #1e1e20;
+    padding: 0px 12px;
+    width: 100%;
+}
 
 .ticket_sale_newbanner_wrapper{ width: 1090px; margin: 0 auto;}
 
