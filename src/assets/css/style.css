@@ -5504,13 +5504,15 @@ Use it to make something cool, have fun, and share what you've learned with othe
     margin: 0px;
     padding: 2px 0px;}
 
+
 .newpage_wrapper h5{     font-family: "RobotoRegular";
     font-size: 16px;
     color: #111;
     line-height: 24px;
     margin: 0px;
     padding: 30px 0;}
-
+.newpage_wrapper h5.asbetos{padding: 15px 0;}
+.newpage_wrapper h5.asbetos span{font-size: 40px;}
 .newpage_wrapper h5 span{color: #000; font-size: 54px; font-family: 'notera_personal_use_onlyRg'!important;}
 
 .newpage_wrapper h3{     font-family: 'RobotoBlack';
@@ -19425,11 +19427,11 @@ span.spangreen{
 
 .ticket_sale_block2form_pricecon{ margin: 0 44px;}
 
-.ticket_sale_block2form_pricecon .block2form_pricecon_link1{ font-size: 18px; color: #15e100; text-transform: uppercase; display: inline-block; float: left; font-family: 'OpenSansBold'; margin-bottom: 10px;}
+.ticket_sale_block2form_pricecon .block2form_pricecon_link1{ font-size: 18px; color: #bb2f2f; text-transform: uppercase; display: inline-block; float: left; font-family: 'OpenSansBold'; margin-bottom: 10px;}
 
 .ticket_sale_block2form_pricecon .block2form_pricecon_link1:hover{ text-decoration: underline;}
 
-.ticket_sale_block2form_pricecon .block2form_pricecon_link2{ font-size: 18px; color: #15e100; text-transform: uppercase; display: inline-block; float: right; font-family: 'OpenSansBold'; margin-bottom: 10px;}
+.ticket_sale_block2form_pricecon .block2form_pricecon_link2{ font-size: 18px; color: #bb2f2f; text-transform: uppercase; display: inline-block; float: right; font-family: 'OpenSansBold'; margin-bottom: 10px;}
 
 .ticket_sale_block2form_pricecon .block2form_pricecon_link2:hover{ text-decoration: underline;}
 
@@ -21153,7 +21155,7 @@ span.spangreen{
 .as_hostflii_wrapper4.kb_ourstory_block2 {background-image: url(../../assets/images/kbourstoryblock2bg.jpg); background-size: cover; background-repeat: no-repeat; background-position: right bottom; position: relative; display: inline-block; width: 100%; padding: 28px 0px;}
 .as_hostflii_wrapper4.kb_ourstory_block2 .astextcontainer p{padding: 0px 51px;}
 .doubleimgwrapperblock{display: inline-flex; flex-wrap: wrap; justify-content: space-between;}
-.doubleimgwrapperblock .asupbgimgwrapper{width: 49%; border:6px solid #212121;}
+.doubleimgwrapperblock .asupbgimgwrapper{width: 49%; border:6px solid #212121; padding: 6px; padding-bottom: 0;}
 .as_hostflii_wrapper4.kb_ourstory_block2 .as_hostflii_container {text-align: center;}
 .as_hostflii_wrapper4.kb_ourstory_block2 .asupbgimgwrapper .border_wrapper {border: 1px solid #e5e5e5;width: 96%; text-align: center; height: 94%; margin: auto; position: absolute; top: 3%; left: 0;
     right: 0;}

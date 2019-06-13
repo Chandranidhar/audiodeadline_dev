@@ -550,9 +550,9 @@ img:focus, *img:focus{
 
 
 .adminbtnred, .adminbtnred:hover {
-    display: inline-block;
+    display: inline-block !important;
     height: auto;
-    background: #cc3333;
+    background: #cc3333 !important;
     font-size: 18px;
     color: #fff!important;
     text-transform: uppercase;
@@ -3260,7 +3260,7 @@ a.copybtn, a:hover.copybtn{
 
 .inviteyourfriend label{
     font-size: 18px;
-    color: #000!important;
+    color: #adaaaa!important;
     text-transform: uppercase;
     font-family: 'Ralewaybold';
     line-height: normal;
@@ -4336,4 +4336,73 @@ a.copybtn, a:hover.copybtn{
 
 .tablediv.affiliatetree .mat-card .searchdiv .mat-form-field-flex {
     padding-right: 24px;
+}
+
+
+
+.example-chip-list.mat-form-field {
+    display: inherit !important;
+}
+
+.inviteyourfriend {
+    padding-top: 20px;
+}
+
+
+
+
+.ma-formdivwrapper form .mat-form-field-wrapper{padding-bottom: 0;}
+.ma-formdivwrapper form .mat-form-field-appearance-legacy .mat-form-field-infix {
+    padding: 0;
+    border-top: 0;
+    width: 100%;
+}
+
+.ma-formdivwrapper form .mat-form-field {
+    width: 100%;
+}
+
+.ma-formdivwrapper form select.mat-input-element {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    background-color: transparent;
+    display: inline-flex;
+    box-sizing: border-box;
+    padding-top: 0;
+    top: 0;
+    margin-bottom: 0;
+}
+
+.ma-formdivwrapper form .mat-form-field-appearance-legacy .mat-form-field-label{
+    text-transform: capitalize !important;
+    font-size: 16px;
+    color: #404040;
+    font-family: 'OpenSans-Semibold';
+}
+
+.ma-formdivwrapper form select{
+    background-color: #ebebeb !important;
+    color: #909090 !important;
+    font-family: "RalewaySemiBold";
+    font-size: 18px;
+    text-transform: inherit;
+    border-radius: 5px;
+    border: none;
+    height: 44px;
+    padding-left: 10px;
+    padding-right: 10px
+}
+
+
+.ma-formdivwrapper form .mat-form-field-appearance-legacy input.mat-input-element {
+    background-color: #ebebeb !important;
+    color: #909090 !important;
+    font-family: "RalewaySemiBold";
+    font-size: 18px;
+    text-transform: inherit;
+    border-radius: 5px;
+    border: none;
+    margin-top: 0px !important;
+    height: 44px;
 }

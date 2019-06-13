@@ -18,7 +18,7 @@ declare var $:any;
 export class TicketsaleComponent implements OnInit {
     public modalRef: BsModalRef;
     public dataForm: FormGroup;
-    private userdata: CookieService;
+    public userdata: CookieService;
     private fb;
     public serverurl;
     public state;

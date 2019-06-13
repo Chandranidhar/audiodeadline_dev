@@ -32,6 +32,7 @@ export class Commonservices{
     nodesslurl1:any;
     envflag:any;
     fileurl_new:any;
+    phpurlforshare:any;
     public pictureuploadurl;
     constructor(private http: HttpClient,userdata: CookieService,private router: Router) {
 
@@ -51,6 +52,7 @@ export class Commonservices{
         this.nodesslurl1 ='https://developmentapi.audiodeadline.com:6004/';
         this.phpurl = 'https://developmentapi.audiodeadline.com/';
         this.phpurllive = 'https://developmentapi.audiodeadline.com/';
+        this.phpurlforshare = 'https://devshare.artistxp.com/';
             //this.url = 'https://audiodeadline.com/serverlocal.php?q=';
             this.url = 'https://developmentapi.audiodeadline.com/server.php?q=';
             this.url1 = 'https://developmentapi.audiodeadline.com/server3.php?q=';
@@ -87,6 +89,7 @@ export class Commonservices{
         this.nodesslurl1 ='https://api.audiodeadline.com:6004/';
         this.phpurl = 'https://api.audiodeadline.com/';
         this.phpurllive = 'https://api.audiodeadline.com/';
+        this.phpurlforshare = 'https://share.artistxp.com/';
             //this.url = 'https://audiodeadline.com/serverlocal.php?q=';
             this.url = 'https://api.audiodeadline.com/server.php?q=';
             this.url1 = 'https://api.audiodeadline.com/server3.php?q=';
@@ -222,4 +225,5 @@ export class Commonservices{
         //  console.log('on blur .....');
         form.controls[val].markAsUntouched();
     }
+    
 }

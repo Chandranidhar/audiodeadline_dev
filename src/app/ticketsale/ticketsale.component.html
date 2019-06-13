@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="powerbysponsorwrapper">
-    <div class="powerbysponsorblock" *ngIf="sponserimg!='' && sponserurl!=''">
+    <div class="powerbysponsorblock" *ngIf="sponserimg!='' && sponserurl!='' && userdata.get('user_id')!=''">
         <div class="powerbysponsorblockinner">
             <h1>Powered by </h1>
             <div class="powerbysponsorblocklogowrapper"><img src="{{_commonservices.fileurl_new}}{{sponserimg}}"></div>

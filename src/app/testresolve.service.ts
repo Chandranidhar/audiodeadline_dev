@@ -28,8 +28,8 @@ export class TestresolveService implements Resolve<EndpointComponent> {
         this.userdata=userdata;
         this.url = "https://developmentapi.audiodeadline.com:6090/";
         this.url1 = "https://developmentapi.audiodeadline.com:6004/";
-        /*this.url1 = "https://api.audiodeadline.com:6004/";
-        this.url = "https://api.audiodeadline.com:6003/";*/
+        // this.url1 = "https://api.audiodeadline.com:6004/";
+        // this.url = "https://api.audiodeadline.com:6003/";
     }
     resolve(route: ActivatedRouteSnapshot,state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
         //let id = route.params['id'];

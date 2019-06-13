@@ -155,6 +155,7 @@ import { UserdatesearchPipe } from './userdatesearch.pipe';
 import { AffiliateTreeComponent } from './affiliate-tree/affiliate-tree.component';
 import { CategoryAddComponent } from './category-add/category-add.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import {PrivacypolicyComponent} from './privacypolicy/privacypolicy.component';
 
 
 @NgModule({
@@ -163,6 +164,7 @@ import { CategoryListComponent } from './category-list/category-list.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
+    PrivacypolicyComponent,
     KendrickComponent,
     AboutAudioDeadlineComponent,
     CommunityComponent,

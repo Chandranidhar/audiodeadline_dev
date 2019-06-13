@@ -329,7 +329,7 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
     }
 
     postinfb2(username,media_id,image){
-        var link = this._commonservices.phpurllive+'sharetool2.php?media_id='+media_id+'&username='+username+'&image='+image;
+        var link = this._commonservices.phpurlforshare+'sharetool2.php?media_id='+media_id+'&username='+username+'&image='+image;
         FB.ui({
             method: 'feed',
             link: link,
