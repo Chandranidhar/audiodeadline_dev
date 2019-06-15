@@ -3544,10 +3544,19 @@ a.copybtn, a:hover.copybtn{
     height: 44px;
     padding-left: 10px;
     padding-right: 10px;
+    line-height:36px;
 }
 
 .ma-formdivwrapper .adminbtnred, .ma-formdivwrapper .adminbtnred:hover {
     border: none;
+    line-height: 36px;
+    padding: 3px 15px;
+}
+
+.ma-formdivwrapper .table.table-hover .adminbtnred, .ma-formdivwrapper .table.table-hover .adminbtnred:hover {
+    border: none;
+    line-height: 24px;
+    padding: 3px 15px;
 }
 
 .ma-formdivwrapper .form-horizontal .control-label {
@@ -4379,6 +4388,7 @@ a.copybtn, a:hover.copybtn{
     font-size: 16px;
     color: #404040;
     font-family: 'OpenSans-Semibold';
+    line-height: 44px;
 }
 
 .ma-formdivwrapper form select{
@@ -4405,4 +4415,249 @@ a.copybtn, a:hover.copybtn{
     border: none;
     margin-top: 0px !important;
     height: 44px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ma-formdivwrapper form select.mat-input-element{
+    border: none;
+}
+
+
+.ma-formdivwrapper form .mat-form-field.mat-form-field-appearance-legacy .mat-form-field-underline {
+    bottom: 0;
+}
+
+.ma-formdivwrapper form .mat-form-field.mat-form-field-invalid .mat-form-field-ripple, .ma-formdivwrapper form .mat-form-field.mat-form-field-invalid .mat-form-field-ripple.mat-accent {
+    background-color: transparent;
+}
+
+.ma-formdivwrapper form .mat-form-field-appearance-legacy .mat-form-field-subscript-wrapper {
+    margin-top: 0;
+    top: 0;
+}
+
+.ma-formdivwrapper form .mat-form-field.mat-form-field-appearance-legacy .mat-form-field-label-wrapper {
+    top: 0;
+    padding-top: 0;
+}
+
+.ma-formdivwrapper form .mat-form-field.mat-form-field-appearance-legacy .mat-form-field-label {
+    top: 0;
+}
+
+.ma-formdivwrapper form .mat-form-field-type-mat-native-select .mat-form-field-infix::after {
+    right: 10px;
+}
+
+.ma-formdivwrapper form .form-group .control-label{line-height: 26px;}
+
+
+.ma-formdivwrapper form .mat-form-field-should-float .mat-focused{display:none;}
+
+
+.ma-formdivwrapper form select.mat-input-element{
+
+    border: none;
+}
+
+.ma-formdivwrapper form select.mat-input-element option{
+    background-color: #ebebeb !important;
+    color: #909090 !important;
+    font-family: "RalewaySemiBold";
+    font-size: 18px;
+    text-transform: inherit;
+    border-radius: 5px;
+}
+
+
+.ma-formdivwrapper form .mat-progress-bar-buffer{ background-color: #fff!important;}
+.ma-formdivwrapper form .mat-progress-bar-fill::after {
+    background-color: #cc3333;
+}
+
+.ma-formdivwrapper form .mat-progress-bar {
+    margin-top: 10px;
+}
+
+.ma-formdivwrapper form table thead tr th {
+    font-family: 'RalewaySemiBold';
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #f44343;
+    background: #393939;
+    padding: 10px;
+    letter-spacing: .1em;
+    text-transform: capitalize;
+}
+
+.ma-formdivwrapper form table tbody tr {
+    background-color: #4f4f4f;
+    border: 0px;
+    padding: .35em;
+    display: table-row;
+    color: #ffffff;
+}
+
+.ma-formdivwrapper form table tbody tr:hover{
+    background-color: #4f4f4f;
+    border: 0px;
+    color: #ffffff;
+}
+
+.ma-formdivwrapper .dashboard1form form .mat-button, .ma-formdivwrapper .dashboard1form form .mat-button:hover {
+    display: inline-block !important;
+    height: auto;
+    background: #cc3333 !important;
+    font-size: 18px;
+    color: #fff!important;
+    text-transform: uppercase;
+    font-family: 'Ralewaybold';
+    text-decoration: none!important;
+    line-height: normal;
+    text-align: center;
+    margin: 0 auto;
+    white-space: normal;
+    margin-top: 0px;
+    padding: 12px 10px;
+    border-radius: 0px !important;
+}
+
+
+.ma-formdivwrapper .dashboard1form form  span {
+    text-transform: inherit;
+    font-size: inherit;
+    color: transparent;
+    margin-left: 0;
+    font-family: 'OpenSans-Regular';
+}
+
+
+.ma-formdivwrapper .dashboard1form form table th {
+    font-family: 'RalewaySemiBold';
+    text-transform: uppercase;
+    font-size: 18px;
+    color: #f44343;
+    background: #393939;
+    padding: 10px;
+    letter-spacing: .1em;
+    text-transform: capitalize;
+}
+
+
+
+.imgmddiv2 {
+    margin: .5%!important;
+    background: #333;
+    padding: 5px !important;
+    display: inline-block;
+    float: none;
+    width: 32.333333%;
+}
+.imgmddiv2 img.img-thumbnail{
+    width: 100%;
+    background-color: #333;
+    border: 0px solid #ddd;
+    padding: 2px;
+}
+
+
+.imgmddiv2 .fa{ color: #fff!important;}
+.imgmddiv2_wrapper{text-align: center; display: flex; align-items: center; justify-content: center;}
+.ma-formdivwrapper .fa-refresh:before {
+    color: #fff!important;
+}
+
+.imgmddiv2_wrapper .img-thumbnail {
+    width: 100%;
+    background-color: #333;
+    border: 0px solid #ddd;
+    padding: 2px;
+
+}
+
+.ma-formdivwrapper form .mat-form-field-appearance-legacy .mat-form-field-infix .mat-form-field-underline {
+    background-color: transparent;
+}
+
+.deleteimg{margin: 10px 0 0 0; background: #444; text-align: center; padding: 5px 5px 0px;}
+.deleteimg .material-icons {
+    color: #c33;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.imgmddiv2wrapperinner{
+    width: 100%;
+    margin: 0px auto 0px;
+    height: auto;
+    display: block;
+    background: #333;
+    padding: 5px !important;
+    float: none;
+}
+
+.imgmddiv2wrapperinner img{
+    width: 100%;
+    height: auto;
+    background-color: #333;
+    border: 0px solid #ddd;
+}
+
+.imgmddiv2row{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.imgmddiv2rowouter{
+    margin-top: 20px;
+}
+
+.imgmddiv2inner{
+    height: 120px;
+    overflow: hidden;
+}
+
+.imgmddivwrapper{
+    width: 280px;
+    margin: 20px auto 0px;
+    height: auto;
+    display: block;
+    background: #333;
+    padding: 5px !important;
+    float: none;
+}
+
+.imgmddivwrapper img{
+   width: 100%;
+    height: auto;
+    background-color: #333;
+    border: 0px solid #ddd;
+}
+
+.ma-formdivwrapper form .mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float.mat-focused .mat-form-field-label{ display: none !important;}
+
+.ma-formdivwrapper form .invalid-feedback{margin-top: 10px;}
+
+
+@media screen and (max-width:1366px) {
+    .imgmddiv2inner {
+        height: 100px;
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width:540px) {
+    .imgmddiv2 {
+        width: 48.333333%;
+    }
+}
+
+
+@media screen and (max-width:360px) {
+    .imgmddiv2 {
+        width: 98.333333%;
+    }
 }

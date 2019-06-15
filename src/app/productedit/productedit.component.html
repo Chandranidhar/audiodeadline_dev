@@ -75,8 +75,10 @@
                       <!-- view selected image -->
                       <div *ngIf="featuredImage.imageUrl != null">
                         <div class="row">
-                          <div class="col-md-12">
-                            <img src="{{ featuredImage.imageUrl }}" class="img-thumbnail" />
+                          <div class="col-md-12 imgmddiv">
+                            <div class="imgmddivwrapper">
+                              <img src="{{ featuredImage.imageUrl }}" class="img-thumbnail" />
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -97,12 +99,19 @@
                       </div>
   
                       <!-- view selected image -->
-                      <div *ngIf="othersImage != '' && othersImage.length > 0">
-                        <div class="row">
-                          <div *ngFor="let image of othersImage; let i = index" class="col-md-4" style="height: 100px;">
-                            <img *ngIf="image.imageUrl != null" src="{{ image.imageUrl }}" class="img-thumbnail" alt="Uploading..." (click)="deleteOthersImage(i)" />
-                            <div *ngIf="image.progressBar != 100" style="text-align: center;"><i class="fa fa-refresh fa-6x" aria-hidden="true"></i></div>
-                            <mat-progress-bar mode="determinate" *ngIf="image.progressBar != 100" value="{{ image.progressBar }}"></mat-progress-bar>
+                      <div *ngIf="othersImage != '' && othersImage.length > 0" class="imgmddiv2rowouter">
+                        <div class="row imgmddiv2row">
+                          <div *ngFor="let image of othersImage; let i = index" class="col-md-4 imgmddiv2">
+                            <div class="imgmddiv2wrapperinner">
+                              <div class="imgmddiv2inner">
+                                <img *ngIf="image.imageUrl != null" src="{{ image.imageUrl }}" class="img-thumbnail" alt="Uploading..." (click)="deleteOthersImage(i)" />
+                              </div>
+                              <div *ngIf="image.progressBar != 100" style="text-align: center;"><i class="fa fa-refresh fa-6x" aria-hidden="true"></i></div>
+                              <mat-progress-bar mode="determinate" *ngIf="image.progressBar != 100" value="{{ image.progressBar }}"></mat-progress-bar>
+                              <div class="deleteimg"><i class="material-icons">
+                                delete_forever
+                              </i></div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -153,7 +162,7 @@
   
                 <!-- Attribute -->
 
-                  <div class="col-md-5">
+                  <div class="col-md-3">
                     <div class="form-group">
                       <div class="control-label text-left"> <label>Attribute*:</label></div>
   
@@ -168,7 +177,7 @@
                   </div>
   
                   <ng-container *ngIf="showDiv">
-                    <div class="col-md-4">
+                    <!--<div class="col-md-3">
                       <div class="form-group">
                         <div class="control-label text-left"></div>
                         <mat-form-field class="example-full-width">
@@ -177,7 +186,32 @@
   
                         <button type="button" class="adminbtnred" mat-button (click)="addAttribute()">Save</button>
                       </div>
+                    </div>-->
+
+
+                    <!-- Attribute select dropdown -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="control-label text-left"><label>&nbsp;</label></div>
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder=" Value" formControlName="attributeValue">
+                        </mat-form-field>
+                      </div>
                     </div>
+                    <!-- Attribute select dropdown -->
+
+                    <!-- Attribute save button -->
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <div class="control-label text-left"> <label>Option</label></div>
+
+                        <button type="button" class="adminbtnred" mat-button (click)="addAttribute()">Save</button>
+                      </div>
+                    </div>
+                    <!-- Attribute save button -->
+
+
+
                   </ng-container>
                 </div>
                 <!-- Attribute end -->
@@ -212,8 +246,12 @@
                   </div>
                 </div>
                 <!-- attributes added list end -->
-  
-                <input type="submit" name="submit" value="SUBMIT" class="adminbtnred">
+                <div class="row">
+                  <div class="col-md-12">
+                    <input type="submit" name="submit" value="SUBMIT" class="adminbtnred">
+                  </div>
+                </div>
+
               </form>
 
                 </div>

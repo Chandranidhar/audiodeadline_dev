@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, TemplateRef, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { Commonservices } from "../app.commonservices";
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
 import { UploadService } from '../upload.service';
-//import { ConsoleReporter } from 'jasmine';
+import { ImageCroppedEvent } from "ngx-image-cropper";
+import { BsModalRef, BsModalService } from "ngx-bootstrap";
 
 @Component({
   selector: 'app-productadd',
@@ -27,9 +28,15 @@ export class ProductaddComponent implements OnInit {
   public othersImage: any = [];
   public imageName: any = [];
   public otherImageCount: number = -1;
-  public imageUploadPath = 'http://developmentapi.audiodeadline.com/nodeserver/uploads/test/';
+  public othersImageDiv = true;
+  public imageUploadPath = 'http://developmentapi.audiodeadline.com/nodeserver/uploads/';
 
-  constructor( FormBuilder: FormBuilder,private _commonservices : Commonservices,private _http: HttpClient,private router: Router, private uploadService: UploadService ) {
+  /* Image crop */
+  @ViewChild('cropImageTemplate') elementView: ElementRef;
+  modalRef: BsModalRef;
+  public imageCrop: any = { base64data: null, imageUrl: null, modalLoader: this._commonservices.fileurl + 'line-loader.gif' };
+
+  constructor( FormBuilder: FormBuilder, private _commonservices : Commonservices, private _http: HttpClient,private router: Router, private uploadService: UploadService, private modalService: BsModalService ) {
     this.formBuilder  = FormBuilder;
     this.serverurl    = _commonservices.url;
     this.apiUrl       = _commonservices.nodesslurl;
@@ -116,8 +123,23 @@ export class ProductaddComponent implements OnInit {
           this.featuredImage.progressBar = result.data;
           break;
         case 'complete':
+          this.createProductForm.patchValue({ 
+            featuredImage: ""
+          });
           this.featuredImage.progressBar = 0;
           this.featuredImage.imageUrl = this.imageUploadPath + result.data.filename;
+
+          /* get base 64 data of image */
+          let link = this._commonservices.phpurl + 'getbase64image1.php';
+          let data = { fileurl: result.data.filename };
+          this._http.post(link, data).subscribe(res => {
+            let result:any;
+            result = res;
+            this.imageCrop.base64data = result.data;
+
+            /* try to open modal */
+            this.modalRef = this.modalService.show(this.elementView, { class: 'modal-md addCategory', backdrop: 'static' });
+          });
           break;
         default:
           console.log("An error occord.");
@@ -128,11 +150,16 @@ export class ProductaddComponent implements OnInit {
     });
   }
 
+  closeModal() {
+    this.modalRef.hide();
+  }
+
   /* upload others image */
   onOthersChange(event) {
     var imageData: any = [];
     
     if (event.target.files.length > 0) {
+      this.othersImageDiv = false;
       imageData = event.target.files[0];
       this.otherImageCount++;
 
@@ -148,6 +175,10 @@ export class ProductaddComponent implements OnInit {
             this.othersImage[this.otherImageCount].progressBar = result.data;
             break;
           case 'complete':
+            this.createProductForm.patchValue({ 
+              othersImage: ""
+            });
+            this.othersImageDiv = true;
             this.othersImage[this.otherImageCount].progressBar = 100;
             imageData = null;
             this.othersImage[this.otherImageCount].imageUrl = this.imageUploadPath + result.data.filename;

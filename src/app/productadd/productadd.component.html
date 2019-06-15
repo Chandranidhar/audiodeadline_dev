@@ -68,7 +68,7 @@
                           <input type="file" (change)="onImageChange($event)" class="form-control" formControlName="featuredImage" accept="image/*" />
 
                           <!-- Price error message -->
-                          <div style="color: red;" *ngIf="createProductFormValidate.featuredImage.touched && createProductFormValidate.featuredImage.errors" class="invalid-feedback">
+                          <div style="color: red;" *ngIf="createProductFormValidate.featuredImage.touched && createProductFormValidate.featuredImage.errors && featuredImage.imageUrl == null" class="invalid-feedback">
                               <div *ngIf="createProductFormValidate.featuredImage.errors.required">Please select Featured Image.</div>
                           </div>
 
@@ -78,8 +78,16 @@
                           <!-- view selected image -->
                           <div *ngIf="featuredImage.imageUrl != null">
                             <div class="row">
-                              <div class="col-md-12">
-                                <img src="{{ featuredImage.imageUrl }}" class="img-thumbnail" />
+                                <div class="col-md-12 imgmddiv">
+                                  <!--<image-cropper
+                                          [imageBase64]="rawimage"
+                                          [maintainAspectRatio]="true"
+                                          [aspectRatio]="1.1"
+                                          (imageCropped)="imageCropped($event)"
+                                  ></image-cropper>-->
+                                  <div class="imgmddivwrapper">
+                                    <img src="{{ featuredImage.imageUrl }}" class="img-thumbnail" />
+                                  </div>
                               </div>
                             </div>
                           </div>
@@ -92,7 +100,7 @@
                         <div class="form-group">
                           <div class="control-label text-left"><label>Others images*:</label></div>
 
-                          <input type="file" formControlName="othersImage" (change)="onOthersChange($event)" class="form-control" accept="image/*" />
+                          <input *ngIf="othersImageDiv" type="file" formControlName="othersImage" (change)="onOthersChange($event)" class="form-control" accept="image/*" />
 
                           <!-- Price error message -->
                           <div style="color: red;" *ngIf="createProductFormValidate.othersImage.touched && createProductFormValidate.othersImage.errors" class="invalid-feedback">
@@ -100,12 +108,20 @@
                           </div>
 
                           <!-- view selected image -->
-                          <div *ngIf="othersImage != '' && othersImage.length > 0">
-                            <div class="row">
-                              <div *ngFor="let image of othersImage; let i = index" class="col-md-4" style="height: 100px;">
-                                <img *ngIf="image.progressBar == 100" src="{{ image.imageUrl }}" class="img-thumbnail" alt="Uploading..." (click)="deleteOthersImage(i)" />
+                          <div *ngIf="othersImage != '' && othersImage.length > 0" class="imgmddiv2rowouter">
+                            <div class="row imgmddiv2row">
+                              <div *ngFor="let image of othersImage; let i = index" class="col-md-4 imgmddiv2"  >
+                                <div class="imgmddiv2wrapperinner">
+                                <div class="imgmddiv2inner">
+                                  <img *ngIf="image.progressBar == 100" src="{{ image.imageUrl }}" class="img-thumbnail" alt="Uploading..." (click)="deleteOthersImage(i)" />
+                                </div>
+
                                 <div *ngIf="image.progressBar != 100" style="text-align: center;"><i class="fa fa-refresh fa-6x" aria-hidden="true"></i></div>
                                 <mat-progress-bar mode="determinate" *ngIf="image.progressBar != 100" value="{{ image.progressBar }}"></mat-progress-bar>
+                                <div class="deleteimg"><i class="material-icons">
+                                  delete_forever
+                                </i></div>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -117,7 +133,7 @@
                     <!-- Product description -->
                     <div class="row">
                       <div class="col-md-12">
-                        <div class="form-group">
+                        <div class="form-group descriptionbox">
                           <div class="control-label text-left"> <label>Description*:</label></div>
 
                           <mat-form-field class="example-full-width">
@@ -134,8 +150,9 @@
                     </div>
                     <!-- Product description end -->
 
-                    <!-- Product price -->
+                    <!-- Product price and attribuate -->
                     <div class="row">
+                      <!-- Product price -->
                       <div class="col-md-3">
                         <div class="form-group">
                           <div class="control-label text-left"><label>Price*:</label></div>
@@ -151,12 +168,10 @@
                           </div>
                         </div>
                       </div>
+                      <!-- Product price -->
 
-                    <!-- Product price end -->
-
-                    <!-- Attribute -->
-
-                      <div class="col-md-5">
+                      <!-- Attribute select dropdown -->
+                      <div class="col-md-3">
                         <div class="form-group">
                           <div class="control-label text-left"> <label>Attribute*:</label></div>
 
@@ -169,18 +184,31 @@
                           </mat-form-field>
                         </div>
                       </div>
+                      <!-- Attribute select dropdown -->
 
                       <ng-container *ngIf="showDiv">
-                        <div class="col-md-4">
+                        <!-- Attribute select dropdown -->
+                        <div class="col-md-3">
                           <div class="form-group">
-                            <div class="control-label text-left"></div>
+                           <!-- <div class="control-label text-left"> <label>Value*:</label></div>-->
+
+                            <div class="control-label text-left"><label>&nbsp;</label></div>
                             <mat-form-field class="example-full-width">
                               <input matInput placeholder=" Value" formControlName="attributeValue">
                             </mat-form-field>
-
-                            <button type="button" class="adminbtnred" mat-button (click)="addAttribute()">Save</button>
                           </div>
                         </div>
+                        <!-- Attribute select dropdown -->
+
+                        <!-- Attribute save button -->
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="control-label text-left"> <label>Option</label></div>
+
+                                <button type="button" class="adminbtnred" mat-button (click)="addAttribute()">Save</button>
+                            </div>
+                        </div>
+                        <!-- Attribute save button -->
                       </ng-container>
                     </div>
                     <!-- Attribute end -->
@@ -201,21 +229,24 @@
                               <tr *ngFor="let attribute of attributes.color; let i = index">
                                 <td>Color</td>
                                 <td>{{ attribute.value }}</td>
-                                <td><button type="button" mat-button (click)="deleteAttribute('color', i)">Delete</button></td>
+                                <td><button type="button" class="adminbtnred" mat-button (click)="deleteAttribute('color', i)">Delete</button></td>
                               </tr>
 
                               <tr *ngFor="let attribute of attributes.size; let i = index">
                                 <td>Size</td>
                                 <td>{{ attribute.value }}</td>
-                                <td><button type="button" mat-button (click)="deleteAttribute('size', i)">Delete</button></td>
+                                <td><button type="button" class="adminbtnred" mat-button (click)="deleteAttribute('size', i)">Delete</button></td>
                               </tr>
                             </tbody>
                         </table>
                       </div>
                     </div>
                     <!-- attributes added list end -->
-
-                    <input type="submit" name="submit" value="SUBMIT" class="adminbtnred">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <input type="submit" name="submit" value="SUBMIT" class="adminbtnred">
+                      </div>
+                    </div>
                   </form>
 
                 </div>
@@ -228,3 +259,21 @@
   </div>
   <div class="clearfix"></div>
 </div>
+
+
+<!-- for image crom -->
+<ng-template #cropImageTemplate>
+  <div class="modal-body copetitionpreview">
+    <a style="cursor: pointer;" (click)="closeModal()" class="closebtn">X</a>
+    <div *ngIf="!imageCrop.base64data" style="text-align: center;"><img style="width: 200px;" src="imageCrop.modalLoader" ></div>
+    <div *ngIf="imageCrop.base64data">
+      <image-cropper
+              [imageBase64]="imageCrop.base64data"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="1.1"
+              (imageCropped)="imageCropped($event)"
+      ></image-cropper>
+    </div>
+    <div *ngIf="rawimage" class="copebtnwrapper text-center"><input type="button" value="save" (click)="crop1()" class="cropselectbtn"><input type="button" value="cancel" (click)="decline()" class="cropselectbtn cancelbtn"></div>
+  </div>
+</ng-template>

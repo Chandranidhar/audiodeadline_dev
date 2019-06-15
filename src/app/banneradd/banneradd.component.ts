@@ -124,7 +124,7 @@ export class BanneraddComponent implements OnInit {
       this.imagewidth = 370;
       this.imageheight = 340;
     }
-    if(ev == '3' || ev == '4' || ev == '7' || ev == '8' || ev == '9'){
+    if(ev == '3' || ev == '4' || ev == '7' || ev == '8' || ev == '9' || ev == '10'){
       this.imagewidth = 515;
       this.imageheight = 270;
     }

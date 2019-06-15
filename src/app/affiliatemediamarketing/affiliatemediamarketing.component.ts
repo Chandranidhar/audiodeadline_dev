@@ -87,6 +87,10 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
         Validators.email,
     ]);
     matcher = new MyErrorStateMatcher();
+
+    /* ARTISTXP BLAST OR PASS BANNER */
+    public blastOrPassBanner: any;
+
     constructor(private _http: HttpClient, private router: Router, userdata: CookieService, public _commonservices: Commonservices, private activeRoute: ActivatedRoute,private modalService: BsModalService, fb: FormBuilder) {
         this.fb = fb;
 
@@ -113,6 +117,7 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
         // this.getticketsalebanner();
         this.getmechandisebanner();
         this.getartistxpsignupbanner();
+        this.getBlastOrPassBanner();
         this.FB_APP_ID=_commonservices.FB_APP_ID;
         this.FB_APP_SECRET=_commonservices.FB_APP_SECRET;
         this.LI_CLIENT_ID=_commonservices.LI_CLIENT_ID;
@@ -192,7 +197,7 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
             },error => {
                 console.log("Oooops!");
             });
-    }
+    }ImageCroppedEvent
 
 
     ngOnInit() {
@@ -296,6 +301,20 @@ export class AffiliatemediamarketingComponent implements OnInit,AfterViewInit {
                 result = res;
                 this.artistxpsignbanner = result.res;
             });
+    }
+
+    /* ARTISTXP BLAST OR PASS BANNER */
+    getBlastOrPassBanner(){
+        let link = this._commonservices.nodesslurl+'datalist';
+        let data = { source: "mediaview", condition: { "type": 10, "status": 1 }};
+
+        this._http.post(link, data).subscribe(res=>{
+            let result:any;
+            result = res;
+            this.blastOrPassBanner = result.res;
+            console.log('===========================');
+            console.log(this.blastOrPassBanner);
+        });
     }
 
     copyText(val: string){

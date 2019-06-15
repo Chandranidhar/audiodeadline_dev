@@ -223,6 +223,68 @@
                   </div>
                 </div>
 
+
+                <!-- ARTISTXP BLAST OR PASS BANNER -->
+                <div class="row n-socialsinglepostlists n-socialsinglepostlistsbg2">
+                  <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost">
+                    <div class="row n-socialsinglepostcontent">
+                      <div class="n-sponsorblock">
+                        <div class="n-sponsorblockheader graburlnewblockwrap">
+                          <h2>Artistxp Blast or Pass Banner</h2>
+                          <div class="graburlnewblock" *ngIf="_commonservices.envflag=='dev'">
+                            <label>URL:</label><span>https://development.artistxp.com/fbartistxp/{{ username }}</span><button type="submit" value="graburl" class="btngrapurl" (click)="copyText('https://development.artistxp.com/'+username)">grab url</button>
+                          </div>
+                          <div class="graburlnewblock" *ngIf="_commonservices.envflag=='live'">
+                            <label>URL:</label><span>https://development.artistxp.com/fbartistxp/{{ username }}</span><button type="submit" value="graburl" class="btngrapurl" (click)="copyText('https://artistxp.com/'+username)">grab url</button>
+                          </div>
+                        </div>
+                        <div class="n-sponsorblocklists">
+                          <div class="col-md-4 col-sm-6 col-xs-12 n-socialsinglepostcontentinner" *ngFor="let item of blastOrPassBanner">
+                            <div class="n-socialsinglepostimgwrapper">
+                              <img *ngIf="item.origimage!=null && item.origimage!=''" src="{{fileurl}}{{uploadfile}}/{{item.origimage}}">
+                              <img *ngIf="item.origimage==null || item.origimage==''" src="{{fileurl}}{{uploadfile}}/{{item.image}}">
+                            </div>
+                            <!-- ---------live share urls start---------------- -->
+                            <div class="n-socialsinglepostbottom" *ngIf="_commonservices.envflag=='live'">
+                              <div class="n-btnsocialsharenewlists">
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fshare.artistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" (click)="postinfb2(username,item.name,item.image)"><span><i class="fa fa-facebook"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fshare.artistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntumblr btnnew"  href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fshare.artistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}&posttype=link" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>
+                              </div>
+                            </div>
+                            <!-----------live share urls end------------------>
+                            <!------------------development share urls start-------------->
+                            <div class="n-socialsinglepostbottom" *ngIf="_commonservices.envflag=='dev'">
+                              <div class="n-btnsocialsharenewlists">
+                                <a class="btn n-btnsocialsharenew btntwit btnnew" href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fdevshare.artistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-twitter"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnfb btnnew" (click)="postinfb2(username,item.name,item.image)"><span><i class="fa fa-facebook"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btnin btnnew" href="https://www.linkedin.com/shareArticle?url=http%3A%2F%2Fdevshare.artistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}" target="_blank"><span><i class="fa fa-linkedin"></i></span></a>
+                                <a class="btn n-btnsocialsharenew btntumblr btnnew"  href="https://www.tumblr.com/widgets/share/tool?shareSource=legacy&canonicalUrl=http%3A%2F%2Fdevshare.artistxp.com%2Fsharetool2.php%3Fmedia_id%3D{{item.name}}%26username%3D{{username}}%26image%3D{{item.image}}&posttype=link" target="_blank"><span><i class="fa fa-tumblr"></i></span></a>
+                              </div>
+                            </div>
+                            <!------------------development share urls end-------------->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="row n-socialsinglepostlists n-socialsinglepostlistsbg1 n-socialsinglepostlistsbgsame">
                   <div class="col-md-12 col-sm-12 col-xs-12 n-socialsinglepost">
                     <div class="row n-socialsinglepostcontent">
