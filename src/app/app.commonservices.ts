@@ -36,7 +36,7 @@ export class Commonservices{
     public pictureuploadurl;
     constructor(private http: HttpClient,userdata: CookieService,private router: Router) {
 
-        this.envflag='dev';
+        this.envflag='live';
 
         this.cookieData= userdata;
         if(this.envflag=='dev'){
