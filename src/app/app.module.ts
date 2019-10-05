@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 // import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -297,6 +297,7 @@ import {PrivacypolicyComponent} from './privacypolicy/privacypolicy.component';
     CategoryAddComponent,
     CategoryListComponent
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA ],
   imports: [
     ImageCropperModule,
     BrowserModule,
